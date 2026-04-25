@@ -1,6 +1,5 @@
 add_library(drivers STATIC
-  display/display.c
-  display/ili9488.c
+  display/st7789.c
 )
 
 target_include_directories(drivers PUBLIC
@@ -9,4 +8,5 @@ target_include_directories(drivers PUBLIC
 
 target_link_libraries(drivers
   hal
+  pico_stdlib
 )

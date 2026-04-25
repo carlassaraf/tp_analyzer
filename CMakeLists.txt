@@ -33,29 +33,30 @@ project(firmware C CXX ASM)
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
-add_subdirectory(app)
 # add_subdirectory(domain)
 add_subdirectory(third_party/lvgl)
-add_subdirectory(services)
-# add_subdirectory(drivers)
 add_subdirectory(hal)
+add_subdirectory(drivers)
+add_subdirectory(services)
 add_subdirectory(bsp)
 add_subdirectory(rtos)
+add_subdirectory(app)
 
+target_link_libraries(lvgl PUBLIC freertos)
 add_executable(firmware main.c)
 
 pico_set_program_name(firmware "firmware")
 pico_set_program_version(firmware "0.1")
 
 # Modify the below lines to enable/disable output over UART/USB
-pico_enable_stdio_uart(firmware 1)
-pico_enable_stdio_usb(firmware 0)
+pico_enable_stdio_uart(firmware 0)
+pico_enable_stdio_usb(firmware 1)
 
 # Add libraries
 target_link_libraries(firmware
   app
   services
-  # drivers
+  drivers
   hal
   bsp
   pico_stdlib

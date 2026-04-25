@@ -9,5 +9,6 @@ target_include_directories(bsp PUBLIC
 target_link_libraries(bsp
   pico_stdlib
   hardware_spi
+  drivers
   hal
 )

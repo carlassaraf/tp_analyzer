@@ -1,22 +1,20 @@
 #include "app.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include <stdio.h>
 
 extern void ui_task(void *params);
 
-bool app_init() {
-  // Initialize application resources here
-  return true; // Return true if initialization is successful
+bool app_init(void) {
+    return true;
 }
 
-bool app_run() {
-
-  xTaskCreate(ui_task, "UI Task", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
-
-  // Main application loop
-  while (true) {
-      // Handle events, update state, render, etc.
-      // Break the loop to exit the application
-  }
-  return true; // Return true if the application ran successfully
+bool app_run(void) {
+    // UI task initializes LVGL internally (must run after scheduler starts)
+    if (xTaskCreate(ui_task, "UI", configMINIMAL_STACK_SIZE * 16,
+                    NULL, tskIDLE_PRIORITY + 1, NULL) != pdPASS) {
+        puts("Failed to create UI task");
+        return false;
+    }
+    return true;
 }
