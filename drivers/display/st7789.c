@@ -67,6 +67,9 @@ st7789_t *st7789_init(const st7789_config_t *config) {
     send_cmd_params(config, ST7789_COLMOD, (uint8_t[]){0x55}, 1);
     sleep_ms(10);
 
+    // This panel has inverted colors by default
+    write_cmd(config, ST7789_INVON);
+
     // Landscape orientation (MX + MV = 90° CW)
     send_cmd_params(config, ST7789_MADCTL, (uint8_t[]){0x60}, 1);
 
