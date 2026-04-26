@@ -1,6 +1,8 @@
 #include "lvgl.h"
 #include "drivers/display/st7789.h"
 #include "board_config.h"
+#include "FreeRTOS.h"
+#include "task.h"
 
 #define DISPLAY_BUFFER_LINES 20
 
@@ -55,6 +57,10 @@ int32_t lvgl_port_init(void) {
     disp = lv_display_create(TFT_WIDTH, TFT_HEIGHT);
     lv_display_set_flush_cb(disp, flush_cb);
     lv_display_set_buffers(disp, buf, NULL, sizeof(buf), LV_DISPLAY_RENDER_MODE_PARTIAL);
+
+    // Wire LVGL tick to FreeRTOS. configTICK_RATE_HZ=1000 so xTaskGetTickCount()
+    // returns milliseconds directly, which is what LVGL expects.
+    lv_tick_set_cb((lv_tick_get_cb_t)xTaskGetTickCount);
 
     return 0;
 }
