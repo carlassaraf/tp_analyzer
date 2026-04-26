@@ -22,4 +22,9 @@
 #define TFT_COL_OFFSET  0
 #define TFT_ROW_OFFSET  34
 
+// Rotary encoder
+#define PIN_ENC_A    6
+#define PIN_ENC_B    7
+#define PIN_ENC_BTN  8
+
 #endif

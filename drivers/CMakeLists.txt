@@ -1,5 +1,6 @@
 add_library(drivers STATIC
   display/st7789.c
+  encoder/encoder.c
 )
 
 target_include_directories(drivers PUBLIC

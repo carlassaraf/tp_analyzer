@@ -2,12 +2,15 @@
 #define HAL_GPIO_H
 
 #include <stdint.h>
+#include <stdbool.h>
 
-/**
- * GPIO Direction constants
- */
 #define HAL_GPIO_IN  0
 #define HAL_GPIO_OUT 1
+
+#define HAL_GPIO_IRQ_EDGE_FALL  (1u << 2)
+#define HAL_GPIO_IRQ_EDGE_RISE  (1u << 3)
+
+typedef void (*hal_gpio_irq_cb_t)(uint8_t pin, uint32_t events);
 
 /**
  * Initialize a GPIO pin
@@ -42,5 +45,7 @@ uint8_t hal_gpio_read(uint8_t pin);
  * @param function GPIO function (e.g., GPIO_FUNC_SPI)
  */
 void hal_gpio_set_function(uint8_t pin, uint8_t function);
+void hal_gpio_set_pull(uint8_t pin, bool pull_up, bool pull_down);
+void hal_gpio_set_irq(uint8_t pin, uint32_t event_mask, bool enabled, hal_gpio_irq_cb_t cb);
 
 #endif
