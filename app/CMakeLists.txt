@@ -1,6 +1,7 @@
 add_library(app STATIC
   app.c
   tasks/ui_task.c
+  tasks/ad_task.c
   ui/screen_manager.c
   ui/screen_update.c
   ui/screens/scr_boot.c
