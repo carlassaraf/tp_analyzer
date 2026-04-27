@@ -22,6 +22,11 @@
 #define TFT_COL_OFFSET  0
 #define TFT_ROW_OFFSET  34
 
+// ADC input
+#define ADC_GPIO         26    // GPIO26 = ADC channel 0
+#define ADC_CHANNEL      0
+#define ADC_SAMPLE_RATE  10000 // Hz
+
 // Rotary encoder
 #define PIN_ENC_A    6
 #define PIN_ENC_B    7
