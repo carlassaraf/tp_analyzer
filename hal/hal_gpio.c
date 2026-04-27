@@ -41,3 +41,7 @@ void hal_gpio_set_irq(uint8_t pin, uint32_t event_mask, bool enabled, hal_gpio_i
   }
   gpio_set_irq_enabled_with_callback(pin, event_mask, enabled, gpio_irq_dispatcher);
 }
+
+void hal_gpio_write_masked(uint32_t mask, uint32_t values) {
+    gpio_put_masked(mask, values);
+}

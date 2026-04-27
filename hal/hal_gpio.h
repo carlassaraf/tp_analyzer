@@ -47,5 +47,6 @@ uint8_t hal_gpio_read(uint8_t pin);
 void hal_gpio_set_function(uint8_t pin, uint8_t function);
 void hal_gpio_set_pull(uint8_t pin, bool pull_up, bool pull_down);
 void hal_gpio_set_irq(uint8_t pin, uint32_t event_mask, bool enabled, hal_gpio_irq_cb_t cb);
+void hal_gpio_write_masked(uint32_t mask, uint32_t values);
 
 #endif
