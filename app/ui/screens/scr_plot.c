@@ -1,10 +1,15 @@
 #include "scr_plot.h"
 #include "lvgl.h"
 #include "ui/screens.h"
+#include "ui/helpers/chart.h"
 
 lv_obj_t *scr_plot = NULL;
 lv_obj_t *scr_plot_chart = NULL;
 lv_obj_t *scr_plot_y_scale = NULL;
+
+void scr_plot_update_chart(const uint16_t *points, uint16_t count) {
+  ui_chart_push_data(scr_plot_chart, points, count);
+}
 
 void scr_plot_init(void) {
   // Screen creation
@@ -49,18 +54,4 @@ void scr_plot_deinit(void) {
 }
 
 void scr_plot_step(void) {
-
-  lv_chart_series_t *series = lv_chart_get_series_next(scr_plot_chart, NULL);
-
-  lv_chart_set_next_value(scr_plot_chart, series, ((int32_t)lv_rand(0, 440)) - 220);
-
-  uint32_t p = lv_chart_get_point_count(scr_plot_chart);
-  uint32_t s = lv_chart_get_x_start_point(scr_plot_chart, series);
-  int32_t *a = lv_chart_get_series_y_array(scr_plot_chart, series);
-
-  a[(s + 1) % p] = LV_CHART_POINT_NONE;
-  a[(s + 2) % p] = LV_CHART_POINT_NONE;
-  a[(s + 2) % p] = LV_CHART_POINT_NONE;
-
-  lv_chart_refresh(scr_plot_chart);
 }
