@@ -37,11 +37,11 @@
 // WARNING: GPIO 6, 7, 8 conflict with PIN_ENC_A, PIN_ENC_B, PIN_ENC_BTN above.
 // When using this display, move the encoder to free GPIOs (e.g. 26, 27, 28).
 #define ILI9486_DATA_BASE  0   // D0=GPIO0, D1=GPIO1, ..., D7=GPIO7
-#define ILI9486_PIN_WR     10  // Write strobe (active low)
-#define ILI9486_PIN_RD     11  // Read strobe  (active low, can be tied high)
-#define ILI9486_PIN_RS     12  // Register select: 0=cmd, 1=data
-#define ILI9486_PIN_CS     13  // Chip select (active low)
-#define ILI9486_PIN_RST    14  // Reset (active low)
+#define ILI9486_PIN_WR     17  // Write strobe (active low)
+#define ILI9486_PIN_RD     16  // Read strobe  (active low, can be tied high)
+#define ILI9486_PIN_RS     18  // Register select: 0=cmd, 1=data
+#define ILI9486_PIN_CS     19  // Chip select (active low)
+#define ILI9486_PIN_RST    20  // Reset (active low)
 #define ILI9486_PIN_BL     15  // Backlight enable (active high)
 #define ILI9486_WIDTH      480
 #define ILI9486_HEIGHT     320
