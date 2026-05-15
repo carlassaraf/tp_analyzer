@@ -143,7 +143,7 @@ ili9486_t *ili9486_init(const ili9486_config_t *config) {
         (uint8_t[]){0x0F, 0x38, 0x30, 0x09, 0x0F, 0x0F, 0x4E, 0x77,
                     0x3C, 0x07, 0x10, 0x05, 0x23, 0x1B, 0x00}, 15);
 
-    send_cmd_params(ctx, ILI9486_INVON, NULL, 0);
+    send_cmd_params(ctx, ILI9486_INVOFF, NULL, 0);
 
     send_cmd_params(ctx, ILI9486_SLPOUT, NULL, 0);
     sleep_ms(150);
