@@ -14,16 +14,24 @@ extern "C" {
 extern void ui_scrPlotter_screen_init(void);
 extern void ui_scrPlotter_screen_destroy(void);
 extern lv_obj_t *ui_scrPlotter;
+extern lv_obj_t *ui_scrPlotter_contTopBar;
+extern lv_obj_t *ui_scrPlotter_contDate;
 extern lv_obj_t *ui_scrPlotter_chartView;
 extern lv_obj_t *ui_scrPlotter_chartView_Xaxis;
 extern lv_obj_t *ui_scrPlotter_chartView_Yaxis1;
 extern lv_obj_t *ui_scrPlotter_chartView_Yaxis2;
-extern lv_obj_t *ui_scrPlotter_pnlView;
-extern lv_obj_t *ui_scrPlotter_btnVrms;
-extern lv_obj_t *ui_scrPlotter_lblVrms;
-extern lv_obj_t *ui_scrPlotter_btnFreq;
+extern lv_obj_t *ui_scrPlotter_contPeak;
+extern lv_obj_t *ui_scrPlotter_lblPeak;
+extern lv_obj_t *ui_scrPlotter_lblPeakV;
+extern lv_obj_t *ui_scrPlotter_contRms;
+extern lv_obj_t *ui_scrPlotter_lblRms;
+extern lv_obj_t *ui_scrPlotter_lblRmsV;
+extern lv_obj_t *ui_scrPlotter_contFreq;
 extern lv_obj_t *ui_scrPlotter_lblFreq;
-extern lv_obj_t *ui_scrPlotter_btnBack;
+extern lv_obj_t *ui_scrPlotter_lblFreqV;
+extern lv_obj_t *ui_scrPlotter_contTime;
+extern lv_obj_t *ui_scrPlotter_lblTime;
+extern lv_obj_t *ui_scrPlotter_lblTimeV;
 // CUSTOM VARIABLES
 
 #ifdef __cplusplus

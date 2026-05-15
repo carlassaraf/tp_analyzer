@@ -3,6 +3,8 @@ SET(SOURCES screens/ui_scrBoot.c
     ui.c
     components/ui_comp_hook.c
     ui_helpers.c
-    images/ui_img_icons_icon_back_png.c)
+    fonts/ui_font_poppinsBold10.c
+    fonts/ui_font_poppinsReg10.c
+    fonts/ui_font_poppinsReg8.c)
 
 add_library(ui ${SOURCES})

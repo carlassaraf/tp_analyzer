@@ -24,8 +24,10 @@ extern "C" {
 // EVENTS
 extern lv_obj_t *ui____initial_actions0;
 
-// IMAGES AND IMAGE SETS
-LV_IMG_DECLARE( ui_img_icons_icon_back_png);   // assets/icons/icon_back.png
+// FONTS
+LV_FONT_DECLARE( ui_font_poppinsBold10);
+LV_FONT_DECLARE( ui_font_poppinsReg10);
+LV_FONT_DECLARE( ui_font_poppinsReg8);
 
 // UI INIT
 void ui_init(void);
