@@ -22,15 +22,19 @@ extern lv_obj_t *ui_scrPlotter_chartView_Yaxis1;
 extern lv_obj_t *ui_scrPlotter_chartView_Yaxis2;
 extern lv_obj_t *ui_scrPlotter_contPeak;
 extern lv_obj_t *ui_scrPlotter_lblPeak;
+extern lv_obj_t *ui_scrPlotter_linePeak;
 extern lv_obj_t *ui_scrPlotter_lblPeakV;
 extern lv_obj_t *ui_scrPlotter_contRms;
 extern lv_obj_t *ui_scrPlotter_lblRms;
+extern lv_obj_t *ui_scrPlotter_lineRms;
 extern lv_obj_t *ui_scrPlotter_lblRmsV;
 extern lv_obj_t *ui_scrPlotter_contFreq;
 extern lv_obj_t *ui_scrPlotter_lblFreq;
+extern lv_obj_t *ui_scrPlotter_lineFreq;
 extern lv_obj_t *ui_scrPlotter_lblFreqV;
 extern lv_obj_t *ui_scrPlotter_contTime;
 extern lv_obj_t *ui_scrPlotter_lblTime;
+extern lv_obj_t *ui_scrPlotter_lineTime;
 extern lv_obj_t *ui_scrPlotter_lblTimeV;
 // CUSTOM VARIABLES
 

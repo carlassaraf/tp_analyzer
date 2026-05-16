@@ -33,7 +33,7 @@ project(firmware C CXX ASM)
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
-set(DISPLAY_DRIVER "ST7789" CACHE STRING "Display driver: ST7789 or ILI9486")
+set(DISPLAY_DRIVER "ILI9486" CACHE STRING "Display driver: ST7789 or ILI9486")
 set_property(CACHE DISPLAY_DRIVER PROPERTY STRINGS ST7789 ILI9486)
 
 # add_subdirectory(domain)
