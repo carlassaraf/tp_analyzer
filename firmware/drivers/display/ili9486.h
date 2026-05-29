@@ -18,13 +18,16 @@ typedef struct {
     uint8_t rotation;      // 0=portrait, 1=landscape, 2=portrait-flip, 3=landscape-flip
 } ili9486_config_t;
 
-typedef struct {
-    const ili9486_config_t *config;
-    uint32_t data_mask;    // 0xFF << data_pin_base, precomputed
-} ili9486_t;
+typedef struct ili9486_t ili9486_t;  // opaque — full definition in ili9486.c
 
 ili9486_t *ili9486_init(const ili9486_config_t *config);
 void ili9486_set_window(ili9486_t *ctx, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);
 void ili9486_send_pixels(ili9486_t *ctx, const uint8_t *data, size_t len);
+
+// Start a DMA pixel transfer (non-blocking). Call ili9486_dma_wait() to block until done.
+void ili9486_send_pixels_dma(ili9486_t *ctx, const uint8_t *data, size_t len);
+
+// Block until the current DMA transfer is complete.
+void ili9486_dma_wait(ili9486_t *ctx);
 
 #endif

@@ -1,21 +1,18 @@
 #include "hal_display.h"
 
-/**
- * Generic display initialization
- * Specific device drivers (e.g., ST7789) handle their own initialization
- */
-void hal_display_init(void) {
-    // This is now handled by driver initialization
-    // e.g., st7789_init() in drivers/display/st7789.c
+static hal_display_flush_fn   _flush_fn;
+static const hal_display_info_t *_info;
+
+void hal_display_set_backend(hal_display_flush_fn flush_fn, const hal_display_info_t *info) {
+    _flush_fn = flush_fn;
+    _info     = info;
 }
 
-/**
- * Generic display flush (write buffer to VRAM)
- * Specific device drivers handle the actual protocol
- */
-void hal_display_flush(int32_t x1, int32_t y1,
-                       int32_t x2, int32_t y2,
-                       const uint16_t *buf) {
-    // This is now handled by LVGL callbacks to the driver
-    // e.g., st7789_send_color() in drivers/display/st7789.c
+const hal_display_info_t *hal_display_get_info(void) {
+    return _info;
+}
+
+void hal_display_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
+                       const uint8_t *buf, size_t len, void (*done_cb)(void)) {
+    _flush_fn(x1, y1, x2, y2, buf, len, done_cb);
 }

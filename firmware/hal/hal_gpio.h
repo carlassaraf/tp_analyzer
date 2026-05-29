@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include <hardware/gpio.h>
 
 #define HAL_GPIO_IN  0
 #define HAL_GPIO_OUT 1
