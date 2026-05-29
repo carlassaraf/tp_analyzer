@@ -1,18 +1,14 @@
 #include "drivers/display/ili9486.h"
-#include "ili9486_write.pio.h"
-#include "hal/hal_gpio.h"
 #include <pico/stdlib.h>
-#include "hardware/pio.h"
-#include "hardware/dma.h"
-#include "hardware/gpio.h"
+#include "hal/hal_gpio.h"
+#include "hal/hal_pio.h"
+#include "hal/hal_dma.h"
 
 struct ili9486_t {
     const ili9486_config_t *config;
-    uint32_t data_mask;
-    PIO      pio;
-    uint     sm;
-    uint     pio_prog_offset;
-    int      dma_chan;
+    uint32_t   data_mask;
+    hal_pio_t *pio;
+    hal_dma_t *dma;
 };
 
 #define ILI9486_SWRESET  0x01
@@ -35,71 +31,12 @@ struct ili9486_t {
 #define ILI9486_PGAMCTRL 0xE0
 #define ILI9486_NGAMCTRL 0xE1
 
-// MADCTL bits
 #define MADCTL_MY  0x80
 #define MADCTL_MX  0x40
 #define MADCTL_MV  0x20
 #define MADCTL_BGR 0x08
 
 static ili9486_t ili9486_instance;
-
-// --- GPIO <-> PIO handoff ---------------------------------------------------
-
-// Reclaim D0-D7 and WR from PIO so write_byte_raw() works (used by set_window).
-static void gpio_claim_from_pio(const ili9486_t *ctx) {
-    pio_sm_set_enabled(ctx->pio, ctx->sm, false);
-    hal_gpio_set_function(ctx->config->pin_wr, GPIO_FUNC_SIO);
-    hal_gpio_write(ctx->config->pin_wr, 1);
-    for (int i = 0; i < 8; i++) {
-        hal_gpio_set_function(ctx->config->data_pin_base + i, GPIO_FUNC_SIO);
-    }
-}
-
-// Hand D0-D7 and WR back to PIO after command writes.
-// Flushes any stale FIFO data and resets the SM to a clean state.
-static void pio_reclaim_gpio(const ili9486_t *ctx) {
-    for (int i = 0; i < 8; i++) {
-        hal_gpio_set_function(ctx->config->data_pin_base + i, GPIO_FUNC_PIO0);
-    }
-    hal_gpio_set_function(ctx->config->pin_wr, GPIO_FUNC_PIO0);
-    pio_sm_restart(ctx->pio, ctx->sm);
-    pio_sm_clear_fifos(ctx->pio, ctx->sm);
-    pio_sm_exec(ctx->pio, ctx->sm, pio_encode_jmp(ctx->pio_prog_offset));
-    pio_sm_set_enabled(ctx->pio, ctx->sm, true);
-}
-
-// --- PIO + DMA init (called once, after the ILI9486 register init sequence) -
-
-static void ili9486_pio_dma_init(ili9486_t *ctx) {
-    PIO  pio = pio0;
-    uint sm  = pio_claim_unused_sm(pio, true);
-    uint off = pio_add_program(pio, &ili9486_write_program);
-
-    ili9486_write_program_init(pio, sm, off,
-                               ctx->config->data_pin_base,
-                               ctx->config->pin_wr,
-                               50.0f);
-
-    ctx->pio             = pio;
-    ctx->sm              = sm;
-    ctx->pio_prog_offset = off;
-
-    int dma_chan = dma_claim_unused_channel(true);
-    ctx->dma_chan = dma_chan;
-
-    dma_channel_config cfg = dma_channel_get_default_config((uint)dma_chan);
-    channel_config_set_transfer_data_size(&cfg, DMA_SIZE_8);
-    channel_config_set_dreq(&cfg, pio_get_dreq(pio, sm, true));
-    channel_config_set_read_increment(&cfg, true);
-    channel_config_set_write_increment(&cfg, false);
-    dma_channel_configure((uint)dma_chan, &cfg,
-                          &pio->txf[sm],  // write addr fixed
-                          NULL,           // read addr set per transfer
-                          0,              // count set per transfer
-                          false);
-}
-
-// ----------------------------------------------------------------------------
 
 static inline void write_byte_raw(const ili9486_t *ctx, uint8_t byte) {
     hal_gpio_write_masked(ctx->data_mask, (uint32_t)byte << ctx->config->data_pin_base);
@@ -159,11 +96,11 @@ ili9486_t *ili9486_init(const ili9486_config_t *config) {
     // Control pins
     hal_gpio_init(config->pin_wr);
     hal_gpio_set_dir(config->pin_wr, HAL_GPIO_OUT);
-    hal_gpio_write(config->pin_wr, 1);  // idle high
+    hal_gpio_write(config->pin_wr, 1);
 
     hal_gpio_init(config->pin_rd);
     hal_gpio_set_dir(config->pin_rd, HAL_GPIO_OUT);
-    hal_gpio_write(config->pin_rd, 1);  // idle high (read not used)
+    hal_gpio_write(config->pin_rd, 1);
 
     hal_gpio_init(config->pin_rs);
     hal_gpio_set_dir(config->pin_rs, HAL_GPIO_OUT);
@@ -171,7 +108,7 @@ ili9486_t *ili9486_init(const ili9486_config_t *config) {
 
     hal_gpio_init(config->pin_cs);
     hal_gpio_set_dir(config->pin_cs, HAL_GPIO_OUT);
-    hal_gpio_write(config->pin_cs, 0);  // assert permanently (single device)
+    hal_gpio_write(config->pin_cs, 0);
 
     hal_gpio_init(config->pin_rst);
     hal_gpio_set_dir(config->pin_rst, HAL_GPIO_OUT);
@@ -179,7 +116,7 @@ ili9486_t *ili9486_init(const ili9486_config_t *config) {
     if (config->pin_bl >= 0) {
         hal_gpio_init((uint8_t)config->pin_bl);
         hal_gpio_set_dir((uint8_t)config->pin_bl, HAL_GPIO_OUT);
-        hal_gpio_write((uint8_t)config->pin_bl, 0);  // backlight off during init
+        hal_gpio_write((uint8_t)config->pin_bl, 0);
     }
 
     hw_reset(config);
@@ -189,27 +126,21 @@ ili9486_t *ili9486_init(const ili9486_config_t *config) {
     send_cmd_params(ctx, ILI9486_SWRESET, NULL, 0);
     sleep_ms(120);
 
-    // Power controls
     send_cmd_params(ctx, ILI9486_PWCTRL1, (uint8_t[]){0x0d, 0x0d}, 2);
     send_cmd_params(ctx, ILI9486_PWCTRL2, (uint8_t[]){0x43, 0x00}, 2);
     send_cmd_params(ctx, ILI9486_PWCTRL3, (uint8_t[]){0x00}, 1);
 
-    // VCOM
     send_cmd_params(ctx, ILI9486_VMCTRL1, (uint8_t[]){0x00, 0x48}, 2);
 
-    // Memory access & color format
     send_cmd_params(ctx, ILI9486_MADCTL, (uint8_t[]){rotation_to_madctl(config->rotation)}, 1);
-    send_cmd_params(ctx, ILI9486_COLMOD, (uint8_t[]){0x55}, 1);  // 16-bit RGB565
+    send_cmd_params(ctx, ILI9486_COLMOD, (uint8_t[]){0x55}, 1);
 
-    // Display function control
     send_cmd_params(ctx, ILI9486_DFUNCTR, (uint8_t[]){0x00, 0x42, 0x3B}, 3);
 
-    // Positive gamma correction
     send_cmd_params(ctx, ILI9486_PGAMCTRL,
         (uint8_t[]){0x0F, 0x24, 0x1C, 0x0A, 0x0F, 0x08, 0x43, 0x88,
                     0x32, 0x0F, 0x10, 0x06, 0x0F, 0x07, 0x00}, 15);
 
-    // Negative gamma correction
     send_cmd_params(ctx, ILI9486_NGAMCTRL,
         (uint8_t[]){0x0F, 0x38, 0x30, 0x09, 0x0F, 0x0F, 0x4E, 0x77,
                     0x3C, 0x07, 0x10, 0x05, 0x23, 0x1B, 0x00}, 15);
@@ -225,18 +156,20 @@ ili9486_t *ili9486_init(const ili9486_config_t *config) {
     send_cmd_params(ctx, ILI9486_NORON, NULL, 0);
 
     if (config->pin_bl >= 0)
-        hal_gpio_write((uint8_t)config->pin_bl, 1);  // backlight on
+        hal_gpio_write((uint8_t)config->pin_bl, 1);
 
-    // Hand D0-D7 and WR to PIO; set up DMA channel.
-    ili9486_pio_dma_init(ctx);
+    // Hand D0-D7 and WR to PIO; wire DMA to the SM's TX FIFO.
+    ctx->pio = hal_pio_init_8080_write(config->data_pin_base, config->pin_wr, 50.0f);
+    ctx->dma = hal_dma_init_pio_tx(hal_pio_get_tx_fifo_addr(ctx->pio),
+                                    hal_pio_get_tx_dreq(ctx->pio),
+                                    HAL_DMA_SIZE_8);
 
     return ctx;
 }
 
 void ili9486_set_window(ili9486_t *ctx, uint16_t x1, uint16_t y1,
                         uint16_t x2, uint16_t y2) {
-    // Reclaim D0-D7 and WR from PIO so write_byte_raw() can drive them.
-    gpio_claim_from_pio(ctx);
+    hal_pio_release_gpio(ctx->pio);
 
     uint8_t col[] = {
         (uint8_t)(x1 >> 8), (uint8_t)(x1 & 0xFF),
@@ -251,14 +184,12 @@ void ili9486_set_window(ili9486_t *ctx, uint16_t x1, uint16_t y1,
     send_cmd_params(ctx, ILI9486_RASET, row, 4);
 
     write_cmd(ctx, ILI9486_RAMWR);
-    hal_gpio_write(ctx->config->pin_rs, 1);  // stay in data mode for pixel burst
+    hal_gpio_write(ctx->config->pin_rs, 1);
 
-    // Return D0-D7 and WR to PIO for the upcoming DMA pixel transfer.
-    pio_reclaim_gpio(ctx);
+    hal_pio_claim_gpio(ctx->pio);
 }
 
 void ili9486_send_pixels(ili9486_t *ctx, const uint8_t *data, size_t len) {
-    // RS is already high (data mode) after ili9486_set_window
     const uint32_t mask  = ctx->data_mask;
     const uint8_t  shift = ctx->config->data_pin_base;
     const uint8_t  wr    = ctx->config->pin_wr;
@@ -271,11 +202,9 @@ void ili9486_send_pixels(ili9486_t *ctx, const uint8_t *data, size_t len) {
 }
 
 void ili9486_send_pixels_dma(ili9486_t *ctx, const uint8_t *data, size_t len) {
-    // RS is already high (data mode) and PIO is enabled after ili9486_set_window.
-    dma_channel_set_read_addr((uint)ctx->dma_chan, data, false);
-    dma_channel_set_trans_count((uint)ctx->dma_chan, (uint32_t)len, true);
+    hal_dma_start(ctx->dma, data, len);
 }
 
 void ili9486_dma_wait(ili9486_t *ctx) {
-    dma_channel_wait_for_finish_blocking((uint)ctx->dma_chan);
+    hal_dma_wait(ctx->dma);
 }
