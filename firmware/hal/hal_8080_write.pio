@@ -1,0 +1,41 @@
+;
+; 8080 8-bit parallel write — HAL PIO program
+; side-set pin : WR  (active-low pulse)
+; OUT pins     : D0-D7 (8 consecutive GPIOs)
+; autopull threshold = 8  ->  one 32-bit FIFO word per byte (byte in [7:0])
+; shift direction = right  ->  bits[7:0] of each word drive D[7:0]
+; 2 PIO cycles per byte; at 60 MHz -> 30 MB/s, WR pulse = 16.7 ns (ILI9486 min 15 ns)
+;
+
+.program hal_8080_write
+.side_set 1
+
+.wrap_target
+    out pins, 8         side 0   ; drive D[7:0], WR low
+    nop                 side 1   ; WR high (latch); data stable this cycle
+.wrap
+
+% c-sdk {
+#include "hardware/clocks.h"
+
+static inline void hal_8080_write_program_init(PIO pio, uint sm, uint offset,
+                                               uint data_base, uint pin_wr,
+                                               float clk_mhz)
+{
+    for (uint i = 0; i < 8; i++) pio_gpio_init(pio, data_base + i);
+    pio_gpio_init(pio, pin_wr);
+    pio_sm_set_consecutive_pindirs(pio, sm, data_base, 8, true);
+    pio_sm_set_consecutive_pindirs(pio, sm, pin_wr,   1, true);
+
+    pio_sm_config c = hal_8080_write_program_get_default_config(offset);
+    sm_config_set_out_pins(&c, data_base, 8);
+    sm_config_set_sideset_pins(&c, pin_wr);
+    sm_config_set_out_shift(&c, true, true, 8);
+
+    float div = (float)clock_get_hz(clk_sys) / (clk_mhz * 1e6f);
+    sm_config_set_clkdiv(&c, div);
+
+    pio_sm_init(pio, sm, offset, &c);
+    pio_sm_set_enabled(pio, sm, true);
+}
+%}

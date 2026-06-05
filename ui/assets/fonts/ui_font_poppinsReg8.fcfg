@@ -1,0 +1,16 @@
+{
+  "codename": "poppinsReg8",
+  "ttf_path": "/assets/fonts/Poppins-Regular.ttf",
+  "bin_path": "/assets/fonts/ui_font_poppinsReg8.bin",
+  "c_path": "/assets/fonts/ui_font_poppinsReg8.c",
+  "cfg_path": "/assets/fonts/ui_font_poppinsReg8.fcfg",
+  "size": 8,
+  "bpp": 4,
+  "letters": 0,
+  "ranges": [
+    "0x20-0x7f"
+  ],
+  "symbols": "",
+  "customparams": "--no-compress --no-prefilter",
+  "uploaded": false
+}
