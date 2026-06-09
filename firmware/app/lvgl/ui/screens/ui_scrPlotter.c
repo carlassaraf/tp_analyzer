@@ -5,7 +5,7 @@
 
 #include "../ui.h"
 
-lv_obj_t *ui_scrPlotter = NULL;lv_obj_t *ui_scrPlotter_contTopBar = NULL;lv_obj_t *ui_scrPlotter_contDate = NULL;lv_obj_t *ui_scrPlotter_chartView = NULL;lv_obj_t *ui_scrPlotter_chartView_Xaxis = NULL;lv_obj_t *ui_scrPlotter_chartView_Yaxis1 = NULL;lv_obj_t *ui_scrPlotter_chartView_Yaxis2 = NULL;lv_obj_t *ui_scrPlotter_contPeak = NULL;lv_obj_t *ui_scrPlotter_lblPeak = NULL;lv_obj_t *ui_scrPlotter_conPeakV = NULL;lv_obj_t *ui_scrPlotter_lblPeakV = NULL;lv_obj_t *ui_scrPlotter_contRms = NULL;lv_obj_t *ui_scrPlotter_lblRms = NULL;lv_obj_t *ui_scrPlotter_conRmsV = NULL;lv_obj_t *ui_scrPlotter_lblRmsV = NULL;lv_obj_t *ui_scrPlotter_contFreq = NULL;lv_obj_t *ui_scrPlotter_lblFreq = NULL;lv_obj_t *ui_scrPlotter_conFreqV = NULL;lv_obj_t *ui_scrPlotter_lblFreqV = NULL;lv_obj_t *ui_scrPlotter_contTime = NULL;lv_obj_t *ui_scrPlotter_lblTime = NULL;lv_obj_t *ui_scrPlotter_contTimeV = NULL;lv_obj_t *ui_scrPlotter_lblTimeV = NULL;
+lv_obj_t *ui_scrPlotter = NULL;lv_obj_t *ui_scrPlotter_contTopBar = NULL;lv_obj_t *ui_scrPlotter_chartView = NULL;lv_obj_t *ui_scrPlotter_chartView_Xaxis = NULL;lv_obj_t *ui_scrPlotter_chartView_Yaxis1 = NULL;lv_obj_t *ui_scrPlotter_chartView_Yaxis2 = NULL;lv_obj_t *ui_scrPlotter_contPeak = NULL;lv_obj_t *ui_scrPlotter_lblPeak = NULL;lv_obj_t *ui_scrPlotter_conPeakV = NULL;lv_obj_t *ui_scrPlotter_lblPeakV = NULL;lv_obj_t *ui_scrPlotter_contRms = NULL;lv_obj_t *ui_scrPlotter_lblRms = NULL;lv_obj_t *ui_scrPlotter_conRmsV = NULL;lv_obj_t *ui_scrPlotter_lblRmsV = NULL;lv_obj_t *ui_scrPlotter_contFreq = NULL;lv_obj_t *ui_scrPlotter_lblFreq = NULL;lv_obj_t *ui_scrPlotter_conFreqV = NULL;lv_obj_t *ui_scrPlotter_lblFreqV = NULL;lv_obj_t *ui_scrPlotter_contTime = NULL;lv_obj_t *ui_scrPlotter_lblTime = NULL;lv_obj_t *ui_scrPlotter_contTimeV = NULL;lv_obj_t *ui_scrPlotter_lblTimeV = NULL;
 // event funtions
 
 // build funtions
@@ -17,24 +17,9 @@ lv_obj_remove_flag( ui_scrPlotter, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_bg_color(ui_scrPlotter, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_scrPlotter, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_scrPlotter_contTopBar = lv_obj_create(ui_scrPlotter);
-lv_obj_remove_style_all(ui_scrPlotter_contTopBar);
-lv_obj_set_width( ui_scrPlotter_contTopBar, 480);
-lv_obj_set_height( ui_scrPlotter_contTopBar, 20);
-lv_obj_remove_flag( ui_scrPlotter_contTopBar, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_obj_set_style_bg_color(ui_scrPlotter_contTopBar, lv_color_hex(0xC1C9FF), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_scrPlotter_contTopBar, 218, LV_PART_MAIN| LV_STATE_DEFAULT);
-
-ui_scrPlotter_contDate = lv_label_create(ui_scrPlotter_contTopBar);
-lv_obj_set_width( ui_scrPlotter_contDate, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_scrPlotter_contDate, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_scrPlotter_contDate, -10 );
-lv_obj_set_y( ui_scrPlotter_contDate, 0 );
-lv_obj_set_align( ui_scrPlotter_contDate, LV_ALIGN_RIGHT_MID );
-lv_label_set_text(ui_scrPlotter_contDate,"Lun 11 May 12:23 PM");
-lv_obj_set_style_text_color(ui_scrPlotter_contDate, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_text_opa(ui_scrPlotter_contDate, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_scrPlotter_contDate, &ui_font_poppinsReg10, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_scrPlotter_contTopBar = ui_contTopBar_create(ui_scrPlotter);
+lv_obj_set_x( ui_scrPlotter_contTopBar, 0 );
+lv_obj_set_y( ui_scrPlotter_contTopBar, 0 );
 
 ui_scrPlotter_chartView = lv_chart_create(ui_scrPlotter);
 lv_obj_set_width( ui_scrPlotter_chartView, 420);
@@ -307,7 +292,6 @@ void ui_scrPlotter_screen_destroy(void)
 // NULL screen variables
 ui_scrPlotter= NULL;
 ui_scrPlotter_contTopBar= NULL;
-ui_scrPlotter_contDate= NULL;
 ui_scrPlotter_chartView= NULL;
 ui_scrPlotter_contPeak= NULL;
 ui_scrPlotter_lblPeak= NULL;

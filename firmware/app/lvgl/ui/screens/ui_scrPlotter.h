@@ -15,7 +15,6 @@ extern void ui_scrPlotter_screen_init(void);
 extern void ui_scrPlotter_screen_destroy(void);
 extern lv_obj_t *ui_scrPlotter;
 extern lv_obj_t *ui_scrPlotter_contTopBar;
-extern lv_obj_t *ui_scrPlotter_contDate;
 extern lv_obj_t *ui_scrPlotter_chartView;
 extern lv_obj_t *ui_scrPlotter_chartView_Xaxis;
 extern lv_obj_t *ui_scrPlotter_chartView_Yaxis1;

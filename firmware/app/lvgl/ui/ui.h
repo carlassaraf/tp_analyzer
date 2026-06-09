@@ -13,16 +13,24 @@ extern "C" {
     #include "lvgl.h"
 
 #include "ui_helpers.h"
+#include "components/ui_comp.h"
+#include "components/ui_comp_hook.h"
 #include "ui_events.h"
 
 ///////////////////// SCREENS ////////////////////
 #include "screens/ui_scrBoot.h"
 #include "screens/ui_scrPlotter.h"
+#include "screens/ui_scrFFT.h"
+#include "screens/ui_scrMenu.h"
 
 ///////////////////// VARIABLES ////////////////////
 
 // EVENTS
 extern lv_obj_t *ui____initial_actions0;
+
+// IMAGES AND IMAGE SETS
+LV_IMG_DECLARE( ui_img_icons_icon_plotter_chart_png);   // assets/icons/icon_plotter_chart.png
+LV_IMG_DECLARE( ui_img_icons_icon_fft_chart_png);   // assets/icons/icon_fft_chart.png
 
 // FONTS
 LV_FONT_DECLARE( ui_font_poppinsBold10);
