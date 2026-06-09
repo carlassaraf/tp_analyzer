@@ -18,7 +18,9 @@ typedef struct screen {
 // Used to register all screens in the applications with their callback functions
 static const screen_t screens[SCREEN_COUNT] = {
   [SCREEN_BOOT] = SCR_REGISTER("Boot",    ui_scrBoot,     boot    ),
+  [SCREEN_MENU] = SCR_REGISTER("Menu",    ui_scrMenu,     menu    ),
   [SCREEN_PLOT] = SCR_REGISTER("Plotter", ui_scrPlotter,  plotter ),
+  [SCREEN_FFT]  = SCR_REGISTER("FFT",     ui_scrFFT,      fft     ),
 };
 
 // Keep track of running screens and transitions

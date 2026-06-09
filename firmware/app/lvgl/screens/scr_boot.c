@@ -8,7 +8,7 @@ static lv_timer_t *timer_handle = NULL;
 
 /** @brief Handles changing screen after timeout */
 static void timer_cb(lv_timer_t *timer) {
-  screen_manager_go_to(SCREEN_PLOT);
+  screen_manager_go_to(SCREEN_MENU);
   lv_timer_delete(timer_handle);
 }
 
