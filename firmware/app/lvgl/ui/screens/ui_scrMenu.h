@@ -13,9 +13,9 @@ extern "C" {
 // SCREEN: ui_scrMenu
 extern void ui_scrMenu_screen_init(void);
 extern void ui_scrMenu_screen_destroy(void);
-extern void ui_event_scrMenu( lv_event_t * e);
 extern lv_obj_t *ui_scrMenu;
 extern lv_obj_t *ui_scrMenu_contTopBar;
+extern void ui_event_scrMenu_btnMenuPlotter( lv_event_t * e);
 extern lv_obj_t *ui_scrMenu_btnMenuPlotter;
 extern void ui_event_scrMenu_btnMenuFFT( lv_event_t * e);
 extern lv_obj_t *ui_scrMenu_btnMenuFFT;

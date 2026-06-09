@@ -7,11 +7,11 @@
 
 lv_obj_t *ui_scrMenu = NULL;lv_obj_t *ui_scrMenu_contTopBar = NULL;lv_obj_t *ui_scrMenu_btnMenuPlotter = NULL;lv_obj_t *ui_scrMenu_btnMenuFFT = NULL;
 // event funtions
-void ui_event_scrMenu( lv_event_t * e) {
+void ui_event_scrMenu_btnMenuPlotter( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
 if ( event_code == LV_EVENT_CLICKED) {
-      _ui_screen_change( &ui_scrPlotter, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_scrPlotter_screen_init);
+      _ui_screen_change( &ui_scrPlotter, LV_SCR_LOAD_ANIM_MOVE_LEFT, 100, 0, &ui_scrPlotter_screen_init);
 }
 }
 
@@ -19,7 +19,7 @@ void ui_event_scrMenu_btnMenuFFT( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
 if ( event_code == LV_EVENT_CLICKED) {
-      _ui_screen_change( &ui_scrFFT, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, &ui_scrFFT_screen_init);
+      _ui_screen_change( &ui_scrFFT, LV_SCR_LOAD_ANIM_MOVE_LEFT, 100, 0, &ui_scrFFT_screen_init);
 }
 }
 
@@ -37,7 +37,7 @@ lv_obj_set_y( ui_scrMenu_contTopBar, 0 );
 ui_scrMenu_btnMenuPlotter = lv_button_create(ui_scrMenu);
 lv_obj_set_width( ui_scrMenu_btnMenuPlotter, 80);
 lv_obj_set_height( ui_scrMenu_btnMenuPlotter, 80);
-lv_obj_set_x( ui_scrMenu_btnMenuPlotter, 20 );
+lv_obj_set_x( ui_scrMenu_btnMenuPlotter, 19 );
 lv_obj_set_y( ui_scrMenu_btnMenuPlotter, 40 );
 lv_obj_add_flag( ui_scrMenu_btnMenuPlotter, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
 lv_obj_remove_flag( ui_scrMenu_btnMenuPlotter, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
@@ -62,8 +62,8 @@ lv_obj_set_style_bg_image_src( ui_scrMenu_btnMenuFFT, &ui_img_icons_icon_fft_cha
 lv_obj_set_style_bg_color(ui_scrMenu_btnMenuFFT, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_FOCUSED );
 lv_obj_set_style_bg_opa(ui_scrMenu_btnMenuFFT, 25, LV_PART_MAIN| LV_STATE_FOCUSED);
 
+lv_obj_add_event_cb(ui_scrMenu_btnMenuPlotter, ui_event_scrMenu_btnMenuPlotter, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_scrMenu_btnMenuFFT, ui_event_scrMenu_btnMenuFFT, LV_EVENT_ALL, NULL);
-lv_obj_add_event_cb(ui_scrMenu, ui_event_scrMenu, LV_EVENT_ALL, NULL);
 
 }
 
