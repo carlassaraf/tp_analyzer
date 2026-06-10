@@ -5,10 +5,14 @@
 #include "arm_math.h"
 #include <stdlib.h>
 
-// Number of samples
+// Number of samples — must match HAL_ADC_BUFFER_SIZE
 #define N   2048
-// Sampling frequency
-#define FS  5000.0
+// Sampling frequency in Hz — must match ADC_SAMPLE_RATE in board_config.h
+#define FS  10000.0f
+
+// Derived display constants (10 harmonics of 50 Hz visible at once)
+#define VISIBLE_BINS  ((uint16_t)((10U * 50U * N) / 10000U))  // = 102 bins
+#define SCROLL_BINS   ((uint16_t)((50U * N) / 10000U))         // = 10 bins per step
 
 /**
  * @brief FFT directions

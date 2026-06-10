@@ -6,6 +6,8 @@
 #include "queue.h"
 
 #include "hal/hal_adc.h"
+#include "dsp.h"
+#include <stdbool.h>
 
 /** 
  * @struct screen_update_msg
@@ -23,9 +25,31 @@ static void screen_update_plot_data(void *data) {
   scr_plotter_update_chart((const uint16_t*)data, HAL_ADC_BUFFER_SIZE);
 }
 
+static void screen_update_fft_data(void *data) {
+  const uint16_t *samples = (const uint16_t *)data;
+  static arm_rfft_fast_instance_f32 fft_inst;
+  static float32_t input[N];
+  static float32_t fft_out[N / 2];
+  static bool initialized = false;
+
+  if (!initialized) {
+    dsp_fft_init(&fft_inst);
+    initialized = true;
+  }
+
+  // Convert 12-bit ADC samples to centered float [-1, 1]
+  for (uint32_t i = 0; i < N; i++) {
+    input[i] = ((float32_t)samples[i] - 2048.0f) / 2048.0f;
+  }
+
+  dsp_fft_run(&fft_inst, input, fft_out);
+  scr_fft_update_chart(fft_out, N / 2);
+}
+
 // Command handler pointer to dispatch pending updates
 static void (*screen_update_handlers[])(void*) = {
-  [SCREEN_PLOT_DATA] = screen_update_plot_data
+  [SCREEN_PLOT_DATA]  = screen_update_plot_data,
+  [SCREEN_FFT_DATA]   = screen_update_fft_data,
 };
 
 void screen_update_init(void) {
