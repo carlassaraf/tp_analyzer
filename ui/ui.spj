@@ -1723,7 +1723,21 @@
               },
               {
                 "part": "lv.PART.INDICATOR",
-                "childs": [],
+                "childs": [
+                  {
+                    "nid": 10000,
+                    "strtype": "_style/StyleState",
+                    "strval": "DEFAULT",
+                    "childs": [
+                      {
+                        "nid": 11310,
+                        "strtype": "_style/Size_size",
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 1
+                  }
+                ],
                 "nid": 1280,
                 "strtype": "CHART/Style_indicator",
                 "strval": "lv.PART.INDICATOR, Rectangle, Pad, Size",
@@ -5848,7 +5862,6 @@
               },
               {
                 "nid": 1230,
-                "flags": 1048576,
                 "strtype": "CHART/Chart_data",
                 "InheritedType": 1
               },
@@ -5915,7 +5928,21 @@
               },
               {
                 "part": "lv.PART.INDICATOR",
-                "childs": [],
+                "childs": [
+                  {
+                    "nid": 10000,
+                    "strtype": "_style/StyleState",
+                    "strval": "DEFAULT",
+                    "childs": [
+                      {
+                        "nid": 11310,
+                        "strtype": "_style/Size_size",
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 1
+                  }
+                ],
                 "nid": 1280,
                 "strtype": "CHART/Style_indicator",
                 "strval": "lv.PART.INDICATOR, Rectangle, Pad, Size",
@@ -7631,7 +7658,7 @@
   },
   "animations": [],
   "selected_theme": "Default",
-  "selected_screen": "GUID16417394-794409S1275160",
+  "selected_screen": "GUID56084559-662854S6815118",
   "info": {
     "name": "ui.spj",
     "depth": 1,
@@ -7660,7 +7687,7 @@
     "separate_screen_save": false,
     "hierarchy_state_save": false,
     "reverse_event_order": false,
-    "backup_cnt": 44,
+    "backup_cnt": 46,
     "autosave_cnt": 0,
     "group_color_cnt": 1,
     "imagebytearrayprefix": "",

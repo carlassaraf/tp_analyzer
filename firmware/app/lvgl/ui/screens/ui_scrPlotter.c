@@ -78,6 +78,8 @@ lv_scale_set_total_tick_count( ui_scrPlotter_chartView_Yaxis2, (0 > 0 ? 0-1 : 0)
 lv_scale_set_major_tick_every( ui_scrPlotter_chartView_Yaxis2, 0 >= 1 ? 0 : 1 );
 lv_scale_set_label_show( ui_scrPlotter_chartView_Yaxis2, false );
 
+lv_obj_set_style_size(ui_scrPlotter_chartView, 0, 0, LV_PART_INDICATOR| LV_STATE_DEFAULT);
+
 //This workaround (an invisible outline) is needed because without it chart overflow-visible doesn't work in LVGL-9.1
 lv_obj_set_style_outline_pad( ui_scrPlotter_chartView, LV_MAX3(50, 50, 0), LV_PART_MAIN | LV_STATE_DEFAULT ); //workaround for ineffective 'overflow visible' flag
 lv_obj_set_style_outline_width( ui_scrPlotter_chartView, -1, LV_PART_MAIN | LV_STATE_DEFAULT );
