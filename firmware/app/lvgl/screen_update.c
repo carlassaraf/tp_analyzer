@@ -36,12 +36,18 @@ static void screen_update_fft_data(void *data) {
     dsp_fft_init(&fft_inst);
     initialized = true;
   }
+  // Hanning window to normalize sample start and end
+  static float32_t hanning_window[N] = {0};
+  const float hanning_gain = 0.5;
+  arm_hanning_f32(hanning_window, N);
 
   // Convert 12-bit ADC samples to centered float [-1, 1]
   for (uint32_t i = 0; i < N; i++) {
     input[i] = ((float32_t)samples[i] - 2048.0f) / 2048.0f;
   }
-
+  // Apply hanning window
+  arm_mult_f32(input, hanning_window, input, N);
+  for (uint32_t i = 0; i < N; i++) { input[i] /= hanning_gain; }
   dsp_fft_run(&fft_inst, input, fft_out);
   scr_fft_update_chart(fft_out, N / 2);
 }

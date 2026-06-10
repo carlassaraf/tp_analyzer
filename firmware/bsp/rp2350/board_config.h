@@ -25,7 +25,7 @@
 // ADC input
 #define ADC_GPIO         26    // GPIO26 = ADC channel 0
 #define ADC_CHANNEL      0
-#define ADC_SAMPLE_RATE  10000 // Hz
+#define ADC_SAMPLE_RATE  10240 // Hz — 50*N/FS=10 exact bins for 50 Hz harmonics
 
 // Rotary encoder
 #define PIN_ENC_A    13
