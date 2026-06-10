@@ -8,4 +8,6 @@ void scr_fft_init(void);
 void scr_fft_deinit(void);
 void scr_fft_step(void);
 
+void scr_fft_update_chart(const float *magnitudes, uint16_t count);
+
 #endif
