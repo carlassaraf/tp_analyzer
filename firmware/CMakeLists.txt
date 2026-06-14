@@ -34,10 +34,13 @@ project(firmware C CXX ASM)
 pico_sdk_init()
 
 set(DISPLAY_DRIVER "ILI9486" CACHE STRING "Display driver: ST7789 or ILI9486")
+set(CMSISCORE ${CMAKE_CURRENT_SOURCE_DIR}/third_party/CMSIS_6/CMSIS/Core)
+set(CMSISDSP_INSTALL OFF CACHE BOOL "" FORCE)
 set_property(CACHE DISPLAY_DRIVER PROPERTY STRINGS ST7789 ILI9486)
 
 # add_subdirectory(domain)
 add_subdirectory(third_party/lvgl)
+add_subdirectory(third_party/CMSIS-DSP)
 add_subdirectory(hal)
 add_subdirectory(drivers)
 add_subdirectory(services)

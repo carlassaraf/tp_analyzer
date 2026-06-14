@@ -7,6 +7,7 @@
  */
 typedef enum screen_update_cmd {
   SCREEN_PLOT_DATA,         /**< Update screen with plotter */
+  SCREEN_FFT_DATA,          /**< Update screen with FFT sample data */
   SCREEN_UPDATE_CMD_COUNT
 } screen_update_cmd_t;
 

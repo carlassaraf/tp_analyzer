@@ -1,6 +1,8 @@
 #include "ui.h"
 #include "screen_manager.h"
 
+#include <stdio.h>
+
 /**
  * @struct screen
  * @brief Screen struct for the manager to register
@@ -18,12 +20,16 @@ typedef struct screen {
 // Used to register all screens in the applications with their callback functions
 static const screen_t screens[SCREEN_COUNT] = {
   [SCREEN_BOOT] = SCR_REGISTER("Boot",    ui_scrBoot,     boot    ),
+  [SCREEN_MENU] = SCR_REGISTER("Menu",    ui_scrMenu,     menu    ),
   [SCREEN_PLOT] = SCR_REGISTER("Plotter", ui_scrPlotter,  plotter ),
+  [SCREEN_FFT]  = SCR_REGISTER("FFT",     ui_scrFFT,      fft     ),
 };
 
 // Keep track of running screens and transitions
 static screen_id_t current = SCREEN_BOOT;
 static screen_id_t pending = SCREEN_BOOT;
+
+static screen_id_t screen_manager_get_screen(void);
 
 void screen_manager_init(void) {
   // Prepare screens
@@ -39,12 +45,17 @@ void screen_manager_go_to(screen_id_t id) {
 }
 
 void screen_manager_step(void) {
+  // Check if any event called _ui_screen_change
+  if(current != screen_manager_get_screen()) {
+    pending = screen_manager_get_screen();
+  }
+  // Resolve screen_manager_go_to calls
   if (pending != current) {
     lv_lock();
     if(screens[current].deinit) { screens[current].deinit(); }
-    if(screens[pending].init) { 
+    // Call _ui_screen_change if it was not called before
+    if(screens[pending].init && current == screen_manager_get_screen()) {
       _ui_screen_change(screens[pending].scr, LV_SCR_LOAD_ANIM_NONE, 0, 0, screens[pending].init);
-      screens[pending].init();
     }
     lv_unlock();
     current = pending;
@@ -52,4 +63,14 @@ void screen_manager_step(void) {
   lv_lock();
   if(screens[current].step) { screens[current].step(); }
   lv_unlock();
+}
+
+/** @brief Returns ID of current active screen */
+static screen_id_t screen_manager_get_screen(void) {
+  for (screen_id_t id = SCREEN_BOOT; id < SCREEN_COUNT; id++) {
+    if (lv_screen_active() == *(screens[id].scr)) {
+      return id;
+    }
+  }
+  return current;
 }

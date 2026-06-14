@@ -1,3 +1,9 @@
 [submodule "firmware/third_party/lvgl"]
 	path = firmware/third_party/lvgl
 	url = https://github.com/lvgl/lvgl
+[submodule "firmware/third_party/CMSIS-DSP"]
+	path = firmware/third_party/CMSIS-DSP
+	url = https://github.com/ARM-software/CMSIS-DSP
+[submodule "firmware/third_party/CMSIS_6"]
+	path = firmware/third_party/CMSIS_6
+	url = https://github.com/ARM-software/CMSIS_6

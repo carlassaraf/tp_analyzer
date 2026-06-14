@@ -3,3 +3,8 @@
 // LVGL version: 9.3
 // Project name: ui
 
+#include "../ui.h"
+
+void ui_comp_contTopBar_create_hook( lv_obj_t * comp)
+{
+}
