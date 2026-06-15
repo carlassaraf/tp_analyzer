@@ -6,7 +6,7 @@ add_library(app STATIC
   lvgl/screen_update.c
   lvgl/screens/scr_boot.c
   lvgl/screens/scr_menu.c
-  lvgl/screens/scr_plotter.c
+  lvgl/screens/scr_oscilloscope.c
   lvgl/screens/scr_fft.c
   lvgl/helpers/chart.c
 )

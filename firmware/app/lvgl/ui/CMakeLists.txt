@@ -1,16 +1,37 @@
 SET(SOURCES components/ui_comp_conttopbar.c
     components/ui_comp.c
     screens/ui_scrBoot.c
-    screens/ui_scrPlotter.c
+    screens/ui_scrOscilloscope.c
     screens/ui_scrFFT.c
     screens/ui_scrMenu.c
+    ui_theme_manager.c
+    ui_themes.c
     ui.c
     components/ui_comp_hook.c
     ui_helpers.c
-    images/ui_img_icons_icon_plotter_chart_png.c
-    images/ui_img_icons_icon_fft_chart_png.c
+    images/ui_img_1310808144.c
+    images/ui_img_icons_ic_sd_png.c
+    images/ui_img_icons_ic_realtime_png.c
+    images/ui_img_icons_ic_fft_png.c
+    images/ui_img_icons_ic_measure_png.c
+    images/ui_img_icons_ic_settings_png.c
+    images/ui_img_icons_ic_record_png.c
     fonts/ui_font_poppinsBold10.c
     fonts/ui_font_poppinsReg10.c
-    fonts/ui_font_poppinsReg8.c)
+    fonts/ui_font_poppinsReg8.c
+    fonts/ui_font_MonoReg11.c
+    fonts/ui_font_MonoReg10.c
+    fonts/ui_font_MonoMed11.c
+    fonts/ui_font_SansMed10.c
+    fonts/ui_font_SansReg10.c
+    fonts/ui_font_SansBold24.c
+    fonts/ui_font_SansBold10.c
+    fonts/ui_font_MonoBold13.c
+    fonts/ui_font_MonoMed10.c
+    fonts/ui_font_SansBold13.c
+    fonts/ui_font_SansReg11.c
+    fonts/ui_font_SansBold15.c
+    fonts/ui_font_SansBold9.c
+    fonts/ui_font_MonoBold19.c)
 
 add_library(ui ${SOURCES})

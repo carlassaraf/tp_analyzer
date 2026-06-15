@@ -3,3 +3,11 @@ project.info
 Themes.slt
 backup
 cache
+
+assets/fonts/IBM_Plex_Mono/*.bin
+assets/fonts/IBM_Plex_Mono/*.fcfg
+assets/fonts/IBM_Plex_Mono/*.c
+
+assets/fonts/IBM_Plex_Sans/*.bin
+assets/fonts/IBM_Plex_Sans/*.fcfg
+assets/fonts/IBM_Plex_Sans/*.c

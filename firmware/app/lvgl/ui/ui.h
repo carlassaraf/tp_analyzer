@@ -16,10 +16,12 @@ extern "C" {
 #include "components/ui_comp.h"
 #include "components/ui_comp_hook.h"
 #include "ui_events.h"
+#include "ui_theme_manager.h"
+#include "ui_themes.h"
 
 ///////////////////// SCREENS ////////////////////
 #include "screens/ui_scrBoot.h"
-#include "screens/ui_scrPlotter.h"
+#include "screens/ui_scrOscilloscope.h"
 #include "screens/ui_scrFFT.h"
 #include "screens/ui_scrMenu.h"
 
@@ -29,13 +31,32 @@ extern "C" {
 extern lv_obj_t *ui____initial_actions0;
 
 // IMAGES AND IMAGE SETS
-LV_IMG_DECLARE( ui_img_icons_icon_plotter_chart_png);   // assets/icons/icon_plotter_chart.png
-LV_IMG_DECLARE( ui_img_icons_icon_fft_chart_png);   // assets/icons/icon_fft_chart.png
+LV_IMG_DECLARE( ui_img_1310808144);   // assets/utn-avellaneda-logo.png
+LV_IMG_DECLARE( ui_img_icons_ic_sd_png);   // assets/icons/ic_sd.png
+LV_IMG_DECLARE( ui_img_icons_ic_realtime_png);   // assets/icons/ic_realtime.png
+LV_IMG_DECLARE( ui_img_icons_ic_fft_png);   // assets/icons/ic_fft.png
+LV_IMG_DECLARE( ui_img_icons_ic_measure_png);   // assets/icons/ic_measure.png
+LV_IMG_DECLARE( ui_img_icons_ic_settings_png);   // assets/icons/ic_settings.png
+LV_IMG_DECLARE( ui_img_icons_ic_record_png);   // assets/icons/ic_record.png
 
 // FONTS
 LV_FONT_DECLARE( ui_font_poppinsBold10);
 LV_FONT_DECLARE( ui_font_poppinsReg10);
 LV_FONT_DECLARE( ui_font_poppinsReg8);
+LV_FONT_DECLARE( ui_font_MonoReg11);
+LV_FONT_DECLARE( ui_font_MonoReg10);
+LV_FONT_DECLARE( ui_font_MonoMed11);
+LV_FONT_DECLARE( ui_font_SansMed10);
+LV_FONT_DECLARE( ui_font_SansReg10);
+LV_FONT_DECLARE( ui_font_SansBold24);
+LV_FONT_DECLARE( ui_font_SansBold10);
+LV_FONT_DECLARE( ui_font_MonoBold13);
+LV_FONT_DECLARE( ui_font_MonoMed10);
+LV_FONT_DECLARE( ui_font_SansBold13);
+LV_FONT_DECLARE( ui_font_SansReg11);
+LV_FONT_DECLARE( ui_font_SansBold15);
+LV_FONT_DECLARE( ui_font_SansBold9);
+LV_FONT_DECLARE( ui_font_MonoBold19);
 
 // UI INIT
 void ui_init(void);

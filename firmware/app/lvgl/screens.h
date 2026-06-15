@@ -4,7 +4,7 @@
 #include "lvgl.h"
 #include "screens/scr_boot.h"
 #include "screens/scr_menu.h"
-#include "screens/scr_plotter.h"
+#include "screens/scr_oscilloscope.h"
 #include "screens/scr_fft.h"
 
 // Register a screen by name — expands to the three callbacks expected by screen_manager.
@@ -25,7 +25,7 @@
 typedef enum screen_id {
     SCREEN_BOOT,
     SCREEN_MENU,
-    SCREEN_PLOT,
+    SCREEN_OSC,
     SCREEN_FFT,
     SCREEN_COUNT
 } screen_id_t;
