@@ -37,6 +37,7 @@ LV_IMG_DECLARE( ui_img_icons_ic_scale_png);   // assets/icons/ic_scale.png
 LV_IMG_DECLARE( ui_img_icons_ic_chevright_png);   // assets/icons/ic_chevright.png
 LV_IMG_DECLARE( ui_img_icons_ic_time_png);   // assets/icons/ic_time.png
 LV_IMG_DECLARE( ui_img_icons_ic_back_png);   // assets/icons/ic_back.png
+LV_IMG_DECLARE( ui_img_icons_ic_check_png);   // assets/icons/ic_check.png
 LV_IMG_DECLARE( ui_img_icons_ic_realtime_png);   // assets/icons/ic_realtime.png
 LV_IMG_DECLARE( ui_img_icons_ic_fft_png);   // assets/icons/ic_fft.png
 LV_IMG_DECLARE( ui_img_icons_ic_measure_png);   // assets/icons/ic_measure.png
@@ -45,6 +46,7 @@ LV_IMG_DECLARE( ui_img_icons_ic_record_png);   // assets/icons/ic_record.png
 
 // FONTS
 LV_FONT_DECLARE( ui_font_MonoBold11);
+LV_FONT_DECLARE( ui_font_MonoBold13);
 LV_FONT_DECLARE( ui_font_MonoBold19);
 LV_FONT_DECLARE( ui_font_MonoMed10);
 LV_FONT_DECLARE( ui_font_MonoMed11);
@@ -64,7 +66,6 @@ LV_FONT_DECLARE( ui_font_SansReg11);
 LV_FONT_DECLARE( ui_font_poppinsBold10);
 LV_FONT_DECLARE( ui_font_poppinsReg10);
 LV_FONT_DECLARE( ui_font_poppinsReg8);
-LV_FONT_DECLARE( ui_font_MonoBold13);
 
 // UI INIT
 void ui_init(void);

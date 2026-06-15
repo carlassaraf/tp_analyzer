@@ -14,15 +14,28 @@
 #define ENCODER_ACTIVE_THRESH 50   // ms: inactive_time below this → encoder just moved
 #define INIT_GRACE_MS         200  // ignore encoder for 200ms after entering screen
 
+/** @brief Menu pages for this screen */
+typedef enum {
+  MENU_PAGE_MAIN,     /**< Default main manu */
+  MENU_PAGE_SCALE_V,  /**< Vertical scale menu */
+  MENU_PAGE_SCALE_H   /**< Horizontal scale menu */
+} menu_page_t;
+
 static lv_chart_series_t *oscilloscope_series = NULL;
 static lv_timer_t *hide_timer   = NULL;
 static bool        menu_visible = false;
 static uint32_t    init_tick;
+static menu_page_t menu_page = MENU_PAGE_MAIN;
 
 static void side_menu_show(void);
 static void side_menu_hide(void);
 static void hide_timer_cb(lv_timer_t *timer);
 static void change_signal_cb(lv_event_t *event);
+static void enter_scale_menu_cb(lv_event_t *event);
+static void enter_time_menu_cb(lv_event_t *event);
+static void menu_go_back(lv_event_t *event);
+
+// Public functions
 
 void scr_oscilloscope_update_chart(const uint16_t *points, uint16_t count) {
   static uint16_t decimated[CHART_PIXEL_WIDTH];
@@ -39,6 +52,8 @@ void scr_oscilloscope_update_chart(const uint16_t *points, uint16_t count) {
   ui_chart_push_data(ui_scrOscilloscope_chartView, decimated, CHART_PIXEL_WIDTH);
 }
 
+// Life cycle functions
+
 void scr_oscilloscope_prepare(void) {
   oscilloscope_series = lv_chart_add_series(ui_scrOscilloscope_chartView,
                       lv_color_hex(_ui_theme_color_Voltage[0]),
@@ -50,9 +65,23 @@ void scr_oscilloscope_prepare(void) {
   lv_obj_add_flag(ui_scrOscilloscope_cntScaleV, LV_OBJ_FLAG_EVENT_TRICKLE);
   lv_obj_add_flag(ui_scrOscilloscope_cntScaleH, LV_OBJ_FLAG_EVENT_TRICKLE);
   lv_obj_add_flag(ui_scrOscilloscope_cntBack, LV_OBJ_FLAG_EVENT_TRICKLE);
+  lv_obj_add_flag(ui_scrOscilloscope_cntScale1, LV_OBJ_FLAG_EVENT_TRICKLE);
+  lv_obj_add_flag(ui_scrOscilloscope_cntScale2, LV_OBJ_FLAG_EVENT_TRICKLE);
+  lv_obj_add_flag(ui_scrOscilloscope_cntScale3, LV_OBJ_FLAG_EVENT_TRICKLE);
+  lv_obj_add_flag(ui_scrOscilloscope_cntScale4, LV_OBJ_FLAG_EVENT_TRICKLE);
+  lv_obj_add_flag(ui_scrOscilloscope_cntTime1, LV_OBJ_FLAG_EVENT_TRICKLE);
+  lv_obj_add_flag(ui_scrOscilloscope_cntTime2, LV_OBJ_FLAG_EVENT_TRICKLE);
+  lv_obj_add_flag(ui_scrOscilloscope_cntTime3, LV_OBJ_FLAG_EVENT_TRICKLE);
+  lv_obj_add_flag(ui_scrOscilloscope_cntTime4, LV_OBJ_FLAG_EVENT_TRICKLE);
+  lv_obj_add_flag(ui_scrOscilloscope_cntTime5, LV_OBJ_FLAG_EVENT_TRICKLE);
   // Add callback event to change signal shown
   lv_obj_add_event_cb(ui_scrOscilloscope_cntSigVoltage, change_signal_cb, LV_EVENT_CLICKED, NULL);
   lv_obj_add_event_cb(ui_scrOscilloscope_cntSigCorriente, change_signal_cb, LV_EVENT_CLICKED, NULL);
+  // Add callback event to menu entries
+  lv_obj_add_event_cb(ui_scrOscilloscope_cntScaleV, enter_scale_menu_cb, LV_EVENT_CLICKED, NULL);
+  lv_obj_add_event_cb(ui_scrOscilloscope_cntScaleH, enter_time_menu_cb, LV_EVENT_CLICKED, NULL);
+  lv_obj_add_event_cb(ui_scrOscilloscope_btnScaleBack, menu_go_back, LV_EVENT_CLICKED, NULL);
+  lv_obj_add_event_cb(ui_scrOscilloscope_btnTimeBack, menu_go_back, LV_EVENT_CLICKED, NULL);
 }
 
 void scr_oscilloscope_init(void) {
@@ -92,8 +121,11 @@ void scr_oscilloscope_step(void) {
   }
 }
 
+// Private functions
+
+/** @brief Called to show the side menu. Animates to left and updates input group */
 static void side_menu_show(void) {
-  animation_move_to_left(ui_scrOscilloscope_cntSideMenu,
+  animation_move_to_side(ui_scrOscilloscope_cntSideMenu,
                          SIDE_MENU_X_HIDDEN, SIDE_MENU_X_VISIBLE,
                          SIDE_MENU_ANIM_MS);
   hide_timer   = lv_timer_create(hide_timer_cb, SIDE_MENU_TIMEOUT_MS, NULL);
@@ -105,20 +137,29 @@ static void side_menu_show(void) {
   menu_visible = true;
 }
 
+/** @brief Called to hide the side menu. Animates to right, clears the menu and input group */
 static void side_menu_hide(void) {
-  animation_move_to_left(ui_scrOscilloscope_cntSideMenu,
+  animation_move_to_side(ui_scrOscilloscope_cntSideMenu,
                          SIDE_MENU_X_VISIBLE, SIDE_MENU_X_HIDDEN,
                          SIDE_MENU_ANIM_MS);
   SCR_CLEAR_GROUP();
   menu_visible = false;
+  // Revert submenus to proper positions
+  lv_obj_set_x(ui_scrOscilloscope_cntMainSideMenu, 0);
+  lv_obj_set_x(ui_scrOscilloscope_cntScaleMenu, 184);
+  lv_obj_set_x(ui_scrOscilloscope_cntTimeMenu, 184);
+  // Restore menu pointer
+  menu_page = MENU_PAGE_MAIN;
 }
 
+/** @brief Timer callback to clear menu */
 static void hide_timer_cb(lv_timer_t *timer) {
   lv_timer_delete(timer);
   hide_timer = NULL;
   side_menu_hide();
 }
 
+/** @brief Clicked callback to update signal displayed */
 static void change_signal_cb(lv_event_t *event) {
   lv_obj_t *target = lv_event_get_target_obj(event);
   // Check what signal is shown
@@ -149,4 +190,55 @@ static void change_signal_cb(lv_event_t *event) {
     lv_chart_set_series_color(ui_scrOscilloscope_chartView, oscilloscope_series, lv_color_hex(_ui_theme_color_Corriente[0]));
     lv_obj_invalidate(ui_scrOscilloscope_chartView);
   }
+}
+
+/** @brief Click callback to show vertical scale menu */
+static void enter_scale_menu_cb(lv_event_t *event) {
+  animation_move_to_side(ui_scrOscilloscope_cntMainSideMenu, 0, 184, 200);
+  animation_move_to_side(ui_scrOscilloscope_cntScaleMenu, 184, 0, 200);
+  // Update input group items
+  SCR_CLEAR_GROUP();
+  SCR_ADD_TO_GROUP(ui_scrOscilloscope_btnScaleBack);
+  SCR_ADD_TO_GROUP(ui_scrOscilloscope_cntScale1);
+  SCR_ADD_TO_GROUP(ui_scrOscilloscope_cntScale2);
+  SCR_ADD_TO_GROUP(ui_scrOscilloscope_cntScale3);
+  SCR_ADD_TO_GROUP(ui_scrOscilloscope_cntScale4);
+  // Point menu to this entry
+  menu_page = MENU_PAGE_SCALE_V;
+}
+
+/** @brief Click callback to show horizontal scale menu */
+static void enter_time_menu_cb(lv_event_t *event) {
+  animation_move_to_side(ui_scrOscilloscope_cntMainSideMenu, 0, 184, 200);
+  animation_move_to_side(ui_scrOscilloscope_cntTimeMenu, 184, 0, 200);
+  // Update input group items
+  SCR_CLEAR_GROUP();
+  SCR_ADD_TO_GROUP(ui_scrOscilloscope_btnTimeBack);
+  SCR_ADD_TO_GROUP(ui_scrOscilloscope_cntTime1);
+  SCR_ADD_TO_GROUP(ui_scrOscilloscope_cntTime2);
+  SCR_ADD_TO_GROUP(ui_scrOscilloscope_cntTime3);
+  SCR_ADD_TO_GROUP(ui_scrOscilloscope_cntTime4);
+  SCR_ADD_TO_GROUP(ui_scrOscilloscope_cntTime5);
+  // Point menu to this entry
+  menu_page = MENU_PAGE_SCALE_H;
+}
+
+/** @brief Click callback to go back to original main menu */
+static void menu_go_back(lv_event_t *event) {
+  // Hide the previous menu
+  if(menu_page == MENU_PAGE_SCALE_V) {
+    animation_move_to_side(ui_scrOscilloscope_cntScaleMenu, 0, 184, 200);
+  } else if(menu_page == MENU_PAGE_SCALE_H) {
+    animation_move_to_side(ui_scrOscilloscope_cntTimeMenu, 0, 184, 200);
+  }
+  animation_move_to_side(ui_scrOscilloscope_cntMainSideMenu, 184, 0, 200);
+  // Update input group items
+  SCR_CLEAR_GROUP();
+  SCR_ADD_TO_GROUP(ui_scrOscilloscope_cntSigVoltage);
+  SCR_ADD_TO_GROUP(ui_scrOscilloscope_cntSigCorriente);
+  SCR_ADD_TO_GROUP(ui_scrOscilloscope_cntScaleV);
+  SCR_ADD_TO_GROUP(ui_scrOscilloscope_cntScaleH);
+  SCR_ADD_TO_GROUP(ui_scrOscilloscope_cntBack);
+  // Point menu to main menu
+  menu_page = MENU_PAGE_MAIN;
 }

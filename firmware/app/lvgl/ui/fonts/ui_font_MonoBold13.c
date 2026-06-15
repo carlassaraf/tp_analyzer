@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Size: 13 px
  * Bpp: 4
- * Opts: --bpp 4 --size 13 --font /Users/carlassaraf/Documents/facultad/tp_analyzer/ui/assets/fonts/IBM_Plex_Mono/IBMPlexMono-Bold.ttf -o /Users/carlassaraf/Documents/facultad/tp_analyzer/ui/assets/fonts/IBM_Plex_Mono/ui_font_MonoBold13.c --format lvgl -r 0x20-0x7f -r 0xc1 -r 0xc9 -r 0xcd -r 0xd3 -r 0xda -r 0xe1 -r 0xe9 -r 0xed -r 0xf3 -r 0xfa --no-compress --no-prefilter
+ * Opts: --bpp 4 --size 13 --font /Users/carlassaraf/Documents/facultad/tp_analyzer/ui/assets/fonts/IBM_Plex_Mono/IBMPlexMono-Bold.ttf -o /Users/carlassaraf/Documents/facultad/tp_analyzer/ui/assets/fonts/IBM_Plex_Mono/ui_font_MonoBold13.c --format lvgl -r 0x20-0x7f -r 0xb1 -r 0xc1 -r 0xc9 -r 0xcd -r 0xd3 -r 0xda -r 0xe1 -r 0xe9 -r 0xed -r 0xf3 -r 0xfa --no-compress --no-prefilter
  ******************************************************************************/
 
 #include "../ui.h"
@@ -615,6 +615,12 @@ static LV_ATTRIBUTE_LARGE_CONST const uint8_t glyph_bitmap[] = {
     0x2, 0x86, 0x0, 0x51, 0xe, 0xff, 0x63, 0xf2,
     0x5f, 0x3d, 0xfd, 0xe0, 0x4b, 0x2, 0xde, 0x40,
 
+    /* U+00B1 "±" */
+    0x0, 0xf, 0xb0, 0x0, 0x0, 0xfb, 0x0, 0x3f,
+    0xff, 0xff, 0xf1, 0x99, 0xfe, 0x99, 0x0, 0xf,
+    0xb0, 0x0, 0x0, 0xeb, 0x0, 0x19, 0x99, 0x99,
+    0x93, 0xff, 0xff, 0xff,
+
     /* U+00C1 "Á" */
     0x0, 0x0, 0x71, 0x0, 0x0, 0x5, 0xf8, 0x0,
     0x0, 0xd, 0xc0, 0x0, 0x0, 0x2, 0x10, 0x0,
@@ -798,16 +804,17 @@ static const lv_font_fmt_txt_glyph_dsc_t glyph_dsc[] = {
     {.bitmap_index = 2872, .adv_w = 125, .box_w = 2, .box_h = 12, .ofs_x = 3, .ofs_y = -2},
     {.bitmap_index = 2884, .adv_w = 125, .box_w = 6, .box_h = 13, .ofs_x = 1, .ofs_y = -3},
     {.bitmap_index = 2923, .adv_w = 125, .box_w = 8, .box_h = 4, .ofs_x = 0, .ofs_y = 2},
-    {.bitmap_index = 2939, .adv_w = 125, .box_w = 8, .box_h = 13, .ofs_x = 0, .ofs_y = 0},
-    {.bitmap_index = 2991, .adv_w = 125, .box_w = 6, .box_h = 13, .ofs_x = 1, .ofs_y = 0},
-    {.bitmap_index = 3030, .adv_w = 125, .box_w = 7, .box_h = 13, .ofs_x = 0, .ofs_y = 0},
-    {.bitmap_index = 3076, .adv_w = 125, .box_w = 8, .box_h = 13, .ofs_x = 0, .ofs_y = 0},
-    {.bitmap_index = 3128, .adv_w = 125, .box_w = 8, .box_h = 13, .ofs_x = 0, .ofs_y = 0},
-    {.bitmap_index = 3180, .adv_w = 125, .box_w = 8, .box_h = 11, .ofs_x = 0, .ofs_y = 0},
-    {.bitmap_index = 3224, .adv_w = 125, .box_w = 8, .box_h = 11, .ofs_x = 0, .ofs_y = 0},
-    {.bitmap_index = 3268, .adv_w = 125, .box_w = 7, .box_h = 11, .ofs_x = 1, .ofs_y = 0},
-    {.bitmap_index = 3307, .adv_w = 125, .box_w = 8, .box_h = 11, .ofs_x = 0, .ofs_y = 0},
-    {.bitmap_index = 3351, .adv_w = 125, .box_w = 7, .box_h = 11, .ofs_x = 0, .ofs_y = 0}
+    {.bitmap_index = 2939, .adv_w = 125, .box_w = 7, .box_h = 8, .ofs_x = 0, .ofs_y = 0},
+    {.bitmap_index = 2967, .adv_w = 125, .box_w = 8, .box_h = 13, .ofs_x = 0, .ofs_y = 0},
+    {.bitmap_index = 3019, .adv_w = 125, .box_w = 6, .box_h = 13, .ofs_x = 1, .ofs_y = 0},
+    {.bitmap_index = 3058, .adv_w = 125, .box_w = 7, .box_h = 13, .ofs_x = 0, .ofs_y = 0},
+    {.bitmap_index = 3104, .adv_w = 125, .box_w = 8, .box_h = 13, .ofs_x = 0, .ofs_y = 0},
+    {.bitmap_index = 3156, .adv_w = 125, .box_w = 8, .box_h = 13, .ofs_x = 0, .ofs_y = 0},
+    {.bitmap_index = 3208, .adv_w = 125, .box_w = 8, .box_h = 11, .ofs_x = 0, .ofs_y = 0},
+    {.bitmap_index = 3252, .adv_w = 125, .box_w = 8, .box_h = 11, .ofs_x = 0, .ofs_y = 0},
+    {.bitmap_index = 3296, .adv_w = 125, .box_w = 7, .box_h = 11, .ofs_x = 1, .ofs_y = 0},
+    {.bitmap_index = 3335, .adv_w = 125, .box_w = 8, .box_h = 11, .ofs_x = 0, .ofs_y = 0},
+    {.bitmap_index = 3379, .adv_w = 125, .box_w = 7, .box_h = 11, .ofs_x = 0, .ofs_y = 0}
 };
 
 /*---------------------
@@ -815,8 +822,8 @@ static const lv_font_fmt_txt_glyph_dsc_t glyph_dsc[] = {
  *--------------------*/
 
 static const uint16_t unicode_list_1[] = {
-    0x0, 0x8, 0xc, 0x12, 0x19, 0x20, 0x28, 0x2c,
-    0x32, 0x39
+    0x0, 0x10, 0x18, 0x1c, 0x22, 0x29, 0x30, 0x38,
+    0x3c, 0x42, 0x49
 };
 
 /*Collect the unicode lists and glyph_id offsets*/
@@ -827,8 +834,8 @@ static const lv_font_fmt_txt_cmap_t cmaps[] =
         .unicode_list = NULL, .glyph_id_ofs_list = NULL, .list_length = 0, .type = LV_FONT_FMT_TXT_CMAP_FORMAT0_TINY
     },
     {
-        .range_start = 193, .range_length = 58, .glyph_id_start = 96,
-        .unicode_list = unicode_list_1, .glyph_id_ofs_list = NULL, .list_length = 10, .type = LV_FONT_FMT_TXT_CMAP_SPARSE_TINY
+        .range_start = 177, .range_length = 74, .glyph_id_start = 96,
+        .unicode_list = unicode_list_1, .glyph_id_ofs_list = NULL, .list_length = 11, .type = LV_FONT_FMT_TXT_CMAP_SPARSE_TINY
     }
 };
 
