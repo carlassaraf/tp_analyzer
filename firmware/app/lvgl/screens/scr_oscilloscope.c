@@ -14,6 +14,7 @@
 #define ENCODER_ACTIVE_THRESH 50   // ms: inactive_time below this → encoder just moved
 #define INIT_GRACE_MS         200  // ignore encoder for 200ms after entering screen
 
+static lv_chart_series_t *oscilloscope_series = NULL;
 static lv_timer_t *hide_timer   = NULL;
 static bool        menu_visible = false;
 static uint32_t    init_tick;
@@ -21,6 +22,7 @@ static uint32_t    init_tick;
 static void side_menu_show(void);
 static void side_menu_hide(void);
 static void hide_timer_cb(lv_timer_t *timer);
+static void change_signal_cb(lv_event_t *event);
 
 void scr_oscilloscope_update_chart(const uint16_t *points, uint16_t count) {
   static uint16_t decimated[CHART_PIXEL_WIDTH];
@@ -38,25 +40,19 @@ void scr_oscilloscope_update_chart(const uint16_t *points, uint16_t count) {
 }
 
 void scr_oscilloscope_prepare(void) {
-  lv_chart_add_series(ui_scrOscilloscope_chartView,
-                      lv_palette_main(UI_THEME_COLOR_VOLTAGE),
+  oscilloscope_series = lv_chart_add_series(ui_scrOscilloscope_chartView,
+                      lv_color_hex(_ui_theme_color_Voltage[0]),
                       LV_CHART_AXIS_PRIMARY_Y);
   lv_chart_set_point_count(ui_scrOscilloscope_chartView, CHART_PIXEL_WIDTH);
   ui_chart_bind_ext_array(ui_scrOscilloscope_chartView, CHART_PIXEL_WIDTH);
 
   // Propagate focus event to inside objects
-  lv_obj_add_flag(ui_scrOscilloscope_iconScaleV,      LV_OBJ_FLAG_EVENT_TRICKLE);
-  lv_obj_add_flag(ui_scrOscilloscope_lblScaleV,       LV_OBJ_FLAG_EVENT_TRICKLE);
-  lv_obj_add_flag(ui_scrOscilloscope_lblScaleVValue,  LV_OBJ_FLAG_EVENT_TRICKLE);
-  lv_obj_add_flag(ui_scrOscilloscope_iconScaleVEnter, LV_OBJ_FLAG_EVENT_TRICKLE);
-
-  lv_obj_add_flag(ui_scrOscilloscope_iconScaleH,      LV_OBJ_FLAG_EVENT_TRICKLE);
-  lv_obj_add_flag(ui_scrOscilloscope_lblScaleH,       LV_OBJ_FLAG_EVENT_TRICKLE);
-  lv_obj_add_flag(ui_scrOscilloscope_lblScaleHValue,  LV_OBJ_FLAG_EVENT_TRICKLE);
-  lv_obj_add_flag(ui_scrOscilloscope_iconScaleHEnter, LV_OBJ_FLAG_EVENT_TRICKLE);
-
-  lv_obj_add_flag(ui_scrOscilloscope_iconBack, LV_OBJ_FLAG_EVENT_TRICKLE);
-  lv_obj_add_flag(ui_scrOscilloscope_lblBack,  LV_OBJ_FLAG_EVENT_TRICKLE);
+  lv_obj_add_flag(ui_scrOscilloscope_cntScaleV, LV_OBJ_FLAG_EVENT_TRICKLE);
+  lv_obj_add_flag(ui_scrOscilloscope_cntScaleH, LV_OBJ_FLAG_EVENT_TRICKLE);
+  lv_obj_add_flag(ui_scrOscilloscope_cntBack, LV_OBJ_FLAG_EVENT_TRICKLE);
+  // Add callback event to change signal shown
+  lv_obj_add_event_cb(ui_scrOscilloscope_cntSigVoltage, change_signal_cb, LV_EVENT_CLICKED, NULL);
+  lv_obj_add_event_cb(ui_scrOscilloscope_cntSigCorriente, change_signal_cb, LV_EVENT_CLICKED, NULL);
 }
 
 void scr_oscilloscope_init(void) {
@@ -121,4 +117,36 @@ static void hide_timer_cb(lv_timer_t *timer) {
   lv_timer_delete(timer);
   hide_timer = NULL;
   side_menu_hide();
+}
+
+static void change_signal_cb(lv_event_t *event) {
+  lv_obj_t *target = lv_event_get_target_obj(event);
+  // Check what signal is shown
+  if(target == ui_scrOscilloscope_cntSigVoltage) {
+    // Set signal in menu
+    lv_obj_remove_state(ui_scrOscilloscope_cntSigCorriente, LV_STATE_CHECKED);
+    lv_obj_add_flag(ui_scrOscilloscope_cntCorriente, LV_OBJ_FLAG_HIDDEN);
+    // Set signal in screen
+    lv_obj_add_state(ui_scrOscilloscope_cntSigVoltage, LV_STATE_CHECKED);
+    lv_obj_remove_flag(ui_scrOscilloscope_cntTension, LV_OBJ_FLAG_HIDDEN);
+    // Update units
+    lv_label_set_text(ui_scrOscilloscope_lblPeakUnit, "V");
+    lv_label_set_text(ui_scrOscilloscope_lblRmsUnit, "V");
+    // Update colors
+    lv_obj_set_style_text_color(ui_scrOscilloscope_lblPeakValue, lv_color_hex(_ui_theme_color_Voltage[0]), LV_PART_MAIN);
+    lv_chart_set_series_color(ui_scrOscilloscope_chartView, oscilloscope_series, lv_color_hex(_ui_theme_color_Voltage[0]));
+    lv_obj_invalidate(ui_scrOscilloscope_chartView);
+  } else if(target == ui_scrOscilloscope_cntSigCorriente) {
+    lv_obj_remove_state(ui_scrOscilloscope_cntSigVoltage, LV_STATE_CHECKED);
+    lv_obj_add_flag(ui_scrOscilloscope_cntTension, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_state(ui_scrOscilloscope_cntSigCorriente, LV_STATE_CHECKED);
+    lv_obj_remove_flag(ui_scrOscilloscope_cntCorriente, LV_OBJ_FLAG_HIDDEN);
+    // Update units
+    lv_label_set_text(ui_scrOscilloscope_lblPeakUnit, "A");
+    lv_label_set_text(ui_scrOscilloscope_lblRmsUnit, "A");
+    // Update colors
+    lv_obj_set_style_text_color(ui_scrOscilloscope_lblPeakValue, lv_color_hex(_ui_theme_color_Corriente[0]), LV_PART_MAIN);
+    lv_chart_set_series_color(ui_scrOscilloscope_chartView, oscilloscope_series, lv_color_hex(_ui_theme_color_Corriente[0]));
+    lv_obj_invalidate(ui_scrOscilloscope_chartView);
+  }
 }
