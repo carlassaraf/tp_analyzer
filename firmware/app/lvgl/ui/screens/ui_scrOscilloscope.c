@@ -5,7 +5,7 @@
 
 #include "../ui.h"
 
-lv_obj_t *ui_scrOscilloscope = NULL;lv_obj_t *ui_scrOscilloscope_contTopBar = NULL;lv_obj_t *ui_scrOscilloscope_lblTitle = NULL;lv_obj_t *ui_scrOscilloscope_cntTension = NULL;lv_obj_t *ui_scrOscilloscope_legendVoltage = NULL;lv_obj_t *ui_scrOscilloscope_lblTension = NULL;lv_obj_t *ui_scrOscilloscope_cntCorriente = NULL;lv_obj_t *ui_scrOscilloscope_legendCorriente = NULL;lv_obj_t *ui_scrOscilloscope_lblCorriente = NULL;lv_obj_t *ui_scrOscilloscope_cntValues = NULL;lv_obj_t *ui_scrOscilloscope_cntPeak = NULL;lv_obj_t *ui_scrOscilloscope_lblPeak = NULL;lv_obj_t *ui_scrOscilloscope_lblPeakValue = NULL;lv_obj_t *ui_scrOscilloscope_lblPeakUnit = NULL;lv_obj_t *ui_scrOscilloscope_cntRMS = NULL;lv_obj_t *ui_scrOscilloscope_lblRMS = NULL;lv_obj_t *ui_scrOscilloscope_lblRmsValue = NULL;lv_obj_t *ui_scrOscilloscope_lblRmsUnit = NULL;lv_obj_t *ui_scrOscilloscope_cntFrequency = NULL;lv_obj_t *ui_scrOscilloscope_lblFrequency = NULL;lv_obj_t *ui_scrOscilloscope_lblFrequencyValue = NULL;lv_obj_t *ui_scrOscilloscope_lblFrequencyUnit = NULL;lv_obj_t *ui_scrOscilloscope_cntTimeDiv = NULL;lv_obj_t *ui_scrOscilloscope_lblTimeDiv = NULL;lv_obj_t *ui_scrOscilloscope_lblTimeDivValue = NULL;lv_obj_t *ui_scrOscilloscope_lblTimeDivValueUnit = NULL;lv_obj_t *ui_scrOscilloscope_chartView = NULL;lv_obj_t *ui_scrOscilloscope_chartView_Xaxis = NULL;lv_obj_t *ui_scrOscilloscope_chartView_Yaxis1 = NULL;lv_obj_t *ui_scrOscilloscope_chartView_Yaxis2 = NULL;lv_obj_t *ui_scrOscilloscope_Label22 = NULL;
+lv_obj_t *ui_scrOscilloscope = NULL;lv_obj_t *ui_scrOscilloscope_contTopBar = NULL;lv_obj_t *ui_scrOscilloscope_lblTitle = NULL;lv_obj_t *ui_scrOscilloscope_cntTension = NULL;lv_obj_t *ui_scrOscilloscope_legendVoltage = NULL;lv_obj_t *ui_scrOscilloscope_lblTension = NULL;lv_obj_t *ui_scrOscilloscope_cntCorriente = NULL;lv_obj_t *ui_scrOscilloscope_legendCorriente = NULL;lv_obj_t *ui_scrOscilloscope_lblCorriente = NULL;lv_obj_t *ui_scrOscilloscope_cntValues = NULL;lv_obj_t *ui_scrOscilloscope_cntPeak = NULL;lv_obj_t *ui_scrOscilloscope_lblPeak = NULL;lv_obj_t *ui_scrOscilloscope_lblPeakValue = NULL;lv_obj_t *ui_scrOscilloscope_lblPeakUnit = NULL;lv_obj_t *ui_scrOscilloscope_cntRMS = NULL;lv_obj_t *ui_scrOscilloscope_lblRMS = NULL;lv_obj_t *ui_scrOscilloscope_lblRmsValue = NULL;lv_obj_t *ui_scrOscilloscope_lblRmsUnit = NULL;lv_obj_t *ui_scrOscilloscope_cntFrequency = NULL;lv_obj_t *ui_scrOscilloscope_lblFrequency = NULL;lv_obj_t *ui_scrOscilloscope_lblFrequencyValue = NULL;lv_obj_t *ui_scrOscilloscope_lblFrequencyUnit = NULL;lv_obj_t *ui_scrOscilloscope_cntTimeDiv = NULL;lv_obj_t *ui_scrOscilloscope_lblTimeDiv = NULL;lv_obj_t *ui_scrOscilloscope_lblTimeDivValue = NULL;lv_obj_t *ui_scrOscilloscope_lblTimeDivValueUnit = NULL;lv_obj_t *ui_scrOscilloscope_chartView = NULL;lv_obj_t *ui_scrOscilloscope_chartView_Xaxis = NULL;lv_obj_t *ui_scrOscilloscope_chartView_Yaxis1 = NULL;lv_obj_t *ui_scrOscilloscope_chartView_Yaxis2 = NULL;lv_obj_t *ui_scrOscilloscope_lineH1 = NULL;lv_obj_t *ui_scrOscilloscope_lineH2 = NULL;lv_obj_t *ui_scrOscilloscope_lineH3 = NULL;lv_obj_t *ui_scrOscilloscope_lineV1 = NULL;lv_obj_t *ui_scrOscilloscope_lineV2 = NULL;lv_obj_t *ui_scrOscilloscope_lineV3 = NULL;lv_obj_t *ui_scrOscilloscope_lineV4 = NULL;lv_obj_t *ui_scrOscilloscope_lineV5 = NULL;lv_obj_t *ui_scrOscilloscope_lineV6 = NULL;lv_obj_t *ui_scrOscilloscope_lineV7 = NULL;lv_obj_t *ui_scrOscilloscope_lineV8 = NULL;lv_obj_t *ui_scrOscilloscope_cntYLabels = NULL;lv_obj_t *ui_scrOscilloscope_lblMiddle = NULL;lv_obj_t *ui_scrOscilloscope_lblUnit = NULL;lv_obj_t *ui_scrOscilloscope_lblTop = NULL;lv_obj_t *ui_scrOscilloscope_lblBot = NULL;
 // event funtions
 
 // build funtions
@@ -284,10 +284,10 @@ ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTimeDivValueUnit, L
 lv_obj_set_style_text_font(ui_scrOscilloscope_lblTimeDivValueUnit, &ui_font_MonoMed10, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_scrOscilloscope_chartView = lv_chart_create(ui_scrOscilloscope);
-lv_obj_set_width( ui_scrOscilloscope_chartView, 422);
-lv_obj_set_height( ui_scrOscilloscope_chartView, 185);
-lv_obj_set_x( ui_scrOscilloscope_chartView, 48 );
-lv_obj_set_y( ui_scrOscilloscope_chartView, 124 );
+lv_obj_set_width( ui_scrOscilloscope_chartView, 414);
+lv_obj_set_height( ui_scrOscilloscope_chartView, 190);
+lv_obj_set_x( ui_scrOscilloscope_chartView, 56 );
+lv_obj_set_y( ui_scrOscilloscope_chartView, 120 );
 lv_obj_add_flag( ui_scrOscilloscope_chartView, LV_OBJ_FLAG_OVERFLOW_VISIBLE );   /// Flags
 lv_obj_remove_flag( ui_scrOscilloscope_chartView, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_add_flag( ui_scrOscilloscope_chartView, LV_OBJ_FLAG_OVERFLOW_VISIBLE );    //make scales visible - Should it be forced to True? 
@@ -295,7 +295,8 @@ lv_obj_add_flag( ui_scrOscilloscope_chartView, LV_OBJ_FLAG_OVERFLOW_VISIBLE );  
 lv_chart_set_type( ui_scrOscilloscope_chartView, LV_CHART_TYPE_LINE);
 lv_chart_set_axis_range( ui_scrOscilloscope_chartView, LV_CHART_AXIS_PRIMARY_Y, -250, 250);
 lv_chart_set_axis_range( ui_scrOscilloscope_chartView, LV_CHART_AXIS_SECONDARY_Y, 0, 0);
-lv_obj_set_style_radius(ui_scrOscilloscope_chartView, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_chart_set_div_line_count( ui_scrOscilloscope_chartView, 0, 0);
+lv_obj_set_style_radius(ui_scrOscilloscope_chartView, 5, LV_PART_MAIN| LV_STATE_DEFAULT);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_chartView, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BG_COLOR, _ui_theme_color_Base);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_chartView, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BG_OPA, _ui_theme_alpha_Base);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_chartView, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_COLOR, _ui_theme_color_Card_Border);
@@ -303,6 +304,10 @@ ui_object_set_themeable_style_property(ui_scrOscilloscope_chartView, LV_PART_MAI
 lv_obj_set_style_border_width(ui_scrOscilloscope_chartView, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_line_color(ui_scrOscilloscope_chartView, lv_color_hex(0x4040FF), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_line_opa(ui_scrOscilloscope_chartView, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_left(ui_scrOscilloscope_chartView, -3, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_right(ui_scrOscilloscope_chartView, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_top(ui_scrOscilloscope_chartView, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_pad_bottom(ui_scrOscilloscope_chartView, 0, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_scrOscilloscope_chartView_Xaxis = lv_scale_create( ui_scrOscilloscope_chartView );
 lv_scale_set_mode( ui_scrOscilloscope_chartView_Xaxis, LV_SCALE_MODE_HORIZONTAL_BOTTOM );
@@ -320,17 +325,16 @@ lv_scale_set_major_tick_every( ui_scrOscilloscope_chartView_Xaxis, 0 >= 1 ? 0 : 
 lv_scale_set_label_show( ui_scrOscilloscope_chartView_Xaxis, false );
 ui_scrOscilloscope_chartView_Yaxis1 = lv_scale_create( ui_scrOscilloscope_chartView );
 lv_scale_set_mode( ui_scrOscilloscope_chartView_Yaxis1, LV_SCALE_MODE_VERTICAL_LEFT );
-lv_obj_set_size( ui_scrOscilloscope_chartView_Yaxis1, 50, lv_pct(100) );
 lv_obj_set_align( ui_scrOscilloscope_chartView_Yaxis1, LV_ALIGN_LEFT_MID );
-lv_obj_set_x( ui_scrOscilloscope_chartView_Yaxis1, -50 - lv_obj_get_style_pad_left(ui_scrOscilloscope_chartView,LV_PART_MAIN) - lv_obj_get_style_border_width(ui_scrOscilloscope_chartView,LV_PART_MAIN) + 2 );
 lv_obj_set_style_line_width( ui_scrOscilloscope_chartView_Yaxis1, 0, LV_PART_MAIN );
 lv_obj_set_style_line_width( ui_scrOscilloscope_chartView_Yaxis1, 1, LV_PART_ITEMS );
 lv_obj_set_style_line_width( ui_scrOscilloscope_chartView_Yaxis1, 1, LV_PART_INDICATOR );
 lv_obj_set_style_length( ui_scrOscilloscope_chartView_Yaxis1, 0, LV_PART_ITEMS ); //minor tick length
-lv_obj_set_style_length( ui_scrOscilloscope_chartView_Yaxis1, 10, LV_PART_INDICATOR ); //major tick length
+lv_obj_set_style_length( ui_scrOscilloscope_chartView_Yaxis1, 0, LV_PART_INDICATOR ); //major tick length
 lv_scale_set_range( ui_scrOscilloscope_chartView_Yaxis1,  -250, 250 );
-lv_scale_set_total_tick_count( ui_scrOscilloscope_chartView_Yaxis1, (3 > 0 ? 3-1 : 0) * 1 + 1 );
-lv_scale_set_major_tick_every( ui_scrOscilloscope_chartView_Yaxis1, 1 >= 1 ? 1 : 1 );
+lv_scale_set_total_tick_count( ui_scrOscilloscope_chartView_Yaxis1, (0 > 0 ? 0-1 : 0) * 0 + 1 );
+lv_scale_set_major_tick_every( ui_scrOscilloscope_chartView_Yaxis1, 0 >= 1 ? 0 : 1 );
+lv_scale_set_label_show( ui_scrOscilloscope_chartView_Yaxis1, false );
 ui_scrOscilloscope_chartView_Yaxis2 = lv_scale_create( ui_scrOscilloscope_chartView );
 lv_scale_set_mode( ui_scrOscilloscope_chartView_Yaxis2, LV_SCALE_MODE_VERTICAL_RIGHT );
 lv_obj_set_align( ui_scrOscilloscope_chartView_Yaxis2, LV_ALIGN_RIGHT_MID );
@@ -347,16 +351,180 @@ lv_scale_set_label_show( ui_scrOscilloscope_chartView_Yaxis2, false );
 lv_obj_set_style_size(ui_scrOscilloscope_chartView, 0, 0, LV_PART_INDICATOR| LV_STATE_DEFAULT);
 
 //This workaround (an invisible outline) is needed because without it chart overflow-visible doesn't work in LVGL-9.1
-lv_obj_set_style_outline_pad( ui_scrOscilloscope_chartView, LV_MAX3(50, 50, 0), LV_PART_MAIN | LV_STATE_DEFAULT ); //workaround for ineffective 'overflow visible' flag
+lv_obj_set_style_outline_pad( ui_scrOscilloscope_chartView, LV_MAX3(50, 0, 0), LV_PART_MAIN | LV_STATE_DEFAULT ); //workaround for ineffective 'overflow visible' flag
 lv_obj_set_style_outline_width( ui_scrOscilloscope_chartView, -1, LV_PART_MAIN | LV_STATE_DEFAULT );
-ui_scrOscilloscope_Label22 = lv_label_create(ui_scrOscilloscope_chartView);
-lv_obj_set_width( ui_scrOscilloscope_Label22, 422);
-lv_obj_set_height( ui_scrOscilloscope_Label22, 1);
-lv_obj_set_align( ui_scrOscilloscope_Label22, LV_ALIGN_CENTER );
-lv_label_set_text(ui_scrOscilloscope_Label22,"");
-ui_object_set_themeable_style_property(ui_scrOscilloscope_Label22, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_COLOR, _ui_theme_color_Card_Border);
-ui_object_set_themeable_style_property(ui_scrOscilloscope_Label22, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_OPA, _ui_theme_alpha_Card_Border);
-lv_obj_set_style_border_width(ui_scrOscilloscope_Label22, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_scrOscilloscope_lineH1 = lv_label_create(ui_scrOscilloscope_chartView);
+lv_obj_set_width( ui_scrOscilloscope_lineH1, 414);
+lv_obj_set_height( ui_scrOscilloscope_lineH1, 1);
+lv_obj_set_x( ui_scrOscilloscope_lineH1, 3 );
+lv_obj_set_y( ui_scrOscilloscope_lineH1, -47 );
+lv_obj_set_align( ui_scrOscilloscope_lineH1, LV_ALIGN_CENTER );
+lv_label_set_text(ui_scrOscilloscope_lineH1,"");
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineH1, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_COLOR, _ui_theme_color_Card_Border);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineH1, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_OPA, _ui_theme_alpha_Card_Border);
+lv_obj_set_style_border_width(ui_scrOscilloscope_lineH1, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_scrOscilloscope_lineH2 = lv_label_create(ui_scrOscilloscope_chartView);
+lv_obj_set_width( ui_scrOscilloscope_lineH2, 414);
+lv_obj_set_height( ui_scrOscilloscope_lineH2, 1);
+lv_obj_set_x( ui_scrOscilloscope_lineH2, 3 );
+lv_obj_set_y( ui_scrOscilloscope_lineH2, 0 );
+lv_obj_set_align( ui_scrOscilloscope_lineH2, LV_ALIGN_CENTER );
+lv_label_set_text(ui_scrOscilloscope_lineH2,"");
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineH2, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_COLOR, _ui_theme_color_Font_Atenuado);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineH2, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_OPA, _ui_theme_alpha_Font_Atenuado);
+lv_obj_set_style_border_width(ui_scrOscilloscope_lineH2, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_scrOscilloscope_lineH3 = lv_label_create(ui_scrOscilloscope_chartView);
+lv_obj_set_width( ui_scrOscilloscope_lineH3, 414);
+lv_obj_set_height( ui_scrOscilloscope_lineH3, 1);
+lv_obj_set_x( ui_scrOscilloscope_lineH3, 3 );
+lv_obj_set_y( ui_scrOscilloscope_lineH3, 47 );
+lv_obj_set_align( ui_scrOscilloscope_lineH3, LV_ALIGN_CENTER );
+lv_label_set_text(ui_scrOscilloscope_lineH3,"");
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineH3, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_COLOR, _ui_theme_color_Card_Border);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineH3, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_OPA, _ui_theme_alpha_Card_Border);
+lv_obj_set_style_border_width(ui_scrOscilloscope_lineH3, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_scrOscilloscope_lineV1 = lv_label_create(ui_scrOscilloscope_chartView);
+lv_obj_set_width( ui_scrOscilloscope_lineV1, 1);
+lv_obj_set_height( ui_scrOscilloscope_lineV1, 190);
+lv_obj_set_x( ui_scrOscilloscope_lineV1, 46 );
+lv_obj_set_y( ui_scrOscilloscope_lineV1, 0 );
+lv_obj_set_align( ui_scrOscilloscope_lineV1, LV_ALIGN_LEFT_MID );
+lv_label_set_text(ui_scrOscilloscope_lineV1,"");
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineV1, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_COLOR, _ui_theme_color_Card_Border);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineV1, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_OPA, _ui_theme_alpha_Card_Border);
+lv_obj_set_style_border_width(ui_scrOscilloscope_lineV1, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_scrOscilloscope_lineV2 = lv_label_create(ui_scrOscilloscope_chartView);
+lv_obj_set_width( ui_scrOscilloscope_lineV2, 1);
+lv_obj_set_height( ui_scrOscilloscope_lineV2, 190);
+lv_obj_set_x( ui_scrOscilloscope_lineV2, 92 );
+lv_obj_set_y( ui_scrOscilloscope_lineV2, 0 );
+lv_obj_set_align( ui_scrOscilloscope_lineV2, LV_ALIGN_LEFT_MID );
+lv_label_set_text(ui_scrOscilloscope_lineV2,"");
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineV2, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_COLOR, _ui_theme_color_Card_Border);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineV2, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_OPA, _ui_theme_alpha_Card_Border);
+lv_obj_set_style_border_width(ui_scrOscilloscope_lineV2, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_scrOscilloscope_lineV3 = lv_label_create(ui_scrOscilloscope_chartView);
+lv_obj_set_width( ui_scrOscilloscope_lineV3, 1);
+lv_obj_set_height( ui_scrOscilloscope_lineV3, 190);
+lv_obj_set_x( ui_scrOscilloscope_lineV3, 138 );
+lv_obj_set_y( ui_scrOscilloscope_lineV3, 0 );
+lv_obj_set_align( ui_scrOscilloscope_lineV3, LV_ALIGN_LEFT_MID );
+lv_label_set_text(ui_scrOscilloscope_lineV3,"");
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineV3, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_COLOR, _ui_theme_color_Card_Border);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineV3, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_OPA, _ui_theme_alpha_Card_Border);
+lv_obj_set_style_border_width(ui_scrOscilloscope_lineV3, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_scrOscilloscope_lineV4 = lv_label_create(ui_scrOscilloscope_chartView);
+lv_obj_set_width( ui_scrOscilloscope_lineV4, 1);
+lv_obj_set_height( ui_scrOscilloscope_lineV4, 190);
+lv_obj_set_x( ui_scrOscilloscope_lineV4, 184 );
+lv_obj_set_y( ui_scrOscilloscope_lineV4, 0 );
+lv_obj_set_align( ui_scrOscilloscope_lineV4, LV_ALIGN_LEFT_MID );
+lv_label_set_text(ui_scrOscilloscope_lineV4,"");
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineV4, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_COLOR, _ui_theme_color_Card_Border);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineV4, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_OPA, _ui_theme_alpha_Card_Border);
+lv_obj_set_style_border_width(ui_scrOscilloscope_lineV4, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_scrOscilloscope_lineV5 = lv_label_create(ui_scrOscilloscope_chartView);
+lv_obj_set_width( ui_scrOscilloscope_lineV5, 1);
+lv_obj_set_height( ui_scrOscilloscope_lineV5, 190);
+lv_obj_set_x( ui_scrOscilloscope_lineV5, 230 );
+lv_obj_set_y( ui_scrOscilloscope_lineV5, 0 );
+lv_obj_set_align( ui_scrOscilloscope_lineV5, LV_ALIGN_LEFT_MID );
+lv_label_set_text(ui_scrOscilloscope_lineV5,"");
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineV5, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_COLOR, _ui_theme_color_Card_Border);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineV5, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_OPA, _ui_theme_alpha_Card_Border);
+lv_obj_set_style_border_width(ui_scrOscilloscope_lineV5, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_scrOscilloscope_lineV6 = lv_label_create(ui_scrOscilloscope_chartView);
+lv_obj_set_width( ui_scrOscilloscope_lineV6, 1);
+lv_obj_set_height( ui_scrOscilloscope_lineV6, 190);
+lv_obj_set_x( ui_scrOscilloscope_lineV6, 276 );
+lv_obj_set_y( ui_scrOscilloscope_lineV6, 0 );
+lv_obj_set_align( ui_scrOscilloscope_lineV6, LV_ALIGN_LEFT_MID );
+lv_label_set_text(ui_scrOscilloscope_lineV6,"");
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineV6, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_COLOR, _ui_theme_color_Card_Border);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineV6, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_OPA, _ui_theme_alpha_Card_Border);
+lv_obj_set_style_border_width(ui_scrOscilloscope_lineV6, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_scrOscilloscope_lineV7 = lv_label_create(ui_scrOscilloscope_chartView);
+lv_obj_set_width( ui_scrOscilloscope_lineV7, 1);
+lv_obj_set_height( ui_scrOscilloscope_lineV7, 190);
+lv_obj_set_x( ui_scrOscilloscope_lineV7, 322 );
+lv_obj_set_y( ui_scrOscilloscope_lineV7, 0 );
+lv_obj_set_align( ui_scrOscilloscope_lineV7, LV_ALIGN_LEFT_MID );
+lv_label_set_text(ui_scrOscilloscope_lineV7,"");
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineV7, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_COLOR, _ui_theme_color_Card_Border);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineV7, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_OPA, _ui_theme_alpha_Card_Border);
+lv_obj_set_style_border_width(ui_scrOscilloscope_lineV7, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_scrOscilloscope_lineV8 = lv_label_create(ui_scrOscilloscope_chartView);
+lv_obj_set_width( ui_scrOscilloscope_lineV8, 1);
+lv_obj_set_height( ui_scrOscilloscope_lineV8, 190);
+lv_obj_set_x( ui_scrOscilloscope_lineV8, 368 );
+lv_obj_set_y( ui_scrOscilloscope_lineV8, 0 );
+lv_obj_set_align( ui_scrOscilloscope_lineV8, LV_ALIGN_LEFT_MID );
+lv_label_set_text(ui_scrOscilloscope_lineV8,"");
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineV8, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_COLOR, _ui_theme_color_Card_Border);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lineV8, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_OPA, _ui_theme_alpha_Card_Border);
+lv_obj_set_style_border_width(ui_scrOscilloscope_lineV8, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_scrOscilloscope_cntYLabels = lv_obj_create(ui_scrOscilloscope);
+lv_obj_remove_style_all(ui_scrOscilloscope_cntYLabels);
+lv_obj_set_width( ui_scrOscilloscope_cntYLabels, 56);
+lv_obj_set_height( ui_scrOscilloscope_cntYLabels, 190);
+lv_obj_set_x( ui_scrOscilloscope_cntYLabels, 0 );
+lv_obj_set_y( ui_scrOscilloscope_cntYLabels, 120 );
+lv_obj_remove_flag( ui_scrOscilloscope_cntYLabels, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+
+ui_scrOscilloscope_lblMiddle = lv_label_create(ui_scrOscilloscope_cntYLabels);
+lv_obj_set_width( ui_scrOscilloscope_lblMiddle, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_scrOscilloscope_lblMiddle, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_scrOscilloscope_lblMiddle, -5 );
+lv_obj_set_y( ui_scrOscilloscope_lblMiddle, -5 );
+lv_obj_set_align( ui_scrOscilloscope_lblMiddle, LV_ALIGN_RIGHT_MID );
+lv_label_set_text(ui_scrOscilloscope_lblMiddle,"0");
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblMiddle, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblMiddle, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
+lv_obj_set_style_text_font(ui_scrOscilloscope_lblMiddle, &ui_font_MonoReg9, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_scrOscilloscope_lblUnit = lv_label_create(ui_scrOscilloscope_cntYLabels);
+lv_obj_set_width( ui_scrOscilloscope_lblUnit, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_scrOscilloscope_lblUnit, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_scrOscilloscope_lblUnit, -5 );
+lv_obj_set_y( ui_scrOscilloscope_lblUnit, 8 );
+lv_obj_set_align( ui_scrOscilloscope_lblUnit, LV_ALIGN_RIGHT_MID );
+lv_label_set_text(ui_scrOscilloscope_lblUnit,"V");
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblUnit, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Atenuado);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblUnit, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Atenuado);
+lv_obj_set_style_text_font(ui_scrOscilloscope_lblUnit, &ui_font_MonoReg8, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_scrOscilloscope_lblTop = lv_label_create(ui_scrOscilloscope_cntYLabels);
+lv_obj_set_width( ui_scrOscilloscope_lblTop, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_scrOscilloscope_lblTop, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_scrOscilloscope_lblTop, -5 );
+lv_obj_set_y( ui_scrOscilloscope_lblTop, 0 );
+lv_obj_set_align( ui_scrOscilloscope_lblTop, LV_ALIGN_TOP_RIGHT );
+lv_label_set_text(ui_scrOscilloscope_lblTop,"+400");
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTop, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Atenuado);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTop, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Atenuado);
+lv_obj_set_style_text_font(ui_scrOscilloscope_lblTop, &ui_font_MonoReg9, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_scrOscilloscope_lblBot = lv_label_create(ui_scrOscilloscope_cntYLabels);
+lv_obj_set_width( ui_scrOscilloscope_lblBot, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_scrOscilloscope_lblBot, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_scrOscilloscope_lblBot, -5 );
+lv_obj_set_y( ui_scrOscilloscope_lblBot, 0 );
+lv_obj_set_align( ui_scrOscilloscope_lblBot, LV_ALIGN_BOTTOM_RIGHT );
+lv_label_set_text(ui_scrOscilloscope_lblBot,"-400");
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblBot, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Atenuado);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblBot, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Atenuado);
+lv_obj_set_style_text_font(ui_scrOscilloscope_lblBot, &ui_font_MonoReg9, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 }
 
@@ -392,6 +560,21 @@ ui_scrOscilloscope_lblTimeDiv= NULL;
 ui_scrOscilloscope_lblTimeDivValue= NULL;
 ui_scrOscilloscope_lblTimeDivValueUnit= NULL;
 ui_scrOscilloscope_chartView= NULL;
-ui_scrOscilloscope_Label22= NULL;
+ui_scrOscilloscope_lineH1= NULL;
+ui_scrOscilloscope_lineH2= NULL;
+ui_scrOscilloscope_lineH3= NULL;
+ui_scrOscilloscope_lineV1= NULL;
+ui_scrOscilloscope_lineV2= NULL;
+ui_scrOscilloscope_lineV3= NULL;
+ui_scrOscilloscope_lineV4= NULL;
+ui_scrOscilloscope_lineV5= NULL;
+ui_scrOscilloscope_lineV6= NULL;
+ui_scrOscilloscope_lineV7= NULL;
+ui_scrOscilloscope_lineV8= NULL;
+ui_scrOscilloscope_cntYLabels= NULL;
+ui_scrOscilloscope_lblMiddle= NULL;
+ui_scrOscilloscope_lblUnit= NULL;
+ui_scrOscilloscope_lblTop= NULL;
+ui_scrOscilloscope_lblBot= NULL;
 
 }

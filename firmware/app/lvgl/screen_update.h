@@ -6,7 +6,7 @@
  * @brief List of UI update commands to be ran from any other task
  */
 typedef enum screen_update_cmd {
-  SCREEN_PLOT_DATA,         /**< Update screen with plotter */
+  SCREEN_OSC_DATA,          /**< Update screen with oscilloscope */
   SCREEN_FFT_DATA,          /**< Update screen with FFT sample data */
   SCREEN_UPDATE_CMD_COUNT
 } screen_update_cmd_t;

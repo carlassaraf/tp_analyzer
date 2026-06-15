@@ -22,7 +22,7 @@ typedef struct screen_update_msg {
 static QueueHandle_t screen_update_queue = NULL;
 
 static void screen_update_plot_data(void *data) {
-  scr_plotter_update_chart((const uint16_t*)data, HAL_ADC_BUFFER_SIZE);
+  scr_oscilloscope_update_chart((const uint16_t*)data, HAL_ADC_BUFFER_SIZE);
 }
 
 static void screen_update_fft_data(void *data) {
@@ -54,7 +54,7 @@ static void screen_update_fft_data(void *data) {
 
 // Command handler pointer to dispatch pending updates
 static void (*screen_update_handlers[])(void*) = {
-  [SCREEN_PLOT_DATA]  = screen_update_plot_data,
+  [SCREEN_OSC_DATA]   = screen_update_plot_data,
   [SCREEN_FFT_DATA]   = screen_update_fft_data,
 };
 

@@ -43,7 +43,22 @@ extern lv_obj_t *ui_scrOscilloscope_chartView;
 extern lv_obj_t *ui_scrOscilloscope_chartView_Xaxis;
 extern lv_obj_t *ui_scrOscilloscope_chartView_Yaxis1;
 extern lv_obj_t *ui_scrOscilloscope_chartView_Yaxis2;
-extern lv_obj_t *ui_scrOscilloscope_Label22;
+extern lv_obj_t *ui_scrOscilloscope_lineH1;
+extern lv_obj_t *ui_scrOscilloscope_lineH2;
+extern lv_obj_t *ui_scrOscilloscope_lineH3;
+extern lv_obj_t *ui_scrOscilloscope_lineV1;
+extern lv_obj_t *ui_scrOscilloscope_lineV2;
+extern lv_obj_t *ui_scrOscilloscope_lineV3;
+extern lv_obj_t *ui_scrOscilloscope_lineV4;
+extern lv_obj_t *ui_scrOscilloscope_lineV5;
+extern lv_obj_t *ui_scrOscilloscope_lineV6;
+extern lv_obj_t *ui_scrOscilloscope_lineV7;
+extern lv_obj_t *ui_scrOscilloscope_lineV8;
+extern lv_obj_t *ui_scrOscilloscope_cntYLabels;
+extern lv_obj_t *ui_scrOscilloscope_lblMiddle;
+extern lv_obj_t *ui_scrOscilloscope_lblUnit;
+extern lv_obj_t *ui_scrOscilloscope_lblTop;
+extern lv_obj_t *ui_scrOscilloscope_lblBot;
 // CUSTOM VARIABLES
 
 #ifdef __cplusplus
