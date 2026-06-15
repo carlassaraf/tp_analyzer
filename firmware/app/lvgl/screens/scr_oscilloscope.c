@@ -24,17 +24,10 @@ void scr_oscilloscope_update_chart(const uint16_t *points, uint16_t count) {
 
 void scr_oscilloscope_prepare(void) {
   lv_chart_add_series(ui_scrOscilloscope_chartView,
-                      lv_palette_main(_ui_theme_color_Voltage[0]),
+                      lv_palette_main(UI_THEME_COLOR_VOLTAGE),
                       LV_CHART_AXIS_PRIMARY_Y);
   lv_chart_set_point_count(ui_scrOscilloscope_chartView, CHART_PIXEL_WIDTH);
-
-  // // The default LVGL theme applies a white background to lv_obj_create() objects.
-  // // These sub-panels use remove_style_all() + border-only styling, so the theme's
-  // // white bg bleeds through and renders as a solid horizontal bar over cntValues.
-  // lv_obj_set_style_bg_opa(ui_scrOscilloscope_cntPeak,      LV_OPA_TRANSP, LV_PART_MAIN | LV_STATE_DEFAULT);
-  // lv_obj_set_style_bg_opa(ui_scrOscilloscope_cntRMS,       LV_OPA_TRANSP, LV_PART_MAIN | LV_STATE_DEFAULT);
-  // lv_obj_set_style_bg_opa(ui_scrOscilloscope_cntFrequency, LV_OPA_TRANSP, LV_PART_MAIN | LV_STATE_DEFAULT);
-  // lv_obj_set_style_bg_opa(ui_scrOscilloscope_cntTimeDiv,   LV_OPA_TRANSP, LV_PART_MAIN | LV_STATE_DEFAULT);
+  ui_chart_bind_ext_array(ui_scrOscilloscope_chartView, CHART_PIXEL_WIDTH);
 }
 
 void scr_oscilloscope_init(void) {
