@@ -5,7 +5,7 @@
 
 #include "../ui.h"
 
-lv_obj_t *ui_scrOscilloscope = NULL;lv_obj_t *ui_scrOscilloscope_contTopBar = NULL;lv_obj_t *ui_scrOscilloscope_lblTitle = NULL;lv_obj_t *ui_scrOscilloscope_cntTension = NULL;lv_obj_t *ui_scrOscilloscope_legendVoltage = NULL;lv_obj_t *ui_scrOscilloscope_lblTension = NULL;lv_obj_t *ui_scrOscilloscope_cntCorriente = NULL;lv_obj_t *ui_scrOscilloscope_legendCorriente = NULL;lv_obj_t *ui_scrOscilloscope_lblCorriente = NULL;lv_obj_t *ui_scrOscilloscope_cntValues = NULL;lv_obj_t *ui_scrOscilloscope_cntPeak = NULL;lv_obj_t *ui_scrOscilloscope_lblPeak = NULL;lv_obj_t *ui_scrOscilloscope_lblPeakValue = NULL;lv_obj_t *ui_scrOscilloscope_lblPeakUnit = NULL;lv_obj_t *ui_scrOscilloscope_cntRMS = NULL;lv_obj_t *ui_scrOscilloscope_lblRMS = NULL;lv_obj_t *ui_scrOscilloscope_lblRmsValue = NULL;lv_obj_t *ui_scrOscilloscope_lblRmsUnit = NULL;lv_obj_t *ui_scrOscilloscope_cntFrequency = NULL;lv_obj_t *ui_scrOscilloscope_lblFrequency = NULL;lv_obj_t *ui_scrOscilloscope_lblFrequencyValue = NULL;lv_obj_t *ui_scrOscilloscope_lblFrequencyUnit = NULL;lv_obj_t *ui_scrOscilloscope_cntTimeDiv = NULL;lv_obj_t *ui_scrOscilloscope_lblTimeDiv = NULL;lv_obj_t *ui_scrOscilloscope_lblTimeDivValue = NULL;lv_obj_t *ui_scrOscilloscope_lblTimeDivValueUnit = NULL;lv_obj_t *ui_scrOscilloscope_chartView = NULL;lv_obj_t *ui_scrOscilloscope_chartView_Xaxis = NULL;lv_obj_t *ui_scrOscilloscope_chartView_Yaxis1 = NULL;lv_obj_t *ui_scrOscilloscope_chartView_Yaxis2 = NULL;lv_obj_t *ui_scrOscilloscope_lineH1 = NULL;lv_obj_t *ui_scrOscilloscope_lineH2 = NULL;lv_obj_t *ui_scrOscilloscope_lineH3 = NULL;lv_obj_t *ui_scrOscilloscope_lineV1 = NULL;lv_obj_t *ui_scrOscilloscope_lineV2 = NULL;lv_obj_t *ui_scrOscilloscope_lineV3 = NULL;lv_obj_t *ui_scrOscilloscope_lineV4 = NULL;lv_obj_t *ui_scrOscilloscope_lineV5 = NULL;lv_obj_t *ui_scrOscilloscope_lineV6 = NULL;lv_obj_t *ui_scrOscilloscope_lineV7 = NULL;lv_obj_t *ui_scrOscilloscope_lineV8 = NULL;lv_obj_t *ui_scrOscilloscope_cntYLabels = NULL;lv_obj_t *ui_scrOscilloscope_lblMiddle = NULL;lv_obj_t *ui_scrOscilloscope_lblUnit = NULL;lv_obj_t *ui_scrOscilloscope_lblTop = NULL;lv_obj_t *ui_scrOscilloscope_lblBot = NULL;lv_obj_t *ui_scrOscilloscope_cntSideMenu = NULL;lv_obj_t *ui_scrOscilloscope_cntMainSideMenu = NULL;lv_obj_t *ui_scrOscilloscope_lblOptions = NULL;lv_obj_t *ui_scrOscilloscope_lblSenal = NULL;lv_obj_t *ui_scrOscilloscope_cntSigVoltage = NULL;lv_obj_t *ui_scrOscilloscope_dotSigVoltage = NULL;lv_obj_t *ui_scrOscilloscope_lblSigVoltage = NULL;lv_obj_t *ui_scrOscilloscope_cntSigCorriente = NULL;lv_obj_t *ui_scrOscilloscope_dotSigCorriente = NULL;lv_obj_t *ui_scrOscilloscope_lblSigCorriente = NULL;lv_obj_t *ui_scrOscilloscope_lineDivH1 = NULL;lv_obj_t *ui_scrOscilloscope_cntScaleV = NULL;lv_obj_t *ui_scrOscilloscope_iconScaleV = NULL;lv_obj_t *ui_scrOscilloscope_lblScaleV = NULL;lv_obj_t *ui_scrOscilloscope_lblScaleVValue = NULL;lv_obj_t *ui_scrOscilloscope_iconScaleVEnter = NULL;lv_obj_t *ui_scrOscilloscope_cntScaleH = NULL;lv_obj_t *ui_scrOscilloscope_iconScaleH = NULL;lv_obj_t *ui_scrOscilloscope_lblScaleH = NULL;lv_obj_t *ui_scrOscilloscope_lblScaleHValue = NULL;lv_obj_t *ui_scrOscilloscope_iconScaleHEnter = NULL;lv_obj_t *ui_scrOscilloscope_lineDivH2 = NULL;lv_obj_t *ui_scrOscilloscope_cntBack = NULL;lv_obj_t *ui_scrOscilloscope_iconBack = NULL;lv_obj_t *ui_scrOscilloscope_lblBack = NULL;lv_obj_t *ui_scrOscilloscope_cntScaleMenu = NULL;lv_obj_t *ui_scrOscilloscope_btnScaleBack = NULL;lv_obj_t *ui_scrOscilloscope_lblScaleMenu = NULL;lv_obj_t *ui_scrOscilloscope_lineScaleMenuH = NULL;lv_obj_t *ui_scrOscilloscope_cntScale1 = NULL;lv_obj_t *ui_scrOscilloscope_lblScale1 = NULL;lv_obj_t *ui_scrOscilloscope_iconScale1Tick = NULL;lv_obj_t *ui_scrOscilloscope_cntScale2 = NULL;lv_obj_t *ui_scrOscilloscope_lblScale2 = NULL;lv_obj_t *ui_scrOscilloscope_iconScale2Tick = NULL;lv_obj_t *ui_scrOscilloscope_cntScale3 = NULL;lv_obj_t *ui_scrOscilloscope_lblScale3 = NULL;lv_obj_t *ui_scrOscilloscope_iconScale3Tick = NULL;lv_obj_t *ui_scrOscilloscope_cntScale4 = NULL;lv_obj_t *ui_scrOscilloscope_lblScale4 = NULL;lv_obj_t *ui_scrOscilloscope_iconScale4Tick = NULL;lv_obj_t *ui_scrOscilloscope_cntTimeMenu = NULL;lv_obj_t *ui_scrOscilloscope_btnTimeBack = NULL;lv_obj_t *ui_scrOscilloscope_lblTimeMenu = NULL;lv_obj_t *ui_scrOscilloscope_lineTimeMenuH = NULL;lv_obj_t *ui_scrOscilloscope_cntTime1 = NULL;lv_obj_t *ui_scrOscilloscope_lblTime1 = NULL;lv_obj_t *ui_scrOscilloscope_iconTime1Tick = NULL;lv_obj_t *ui_scrOscilloscope_cntTime2 = NULL;lv_obj_t *ui_scrOscilloscope_lblTime2 = NULL;lv_obj_t *ui_scrOscilloscope_iconTime2Tick = NULL;lv_obj_t *ui_scrOscilloscope_cntTime3 = NULL;lv_obj_t *ui_scrOscilloscope_lblTime3 = NULL;lv_obj_t *ui_scrOscilloscope_iconTime3Tick = NULL;lv_obj_t *ui_scrOscilloscope_cntTime4 = NULL;lv_obj_t *ui_scrOscilloscope_lblTime4 = NULL;lv_obj_t *ui_scrOscilloscope_iconTime4Tick = NULL;lv_obj_t *ui_scrOscilloscope_cntTime5 = NULL;lv_obj_t *ui_scrOscilloscope_lblTime5 = NULL;lv_obj_t *ui_scrOscilloscope_iconTime5Tick = NULL;
+lv_obj_t *ui_scrOscilloscope = NULL;lv_obj_t *ui_scrOscilloscope_contTopBar = NULL;lv_obj_t *ui_scrOscilloscope_lblTitle = NULL;lv_obj_t *ui_scrOscilloscope_cntTension = NULL;lv_obj_t *ui_scrOscilloscope_legendVoltage = NULL;lv_obj_t *ui_scrOscilloscope_lblTension = NULL;lv_obj_t *ui_scrOscilloscope_cntCorriente = NULL;lv_obj_t *ui_scrOscilloscope_legendCorriente = NULL;lv_obj_t *ui_scrOscilloscope_lblCorriente = NULL;lv_obj_t *ui_scrOscilloscope_cntValues = NULL;lv_obj_t *ui_scrOscilloscope_cntPeak = NULL;lv_obj_t *ui_scrOscilloscope_lblPeak = NULL;lv_obj_t *ui_scrOscilloscope_lblPeakValue = NULL;lv_obj_t *ui_scrOscilloscope_lblPeakUnit = NULL;lv_obj_t *ui_scrOscilloscope_cntRMS = NULL;lv_obj_t *ui_scrOscilloscope_lblRMS = NULL;lv_obj_t *ui_scrOscilloscope_lblRmsValue = NULL;lv_obj_t *ui_scrOscilloscope_lblRmsUnit = NULL;lv_obj_t *ui_scrOscilloscope_cntFrequency = NULL;lv_obj_t *ui_scrOscilloscope_lblFrequency = NULL;lv_obj_t *ui_scrOscilloscope_lblFrequencyValue = NULL;lv_obj_t *ui_scrOscilloscope_lblFrequencyUnit = NULL;lv_obj_t *ui_scrOscilloscope_cntTimeDiv = NULL;lv_obj_t *ui_scrOscilloscope_lblTimeDiv = NULL;lv_obj_t *ui_scrOscilloscope_lblTimeDivValue = NULL;lv_obj_t *ui_scrOscilloscope_lblTimeDivValueUnit = NULL;lv_obj_t *ui_scrOscilloscope_chartView = NULL;lv_obj_t *ui_scrOscilloscope_chartView_Xaxis = NULL;lv_obj_t *ui_scrOscilloscope_chartView_Yaxis1 = NULL;lv_obj_t *ui_scrOscilloscope_chartView_Yaxis2 = NULL;lv_obj_t *ui_scrOscilloscope_lineH1 = NULL;lv_obj_t *ui_scrOscilloscope_lineH2 = NULL;lv_obj_t *ui_scrOscilloscope_lineH3 = NULL;lv_obj_t *ui_scrOscilloscope_lineV1 = NULL;lv_obj_t *ui_scrOscilloscope_lineV2 = NULL;lv_obj_t *ui_scrOscilloscope_lineV3 = NULL;lv_obj_t *ui_scrOscilloscope_lineV4 = NULL;lv_obj_t *ui_scrOscilloscope_lineV5 = NULL;lv_obj_t *ui_scrOscilloscope_lineV6 = NULL;lv_obj_t *ui_scrOscilloscope_lineV7 = NULL;lv_obj_t *ui_scrOscilloscope_lineV8 = NULL;lv_obj_t *ui_scrOscilloscope_cntYLabels = NULL;lv_obj_t *ui_scrOscilloscope_lblMiddle = NULL;lv_obj_t *ui_scrOscilloscope_lblUnit = NULL;lv_obj_t *ui_scrOscilloscope_lblTop = NULL;lv_obj_t *ui_scrOscilloscope_lblBot = NULL;lv_obj_t *ui_scrOscilloscope_cntSideMenu = NULL;lv_obj_t *ui_scrOscilloscope_cntMainSideMenu = NULL;lv_obj_t *ui_scrOscilloscope_lblOptions = NULL;lv_obj_t *ui_scrOscilloscope_lblSenal = NULL;lv_obj_t *ui_scrOscilloscope_cntSigVoltage = NULL;lv_obj_t *ui_scrOscilloscope_dotSigVoltage = NULL;lv_obj_t *ui_scrOscilloscope_lblSigVoltage = NULL;lv_obj_t *ui_scrOscilloscope_cntSigCorriente = NULL;lv_obj_t *ui_scrOscilloscope_dotSigCorriente = NULL;lv_obj_t *ui_scrOscilloscope_lblSigCorriente = NULL;lv_obj_t *ui_scrOscilloscope_lineDivH1 = NULL;lv_obj_t *ui_scrOscilloscope_cntScaleV = NULL;lv_obj_t *ui_scrOscilloscope_iconScaleV = NULL;lv_obj_t *ui_scrOscilloscope_lblScaleV = NULL;lv_obj_t *ui_scrOscilloscope_lblScaleVValue = NULL;lv_obj_t *ui_scrOscilloscope_iconScaleVEnter = NULL;lv_obj_t *ui_scrOscilloscope_cntScaleH = NULL;lv_obj_t *ui_scrOscilloscope_iconScaleH = NULL;lv_obj_t *ui_scrOscilloscope_lblScaleH = NULL;lv_obj_t *ui_scrOscilloscope_lblScaleHValue = NULL;lv_obj_t *ui_scrOscilloscope_iconScaleHEnter = NULL;lv_obj_t *ui_scrOscilloscope_lineDivH2 = NULL;lv_obj_t *ui_scrOscilloscope_cntBack = NULL;lv_obj_t *ui_scrOscilloscope_iconBack = NULL;lv_obj_t *ui_scrOscilloscope_lblBack = NULL;lv_obj_t *ui_scrOscilloscope_cntScaleMenu = NULL;lv_obj_t *ui_scrOscilloscope_btnScaleBack = NULL;lv_obj_t *ui_scrOscilloscope_lblScaleMenu = NULL;lv_obj_t *ui_scrOscilloscope_lineScaleMenuH = NULL;lv_obj_t *ui_scrOscilloscope_cntScales = NULL;lv_obj_t *ui_scrOscilloscope_cntScale1 = NULL;lv_obj_t *ui_scrOscilloscope_lblScale1 = NULL;lv_obj_t *ui_scrOscilloscope_iconScale1Tick = NULL;lv_obj_t *ui_scrOscilloscope_cntScale2 = NULL;lv_obj_t *ui_scrOscilloscope_lblScale2 = NULL;lv_obj_t *ui_scrOscilloscope_iconScale2Tick = NULL;lv_obj_t *ui_scrOscilloscope_cntScale3 = NULL;lv_obj_t *ui_scrOscilloscope_lblScale3 = NULL;lv_obj_t *ui_scrOscilloscope_iconScale3Tick = NULL;lv_obj_t *ui_scrOscilloscope_cntScale4 = NULL;lv_obj_t *ui_scrOscilloscope_lblScale4 = NULL;lv_obj_t *ui_scrOscilloscope_iconScale4Tick = NULL;lv_obj_t *ui_scrOscilloscope_cntTimeMenu = NULL;lv_obj_t *ui_scrOscilloscope_btnTimeBack = NULL;lv_obj_t *ui_scrOscilloscope_lblTimeMenu = NULL;lv_obj_t *ui_scrOscilloscope_lineTimeMenuH = NULL;lv_obj_t *ui_scrOscilloscope_cntTimes = NULL;lv_obj_t *ui_scrOscilloscope_cntTime1 = NULL;lv_obj_t *ui_scrOscilloscope_lblTime1 = NULL;lv_obj_t *ui_scrOscilloscope_iconTime1Tick = NULL;lv_obj_t *ui_scrOscilloscope_cntTime2 = NULL;lv_obj_t *ui_scrOscilloscope_lblTime2 = NULL;lv_obj_t *ui_scrOscilloscope_iconTime2Tick = NULL;lv_obj_t *ui_scrOscilloscope_cntTime3 = NULL;lv_obj_t *ui_scrOscilloscope_lblTime3 = NULL;lv_obj_t *ui_scrOscilloscope_iconTime3Tick = NULL;lv_obj_t *ui_scrOscilloscope_cntTime4 = NULL;lv_obj_t *ui_scrOscilloscope_lblTime4 = NULL;lv_obj_t *ui_scrOscilloscope_iconTime4Tick = NULL;lv_obj_t *ui_scrOscilloscope_cntTime5 = NULL;lv_obj_t *ui_scrOscilloscope_lblTime5 = NULL;lv_obj_t *ui_scrOscilloscope_iconTime5Tick = NULL;
 // event funtions
 void ui_event_scrOscilloscope_cntBack( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
@@ -545,7 +545,7 @@ ui_scrOscilloscope_cntSideMenu = lv_obj_create(ui_scrOscilloscope);
 lv_obj_remove_style_all(ui_scrOscilloscope_cntSideMenu);
 lv_obj_set_width( ui_scrOscilloscope_cntSideMenu, 184);
 lv_obj_set_height( ui_scrOscilloscope_cntSideMenu, 290);
-lv_obj_set_x( ui_scrOscilloscope_cntSideMenu, 480 );
+lv_obj_set_x( ui_scrOscilloscope_cntSideMenu, 296 );
 lv_obj_set_y( ui_scrOscilloscope_cntSideMenu, 30 );
 lv_obj_remove_flag( ui_scrOscilloscope_cntSideMenu, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 ui_object_set_themeable_style_property(ui_scrOscilloscope_cntSideMenu, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BG_COLOR, _ui_theme_color_Panel);
@@ -932,12 +932,19 @@ ui_object_set_themeable_style_property(ui_scrOscilloscope_lineScaleMenuH, LV_PAR
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lineScaleMenuH, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_OPA, _ui_theme_alpha_Card_Border);
 lv_obj_set_style_border_width(ui_scrOscilloscope_lineScaleMenuH, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_scrOscilloscope_cntScale1 = lv_obj_create(ui_scrOscilloscope_cntScaleMenu);
+ui_scrOscilloscope_cntScales = lv_obj_create(ui_scrOscilloscope_cntScaleMenu);
+lv_obj_remove_style_all(ui_scrOscilloscope_cntScales);
+lv_obj_set_width( ui_scrOscilloscope_cntScales, 163);
+lv_obj_set_height( ui_scrOscilloscope_cntScales, 180);
+lv_obj_set_x( ui_scrOscilloscope_cntScales, 11 );
+lv_obj_set_y( ui_scrOscilloscope_cntScales, 60 );
+lv_obj_remove_flag( ui_scrOscilloscope_cntScales, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+
+ui_scrOscilloscope_cntScale1 = lv_obj_create(ui_scrOscilloscope_cntScales);
 lv_obj_remove_style_all(ui_scrOscilloscope_cntScale1);
 lv_obj_set_width( ui_scrOscilloscope_cntScale1, 163);
 lv_obj_set_height( ui_scrOscilloscope_cntScale1, 40);
-lv_obj_set_x( ui_scrOscilloscope_cntScale1, 11 );
-lv_obj_set_y( ui_scrOscilloscope_cntScale1, 60 );
+lv_obj_set_align( ui_scrOscilloscope_cntScale1, LV_ALIGN_TOP_MID );
 lv_obj_remove_flag( ui_scrOscilloscope_cntScale1, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_scrOscilloscope_cntScale1, 8, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_scrOscilloscope_cntScale1, lv_color_hex(0xFFD23F), LV_PART_MAIN | LV_STATE_CHECKED );
@@ -961,8 +968,8 @@ lv_label_set_text(ui_scrOscilloscope_lblScale1,"±100 V");
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale1, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale1, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
 lv_obj_set_style_text_font(ui_scrOscilloscope_lblScale1, &ui_font_MonoBold13, LV_PART_MAIN| LV_STATE_DEFAULT);
-ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale1, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_BG_COLOR, _ui_theme_color_Voltage);
-ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale1, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_BG_OPA, _ui_theme_alpha_Voltage);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale1, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Voltage);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale1, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Voltage);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale1, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Primario);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale1, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Primario);
 
@@ -983,12 +990,13 @@ ui_object_set_themeable_style_property(ui_scrOscilloscope_iconScale1Tick, LV_PAR
 ui_object_set_themeable_style_property(ui_scrOscilloscope_iconScale1Tick, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_IMAGE_RECOLOR, _ui_theme_color_Foco);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_iconScale1Tick, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_IMAGE_RECOLOR_OPA, _ui_theme_alpha_Foco);
 
-ui_scrOscilloscope_cntScale2 = lv_obj_create(ui_scrOscilloscope_cntScaleMenu);
+ui_scrOscilloscope_cntScale2 = lv_obj_create(ui_scrOscilloscope_cntScales);
 lv_obj_remove_style_all(ui_scrOscilloscope_cntScale2);
 lv_obj_set_width( ui_scrOscilloscope_cntScale2, 163);
 lv_obj_set_height( ui_scrOscilloscope_cntScale2, 40);
-lv_obj_set_x( ui_scrOscilloscope_cntScale2, 11 );
-lv_obj_set_y( ui_scrOscilloscope_cntScale2, 105 );
+lv_obj_set_x( ui_scrOscilloscope_cntScale2, 0 );
+lv_obj_set_y( ui_scrOscilloscope_cntScale2, 45 );
+lv_obj_set_align( ui_scrOscilloscope_cntScale2, LV_ALIGN_TOP_MID );
 lv_obj_remove_flag( ui_scrOscilloscope_cntScale2, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_scrOscilloscope_cntScale2, 8, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_scrOscilloscope_cntScale2, lv_color_hex(0xFFD23F), LV_PART_MAIN | LV_STATE_CHECKED );
@@ -1012,8 +1020,8 @@ lv_label_set_text(ui_scrOscilloscope_lblScale2,"±250 V");
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale2, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale2, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
 lv_obj_set_style_text_font(ui_scrOscilloscope_lblScale2, &ui_font_MonoBold13, LV_PART_MAIN| LV_STATE_DEFAULT);
-ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale2, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_BG_COLOR, _ui_theme_color_Voltage);
-ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale2, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_BG_OPA, _ui_theme_alpha_Voltage);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale2, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Voltage);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale2, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Voltage);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale2, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Primario);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale2, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Primario);
 
@@ -1034,12 +1042,13 @@ ui_object_set_themeable_style_property(ui_scrOscilloscope_iconScale2Tick, LV_PAR
 ui_object_set_themeable_style_property(ui_scrOscilloscope_iconScale2Tick, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_IMAGE_RECOLOR, _ui_theme_color_Foco);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_iconScale2Tick, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_IMAGE_RECOLOR_OPA, _ui_theme_alpha_Foco);
 
-ui_scrOscilloscope_cntScale3 = lv_obj_create(ui_scrOscilloscope_cntScaleMenu);
+ui_scrOscilloscope_cntScale3 = lv_obj_create(ui_scrOscilloscope_cntScales);
 lv_obj_remove_style_all(ui_scrOscilloscope_cntScale3);
 lv_obj_set_width( ui_scrOscilloscope_cntScale3, 163);
 lv_obj_set_height( ui_scrOscilloscope_cntScale3, 40);
-lv_obj_set_x( ui_scrOscilloscope_cntScale3, 11 );
-lv_obj_set_y( ui_scrOscilloscope_cntScale3, 150 );
+lv_obj_set_x( ui_scrOscilloscope_cntScale3, 0 );
+lv_obj_set_y( ui_scrOscilloscope_cntScale3, 90 );
+lv_obj_set_align( ui_scrOscilloscope_cntScale3, LV_ALIGN_TOP_MID );
 lv_obj_remove_flag( ui_scrOscilloscope_cntScale3, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_scrOscilloscope_cntScale3, 8, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_scrOscilloscope_cntScale3, lv_color_hex(0xFFD23F), LV_PART_MAIN | LV_STATE_CHECKED );
@@ -1063,8 +1072,8 @@ lv_label_set_text(ui_scrOscilloscope_lblScale3,"±400 V");
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale3, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale3, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
 lv_obj_set_style_text_font(ui_scrOscilloscope_lblScale3, &ui_font_MonoBold13, LV_PART_MAIN| LV_STATE_DEFAULT);
-ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale3, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_BG_COLOR, _ui_theme_color_Voltage);
-ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale3, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_BG_OPA, _ui_theme_alpha_Voltage);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale3, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Voltage);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale3, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Voltage);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale3, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Primario);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale3, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Primario);
 
@@ -1085,12 +1094,13 @@ ui_object_set_themeable_style_property(ui_scrOscilloscope_iconScale3Tick, LV_PAR
 ui_object_set_themeable_style_property(ui_scrOscilloscope_iconScale3Tick, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_IMAGE_RECOLOR, _ui_theme_color_Foco);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_iconScale3Tick, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_IMAGE_RECOLOR_OPA, _ui_theme_alpha_Foco);
 
-ui_scrOscilloscope_cntScale4 = lv_obj_create(ui_scrOscilloscope_cntScaleMenu);
+ui_scrOscilloscope_cntScale4 = lv_obj_create(ui_scrOscilloscope_cntScales);
 lv_obj_remove_style_all(ui_scrOscilloscope_cntScale4);
 lv_obj_set_width( ui_scrOscilloscope_cntScale4, 163);
 lv_obj_set_height( ui_scrOscilloscope_cntScale4, 40);
-lv_obj_set_x( ui_scrOscilloscope_cntScale4, 11 );
-lv_obj_set_y( ui_scrOscilloscope_cntScale4, 195 );
+lv_obj_set_x( ui_scrOscilloscope_cntScale4, 0 );
+lv_obj_set_y( ui_scrOscilloscope_cntScale4, 135 );
+lv_obj_set_align( ui_scrOscilloscope_cntScale4, LV_ALIGN_TOP_MID );
 lv_obj_remove_flag( ui_scrOscilloscope_cntScale4, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_scrOscilloscope_cntScale4, 8, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_scrOscilloscope_cntScale4, lv_color_hex(0xFFD23F), LV_PART_MAIN | LV_STATE_CHECKED );
@@ -1114,8 +1124,8 @@ lv_label_set_text(ui_scrOscilloscope_lblScale4,"±800 V");
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale4, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale4, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
 lv_obj_set_style_text_font(ui_scrOscilloscope_lblScale4, &ui_font_MonoBold13, LV_PART_MAIN| LV_STATE_DEFAULT);
-ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale4, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_BG_COLOR, _ui_theme_color_Voltage);
-ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale4, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_BG_OPA, _ui_theme_alpha_Voltage);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale4, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Voltage);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale4, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Voltage);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale4, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Primario);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblScale4, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Primario);
 
@@ -1192,12 +1202,19 @@ ui_object_set_themeable_style_property(ui_scrOscilloscope_lineTimeMenuH, LV_PART
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lineTimeMenuH, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_OPA, _ui_theme_alpha_Card_Border);
 lv_obj_set_style_border_width(ui_scrOscilloscope_lineTimeMenuH, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_scrOscilloscope_cntTime1 = lv_obj_create(ui_scrOscilloscope_cntTimeMenu);
+ui_scrOscilloscope_cntTimes = lv_obj_create(ui_scrOscilloscope_cntTimeMenu);
+lv_obj_remove_style_all(ui_scrOscilloscope_cntTimes);
+lv_obj_set_width( ui_scrOscilloscope_cntTimes, 163);
+lv_obj_set_height( ui_scrOscilloscope_cntTimes, 225);
+lv_obj_set_x( ui_scrOscilloscope_cntTimes, 11 );
+lv_obj_set_y( ui_scrOscilloscope_cntTimes, 60 );
+lv_obj_remove_flag( ui_scrOscilloscope_cntTimes, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+
+ui_scrOscilloscope_cntTime1 = lv_obj_create(ui_scrOscilloscope_cntTimes);
 lv_obj_remove_style_all(ui_scrOscilloscope_cntTime1);
 lv_obj_set_width( ui_scrOscilloscope_cntTime1, 163);
 lv_obj_set_height( ui_scrOscilloscope_cntTime1, 40);
-lv_obj_set_x( ui_scrOscilloscope_cntTime1, 11 );
-lv_obj_set_y( ui_scrOscilloscope_cntTime1, 60 );
+lv_obj_set_align( ui_scrOscilloscope_cntTime1, LV_ALIGN_TOP_MID );
 lv_obj_remove_flag( ui_scrOscilloscope_cntTime1, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_scrOscilloscope_cntTime1, 8, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_scrOscilloscope_cntTime1, lv_color_hex(0xFFD23F), LV_PART_MAIN | LV_STATE_CHECKED );
@@ -1243,12 +1260,13 @@ ui_object_set_themeable_style_property(ui_scrOscilloscope_iconTime1Tick, LV_PART
 ui_object_set_themeable_style_property(ui_scrOscilloscope_iconTime1Tick, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_IMAGE_RECOLOR, _ui_theme_color_Foco);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_iconTime1Tick, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_IMAGE_RECOLOR_OPA, _ui_theme_alpha_Foco);
 
-ui_scrOscilloscope_cntTime2 = lv_obj_create(ui_scrOscilloscope_cntTimeMenu);
+ui_scrOscilloscope_cntTime2 = lv_obj_create(ui_scrOscilloscope_cntTimes);
 lv_obj_remove_style_all(ui_scrOscilloscope_cntTime2);
 lv_obj_set_width( ui_scrOscilloscope_cntTime2, 163);
 lv_obj_set_height( ui_scrOscilloscope_cntTime2, 40);
-lv_obj_set_x( ui_scrOscilloscope_cntTime2, 11 );
-lv_obj_set_y( ui_scrOscilloscope_cntTime2, 105 );
+lv_obj_set_x( ui_scrOscilloscope_cntTime2, 0 );
+lv_obj_set_y( ui_scrOscilloscope_cntTime2, 45 );
+lv_obj_set_align( ui_scrOscilloscope_cntTime2, LV_ALIGN_TOP_MID );
 lv_obj_remove_flag( ui_scrOscilloscope_cntTime2, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_scrOscilloscope_cntTime2, 8, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_scrOscilloscope_cntTime2, lv_color_hex(0xFFD23F), LV_PART_MAIN | LV_STATE_CHECKED );
@@ -1294,12 +1312,13 @@ ui_object_set_themeable_style_property(ui_scrOscilloscope_iconTime2Tick, LV_PART
 ui_object_set_themeable_style_property(ui_scrOscilloscope_iconTime2Tick, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_IMAGE_RECOLOR, _ui_theme_color_Foco);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_iconTime2Tick, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_IMAGE_RECOLOR_OPA, _ui_theme_alpha_Foco);
 
-ui_scrOscilloscope_cntTime3 = lv_obj_create(ui_scrOscilloscope_cntTimeMenu);
+ui_scrOscilloscope_cntTime3 = lv_obj_create(ui_scrOscilloscope_cntTimes);
 lv_obj_remove_style_all(ui_scrOscilloscope_cntTime3);
 lv_obj_set_width( ui_scrOscilloscope_cntTime3, 163);
 lv_obj_set_height( ui_scrOscilloscope_cntTime3, 40);
-lv_obj_set_x( ui_scrOscilloscope_cntTime3, 11 );
-lv_obj_set_y( ui_scrOscilloscope_cntTime3, 150 );
+lv_obj_set_x( ui_scrOscilloscope_cntTime3, 0 );
+lv_obj_set_y( ui_scrOscilloscope_cntTime3, 90 );
+lv_obj_set_align( ui_scrOscilloscope_cntTime3, LV_ALIGN_TOP_MID );
 lv_obj_remove_flag( ui_scrOscilloscope_cntTime3, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_scrOscilloscope_cntTime3, 8, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_scrOscilloscope_cntTime3, lv_color_hex(0xFFD23F), LV_PART_MAIN | LV_STATE_CHECKED );
@@ -1345,12 +1364,13 @@ ui_object_set_themeable_style_property(ui_scrOscilloscope_iconTime3Tick, LV_PART
 ui_object_set_themeable_style_property(ui_scrOscilloscope_iconTime3Tick, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_IMAGE_RECOLOR, _ui_theme_color_Foco);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_iconTime3Tick, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_IMAGE_RECOLOR_OPA, _ui_theme_alpha_Foco);
 
-ui_scrOscilloscope_cntTime4 = lv_obj_create(ui_scrOscilloscope_cntTimeMenu);
+ui_scrOscilloscope_cntTime4 = lv_obj_create(ui_scrOscilloscope_cntTimes);
 lv_obj_remove_style_all(ui_scrOscilloscope_cntTime4);
 lv_obj_set_width( ui_scrOscilloscope_cntTime4, 163);
 lv_obj_set_height( ui_scrOscilloscope_cntTime4, 40);
-lv_obj_set_x( ui_scrOscilloscope_cntTime4, 11 );
-lv_obj_set_y( ui_scrOscilloscope_cntTime4, 195 );
+lv_obj_set_x( ui_scrOscilloscope_cntTime4, 0 );
+lv_obj_set_y( ui_scrOscilloscope_cntTime4, 140 );
+lv_obj_set_align( ui_scrOscilloscope_cntTime4, LV_ALIGN_TOP_MID );
 lv_obj_remove_flag( ui_scrOscilloscope_cntTime4, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_scrOscilloscope_cntTime4, 8, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_scrOscilloscope_cntTime4, lv_color_hex(0xFFD23F), LV_PART_MAIN | LV_STATE_CHECKED );
@@ -1396,12 +1416,13 @@ ui_object_set_themeable_style_property(ui_scrOscilloscope_iconTime4Tick, LV_PART
 ui_object_set_themeable_style_property(ui_scrOscilloscope_iconTime4Tick, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_IMAGE_RECOLOR, _ui_theme_color_Foco);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_iconTime4Tick, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_IMAGE_RECOLOR_OPA, _ui_theme_alpha_Foco);
 
-ui_scrOscilloscope_cntTime5 = lv_obj_create(ui_scrOscilloscope_cntTimeMenu);
+ui_scrOscilloscope_cntTime5 = lv_obj_create(ui_scrOscilloscope_cntTimes);
 lv_obj_remove_style_all(ui_scrOscilloscope_cntTime5);
 lv_obj_set_width( ui_scrOscilloscope_cntTime5, 163);
 lv_obj_set_height( ui_scrOscilloscope_cntTime5, 40);
-lv_obj_set_x( ui_scrOscilloscope_cntTime5, 11 );
-lv_obj_set_y( ui_scrOscilloscope_cntTime5, 240 );
+lv_obj_set_x( ui_scrOscilloscope_cntTime5, 0 );
+lv_obj_set_y( ui_scrOscilloscope_cntTime5, 185 );
+lv_obj_set_align( ui_scrOscilloscope_cntTime5, LV_ALIGN_TOP_MID );
 lv_obj_remove_flag( ui_scrOscilloscope_cntTime5, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_scrOscilloscope_cntTime5, 8, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_bg_color(ui_scrOscilloscope_cntTime5, lv_color_hex(0xFFD23F), LV_PART_MAIN | LV_STATE_CHECKED );
@@ -1528,6 +1549,7 @@ ui_scrOscilloscope_cntScaleMenu= NULL;
 ui_scrOscilloscope_btnScaleBack= NULL;
 ui_scrOscilloscope_lblScaleMenu= NULL;
 ui_scrOscilloscope_lineScaleMenuH= NULL;
+ui_scrOscilloscope_cntScales= NULL;
 ui_scrOscilloscope_cntScale1= NULL;
 ui_scrOscilloscope_lblScale1= NULL;
 ui_scrOscilloscope_iconScale1Tick= NULL;
@@ -1544,6 +1566,7 @@ ui_scrOscilloscope_cntTimeMenu= NULL;
 ui_scrOscilloscope_btnTimeBack= NULL;
 ui_scrOscilloscope_lblTimeMenu= NULL;
 ui_scrOscilloscope_lineTimeMenuH= NULL;
+ui_scrOscilloscope_cntTimes= NULL;
 ui_scrOscilloscope_cntTime1= NULL;
 ui_scrOscilloscope_lblTime1= NULL;
 ui_scrOscilloscope_iconTime1Tick= NULL;
