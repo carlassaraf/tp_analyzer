@@ -159,7 +159,7 @@ ili9486_t *ili9486_init(const ili9486_config_t *config) {
         hal_gpio_write((uint8_t)config->pin_bl, 1);
 
     // Hand D0-D7 and WR to PIO; wire DMA to the SM's TX FIFO.
-    ctx->pio = hal_pio_init_8080_write(config->data_pin_base, config->pin_wr, 50.0f);
+    ctx->pio = hal_pio_init_8080_write(config->data_pin_base, config->pin_wr, 30.0f);
     ctx->dma = hal_dma_init_pio_tx(hal_pio_get_tx_fifo_addr(ctx->pio),
                                     hal_pio_get_tx_dreq(ctx->pio),
                                     HAL_DMA_SIZE_8);
