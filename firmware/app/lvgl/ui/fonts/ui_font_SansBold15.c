@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Size: 15 px
  * Bpp: 4
- * Opts: --bpp 4 --size 15 --font /Users/carlassaraf/Documents/facultad/tp_analyzer/ui/assets/fonts/IBM_Plex_Sans/static/IBMPlexSans-Bold.ttf -o /Users/carlassaraf/Documents/facultad/tp_analyzer/ui/assets/fonts/IBM_Plex_Sans/static/ui_font_SansBold15.c --format lvgl -r 0x20-0x7f -r 0xc1 -r 0xc9 -r 0xcd -r 0xd3 -r 0xda -r 0xe1 -r 0xe9 -r 0xed -r 0xf3 -r 0xfa --no-compress --no-prefilter
+ * Opts: --bpp 4 --size 15 --font /Users/carlassaraf/Documents/facultad/tp_analyzer/ui/assets/fonts/IBM_Plex_Sans/IBMPlexSans-Bold.ttf -o /Users/carlassaraf/Documents/facultad/tp_analyzer/ui/assets/fonts/IBM_Plex_Sans/ui_font_SansBold15.c --format lvgl -r 0x20-0x7f -r 0xc1 -r 0xc9 -r 0xcd -r 0xd3 -r 0xda -r 0xe1 -r 0xe9 -r 0xed -r 0xf3 -r 0xfa --no-compress --no-prefilter
  ******************************************************************************/
 
 #include "../ui.h"
