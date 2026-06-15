@@ -14,8 +14,18 @@ extern "C" {
 extern void ui_scrBoot_screen_init(void);
 extern void ui_scrBoot_screen_destroy(void);
 extern lv_obj_t *ui_scrBoot;
-extern lv_obj_t *ui_scrBoot_lblWelcome;
-extern lv_obj_t *ui_scrBoot_spinWelcome;
+extern lv_obj_t *ui_scrBoot_lblTitle;
+extern lv_obj_t *ui_scrBoot_spnrInit;
+extern lv_obj_t *ui_scrBoot_imgLogo;
+extern lv_obj_t *ui_scrBoot_lblInit;
+extern lv_obj_t *ui_scrBoot_lblSubtitle;
+extern lv_obj_t *ui_scrBoot_vLine;
+extern lv_obj_t *ui_scrBoot_hLine;
+extern lv_obj_t *ui_scrBoot_lblSn;
+extern lv_obj_t *ui_scrBoot_lblSnV;
+extern lv_obj_t *ui_scrBoot_lblFw;
+extern lv_obj_t *ui_scrBoot_lblFwV;
+extern lv_obj_t *ui_scrBoot_lblFacultyName;
 // CUSTOM VARIABLES
 
 #ifdef __cplusplus

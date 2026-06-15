@@ -19,10 +19,10 @@ typedef struct screen {
 
 // Used to register all screens in the applications with their callback functions
 static const screen_t screens[SCREEN_COUNT] = {
-  [SCREEN_BOOT] = SCR_REGISTER("Boot",    ui_scrBoot,     boot    ),
-  [SCREEN_MENU] = SCR_REGISTER("Menu",    ui_scrMenu,     menu    ),
-  [SCREEN_PLOT] = SCR_REGISTER("Plotter", ui_scrPlotter,  plotter ),
-  [SCREEN_FFT]  = SCR_REGISTER("FFT",     ui_scrFFT,      fft     ),
+  [SCREEN_BOOT] = SCR_REGISTER("Boot",          ui_scrBoot,         boot    ),
+  [SCREEN_MENU] = SCR_REGISTER("Menu",          ui_scrMenu,         menu    ),
+  [SCREEN_OSC]  = SCR_REGISTER("Oscilloscope",  ui_scrOscilloscope, oscilloscope ),
+  [SCREEN_FFT]  = SCR_REGISTER("FFT",           ui_scrFFT,          fft     ),
 };
 
 // Keep track of running screens and transitions
@@ -53,10 +53,13 @@ void screen_manager_step(void) {
   if (pending != current) {
     lv_lock();
     if(screens[current].deinit) { screens[current].deinit(); }
-    // Call _ui_screen_change if it was not called before
-    if(screens[pending].init && current == screen_manager_get_screen()) {
-      _ui_screen_change(screens[pending].scr, LV_SCR_LOAD_ANIM_NONE, 0, 0, screens[pending].init);
+    // Load the screen if not already changed by an LVGL event
+    if(current == screen_manager_get_screen()) {
+      lv_screen_load_anim(*screens[pending].scr, LV_SCR_LOAD_ANIM_NONE, 0, 0, false);
     }
+    // Always call init so group registration (SCR_ADD_TO_GROUP) runs regardless
+    // of whether the screen object was pre-created by ui_init()
+    if(screens[pending].init) { screens[pending].init(); }
     lv_unlock();
     current = pending;
   }

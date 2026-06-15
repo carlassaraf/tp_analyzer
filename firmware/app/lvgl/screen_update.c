@@ -21,8 +21,39 @@ typedef struct screen_update_msg {
 // Internal queue for receiving and dispaching commands
 static QueueHandle_t screen_update_queue = NULL;
 
-static void screen_update_plot_data(void *data) {
-  scr_plotter_update_chart((const uint16_t*)data, HAL_ADC_BUFFER_SIZE);
+static void screen_update_plot_data(void *data)
+{
+  scr_oscilloscope_update_chart((const uint16_t*)data, HAL_ADC_BUFFER_SIZE);
+  // Get max raw value from array for peak and rms
+  const q15_t *samples = (const q15_t *)data;
+  static float32_t input[N] = {0};
+  float32_t peak = 0;
+  uint32_t idx = 0;
+  float32_t sqrt2 = 0.0;
+
+  // Convert 12-bit ADC samples to centered float [-1, 1]
+  for (uint32_t i = 0; i < N; i++) {
+    input[i] = ((float32_t)samples[i] - 2048.0f) / 2048.0f;
+  }
+
+  arm_sqrt_f32(2, &sqrt2);
+  arm_absmax_f32(input, N, &peak, &idx);
+  
+  scr_oscilloscope_update_peak(peak);
+  scr_oscilloscope_update_rms(peak / sqrt2);
+  // Get max bin from FFT for main frequency
+  static arm_rfft_fast_instance_f32 fft_inst;
+  static float32_t fft_out[N / 2];
+  static bool initialized = false;
+  uint32_t bin_max = 0;
+
+  if (!initialized) {
+    dsp_fft_init(&fft_inst);
+    initialized = true;
+  }
+  dsp_fft_run(&fft_inst, input, fft_out);
+  arm_max_f32(fft_out, N, &peak, &bin_max);
+  scr_oscilloscope_update_frequency(bin_max * FS / N);
 }
 
 static void screen_update_fft_data(void *data) {
@@ -52,9 +83,27 @@ static void screen_update_fft_data(void *data) {
   scr_fft_update_chart(fft_out, N / 2);
 }
 
+static void screen_update_peak_value(void *data)
+{
+  const q15_t *samples = (const q15_t *)data;
+  q15_t res = 0;
+  uint32_t idx = 0;
+  arm_max_q15(samples, N, &res, &idx);
+  scr_oscilloscope_update_peak((uint16_t)res);
+}
+
+static void screen_update_rms_value(void *data)
+{
+  const q15_t *samples = (const q15_t *)data;
+  q15_t res = 0;
+  uint32_t idx = 0;
+  arm_max_q15(samples, N, &res, &idx);
+  scr_oscilloscope_update_peak((uint16_t)res);
+}
+
 // Command handler pointer to dispatch pending updates
 static void (*screen_update_handlers[])(void*) = {
-  [SCREEN_PLOT_DATA]  = screen_update_plot_data,
+  [SCREEN_OSC_DATA]   = screen_update_plot_data,
   [SCREEN_FFT_DATA]   = screen_update_fft_data,
 };
 

@@ -3,8 +3,16 @@
 
 #include "lvgl.h"
 
-/** 
- * @brief Called to update chart values
+/**
+ * @brief Binds the internal scaled buffer as the chart's external Y array.
+ *        Call once from the screen's prepare() before data starts flowing.
+ * @param chart Pointer to chart object
+ * @param count Number of points the chart is configured for
+ */
+void ui_chart_bind_ext_array(lv_obj_t *chart, uint16_t count);
+
+/**
+ * @brief Called to update chart values — writes scaled data then refreshes.
  * @param chart Pointer to chart to update
  * @param points Data points in Y axis
  * @param count Number of data points

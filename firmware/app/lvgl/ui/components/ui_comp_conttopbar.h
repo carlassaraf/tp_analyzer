@@ -14,8 +14,12 @@ extern "C" {
 
 // COMPONENT contTopBar
 #define UI_COMP_CONTTOPBAR_CONTTOPBAR 0
-#define UI_COMP_CONTTOPBAR_CONTDATE 1
-#define _UI_COMP_CONTTOPBAR_NUM 2
+#define UI_COMP_CONTTOPBAR_IMGLOGO 1
+#define UI_COMP_CONTTOPBAR_LBLNAME 2
+#define UI_COMP_CONTTOPBAR_LBLTIME 3
+#define UI_COMP_CONTTOPBAR_LBLDATE 4
+#define UI_COMP_CONTTOPBAR_IMGSD 5
+#define _UI_COMP_CONTTOPBAR_NUM 6
 lv_obj_t *ui_contTopBar_create(lv_obj_t *comp_parent);
 
 #ifdef __cplusplus
