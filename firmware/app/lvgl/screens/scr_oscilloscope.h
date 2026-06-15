@@ -11,14 +11,26 @@ void scr_oscilloscope_step(void);
 // Update functions
 
 /**
- * @brief Updates plot chart
+ * @brief Updates oscilloscope chart
  * @param points Data points to plot
  * @param count Number of data points
  */
 void scr_oscilloscope_update_chart(const uint16_t *points, uint16_t count);
-
-void scr_oscilloscope_update_peak(uint16_t raw_peak);
-void scr_oscilloscope_update_rms(float rms);
+/**
+ * @brief Updates the peak field in the oscilloscope data brief
+ * @param raw_peak Raw peak value (not scaled)
+ */
+void scr_oscilloscope_update_peak(float raw_peak);
+/**
+ * @brief Updates the RMS field in the oscilloscope data brief
+ * @param raw_rms Raw RMS value (not scaled)
+ */
+void scr_oscilloscope_update_rms(float raw_rms);
+/**
+ * @brief Updates the frequency field in the oscilloscope data brief
+ * @param frequency Frequency value
+ */
 void scr_oscilloscope_update_frequency(float frequency);
 
 #endif
+

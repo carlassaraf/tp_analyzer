@@ -80,14 +80,14 @@ void scr_oscilloscope_update_chart(const uint16_t *points, uint16_t count)
   ui_chart_push_data(ui_scrOscilloscope_chartView, decimated, CHART_PIXEL_WIDTH);
 }
 
-void scr_oscilloscope_update_peak(uint16_t raw_peak)
+void scr_oscilloscope_update_peak(float raw_peak)
 {
-  lv_label_set_text_fmt(ui_scrOscilloscope_lblPeakValue, "%d", raw_peak);
+  lv_label_set_text_fmt(ui_scrOscilloscope_lblPeakValue, "%.1f", raw_peak * s_curr_vscale);
 }
 
-void scr_oscilloscope_update_rms(float rms)
+void scr_oscilloscope_update_rms(float raw_rms)
 {
-  lv_label_set_text_fmt(ui_scrOscilloscope_lblRmsValue, "%.1f", rms);
+  lv_label_set_text_fmt(ui_scrOscilloscope_lblRmsValue, "%.1f", raw_rms * s_curr_vscale);
 }
 
 void scr_oscilloscope_update_frequency(float frequency)
