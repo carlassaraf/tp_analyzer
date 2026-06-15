@@ -44,7 +44,7 @@ LV_IMG_DECLARE( ui_img_icons_ic_settings_png);   // assets/icons/ic_settings.png
 LV_IMG_DECLARE( ui_img_icons_ic_record_png);   // assets/icons/ic_record.png
 
 // FONTS
-LV_FONT_DECLARE( ui_font_MonoBold13);
+LV_FONT_DECLARE( ui_font_MonoBold11);
 LV_FONT_DECLARE( ui_font_MonoBold19);
 LV_FONT_DECLARE( ui_font_MonoMed10);
 LV_FONT_DECLARE( ui_font_MonoMed11);
@@ -58,13 +58,13 @@ LV_FONT_DECLARE( ui_font_SansBold15);
 LV_FONT_DECLARE( ui_font_SansBold24);
 LV_FONT_DECLARE( ui_font_SansBold9);
 LV_FONT_DECLARE( ui_font_SansMed10);
+LV_FONT_DECLARE( ui_font_SansMed12);
 LV_FONT_DECLARE( ui_font_SansReg10);
 LV_FONT_DECLARE( ui_font_SansReg11);
-LV_FONT_DECLARE( ui_font_SansMed12);
 LV_FONT_DECLARE( ui_font_poppinsBold10);
 LV_FONT_DECLARE( ui_font_poppinsReg10);
 LV_FONT_DECLARE( ui_font_poppinsReg8);
-LV_FONT_DECLARE( ui_font_MonoBold11);
+LV_FONT_DECLARE( ui_font_MonoBold13);
 
 // UI INIT
 void ui_init(void);

@@ -5,14 +5,22 @@
 #include "lvgl/helpers/animations.h"
 #include "hal/hal_adc.h"
 #include "board_config.h"
-#include "encoder/encoder.h"
 
-#define CHART_PIXEL_WIDTH 414
+#define CHART_PIXEL_WIDTH     414
+#define SIDE_MENU_X_HIDDEN    480
+#define SIDE_MENU_X_VISIBLE   296
+#define SIDE_MENU_TIMEOUT_MS  5000
+#define SIDE_MENU_ANIM_MS     250
+#define ENCODER_ACTIVE_THRESH 50   // ms: inactive_time below this → encoder just moved
+#define INIT_GRACE_MS         200  // ignore encoder for 200ms after entering screen
 
-static lv_timer_t *scr_oscilloscope_activity_timer = NULL;
-static bool encoder_activity = false;
+static lv_timer_t *hide_timer   = NULL;
+static bool        menu_visible = false;
+static uint32_t    init_tick;
 
-static void scr_oscilloscope_encoder_timeout_cb(lv_timer_t *timer);
+static void side_menu_show(void);
+static void side_menu_hide(void);
+static void hide_timer_cb(lv_timer_t *timer);
 
 void scr_oscilloscope_update_chart(const uint16_t *points, uint16_t count) {
   static uint16_t decimated[CHART_PIXEL_WIDTH];
@@ -37,39 +45,80 @@ void scr_oscilloscope_prepare(void) {
   ui_chart_bind_ext_array(ui_scrOscilloscope_chartView, CHART_PIXEL_WIDTH);
 
   // Propagate focus event to inside objects
-  lv_obj_add_flag(ui_scrOscilloscope_iconScaleV, LV_OBJ_FLAG_EVENT_TRICKLE);
-  lv_obj_add_flag(ui_scrOscilloscope_lblScaleV, LV_OBJ_FLAG_EVENT_TRICKLE);
-  lv_obj_add_flag(ui_scrOscilloscope_lblScaleVValue, LV_OBJ_FLAG_EVENT_TRICKLE);
+  lv_obj_add_flag(ui_scrOscilloscope_iconScaleV,      LV_OBJ_FLAG_EVENT_TRICKLE);
+  lv_obj_add_flag(ui_scrOscilloscope_lblScaleV,       LV_OBJ_FLAG_EVENT_TRICKLE);
+  lv_obj_add_flag(ui_scrOscilloscope_lblScaleVValue,  LV_OBJ_FLAG_EVENT_TRICKLE);
   lv_obj_add_flag(ui_scrOscilloscope_iconScaleVEnter, LV_OBJ_FLAG_EVENT_TRICKLE);
 
-  lv_obj_add_flag(ui_scrOscilloscope_iconScaleH, LV_OBJ_FLAG_EVENT_TRICKLE);
-  lv_obj_add_flag(ui_scrOscilloscope_lblScaleH, LV_OBJ_FLAG_EVENT_TRICKLE);
-  lv_obj_add_flag(ui_scrOscilloscope_lblScaleHValue, LV_OBJ_FLAG_EVENT_TRICKLE);
+  lv_obj_add_flag(ui_scrOscilloscope_iconScaleH,      LV_OBJ_FLAG_EVENT_TRICKLE);
+  lv_obj_add_flag(ui_scrOscilloscope_lblScaleH,       LV_OBJ_FLAG_EVENT_TRICKLE);
+  lv_obj_add_flag(ui_scrOscilloscope_lblScaleHValue,  LV_OBJ_FLAG_EVENT_TRICKLE);
   lv_obj_add_flag(ui_scrOscilloscope_iconScaleHEnter, LV_OBJ_FLAG_EVENT_TRICKLE);
 
   lv_obj_add_flag(ui_scrOscilloscope_iconBack, LV_OBJ_FLAG_EVENT_TRICKLE);
-  lv_obj_add_flag(ui_scrOscilloscope_lblBack, LV_OBJ_FLAG_EVENT_TRICKLE);
+  lv_obj_add_flag(ui_scrOscilloscope_lblBack,  LV_OBJ_FLAG_EVENT_TRICKLE);
 }
 
 void scr_oscilloscope_init(void) {
+  // Position the side menu off-screen and remove HIDDEN so animations work.
+  // x=480 puts the left edge exactly at the screen's right boundary (menu width=184).
+  lv_obj_set_x(ui_scrOscilloscope_cntSideMenu, SIDE_MENU_X_HIDDEN);
+  lv_obj_remove_flag(ui_scrOscilloscope_cntSideMenu, LV_OBJ_FLAG_HIDDEN);
+  menu_visible = false;
+  init_tick    = lv_tick_get();
 }
 
 void scr_oscilloscope_deinit(void) {
   SCR_CLEAR_GROUP();
+  if (hide_timer != NULL) {
+    lv_timer_delete(hide_timer);
+    hide_timer = NULL;
+  }
+  lv_obj_add_flag(ui_scrOscilloscope_cntSideMenu, LV_OBJ_FLAG_HIDDEN);
+  menu_visible = false;
 }
 
 void scr_oscilloscope_step(void) {
-  // Check activity
-  if(encoder_pop_delta() && !encoder_activity) {
-    scr_oscilloscope_activity_timer = lv_timer_create(scr_oscilloscope_encoder_timeout_cb, 5000, NULL);
-    animation_move_to_left(ui_scrOscilloscope_cntSideMenu, 480, 196, 250);
-    encoder_activity = true;
-  } else if(encoder_pop_delta()) {
-    // Relauch timer
-    lv_timer_reset(scr_oscilloscope_activity_timer);
+  // Skip the first 200ms to avoid the encoder button press used to navigate here
+  // from immediately triggering the side menu.
+  if (lv_tick_elaps(init_tick) < INIT_GRACE_MS) return;
+
+  // lv_task_handler() updates last_activity_time whenever enc_diff != 0,
+  // so a low inactive time here means the encoder was rotated this frame.
+  bool encoder_active = lv_display_get_inactive_time(lv_display_get_default()) < ENCODER_ACTIVE_THRESH;
+
+  if (!encoder_active) return;
+
+  if (!menu_visible) {
+    side_menu_show();
+  } else if (hide_timer != NULL) {
+    lv_timer_reset(hide_timer);
   }
 }
 
-static void scr_oscilloscope_encoder_timeout_cb(lv_timer_t *timer) {
-  encoder_activity = false;
+static void side_menu_show(void) {
+  animation_move_to_left(ui_scrOscilloscope_cntSideMenu,
+                         SIDE_MENU_X_HIDDEN, SIDE_MENU_X_VISIBLE,
+                         SIDE_MENU_ANIM_MS);
+  hide_timer   = lv_timer_create(hide_timer_cb, SIDE_MENU_TIMEOUT_MS, NULL);
+  SCR_ADD_TO_GROUP(ui_scrOscilloscope_cntSigVoltage);
+  SCR_ADD_TO_GROUP(ui_scrOscilloscope_cntSigCorriente);
+  SCR_ADD_TO_GROUP(ui_scrOscilloscope_cntScaleV);
+  SCR_ADD_TO_GROUP(ui_scrOscilloscope_cntScaleH);
+  SCR_ADD_TO_GROUP(ui_scrOscilloscope_cntBack);
+  menu_visible = true;
+}
+
+static void side_menu_hide(void) {
+  animation_move_to_left(ui_scrOscilloscope_cntSideMenu,
+                         SIDE_MENU_X_VISIBLE, SIDE_MENU_X_HIDDEN,
+                         SIDE_MENU_ANIM_MS);
+  SCR_CLEAR_GROUP();
+  menu_visible = false;
+}
+
+static void hide_timer_cb(lv_timer_t *timer) {
+  lv_timer_delete(timer);
+  hide_timer = NULL;
+  side_menu_hide();
 }

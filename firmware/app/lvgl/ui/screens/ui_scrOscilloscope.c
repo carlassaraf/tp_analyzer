@@ -545,7 +545,7 @@ ui_scrOscilloscope_cntSideMenu = lv_obj_create(ui_scrOscilloscope);
 lv_obj_remove_style_all(ui_scrOscilloscope_cntSideMenu);
 lv_obj_set_width( ui_scrOscilloscope_cntSideMenu, 184);
 lv_obj_set_height( ui_scrOscilloscope_cntSideMenu, 290);
-lv_obj_set_x( ui_scrOscilloscope_cntSideMenu, 480 );
+lv_obj_set_x( ui_scrOscilloscope_cntSideMenu, 296 );
 lv_obj_set_y( ui_scrOscilloscope_cntSideMenu, 30 );
 lv_obj_remove_flag( ui_scrOscilloscope_cntSideMenu, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 ui_object_set_themeable_style_property(ui_scrOscilloscope_cntSideMenu, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BG_COLOR, _ui_theme_color_Panel);
