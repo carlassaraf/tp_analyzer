@@ -8645,7 +8645,7 @@
                         "flags": 17,
                         "strtype": "OBJECT/Position",
                         "intarray": [
-                          30,
+                          45,
                           30
                         ],
                         "InheritedType": 7
@@ -21474,9 +21474,9 @@
                                     "strval": "CHECKED",
                                     "childs": [
                                       {
-                                        "nid": 20520,
+                                        "nid": 20410,
                                         "flags": 4096,
-                                        "strtype": "_style/Bg_Color",
+                                        "strtype": "_style/Text_Color",
                                         "strval": "Voltage",
                                         "integer": 1000366,
                                         "intarray": [
@@ -22151,9 +22151,9 @@
                                     "strval": "CHECKED",
                                     "childs": [
                                       {
-                                        "nid": 20520,
+                                        "nid": 20410,
                                         "flags": 4096,
-                                        "strtype": "_style/Bg_Color",
+                                        "strtype": "_style/Text_Color",
                                         "strval": "Voltage",
                                         "integer": 1000366,
                                         "intarray": [
@@ -22828,9 +22828,9 @@
                                     "strval": "CHECKED",
                                     "childs": [
                                       {
-                                        "nid": 20520,
+                                        "nid": 20410,
                                         "flags": 4096,
-                                        "strtype": "_style/Bg_Color",
+                                        "strtype": "_style/Text_Color",
                                         "strval": "Voltage",
                                         "integer": 1000366,
                                         "intarray": [
@@ -23505,9 +23505,9 @@
                                     "strval": "CHECKED",
                                     "childs": [
                                       {
-                                        "nid": 20520,
+                                        "nid": 20410,
                                         "flags": 4096,
-                                        "strtype": "_style/Bg_Color",
+                                        "strtype": "_style/Text_Color",
                                         "strval": "Voltage",
                                         "integer": 1000366,
                                         "intarray": [
@@ -24182,9 +24182,9 @@
                                     "strval": "CHECKED",
                                     "childs": [
                                       {
-                                        "nid": 20520,
+                                        "nid": 20410,
                                         "flags": 4096,
-                                        "strtype": "_style/Bg_Color",
+                                        "strtype": "_style/Text_Color",
                                         "strval": "Voltage",
                                         "integer": 1000366,
                                         "intarray": [
@@ -24991,7 +24991,7 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  296,
+                  480,
                   30
                 ],
                 "InheritedType": 7
@@ -36781,7 +36781,7 @@
     "separate_screen_save": false,
     "hierarchy_state_save": false,
     "reverse_event_order": false,
-    "backup_cnt": 98,
+    "backup_cnt": 100,
     "autosave_cnt": 0,
     "group_color_cnt": 1,
     "imagebytearrayprefix": "",

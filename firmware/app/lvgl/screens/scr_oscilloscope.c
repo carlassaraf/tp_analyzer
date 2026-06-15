@@ -14,6 +14,7 @@
 #define ENCODER_ACTIVE_THRESH 50   // ms: inactive_time below this → encoder just moved
 #define INIT_GRACE_MS         200  // ignore encoder for 200ms after entering screen
 #define VSCALE_CNT            4
+#define HSCALE_CNT            5
 
 /** @brief Menu pages for this screen */
 typedef enum {
@@ -39,10 +40,14 @@ static const uint32_t s_vscales[SIGNAL_CNT][VSCALE_CNT] = {
   {100, 250, 400, 800},  // SIGNAL_SP_VOLTAGE
   {5,   10,  20,  50},   // SIGNAL_SP_CURRENT
 };
+static const uint32_t s_hscales[HSCALE_CNT] = {
+  1, 5, 10, 20, 50
+};
 static const uint32_t s_sig_colors[SIGNAL_CNT] = { 0xFFD23F, 0x33D6EE };
 static uint32_t s_curr_voltage_scale = 400;
 static uint32_t s_curr_current_scale = 10;
 static uint32_t s_curr_vscale = 400;
+static uint32_t s_curr_hscale = 20;
 
 static void side_menu_show(void);
 static void side_menu_hide(void);
@@ -52,8 +57,10 @@ static void enter_scale_menu_cb(lv_event_t *event);
 static void enter_time_menu_cb(lv_event_t *event);
 static void menu_go_back(lv_event_t *event);
 static void change_vertical_scale_cb(lv_event_t *event);
+static void change_horizontal_scale_cb(lv_event_t *event);
 static void update_vscales(void);
-static int32_t restore_selected_scale(uint32_t idx);
+static void update_hscales(void);
+static int32_t restore_selected_scale(lv_obj_t *parent, uint32_t idx);
 
 // Public functions
 
@@ -103,11 +110,17 @@ void scr_oscilloscope_prepare(void)
   lv_obj_add_event_cb(ui_scrOscilloscope_cntScaleH, enter_time_menu_cb, LV_EVENT_CLICKED, NULL);
   lv_obj_add_event_cb(ui_scrOscilloscope_btnScaleBack, menu_go_back, LV_EVENT_CLICKED, NULL);
   lv_obj_add_event_cb(ui_scrOscilloscope_btnTimeBack, menu_go_back, LV_EVENT_CLICKED, NULL);
-  // Add scales check callback
+  // Add vertical scales check callback
   lv_obj_add_event_cb(ui_scrOscilloscope_cntScale1, change_vertical_scale_cb, LV_EVENT_CLICKED, NULL);
   lv_obj_add_event_cb(ui_scrOscilloscope_cntScale2, change_vertical_scale_cb, LV_EVENT_CLICKED, NULL);
   lv_obj_add_event_cb(ui_scrOscilloscope_cntScale3, change_vertical_scale_cb, LV_EVENT_CLICKED, NULL);
   lv_obj_add_event_cb(ui_scrOscilloscope_cntScale4, change_vertical_scale_cb, LV_EVENT_CLICKED, NULL);
+  // Add horizontal scales check callback
+  lv_obj_add_event_cb(ui_scrOscilloscope_cntTime1, change_horizontal_scale_cb, LV_EVENT_CLICKED, NULL);
+  lv_obj_add_event_cb(ui_scrOscilloscope_cntTime2, change_horizontal_scale_cb, LV_EVENT_CLICKED, NULL);
+  lv_obj_add_event_cb(ui_scrOscilloscope_cntTime3, change_horizontal_scale_cb, LV_EVENT_CLICKED, NULL);
+  lv_obj_add_event_cb(ui_scrOscilloscope_cntTime4, change_horizontal_scale_cb, LV_EVENT_CLICKED, NULL);
+  lv_obj_add_event_cb(ui_scrOscilloscope_cntTime5, change_horizontal_scale_cb, LV_EVENT_CLICKED, NULL);
 }
 
 void scr_oscilloscope_init(void)
@@ -122,10 +135,20 @@ void scr_oscilloscope_init(void)
   lv_label_set_text_fmt(ui_scrOscilloscope_lblTop, "+%d", s_curr_vscale);
   lv_label_set_text_fmt(ui_scrOscilloscope_lblBot, "-%d", s_curr_vscale);
   lv_label_set_text_fmt(ui_scrOscilloscope_lblScaleVValue, "%d %s", s_curr_vscale, (s_curr_signal == SIGNAL_SP_VOLTAGE)? "V" : "A");
+  lv_label_set_text_fmt(ui_scrOscilloscope_lblScaleHValue, "%d ms/div", s_curr_hscale);
+  lv_label_set_text_fmt(ui_scrOscilloscope_lblTimeDivValue, "%d", s_curr_hscale);
   update_vscales();
+  update_hscales();
+  // Restore styles and states of vertical and horizontal scales
   for(uint32_t i = 0; i < VSCALE_CNT; i++) {
     if(s_vscales[s_curr_signal][i] == s_curr_vscale) {
-      restore_selected_scale(i);
+      restore_selected_scale(ui_scrOscilloscope_cntScales, i);
+      break;
+    }
+  }
+  for(uint32_t i = 0; i < HSCALE_CNT; i++) {
+    if(s_hscales[i] == s_curr_hscale) {
+      restore_selected_scale(ui_scrOscilloscope_cntTimes, i);
       break;
     }
   }
@@ -242,9 +265,10 @@ static void change_signal_cb(lv_event_t *event)
   // Update scales with current signal
   lv_label_set_text_fmt(ui_scrOscilloscope_lblScaleVValue, "%d %s", s_curr_vscale, (s_curr_signal == SIGNAL_SP_VOLTAGE)? "V" : "A");
   update_vscales();
+  update_hscales();
   for(uint32_t i = 0; i < VSCALE_CNT; i++) {
     if(s_vscales[s_curr_signal][i] == s_curr_vscale) {
-      restore_selected_scale(i);
+      restore_selected_scale(ui_scrOscilloscope_cntScales, i);
       break;
     }
   }
@@ -315,7 +339,7 @@ static void change_vertical_scale_cb(lv_event_t *event)
   for (uint32_t i = 0; i < count; i++) {
     lv_obj_t *child = lv_obj_get_child(parent, i);
     if (child == target) {
-      selected = restore_selected_scale(i);
+      selected = restore_selected_scale(parent, i);
     }
   }
   if (selected < 0) return;
@@ -330,6 +354,27 @@ static void change_vertical_scale_cb(lv_event_t *event)
   lv_label_set_text_fmt(ui_scrOscilloscope_lblTop, "+%d", s_curr_vscale);
   lv_label_set_text_fmt(ui_scrOscilloscope_lblBot, "-%d", s_curr_vscale);
   lv_label_set_text_fmt(ui_scrOscilloscope_lblScaleVValue, "%d %s", s_curr_vscale, (s_curr_signal == SIGNAL_SP_VOLTAGE)? "V" : "A");
+}
+
+/** @brief Click callback to update horizontal scale */
+static void change_horizontal_scale_cb(lv_event_t *event)
+{
+  lv_obj_t *target = lv_event_get_target(event);
+  lv_obj_t *parent = ui_scrOscilloscope_cntTimes;
+  uint32_t count = lv_obj_get_child_count(parent);
+
+  int32_t selected = -1;
+  for (uint32_t i = 0; i < count; i++) {
+    lv_obj_t *child = lv_obj_get_child(parent, i);
+    if (child == target) {
+      selected = restore_selected_scale(parent, i);
+    }
+  }
+  if (selected < 0) return;
+  // Update current time scale and labels
+  s_curr_hscale = s_hscales[selected];
+  lv_label_set_text_fmt(ui_scrOscilloscope_lblScaleHValue, "%d ms/div", s_curr_hscale);
+  lv_label_set_text_fmt(ui_scrOscilloscope_lblTimeDivValue, "%d", s_curr_hscale);
 }
 
 /** @brief Call to update vertical scales when switching signal */
@@ -352,11 +397,29 @@ static void update_vscales(void)
   }
 }
 
-static int32_t restore_selected_scale(uint32_t idx) {
-
-  lv_obj_t *parent = ui_scrOscilloscope_cntScales;
+/** @brief Call to update horizontal scales */
+static void update_hscales(void)
+{
+  lv_obj_t *parent = ui_scrOscilloscope_cntTimes;
   uint32_t count = lv_obj_get_child_count(parent);
+  for (uint32_t i = 0; i < count; i++) {
+    lv_obj_t *child = lv_obj_get_child(parent, i);
+    lv_obj_t *lbl = lv_obj_get_child(child, 0);
+    lv_obj_t *tick  = lv_obj_get_child(child, 1);
+    lv_color_t color = lv_color_hex(s_sig_colors[s_curr_signal]);
 
+    lv_label_set_text_fmt(lbl, "%d ms/div", s_hscales[i]);
+    lv_obj_set_style_bg_color(child, color, LV_PART_MAIN | LV_STATE_CHECKED);
+    lv_obj_set_style_border_color(child, color, LV_PART_MAIN | LV_STATE_CHECKED);
+    lv_obj_set_style_text_color(lbl, color, LV_STATE_CHECKED);
+    lv_obj_set_style_image_recolor(tick, color, LV_STATE_CHECKED);
+    lv_obj_invalidate(child);
+  }
+}
+
+static int32_t restore_selected_scale(lv_obj_t *parent, uint32_t idx)
+{
+  uint32_t count = lv_obj_get_child_count(parent);
   int32_t selected = -1;
   for (uint32_t i = 0; i < count; i++) {
     lv_obj_t *child = lv_obj_get_child(parent, i);

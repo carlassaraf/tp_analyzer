@@ -291,7 +291,7 @@ lv_obj_set_style_text_font(ui_scrOscilloscope_lblTimeDivValue, &ui_font_MonoBold
 ui_scrOscilloscope_lblTimeDivValueUnit = lv_label_create(ui_scrOscilloscope_cntTimeDiv);
 lv_obj_set_width( ui_scrOscilloscope_lblTimeDivValueUnit, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_scrOscilloscope_lblTimeDivValueUnit, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_scrOscilloscope_lblTimeDivValueUnit, 30 );
+lv_obj_set_x( ui_scrOscilloscope_lblTimeDivValueUnit, 45 );
 lv_obj_set_y( ui_scrOscilloscope_lblTimeDivValueUnit, 30 );
 lv_label_set_text(ui_scrOscilloscope_lblTimeDivValueUnit,"ms");
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTimeDivValueUnit, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Atenuado);
@@ -545,7 +545,7 @@ ui_scrOscilloscope_cntSideMenu = lv_obj_create(ui_scrOscilloscope);
 lv_obj_remove_style_all(ui_scrOscilloscope_cntSideMenu);
 lv_obj_set_width( ui_scrOscilloscope_cntSideMenu, 184);
 lv_obj_set_height( ui_scrOscilloscope_cntSideMenu, 290);
-lv_obj_set_x( ui_scrOscilloscope_cntSideMenu, 296 );
+lv_obj_set_x( ui_scrOscilloscope_cntSideMenu, 480 );
 lv_obj_set_y( ui_scrOscilloscope_cntSideMenu, 30 );
 lv_obj_remove_flag( ui_scrOscilloscope_cntSideMenu, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 ui_object_set_themeable_style_property(ui_scrOscilloscope_cntSideMenu, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BG_COLOR, _ui_theme_color_Panel);
@@ -1238,8 +1238,8 @@ lv_label_set_text(ui_scrOscilloscope_lblTime1,"1 ms/div");
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime1, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime1, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
 lv_obj_set_style_text_font(ui_scrOscilloscope_lblTime1, &ui_font_MonoBold13, LV_PART_MAIN| LV_STATE_DEFAULT);
-ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime1, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_BG_COLOR, _ui_theme_color_Voltage);
-ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime1, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_BG_OPA, _ui_theme_alpha_Voltage);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime1, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Voltage);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime1, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Voltage);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime1, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Primario);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime1, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Primario);
 
@@ -1290,8 +1290,8 @@ lv_label_set_text(ui_scrOscilloscope_lblTime2,"2 ms/div");
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime2, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime2, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
 lv_obj_set_style_text_font(ui_scrOscilloscope_lblTime2, &ui_font_MonoBold13, LV_PART_MAIN| LV_STATE_DEFAULT);
-ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime2, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_BG_COLOR, _ui_theme_color_Voltage);
-ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime2, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_BG_OPA, _ui_theme_alpha_Voltage);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime2, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Voltage);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime2, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Voltage);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime2, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Primario);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime2, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Primario);
 
@@ -1342,8 +1342,8 @@ lv_label_set_text(ui_scrOscilloscope_lblTime3,"10 ms/div");
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime3, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime3, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
 lv_obj_set_style_text_font(ui_scrOscilloscope_lblTime3, &ui_font_MonoBold13, LV_PART_MAIN| LV_STATE_DEFAULT);
-ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime3, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_BG_COLOR, _ui_theme_color_Voltage);
-ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime3, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_BG_OPA, _ui_theme_alpha_Voltage);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime3, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Voltage);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime3, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Voltage);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime3, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Primario);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime3, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Primario);
 
@@ -1394,8 +1394,8 @@ lv_label_set_text(ui_scrOscilloscope_lblTime4,"20 ms/div");
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime4, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime4, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
 lv_obj_set_style_text_font(ui_scrOscilloscope_lblTime4, &ui_font_MonoBold13, LV_PART_MAIN| LV_STATE_DEFAULT);
-ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime4, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_BG_COLOR, _ui_theme_color_Voltage);
-ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime4, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_BG_OPA, _ui_theme_alpha_Voltage);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime4, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Voltage);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime4, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Voltage);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime4, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Primario);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime4, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Primario);
 
@@ -1446,8 +1446,8 @@ lv_label_set_text(ui_scrOscilloscope_lblTime5,"50 ms/div");
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime5, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime5, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
 lv_obj_set_style_text_font(ui_scrOscilloscope_lblTime5, &ui_font_MonoBold13, LV_PART_MAIN| LV_STATE_DEFAULT);
-ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime5, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_BG_COLOR, _ui_theme_color_Voltage);
-ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime5, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_BG_OPA, _ui_theme_alpha_Voltage);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime5, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Voltage);
+ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime5, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Voltage);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime5, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Primario);
 ui_object_set_themeable_style_property(ui_scrOscilloscope_lblTime5, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Primario);
 
