@@ -8,7 +8,7 @@
 typedef enum screen_update_cmd {
   SCREEN_OSC_DATA,          /**< Update screen with oscilloscope */
   SCREEN_FFT_DATA,          /**< Update screen with FFT sample data */
-  SCREEN_UPDATE_CMD_COUNT
+  SCREEN_UPDATE_CMD_COUNT,
 } screen_update_cmd_t;
 
 /** @brief Called to initialize the internal command queue */

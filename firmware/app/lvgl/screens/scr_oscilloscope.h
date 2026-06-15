@@ -17,4 +17,8 @@ void scr_oscilloscope_step(void);
  */
 void scr_oscilloscope_update_chart(const uint16_t *points, uint16_t count);
 
+void scr_oscilloscope_update_peak(uint16_t raw_peak);
+void scr_oscilloscope_update_rms(float rms);
+void scr_oscilloscope_update_frequency(float frequency);
+
 #endif
