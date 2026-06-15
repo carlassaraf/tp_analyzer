@@ -8,6 +8,7 @@ add_library(app STATIC
   lvgl/screens/scr_menu.c
   lvgl/screens/scr_oscilloscope.c
   lvgl/screens/scr_fft.c
+  lvgl/helpers/animations.c
   lvgl/helpers/chart.c
 )
 

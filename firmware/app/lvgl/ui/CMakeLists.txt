@@ -11,6 +11,10 @@ SET(SOURCES components/ui_comp_conttopbar.c
     ui_helpers.c
     images/ui_img_1310808144.c
     images/ui_img_icons_ic_sd_png.c
+    images/ui_img_icons_ic_scale_png.c
+    images/ui_img_icons_ic_chevright_png.c
+    images/ui_img_icons_ic_time_png.c
+    images/ui_img_icons_ic_back_png.c
     images/ui_img_icons_ic_realtime_png.c
     images/ui_img_icons_ic_fft_png.c
     images/ui_img_icons_ic_measure_png.c
@@ -32,8 +36,10 @@ SET(SOURCES components/ui_comp_conttopbar.c
     fonts/ui_font_SansMed10.c
     fonts/ui_font_SansReg10.c
     fonts/ui_font_SansReg11.c
+    fonts/ui_font_SansMed12.c
     fonts/ui_font_poppinsBold10.c
     fonts/ui_font_poppinsReg10.c
-    fonts/ui_font_poppinsReg8.c)
+    fonts/ui_font_poppinsReg8.c
+    fonts/ui_font_MonoBold11.c)
 
 add_library(ui ${SOURCES})

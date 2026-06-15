@@ -59,6 +59,32 @@ extern lv_obj_t *ui_scrOscilloscope_lblMiddle;
 extern lv_obj_t *ui_scrOscilloscope_lblUnit;
 extern lv_obj_t *ui_scrOscilloscope_lblTop;
 extern lv_obj_t *ui_scrOscilloscope_lblBot;
+extern lv_obj_t *ui_scrOscilloscope_cntSideMenu;
+extern lv_obj_t *ui_scrOscilloscope_cntMainSideMenu;
+extern lv_obj_t *ui_scrOscilloscope_lblOptions;
+extern lv_obj_t *ui_scrOscilloscope_lblSenal;
+extern lv_obj_t *ui_scrOscilloscope_cntSigVoltage;
+extern lv_obj_t *ui_scrOscilloscope_dotSigVoltage;
+extern lv_obj_t *ui_scrOscilloscope_lblSigVoltage;
+extern lv_obj_t *ui_scrOscilloscope_cntSigCorriente;
+extern lv_obj_t *ui_scrOscilloscope_dotSigCorriente;
+extern lv_obj_t *ui_scrOscilloscope_lblSigCorriente;
+extern lv_obj_t *ui_scrOscilloscope_lineDivH1;
+extern lv_obj_t *ui_scrOscilloscope_cntScaleV;
+extern lv_obj_t *ui_scrOscilloscope_iconScaleV;
+extern lv_obj_t *ui_scrOscilloscope_lblScaleV;
+extern lv_obj_t *ui_scrOscilloscope_lblScaleVValue;
+extern lv_obj_t *ui_scrOscilloscope_iconScaleVEnter;
+extern lv_obj_t *ui_scrOscilloscope_cntScaleH;
+extern lv_obj_t *ui_scrOscilloscope_iconScaleH;
+extern lv_obj_t *ui_scrOscilloscope_lblScaleH;
+extern lv_obj_t *ui_scrOscilloscope_lblScaleHValue;
+extern lv_obj_t *ui_scrOscilloscope_iconScaleHEnter;
+extern lv_obj_t *ui_scrOscilloscope_lineDivH2;
+extern void ui_event_scrOscilloscope_cntBack( lv_event_t * e);
+extern lv_obj_t *ui_scrOscilloscope_cntBack;
+extern lv_obj_t *ui_scrOscilloscope_iconBack;
+extern lv_obj_t *ui_scrOscilloscope_lblBack;
 // CUSTOM VARIABLES
 
 #ifdef __cplusplus
