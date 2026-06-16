@@ -9168,6 +9168,82 @@
                 "strtype": "CONTAINER/Style_scrollbar",
                 "strval": "lv.PART.SCROLLBAR, Rectangle, Pad",
                 "InheritedType": 11
+              },
+              {
+                "disabled": false,
+                "nid": 1000420,
+                "strtype": "_event/EventHandler",
+                "strval": "CLICKED",
+                "childs": [
+                  {
+                    "nid": 1000421,
+                    "strtype": "_event/name",
+                    "strval": "goSettings",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1000422,
+                    "strtype": "_event/condition_C",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1000423,
+                    "strtype": "_event/condition_P",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1000424,
+                    "strtype": "_event/action",
+                    "strval": "CHANGE SCREEN",
+                    "childs": [
+                      {
+                        "nid": 1000425,
+                        "strtype": "CHANGE SCREEN/Name",
+                        "strval": "CHANGE SCREEN",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1000426,
+                        "strtype": "CHANGE SCREEN/Call",
+                        "strval": "ChangeScreen( <{Screen_to}>, lv.SCR_LOAD_ANIM.<{Fade_mode}>, <{Speed}>, <{Delay}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1000427,
+                        "strtype": "CHANGE SCREEN/CallC",
+                        "strval": "_ui_screen_change( &<{Screen_to}>, LV_SCR_LOAD_ANIM_<{Fade_mode}>, <{Speed}>, <{Delay}>, &<{Screen_to}>_screen_init);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1000428,
+                        "strtype": "CHANGE SCREEN/Screen_to",
+                        "strval": "GUID61026074-788211S6185167",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": 1000429,
+                        "strtype": "CHANGE SCREEN/Fade_mode",
+                        "strval": "MOVE_LEFT",
+                        "InheritedType": 3
+                      },
+                      {
+                        "nid": 1000430,
+                        "strtype": "CHANGE SCREEN/Speed",
+                        "integer": 200,
+                        "InheritedType": 6
+                      },
+                      {
+                        "nid": 1000431,
+                        "strtype": "CHANGE SCREEN/Delay",
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  }
+                ],
+                "InheritedType": 4
               }
             ],
             "saved_objtypeKey": "CONTAINER"
@@ -74008,7 +74084,7 @@
   },
   "animations": [],
   "selected_theme": "Dark",
-  "selected_screen": "GUID61026074-788211S6185167",
+  "selected_screen": "GUID16417394-794409S1275160",
   "info": {
     "name": "ui.spj",
     "depth": 1,
@@ -74037,7 +74113,7 @@
     "separate_screen_save": false,
     "hierarchy_state_save": false,
     "reverse_event_order": false,
-    "backup_cnt": 108,
+    "backup_cnt": 109,
     "autosave_cnt": 0,
     "group_color_cnt": 1,
     "imagebytearrayprefix": "",
@@ -74048,7 +74124,7 @@
     "naming": "_Screen_Name",
     "naming_force_lowercase": false,
     "naming_add_subcomponent": false,
-    "nidcnt": 1000420,
+    "nidcnt": 1000432,
     "BitDepth": 16,
     "Name": "ui"
   }

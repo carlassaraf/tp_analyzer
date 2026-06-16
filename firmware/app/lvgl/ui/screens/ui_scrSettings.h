@@ -18,6 +18,7 @@ extern lv_obj_t *ui_scrSettings_contTopBar2;
 extern lv_obj_t *ui_scrSettings_lblSettings;
 extern void ui_event_scrSettings_btnBack( lv_event_t * e);
 extern lv_obj_t *ui_scrSettings_btnBack;
+extern void ui_event_scrSettings_cntDatetime( lv_event_t * e);
 extern lv_obj_t *ui_scrSettings_cntDatetime;
 extern lv_obj_t *ui_scrSettings_iconDatetime;
 extern lv_obj_t *ui_scrSettings_lblDatetime;

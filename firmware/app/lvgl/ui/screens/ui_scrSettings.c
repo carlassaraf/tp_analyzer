@@ -15,6 +15,14 @@ if ( event_code == LV_EVENT_CLICKED) {
 }
 }
 
+void ui_event_scrSettings_cntDatetime( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+if ( event_code == LV_EVENT_CLICKED) {
+      _ui_screen_change( &ui_scrDatetime, LV_SCR_LOAD_ANIM_MOVE_LEFT, 200, 0, &ui_scrDatetime_screen_init);
+}
+}
+
 // build funtions
 
 void ui_scrSettings_screen_init(void)
@@ -393,6 +401,7 @@ ui_object_set_themeable_style_property(ui_scrSettings_iconInfoEnter, LV_PART_MAI
 ui_object_set_themeable_style_property(ui_scrSettings_iconInfoEnter, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_IMAGE_RECOLOR_OPA, _ui_theme_alpha_Foco);
 
 lv_obj_add_event_cb(ui_scrSettings_btnBack, ui_event_scrSettings_btnBack, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_scrSettings_cntDatetime, ui_event_scrSettings_cntDatetime, LV_EVENT_ALL, NULL);
 
 }
 
