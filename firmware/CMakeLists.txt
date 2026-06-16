@@ -38,6 +38,12 @@ set(CMSISCORE ${CMAKE_CURRENT_SOURCE_DIR}/third_party/CMSIS_6/CMSIS/Core)
 set(CMSISDSP_INSTALL OFF CACHE BOOL "" FORCE)
 set_property(CACHE DISPLAY_DRIVER PROPERTY STRINGS ST7789 ILI9486)
 
+# Disable LVGL optional components — all three default to ON in LVGL's own
+# CMakeLists and must be overridden here before add_subdirectory(lvgl).
+set(CONFIG_LV_BUILD_DEMOS          OFF CACHE BOOL "" FORCE)
+set(CONFIG_LV_BUILD_EXAMPLES       OFF CACHE BOOL "" FORCE)
+set(CONFIG_LV_USE_THORVG_INTERNAL  OFF CACHE BOOL "" FORCE)
+
 # add_subdirectory(domain)
 add_subdirectory(third_party/lvgl)
 add_subdirectory(third_party/CMSIS-DSP)
@@ -66,6 +72,7 @@ target_link_libraries(firmware
   hal
   bsp
   pico_stdlib
+  hardware_pwm
 )
 
 pico_add_extra_outputs(firmware)
