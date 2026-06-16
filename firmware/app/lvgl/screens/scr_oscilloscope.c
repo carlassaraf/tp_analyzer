@@ -279,6 +279,7 @@ static void change_signal_cb(lv_event_t *event)
   }
   // Update scales with current signal
   lv_label_set_text_fmt(ui_scrOscilloscope_lblScaleVValue, "%d %s", s_curr_vscale, (s_curr_signal == SIGNAL_SP_VOLTAGE)? "V" : "A");
+  lv_label_set_text_fmt(ui_scrOscilloscope_lblUnit, "%s", (s_curr_signal == SIGNAL_SP_VOLTAGE)? "V" : "A");
   update_vscales();
   update_hscales();
   for(uint32_t i = 0; i < VSCALE_CNT; i++) {
