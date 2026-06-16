@@ -21,9 +21,9 @@ extern "C" {
 
 ///////////////////// SCREENS ////////////////////
 #include "screens/ui_scrBoot.h"
+#include "screens/ui_scrMenu.h"
 #include "screens/ui_scrOscilloscope.h"
 #include "screens/ui_scrFFT.h"
-#include "screens/ui_scrMenu.h"
 
 ///////////////////// VARIABLES ////////////////////
 
@@ -33,16 +33,19 @@ extern lv_obj_t *ui____initial_actions0;
 // IMAGES AND IMAGE SETS
 LV_IMG_DECLARE( ui_img_1310808144);   // assets/utn-avellaneda-logo.png
 LV_IMG_DECLARE( ui_img_icons_ic_sd_png);   // assets/icons/ic_sd.png
-LV_IMG_DECLARE( ui_img_icons_ic_scale_png);   // assets/icons/ic_scale.png
-LV_IMG_DECLARE( ui_img_icons_ic_chevright_png);   // assets/icons/ic_chevright.png
-LV_IMG_DECLARE( ui_img_icons_ic_time_png);   // assets/icons/ic_time.png
-LV_IMG_DECLARE( ui_img_icons_ic_back_png);   // assets/icons/ic_back.png
-LV_IMG_DECLARE( ui_img_icons_ic_check_png);   // assets/icons/ic_check.png
+LV_IMG_DECLARE( ui_img_1310808144);   // assets/utn-avellaneda-logo.png
+LV_IMG_DECLARE( ui_img_icons_ic_sd_png);   // assets/icons/ic_sd.png
 LV_IMG_DECLARE( ui_img_icons_ic_realtime_png);   // assets/icons/ic_realtime.png
 LV_IMG_DECLARE( ui_img_icons_ic_fft_png);   // assets/icons/ic_fft.png
 LV_IMG_DECLARE( ui_img_icons_ic_measure_png);   // assets/icons/ic_measure.png
 LV_IMG_DECLARE( ui_img_icons_ic_settings_png);   // assets/icons/ic_settings.png
 LV_IMG_DECLARE( ui_img_icons_ic_record_png);   // assets/icons/ic_record.png
+LV_IMG_DECLARE( ui_img_icons_ic_scale_png);   // assets/icons/ic_scale.png
+LV_IMG_DECLARE( ui_img_icons_ic_chevright_png);   // assets/icons/ic_chevright.png
+LV_IMG_DECLARE( ui_img_icons_ic_time_png);   // assets/icons/ic_time.png
+LV_IMG_DECLARE( ui_img_icons_ic_back_png);   // assets/icons/ic_back.png
+LV_IMG_DECLARE( ui_img_icons_ic_check_png);   // assets/icons/ic_check.png
+LV_IMG_DECLARE( ui_img_icons_ic_freq_png);   // assets/icons/ic_freq.png
 
 // FONTS
 LV_FONT_DECLARE( ui_font_MonoBold11);

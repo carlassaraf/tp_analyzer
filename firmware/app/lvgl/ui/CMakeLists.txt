@@ -1,9 +1,9 @@
 SET(SOURCES components/ui_comp_conttopbar.c
     components/ui_comp.c
     screens/ui_scrBoot.c
+    screens/ui_scrMenu.c
     screens/ui_scrOscilloscope.c
     screens/ui_scrFFT.c
-    screens/ui_scrMenu.c
     ui_theme_manager.c
     ui_themes.c
     ui.c
@@ -11,16 +11,19 @@ SET(SOURCES components/ui_comp_conttopbar.c
     ui_helpers.c
     images/ui_img_1310808144.c
     images/ui_img_icons_ic_sd_png.c
-    images/ui_img_icons_ic_scale_png.c
-    images/ui_img_icons_ic_chevright_png.c
-    images/ui_img_icons_ic_time_png.c
-    images/ui_img_icons_ic_back_png.c
-    images/ui_img_icons_ic_check_png.c
+    images/ui_img_1310808144.c
+    images/ui_img_icons_ic_sd_png.c
     images/ui_img_icons_ic_realtime_png.c
     images/ui_img_icons_ic_fft_png.c
     images/ui_img_icons_ic_measure_png.c
     images/ui_img_icons_ic_settings_png.c
     images/ui_img_icons_ic_record_png.c
+    images/ui_img_icons_ic_scale_png.c
+    images/ui_img_icons_ic_chevright_png.c
+    images/ui_img_icons_ic_time_png.c
+    images/ui_img_icons_ic_back_png.c
+    images/ui_img_icons_ic_check_png.c
+    images/ui_img_icons_ic_freq_png.c
     fonts/ui_font_MonoBold11.c
     fonts/ui_font_MonoBold13.c
     fonts/ui_font_MonoBold19.c
