@@ -24,6 +24,8 @@ extern "C" {
 #include "screens/ui_scrMenu.h"
 #include "screens/ui_scrOscilloscope.h"
 #include "screens/ui_scrFFT.h"
+#include "screens/ui_scrSettings.h"
+#include "screens/ui_scrDatetime.h"
 
 ///////////////////// VARIABLES ////////////////////
 
@@ -46,6 +48,12 @@ LV_IMG_DECLARE( ui_img_icons_ic_time_png);   // assets/icons/ic_time.png
 LV_IMG_DECLARE( ui_img_icons_ic_back_png);   // assets/icons/ic_back.png
 LV_IMG_DECLARE( ui_img_icons_ic_check_png);   // assets/icons/ic_check.png
 LV_IMG_DECLARE( ui_img_icons_ic_freq_png);   // assets/icons/ic_freq.png
+LV_IMG_DECLARE( ui_img_icons_ic_datetime_png);   // assets/icons/ic_datetime.png
+LV_IMG_DECLARE( ui_img_icons_ic_screen_png);   // assets/icons/ic_screen.png
+LV_IMG_DECLARE( ui_img_icons_ic_bolt_png);   // assets/icons/ic_bolt.png
+LV_IMG_DECLARE( ui_img_icons_ic_info_png);   // assets/icons/ic_info.png
+LV_IMG_DECLARE( ui_img_icons_ic_chevup_png);   // assets/icons/ic_chevup.png
+LV_IMG_DECLARE( ui_img_icons_ic_chevdown_png);   // assets/icons/ic_chevdown.png
 
 // FONTS
 LV_FONT_DECLARE( ui_font_MonoBold11);
@@ -57,6 +65,7 @@ LV_FONT_DECLARE( ui_font_MonoReg10);
 LV_FONT_DECLARE( ui_font_MonoReg11);
 LV_FONT_DECLARE( ui_font_MonoReg8);
 LV_FONT_DECLARE( ui_font_MonoReg9);
+LV_FONT_DECLARE( ui_font_MonoBold24);
 LV_FONT_DECLARE( ui_font_SansBold10);
 LV_FONT_DECLARE( ui_font_SansBold13);
 LV_FONT_DECLARE( ui_font_SansBold15);
@@ -66,9 +75,7 @@ LV_FONT_DECLARE( ui_font_SansMed10);
 LV_FONT_DECLARE( ui_font_SansMed12);
 LV_FONT_DECLARE( ui_font_SansReg10);
 LV_FONT_DECLARE( ui_font_SansReg11);
-LV_FONT_DECLARE( ui_font_poppinsBold10);
-LV_FONT_DECLARE( ui_font_poppinsReg10);
-LV_FONT_DECLARE( ui_font_poppinsReg8);
+LV_FONT_DECLARE( ui_font_SansBold16);
 
 // UI INIT
 void ui_init(void);

@@ -3,9 +3,11 @@
 
 #include "lvgl.h"
 #include "screens/scr_boot.h"
+#include "screens/scr_datetime.h"
+#include "screens/scr_fft.h"
 #include "screens/scr_menu.h"
 #include "screens/scr_oscilloscope.h"
-#include "screens/scr_fft.h"
+#include "screens/scr_settings.h"
 
 // Register a screen by name — expands to the three callbacks expected by screen_manager.
 #define SCR_REGISTER(name, scr, fn_name)  { name, &scr, scr_##fn_name##_prepare, scr_##fn_name##_init, scr_##fn_name##_deinit, scr_##fn_name##_step }
@@ -24,9 +26,11 @@
  */
 typedef enum screen_id {
     SCREEN_BOOT,
+    SCREEN_DATETIME,
+    SCREEN_FFT,
     SCREEN_MENU,
     SCREEN_OSC,
-    SCREEN_FFT,
+    SCREEN_SETTINGS,
     SCREEN_COUNT
 } screen_id_t;
 
