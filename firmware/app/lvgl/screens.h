@@ -3,12 +3,16 @@
 
 #include "lvgl.h"
 #include "screens/scr_boot.h"
+#include "screens/scr_datetime.h"
+#include "screens/scr_fft.h"
 #include "screens/scr_menu.h"
 #include "screens/scr_oscilloscope.h"
-#include "screens/scr_fft.h"
+#include "screens/scr_settings.h"
 
-// Register a screen by name — expands to the three callbacks expected by screen_manager.
-#define SCR_REGISTER(name, scr, fn_name)  { name, &scr, scr_##fn_name##_prepare, scr_##fn_name##_init, scr_##fn_name##_deinit, scr_##fn_name##_step }
+// Register a screen by name — expands to the SquareLine-generated create/destroy
+// pair (so the screen can be built lazily, on first visit) plus the app-level
+// lifecycle callbacks expected by screen_manager.
+#define SCR_REGISTER(name, scr, fn_name)  { name, &scr, scr##_screen_init, scr##_screen_destroy, scr_##fn_name##_prepare, scr_##fn_name##_init, scr_##fn_name##_deinit, scr_##fn_name##_step }
 
 // Add a widget to the default LVGL encoder group so it can receive input.
 // Call this inside scr_xxx_init() for every focusable widget on the screen.
@@ -24,9 +28,11 @@
  */
 typedef enum screen_id {
     SCREEN_BOOT,
+    SCREEN_DATETIME,
+    SCREEN_FFT,
     SCREEN_MENU,
     SCREEN_OSC,
-    SCREEN_FFT,
+    SCREEN_SETTINGS,
     SCREEN_COUNT
 } screen_id_t;
 

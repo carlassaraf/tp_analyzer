@@ -23,6 +23,14 @@ if ( event_code == LV_EVENT_CLICKED) {
 }
 }
 
+void ui_event_scrMenu_cardAjustes( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+if ( event_code == LV_EVENT_CLICKED) {
+      _ui_screen_change( &ui_scrSettings, LV_SCR_LOAD_ANIM_MOVE_LEFT, 200, 0, &ui_scrSettings_screen_init);
+}
+}
+
 // build funtions
 
 void ui_scrMenu_screen_init(void)
@@ -413,6 +421,7 @@ lv_obj_set_style_text_font(ui_scrMenu_lblBottomInfo, &ui_font_SansReg11, LV_PART
 
 lv_obj_add_event_cb(ui_scrMenu_cardOscilloscope, ui_event_scrMenu_cardOscilloscope, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_scrMenu_cardFFT, ui_event_scrMenu_cardFFT, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_scrMenu_cardAjustes, ui_event_scrMenu_cardAjustes, LV_EVENT_ALL, NULL);
 
 }
 

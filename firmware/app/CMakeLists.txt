@@ -5,9 +5,11 @@ add_library(app STATIC
   lvgl/screen_manager.c
   lvgl/screen_update.c
   lvgl/screens/scr_boot.c
+  lvgl/screens/scr_datetime.c
+  lvgl/screens/scr_fft.c
   lvgl/screens/scr_menu.c
   lvgl/screens/scr_oscilloscope.c
-  lvgl/screens/scr_fft.c
+  lvgl/screens/scr_settings.c
   lvgl/helpers/animations.c
   lvgl/helpers/chart.c
 )

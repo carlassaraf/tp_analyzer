@@ -15,4 +15,10 @@ void screen_manager_go_to(screen_id_t id);
 /** @brief Run current screen step function */
 void screen_manager_step(void);
 
+/**
+ * @brief Returns current active screen
+ * @return ID of active screen
+ */
+screen_id_t screen_manager_get_active_screen(void);
+
 #endif

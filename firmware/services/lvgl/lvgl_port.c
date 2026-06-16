@@ -72,6 +72,12 @@ static void flush_cb(lv_display_t *display, const lv_area_t *area, uint8_t *colo
     hal_display_flush(x1, y1, x2, y2, color_p, pixels * 2, flush_done_cb);
 }
 
+// Mirrors the diff handed to LVGL on the last read so screens can consume it
+// directly (e.g. to bump a value being edited) without racing the group's
+// own encoder_pop_delta() consumption, which already happened by the time
+// screen_manager_step() runs (see lvgl_port_get_encoder_diff()).
+static int16_t last_enc_diff = 0;
+
 static void encoder_read_cb(lv_indev_t *indev, lv_indev_data_t *data) {
     (void)indev;
     int32_t delta   = encoder_pop_delta();
@@ -84,6 +90,7 @@ static void encoder_read_cb(lv_indev_t *indev, lv_indev_data_t *data) {
 
     data->enc_diff = (int16_t)delta;
     data->state    = pressed ? LV_INDEV_STATE_PRESSED : LV_INDEV_STATE_RELEASED;
+    last_enc_diff  = data->enc_diff;
 }
 
 int32_t lvgl_port_init(void) {
@@ -159,4 +166,10 @@ int32_t lvgl_port_init(void) {
 
 lv_indev_t *lvgl_port_get_encoder(void) {
     return enc_indev;
+}
+
+int16_t lvgl_port_get_encoder_diff(void) {
+    int16_t diff  = last_enc_diff;
+    last_enc_diff = 0;
+    return diff;
 }

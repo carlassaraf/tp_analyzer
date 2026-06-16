@@ -7,6 +7,13 @@
 #include "ui.h"
 #include <stdio.h>
 
+static void ui_init_minimal(void) {
+  LV_EVENT_GET_COMP_CHILD = lv_event_register_id();
+  ui_scrBoot_screen_init();
+  // ui____initial_actions0 = lv_obj_create(NULL);
+  lv_screen_load(ui_scrBoot);
+}
+
 void ui_task(void *params) {
   if (lvgl_port_init() != 0) {
     puts("lvgl_port_init failed");
@@ -14,7 +21,7 @@ void ui_task(void *params) {
     return;
   }
 
-  ui_init();
+  ui_init_minimal();
   screen_manager_init();
   screen_update_init();
 

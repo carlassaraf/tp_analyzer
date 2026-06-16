@@ -33,6 +33,7 @@ extern lv_obj_t *ui_scrMenu_cardContMediciones;
 extern lv_obj_t *ui_scrMenu_iconMediciones;
 extern lv_obj_t *ui_scrMenu_lblMediciones;
 extern lv_obj_t *ui_scrMenu_lblMedicionesInfo;
+extern void ui_event_scrMenu_cardAjustes( lv_event_t * e);
 extern lv_obj_t *ui_scrMenu_cardAjustes;
 extern lv_obj_t *ui_scrMenu_cardContAjustes;
 extern lv_obj_t *ui_scrMenu_iconAjustes;
