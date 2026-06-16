@@ -1,5 +1,6 @@
 #include "screens.h"
 #include "screen_update.h"
+#include "screen_manager.h"
 #include "lvgl_port.h"
 
 #include "FreeRTOS.h"
@@ -23,6 +24,8 @@ static QueueHandle_t screen_update_queue = NULL;
 
 static void screen_update_plot_data(void *data)
 {
+  // Cant send data if screen is not active
+  if(screen_manager_get_active_screen() != SCREEN_OSC) { return; }
   scr_oscilloscope_update_chart((const uint16_t*)data, HAL_ADC_BUFFER_SIZE);
   // Get max raw value from array for peak and rms
   const q15_t *samples = (const q15_t *)data;
@@ -56,7 +59,10 @@ static void screen_update_plot_data(void *data)
   scr_oscilloscope_update_frequency(bin_max * FS / N);
 }
 
-static void screen_update_fft_data(void *data) {
+static void screen_update_fft_data(void *data)
+{
+  // Cant send data if screen is not active
+  if(screen_manager_get_active_screen() != SCREEN_FFT) { return; }
   const uint16_t *samples = (const uint16_t *)data;
   static arm_rfft_fast_instance_f32 fft_inst;
   static float32_t input[N];
