@@ -5,7 +5,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
-#define DISPLAY_BUFFER_LINES 40
+#define DISPLAY_BUFFER_LINES 20
 
 #if defined(DISPLAY_DRIVER_ILI9486)
 #include "drivers/display/ili9486.h"
