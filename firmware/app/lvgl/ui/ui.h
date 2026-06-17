@@ -35,8 +35,6 @@ extern lv_obj_t *ui____initial_actions0;
 // IMAGES AND IMAGE SETS
 LV_IMG_DECLARE( ui_img_1310808144);   // assets/utn-avellaneda-logo.png
 LV_IMG_DECLARE( ui_img_icons_ic_sd_png);   // assets/icons/ic_sd.png
-LV_IMG_DECLARE( ui_img_1310808144);   // assets/utn-avellaneda-logo.png
-LV_IMG_DECLARE( ui_img_icons_ic_sd_png);   // assets/icons/ic_sd.png
 LV_IMG_DECLARE( ui_img_icons_ic_realtime_png);   // assets/icons/ic_realtime.png
 LV_IMG_DECLARE( ui_img_icons_ic_fft_png);   // assets/icons/ic_fft.png
 LV_IMG_DECLARE( ui_img_icons_ic_measure_png);   // assets/icons/ic_measure.png

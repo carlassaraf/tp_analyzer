@@ -21,4 +21,10 @@ void screen_manager_step(void);
  */
 screen_id_t screen_manager_get_active_screen(void);
 
+/**
+ * @brief Updates datetime on current screen if available
+ * @param dt Pointer to datetime
+ */
+void screen_manager_update_datetime(hal_rtc_datetime_t *dt);
+
 #endif

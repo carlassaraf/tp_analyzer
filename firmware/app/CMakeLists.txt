@@ -12,6 +12,7 @@ add_library(app STATIC
   lvgl/screens/scr_settings.c
   lvgl/helpers/animations.c
   lvgl/helpers/chart.c
+  lvgl/helpers/components.c
 )
 
 target_include_directories(app PUBLIC

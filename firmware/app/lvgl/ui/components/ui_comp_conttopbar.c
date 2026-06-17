@@ -44,6 +44,18 @@ ui_object_set_themeable_style_property(cui_lblName, LV_PART_MAIN| LV_STATE_DEFAU
 ui_object_set_themeable_style_property(cui_lblName, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
 lv_obj_set_style_text_font(cui_lblName, &ui_font_MonoMed11, LV_PART_MAIN| LV_STATE_DEFAULT);
 
+lv_obj_t *cui_imgSd;
+cui_imgSd = lv_image_create(cui_contTopBar);
+lv_image_set_src(cui_imgSd, &ui_img_icons_ic_sd_png);
+lv_obj_set_width( cui_imgSd, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( cui_imgSd, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( cui_imgSd, 350 );
+lv_obj_set_y( cui_imgSd, 0 );
+lv_obj_set_align( cui_imgSd, LV_ALIGN_LEFT_MID );
+lv_obj_add_flag( cui_imgSd, LV_OBJ_FLAG_CLICKABLE );   /// Flags
+lv_obj_remove_flag( cui_imgSd, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_image_set_scale(cui_imgSd,69);
+
 lv_obj_t *cui_lblTime;
 cui_lblTime = lv_label_create(cui_contTopBar);
 lv_obj_set_width( cui_lblTime, LV_SIZE_CONTENT);  /// 1
@@ -68,25 +80,13 @@ ui_object_set_themeable_style_property(cui_lblDate, LV_PART_MAIN| LV_STATE_DEFAU
 ui_object_set_themeable_style_property(cui_lblDate, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Atenuado);
 lv_obj_set_style_text_font(cui_lblDate, &ui_font_MonoMed10, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-lv_obj_t *cui_imgSd;
-cui_imgSd = lv_image_create(cui_contTopBar);
-lv_image_set_src(cui_imgSd, &ui_img_icons_ic_sd_png);
-lv_obj_set_width( cui_imgSd, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( cui_imgSd, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( cui_imgSd, 350 );
-lv_obj_set_y( cui_imgSd, 0 );
-lv_obj_set_align( cui_imgSd, LV_ALIGN_LEFT_MID );
-lv_obj_add_flag( cui_imgSd, LV_OBJ_FLAG_CLICKABLE );   /// Flags
-lv_obj_remove_flag( cui_imgSd, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_image_set_scale(cui_imgSd,69);
-
 lv_obj_t ** children = lv_malloc(sizeof(lv_obj_t *) * _UI_COMP_CONTTOPBAR_NUM);
 children[UI_COMP_CONTTOPBAR_CONTTOPBAR] = cui_contTopBar;
 children[UI_COMP_CONTTOPBAR_IMGLOGO] = cui_imgLogo;
 children[UI_COMP_CONTTOPBAR_LBLNAME] = cui_lblName;
+children[UI_COMP_CONTTOPBAR_IMGSD] = cui_imgSd;
 children[UI_COMP_CONTTOPBAR_LBLTIME] = cui_lblTime;
 children[UI_COMP_CONTTOPBAR_LBLDATE] = cui_lblDate;
-children[UI_COMP_CONTTOPBAR_IMGSD] = cui_imgSd;
 lv_obj_add_event_cb(cui_contTopBar, get_component_child_event_cb, LV_EVENT_GET_COMP_CHILD, children);
 lv_obj_add_event_cb(cui_contTopBar, del_component_child_event_cb, LV_EVENT_DELETE, children);
 ui_comp_contTopBar_create_hook(cui_contTopBar);

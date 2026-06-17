@@ -14,7 +14,7 @@ extern "C" {
 extern void ui_scrFFT_screen_init(void);
 extern void ui_scrFFT_screen_destroy(void);
 extern lv_obj_t *ui_scrFFT;
-extern lv_obj_t *ui_scrFFT_contTopBar1;
+extern lv_obj_t *ui_scrFFT_contTopBar;
 extern lv_obj_t *ui_scrFFT_lblTitle;
 extern lv_obj_t *ui_scrFFT_cntTension;
 extern lv_obj_t *ui_scrFFT_legendVoltage;

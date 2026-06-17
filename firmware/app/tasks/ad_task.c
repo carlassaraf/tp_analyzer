@@ -30,7 +30,7 @@ void ad_task(void *params) {
   while (1) {
     uint32_t data;
     xTaskNotifyWait(0, ULONG_MAX, &data, portMAX_DELAY);
-    screen_update_cmd_push(SCREEN_PLOT_DATA, (void*)data);
-    screen_update_cmd_push(SCREEN_FFT_DATA,  (void*)data);
+    screen_update_cmd_push(SCREEN_UPDATE_OSC_DATA, (void*)data);
+    screen_update_cmd_push(SCREEN_UPDATE_FFT_DATA,  (void*)data);
   }
 }
