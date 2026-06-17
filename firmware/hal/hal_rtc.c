@@ -19,7 +19,7 @@ bool hal_rtc_set(const hal_rtc_datetime_t *dt)
 {
   struct tm tm = {0};
   tm.tm_mday = dt->day;
-  tm.tm_mon  = dt->month - 1;
+  tm.tm_mon  = dt->month;
   tm.tm_year = dt->year - 1900;
   tm.tm_hour = dt->hour;
   tm.tm_min  = dt->min;

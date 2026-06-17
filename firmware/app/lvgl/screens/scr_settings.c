@@ -19,7 +19,7 @@ void scr_settings_init(void)
   // Update clock label in menu
   hal_rtc_datetime_t dt;
   hal_rtc_get(&dt);
-  lv_label_set_text_fmt(ui_scrSettings_lblDatetimeBrief, "%02d/%02d/%02d - %02d:%02d", dt.day, dt.month+1, dt.year, dt.hour, dt.min);
+  lv_label_set_text_fmt(ui_scrSettings_lblDatetimeBrief, "%02d/%02d/%02d - %02d:%02d", dt.day, dt.month, dt.year, dt.hour, dt.min);
 }
 
 void scr_settings_deinit(void)
