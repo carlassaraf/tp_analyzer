@@ -22,6 +22,46 @@ typedef struct screen_update_msg {
 // Internal queue for receiving and dispaching commands
 static QueueHandle_t screen_update_queue = NULL;
 
+// Private command handlers
+static void screen_update_plot_data(void *data);
+static void screen_update_fft_data(void *data);
+static void screen_update_datetime(void *data);
+
+// Command handler pointer to dispatch pending updates
+static void (*screen_update_handlers[])(void*) = {
+  [SCREEN_UPDATE_OSC_DATA]  = screen_update_plot_data,
+  [SCREEN_UPDATE_FFT_DATA]  = screen_update_fft_data,
+  [SCREEN_UPDATE_DATETIME]  = screen_update_datetime,
+};
+
+// Extra private helper prototypes
+static void screen_update_helper_peak_value(void *data);
+static void screen_update_helper_rms_value(void *data);
+
+// Public functions
+
+void screen_update_init(void) {
+  screen_update_queue = xQueueCreate(10, sizeof(screen_update_msg_t));
+}
+
+void screen_update_cmd_push(screen_update_cmd_t cmd, void *data) {
+  screen_update_msg_t msg = { .cmd = cmd, .data = data };
+  if (screen_update_queue != NULL) {
+    xQueueSend(screen_update_queue, &msg, 0);
+  }
+}
+
+void screen_update(void) {
+  screen_update_msg_t msg;
+  if (xQueueReceive(screen_update_queue, &msg, 0)) {
+    lv_lock();
+    screen_update_handlers[msg.cmd](msg.data);
+    lv_unlock();
+  }
+}
+
+// Private functions and helpers
+
 static void screen_update_plot_data(void *data)
 {
   // Cant send data if screen is not active
@@ -89,7 +129,20 @@ static void screen_update_fft_data(void *data)
   scr_fft_update_chart(fft_out, N / 2);
 }
 
-static void screen_update_peak_value(void *data)
+static void screen_update_datetime(void *data)
+{
+  hal_rtc_datetime_t *dt = (hal_rtc_datetime_t*)data;
+  // Update topbar datetime
+  screen_manager_update_datetime(dt);
+  // Only update if it's not active to load them on next prepare call
+  if(screen_manager_get_active_screen() != SCREEN_DATETIME) {
+    scr_datetime_update_datetime(dt);
+  }
+}
+
+// Helpers
+
+static void screen_update_helper_peak_value(void *data)
 {
   const q15_t *samples = (const q15_t *)data;
   q15_t res = 0;
@@ -98,37 +151,11 @@ static void screen_update_peak_value(void *data)
   scr_oscilloscope_update_peak((uint16_t)res);
 }
 
-static void screen_update_rms_value(void *data)
+static void screen_update_helper_rms_value(void *data)
 {
   const q15_t *samples = (const q15_t *)data;
   q15_t res = 0;
   uint32_t idx = 0;
   arm_max_q15(samples, N, &res, &idx);
   scr_oscilloscope_update_peak((uint16_t)res);
-}
-
-// Command handler pointer to dispatch pending updates
-static void (*screen_update_handlers[])(void*) = {
-  [SCREEN_OSC_DATA]   = screen_update_plot_data,
-  [SCREEN_FFT_DATA]   = screen_update_fft_data,
-};
-
-void screen_update_init(void) {
-  screen_update_queue = xQueueCreate(10, sizeof(screen_update_msg_t));
-}
-
-void screen_update_cmd_push(screen_update_cmd_t cmd, void *data) {
-  screen_update_msg_t msg = { .cmd = cmd, .data = data };
-  if (screen_update_queue != NULL) {
-    xQueueSend(screen_update_queue, &msg, 0);
-  }
-}
-
-void screen_update(void) {
-  screen_update_msg_t msg;
-  if (xQueueReceive(screen_update_queue, &msg, 0)) {
-    lv_lock();
-    screen_update_handlers[msg.cmd](msg.data);
-    lv_unlock();
-  }
 }
