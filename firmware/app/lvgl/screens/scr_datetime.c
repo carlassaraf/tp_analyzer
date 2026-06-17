@@ -37,6 +37,7 @@ static void datetime_lock_input_group(lv_obj_t *obj);
 static void datetime_click_cb(lv_event_t *event);
 static int32_t datetime_parse_value(lv_obj_t *lbl);
 static datetime_field_t *datetime_field_for_obj(lv_obj_t *obj);
+static void datetime_field_update_labels(void);
 
 // Screen lifecycle
 
@@ -57,11 +58,11 @@ void scr_datetime_prepare(void)
   lv_obj_add_event_cb(ui_scrDatetime_cntMin, datetime_click_cb, LV_EVENT_CLICKED, NULL);
 
   // Seed each field from whatever the label currently shows, so the encoder edits start from the displayed value instead of clobbering it.
-  s_fields[FIELD_DAY]   = (datetime_field_t){ ui_scrDatetime_cntDay,   ui_scrDatetime_lblDayV,   datetime_parse_value(ui_scrDatetime_lblDayV),   1,  31 };
-  s_fields[FIELD_MONTH] = (datetime_field_t){ ui_scrDatetime_cntMonth, ui_scrDatetime_lblMonthV, datetime_parse_value(ui_scrDatetime_lblMonthV), 1,  12 };
-  s_fields[FIELD_YEAR]  = (datetime_field_t){ ui_scrDatetime_cntYear,  ui_scrDatetime_lblYearV,  datetime_parse_value(ui_scrDatetime_lblYearV),  0,  99 };
-  s_fields[FIELD_HOUR]  = (datetime_field_t){ ui_scrDatetime_cntHour,  ui_scrDatetime_lblHourV,  datetime_parse_value(ui_scrDatetime_lblHourV),  0,  23 };
-  s_fields[FIELD_MIN]   = (datetime_field_t){ ui_scrDatetime_cntMin,   ui_scrDatetime_lblMinV,   datetime_parse_value(ui_scrDatetime_lblMinV),   0,  59 };
+  s_fields[FIELD_DAY]   = (datetime_field_t){ ui_scrDatetime_cntDay,   ui_scrDatetime_lblDayV,   s_fields[FIELD_DAY].value,   1,  31 };
+  s_fields[FIELD_MONTH] = (datetime_field_t){ ui_scrDatetime_cntMonth, ui_scrDatetime_lblMonthV, s_fields[FIELD_MONTH].value, 1,  12 };
+  s_fields[FIELD_YEAR]  = (datetime_field_t){ ui_scrDatetime_cntYear,  ui_scrDatetime_lblYearV,  s_fields[FIELD_YEAR].value % 100,  0,  99 };
+  s_fields[FIELD_HOUR]  = (datetime_field_t){ ui_scrDatetime_cntHour,  ui_scrDatetime_lblHourV,  s_fields[FIELD_HOUR].value,  0,  23 };
+  s_fields[FIELD_MIN]   = (datetime_field_t){ ui_scrDatetime_cntMin,   ui_scrDatetime_lblMinV,   s_fields[FIELD_MIN].value,   0,  59 };
 }
 
 void scr_datetime_init(void)
@@ -73,6 +74,8 @@ void scr_datetime_init(void)
   SCR_ADD_TO_GROUP(ui_scrDatetime_cntHour);
   SCR_ADD_TO_GROUP(ui_scrDatetime_cntMin);
   SCR_ADD_TO_GROUP(ui_scrDatetime_btnSave);
+  // Update labels
+  datetime_field_update_labels();
 }
 
 void scr_datetime_deinit(void)
@@ -98,6 +101,15 @@ void scr_datetime_step(void)
   lv_label_set_text_fmt(s_locked_field->lbl, "\n%02d", (int)value);
 }
 
+/** @brief Update field values with RTC data */
+void scr_datetime_update_datetime(hal_rtc_datetime_t *dt) {
+  s_fields[FIELD_DAY].value = dt->day;
+  s_fields[FIELD_MONTH].value = dt->month;
+  s_fields[FIELD_YEAR].value = dt->year % 100;
+  s_fields[FIELD_HOUR].value = dt->hour;
+  s_fields[FIELD_MIN].value = dt->min;
+}
+
 // Private functions
 
 /** @brief Call to restore all interactive widgets to input group */
@@ -120,7 +132,7 @@ static void datetime_lock_input_group(lv_obj_t *obj)
   SCR_ADD_TO_GROUP(obj);
 }
 
-/** @brief  */
+/** @brief Called to lock/unlock input group on a single datetime field */
 static void datetime_click_cb(lv_event_t *event)
 {
   lv_obj_t *target = lv_event_get_target(event);
@@ -154,4 +166,14 @@ static datetime_field_t *datetime_field_for_obj(lv_obj_t *obj)
     if (s_fields[i].cnt == obj) { return &s_fields[i]; }
   }
   return NULL;
+}
+
+/** @brief Helper to update all datetime field labels from RAM */
+static void datetime_field_update_labels(void)
+{
+  for (int i = 0; i < FIELD_COUNT; i++) {
+    if(s_fields[i].lbl) {
+      lv_label_set_text_fmt(s_fields[i].lbl, "\n%d", s_fields[i].value);
+    }
+  }
 }
