@@ -1,5 +1,6 @@
 #include "ui.h"
 #include "lvgl/screens.h"
+#include "lvgl/screen_manager.h"
 #include "lvgl_port.h"
 
 #include <stdlib.h>
@@ -32,9 +33,10 @@ static bool locked_input_group = false;
 
 // Callbacks and private functions
 
+static void datetime_click_cb(lv_event_t *event);
+static void datetime_save_cb(lv_event_t *event);
 static void datetime_restore_full_input_group(void);
 static void datetime_lock_input_group(lv_obj_t *obj);
-static void datetime_click_cb(lv_event_t *event);
 static int32_t datetime_parse_value(lv_obj_t *lbl);
 static datetime_field_t *datetime_field_for_obj(lv_obj_t *obj);
 static void datetime_field_update_labels(void);
@@ -56,6 +58,8 @@ void scr_datetime_prepare(void)
   lv_obj_add_event_cb(ui_scrDatetime_cntYear, datetime_click_cb, LV_EVENT_CLICKED, NULL);
   lv_obj_add_event_cb(ui_scrDatetime_cntHour, datetime_click_cb, LV_EVENT_CLICKED, NULL);
   lv_obj_add_event_cb(ui_scrDatetime_cntMin, datetime_click_cb, LV_EVENT_CLICKED, NULL);
+  // Save datetime callback
+  lv_obj_add_event_cb(ui_scrDatetime_btnSave, datetime_save_cb, LV_EVENT_CLICKED, NULL);
 
   // Seed each field from whatever the label currently shows, so the encoder edits start from the displayed value instead of clobbering it.
   s_fields[FIELD_DAY]   = (datetime_field_t){ ui_scrDatetime_cntDay,   ui_scrDatetime_lblDayV,   s_fields[FIELD_DAY].value,   1,  31 };
@@ -81,6 +85,10 @@ void scr_datetime_init(void)
 void scr_datetime_deinit(void)
 {
   SCR_CLEAR_GROUP();
+  // Restore field values with RTC for next time
+  hal_rtc_datetime_t dt;
+  hal_rtc_get(&dt);
+  scr_datetime_update_datetime(&dt);
 }
 
 void scr_datetime_step(void)
@@ -112,6 +120,39 @@ void scr_datetime_update_datetime(hal_rtc_datetime_t *dt) {
 
 // Private functions
 
+/** @brief Called to lock/unlock input group on a single datetime field */
+static void datetime_click_cb(lv_event_t *event)
+{
+  lv_obj_t *target = lv_event_get_target(event);
+  // Dont let user move to other object without unlocking
+  if(!locked_input_group) {
+    // Lock field to modify with encoder
+    datetime_lock_input_group(target);
+    s_locked_field = datetime_field_for_obj(target);
+    locked_input_group = true;
+  } else {
+    // Unlock field and restore normal operation
+    datetime_restore_full_input_group();
+    lv_group_focus_obj(target);
+    s_locked_field = NULL;
+    locked_input_group = false;
+  }
+}
+
+static void datetime_save_cb(lv_event_t *event)
+{
+  hal_rtc_datetime_t dt = {
+    .day = s_fields[FIELD_DAY].value,
+    .month = s_fields[FIELD_MONTH].value,
+    .year = s_fields[FIELD_YEAR].value,
+    .hour = s_fields[FIELD_HOUR].value,
+    .min = s_fields[FIELD_MIN].value
+  };
+  hal_rtc_set(&dt);
+  screen_manager_update_datetime(&dt);
+
+}
+
 /** @brief Call to restore all interactive widgets to input group */
 static void datetime_restore_full_input_group(void)
 {
@@ -130,25 +171,6 @@ static void datetime_lock_input_group(lv_obj_t *obj)
 {
   SCR_CLEAR_GROUP();
   SCR_ADD_TO_GROUP(obj);
-}
-
-/** @brief Called to lock/unlock input group on a single datetime field */
-static void datetime_click_cb(lv_event_t *event)
-{
-  lv_obj_t *target = lv_event_get_target(event);
-  // Dont let user move to other object without unlocking
-  if(!locked_input_group) {
-    // Lock field to modify with encoder
-    datetime_lock_input_group(target);
-    s_locked_field = datetime_field_for_obj(target);
-    locked_input_group = true;
-  } else {
-    // Unlock field and restore normal operation
-    datetime_restore_full_input_group();
-    lv_group_focus_obj(target);
-    s_locked_field = NULL;
-    locked_input_group = false;
-  }
 }
 
 /** @brief Reads the numeric value out of a field's label (format "\nNN") */
@@ -173,7 +195,7 @@ static void datetime_field_update_labels(void)
 {
   for (int i = 0; i < FIELD_COUNT; i++) {
     if(s_fields[i].lbl) {
-      lv_label_set_text_fmt(s_fields[i].lbl, "\n%d", s_fields[i].value);
+      lv_label_set_text_fmt(s_fields[i].lbl, "\n%02d", s_fields[i].value);
     }
   }
 }
