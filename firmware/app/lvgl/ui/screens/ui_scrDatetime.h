@@ -14,7 +14,7 @@ extern "C" {
 extern void ui_scrDatetime_screen_init(void);
 extern void ui_scrDatetime_screen_destroy(void);
 extern lv_obj_t *ui_scrDatetime;
-extern lv_obj_t *ui_scrDatetime_contTopBar3;
+extern lv_obj_t *ui_scrDatetime_contTopBar;
 extern lv_obj_t *ui_scrDatetime_lblDatime;
 extern void ui_event_scrDatetime_btnBack( lv_event_t * e);
 extern lv_obj_t *ui_scrDatetime_btnBack;
@@ -49,6 +49,9 @@ extern lv_obj_t *ui_scrDatetime_lblMin;
 extern lv_obj_t *ui_scrDatetime_btnSave;
 extern lv_obj_t *ui_scrDatetime_iconSave;
 extern lv_obj_t *ui_scrDatetime_lblSave;
+extern lv_obj_t *ui_scrDatetime_cntBottomInfo;
+extern lv_obj_t *ui_scrDatetime_circle;
+extern lv_obj_t *ui_scrDatetime_lblBottomInfo;
 // CUSTOM VARIABLES
 
 #ifdef __cplusplus

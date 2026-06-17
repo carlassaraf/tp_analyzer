@@ -5,7 +5,7 @@
 
 #include "../ui.h"
 
-lv_obj_t *ui_scrSettings = NULL;lv_obj_t *ui_scrSettings_contTopBar2 = NULL;lv_obj_t *ui_scrSettings_lblSettings = NULL;lv_obj_t *ui_scrSettings_btnBack = NULL;lv_obj_t *ui_scrSettings_cntDatetime = NULL;lv_obj_t *ui_scrSettings_iconDatetime = NULL;lv_obj_t *ui_scrSettings_lblDatetime = NULL;lv_obj_t *ui_scrSettings_lblDatetimeBrief = NULL;lv_obj_t *ui_scrSettings_iconDatetimeEnter = NULL;lv_obj_t *ui_scrSettings_cntScreen = NULL;lv_obj_t *ui_scrSettings_iconScreen = NULL;lv_obj_t *ui_scrSettings_lblScreen = NULL;lv_obj_t *ui_scrSettings_lblScreenBrief = NULL;lv_obj_t *ui_scrSettings_iconScreenEnter = NULL;lv_obj_t *ui_scrSettings_cntMeasure = NULL;lv_obj_t *ui_scrSettings_iconMeasure = NULL;lv_obj_t *ui_scrSettings_lblMeasure = NULL;lv_obj_t *ui_scrSettings_lblMeasureBrief = NULL;lv_obj_t *ui_scrSettings_iconMeasureEnter = NULL;lv_obj_t *ui_scrSettings_cntInfo = NULL;lv_obj_t *ui_scrSettings_iconInfo = NULL;lv_obj_t *ui_scrSettings_lblInfo = NULL;lv_obj_t *ui_scrSettings_lblInfoBrief = NULL;lv_obj_t *ui_scrSettings_iconInfoEnter = NULL;
+lv_obj_t *ui_scrSettings = NULL;lv_obj_t *ui_scrSettings_contTopBar = NULL;lv_obj_t *ui_scrSettings_lblSettings = NULL;lv_obj_t *ui_scrSettings_btnBack = NULL;lv_obj_t *ui_scrSettings_cntDatetime = NULL;lv_obj_t *ui_scrSettings_iconDatetime = NULL;lv_obj_t *ui_scrSettings_lblDatetime = NULL;lv_obj_t *ui_scrSettings_lblDatetimeBrief = NULL;lv_obj_t *ui_scrSettings_iconDatetimeEnter = NULL;lv_obj_t *ui_scrSettings_cntScreen = NULL;lv_obj_t *ui_scrSettings_iconScreen = NULL;lv_obj_t *ui_scrSettings_lblScreen = NULL;lv_obj_t *ui_scrSettings_lblScreenBrief = NULL;lv_obj_t *ui_scrSettings_iconScreenEnter = NULL;lv_obj_t *ui_scrSettings_cntMeasure = NULL;lv_obj_t *ui_scrSettings_iconMeasure = NULL;lv_obj_t *ui_scrSettings_lblMeasure = NULL;lv_obj_t *ui_scrSettings_lblMeasureBrief = NULL;lv_obj_t *ui_scrSettings_iconMeasureEnter = NULL;lv_obj_t *ui_scrSettings_cntInfo = NULL;lv_obj_t *ui_scrSettings_iconInfo = NULL;lv_obj_t *ui_scrSettings_lblInfo = NULL;lv_obj_t *ui_scrSettings_lblInfoBrief = NULL;lv_obj_t *ui_scrSettings_iconInfoEnter = NULL;
 // event funtions
 void ui_event_scrSettings_btnBack( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
@@ -32,9 +32,9 @@ lv_obj_remove_flag( ui_scrSettings, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 ui_object_set_themeable_style_property(ui_scrSettings, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BG_COLOR, _ui_theme_color_Base);
 ui_object_set_themeable_style_property(ui_scrSettings, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BG_OPA, _ui_theme_alpha_Base);
 
-ui_scrSettings_contTopBar2 = ui_contTopBar_create(ui_scrSettings);
-lv_obj_set_x( ui_scrSettings_contTopBar2, 0 );
-lv_obj_set_y( ui_scrSettings_contTopBar2, 0 );
+ui_scrSettings_contTopBar = ui_contTopBar_create(ui_scrSettings);
+lv_obj_set_x( ui_scrSettings_contTopBar, 0 );
+lv_obj_set_y( ui_scrSettings_contTopBar, 0 );
 
 ui_scrSettings_lblSettings = lv_label_create(ui_scrSettings);
 lv_obj_set_width( ui_scrSettings_lblSettings, LV_SIZE_CONTENT);  /// 1
@@ -411,7 +411,7 @@ void ui_scrSettings_screen_destroy(void)
 
 // NULL screen variables
 ui_scrSettings= NULL;
-ui_scrSettings_contTopBar2= NULL;
+ui_scrSettings_contTopBar= NULL;
 ui_scrSettings_lblSettings= NULL;
 ui_scrSettings_btnBack= NULL;
 ui_scrSettings_cntDatetime= NULL;

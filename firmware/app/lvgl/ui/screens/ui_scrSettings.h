@@ -14,7 +14,7 @@ extern "C" {
 extern void ui_scrSettings_screen_init(void);
 extern void ui_scrSettings_screen_destroy(void);
 extern lv_obj_t *ui_scrSettings;
-extern lv_obj_t *ui_scrSettings_contTopBar2;
+extern lv_obj_t *ui_scrSettings_contTopBar;
 extern lv_obj_t *ui_scrSettings_lblSettings;
 extern void ui_event_scrSettings_btnBack( lv_event_t * e);
 extern lv_obj_t *ui_scrSettings_btnBack;

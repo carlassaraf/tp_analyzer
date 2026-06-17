@@ -5,7 +5,7 @@
 
 #include "../ui.h"
 
-lv_obj_t *ui_scrDatetime = NULL;lv_obj_t *ui_scrDatetime_contTopBar3 = NULL;lv_obj_t *ui_scrDatetime_lblDatime = NULL;lv_obj_t *ui_scrDatetime_btnBack = NULL;lv_obj_t *ui_scrDatetime_lblDate = NULL;lv_obj_t *ui_scrDatetime_cntDay = NULL;lv_obj_t *ui_scrDatetime_dayUp = NULL;lv_obj_t *ui_scrDatetime_lblDayV = NULL;lv_obj_t *ui_scrDatetime_dayDown = NULL;lv_obj_t *ui_scrDatetime_lblDay = NULL;lv_obj_t *ui_scrDatetime_cntMonth = NULL;lv_obj_t *ui_scrDatetime_monthUp = NULL;lv_obj_t *ui_scrDatetime_lblMonthV = NULL;lv_obj_t *ui_scrDatetime_monthDown = NULL;lv_obj_t *ui_scrDatetime_lblMonth = NULL;lv_obj_t *ui_scrDatetime_cntYear = NULL;lv_obj_t *ui_scrDatetime_yearUp = NULL;lv_obj_t *ui_scrDatetime_lblYearV = NULL;lv_obj_t *ui_scrDatetime_yearDown = NULL;lv_obj_t *ui_scrDatetime_lblYear = NULL;lv_obj_t *ui_scrDatetime_vline = NULL;lv_obj_t *ui_scrDatetime_lblTime = NULL;lv_obj_t *ui_scrDatetime_cntHour = NULL;lv_obj_t *ui_scrDatetime_hourUp = NULL;lv_obj_t *ui_scrDatetime_lblHourV = NULL;lv_obj_t *ui_scrDatetime_hourDown = NULL;lv_obj_t *ui_scrDatetime_lblHour = NULL;lv_obj_t *ui_scrDatetime_cntMin = NULL;lv_obj_t *ui_scrDatetime_minUp = NULL;lv_obj_t *ui_scrDatetime_lblMinV = NULL;lv_obj_t *ui_scrDatetime_minDown = NULL;lv_obj_t *ui_scrDatetime_lblMin = NULL;lv_obj_t *ui_scrDatetime_btnSave = NULL;lv_obj_t *ui_scrDatetime_iconSave = NULL;lv_obj_t *ui_scrDatetime_lblSave = NULL;
+lv_obj_t *ui_scrDatetime = NULL;lv_obj_t *ui_scrDatetime_contTopBar = NULL;lv_obj_t *ui_scrDatetime_lblDatime = NULL;lv_obj_t *ui_scrDatetime_btnBack = NULL;lv_obj_t *ui_scrDatetime_lblDate = NULL;lv_obj_t *ui_scrDatetime_cntDay = NULL;lv_obj_t *ui_scrDatetime_dayUp = NULL;lv_obj_t *ui_scrDatetime_lblDayV = NULL;lv_obj_t *ui_scrDatetime_dayDown = NULL;lv_obj_t *ui_scrDatetime_lblDay = NULL;lv_obj_t *ui_scrDatetime_cntMonth = NULL;lv_obj_t *ui_scrDatetime_monthUp = NULL;lv_obj_t *ui_scrDatetime_lblMonthV = NULL;lv_obj_t *ui_scrDatetime_monthDown = NULL;lv_obj_t *ui_scrDatetime_lblMonth = NULL;lv_obj_t *ui_scrDatetime_cntYear = NULL;lv_obj_t *ui_scrDatetime_yearUp = NULL;lv_obj_t *ui_scrDatetime_lblYearV = NULL;lv_obj_t *ui_scrDatetime_yearDown = NULL;lv_obj_t *ui_scrDatetime_lblYear = NULL;lv_obj_t *ui_scrDatetime_vline = NULL;lv_obj_t *ui_scrDatetime_lblTime = NULL;lv_obj_t *ui_scrDatetime_cntHour = NULL;lv_obj_t *ui_scrDatetime_hourUp = NULL;lv_obj_t *ui_scrDatetime_lblHourV = NULL;lv_obj_t *ui_scrDatetime_hourDown = NULL;lv_obj_t *ui_scrDatetime_lblHour = NULL;lv_obj_t *ui_scrDatetime_cntMin = NULL;lv_obj_t *ui_scrDatetime_minUp = NULL;lv_obj_t *ui_scrDatetime_lblMinV = NULL;lv_obj_t *ui_scrDatetime_minDown = NULL;lv_obj_t *ui_scrDatetime_lblMin = NULL;lv_obj_t *ui_scrDatetime_btnSave = NULL;lv_obj_t *ui_scrDatetime_iconSave = NULL;lv_obj_t *ui_scrDatetime_lblSave = NULL;lv_obj_t *ui_scrDatetime_cntBottomInfo = NULL;lv_obj_t *ui_scrDatetime_circle = NULL;lv_obj_t *ui_scrDatetime_lblBottomInfo = NULL;
 // event funtions
 void ui_event_scrDatetime_btnBack( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
@@ -24,9 +24,9 @@ lv_obj_remove_flag( ui_scrDatetime, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 ui_object_set_themeable_style_property(ui_scrDatetime, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BG_COLOR, _ui_theme_color_Base);
 ui_object_set_themeable_style_property(ui_scrDatetime, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BG_OPA, _ui_theme_alpha_Base);
 
-ui_scrDatetime_contTopBar3 = ui_contTopBar_create(ui_scrDatetime);
-lv_obj_set_x( ui_scrDatetime_contTopBar3, 0 );
-lv_obj_set_y( ui_scrDatetime_contTopBar3, 0 );
+ui_scrDatetime_contTopBar = ui_contTopBar_create(ui_scrDatetime);
+lv_obj_set_x( ui_scrDatetime_contTopBar, 0 );
+lv_obj_set_y( ui_scrDatetime_contTopBar, 0 );
 
 ui_scrDatetime_lblDatime = lv_label_create(ui_scrDatetime);
 lv_obj_set_width( ui_scrDatetime_lblDatime, LV_SIZE_CONTENT);  /// 1
@@ -467,9 +467,9 @@ lv_obj_set_style_text_font(ui_scrDatetime_lblMin, &ui_font_SansReg10, LV_PART_MA
 ui_scrDatetime_btnSave = lv_obj_create(ui_scrDatetime);
 lv_obj_remove_style_all(ui_scrDatetime_btnSave);
 lv_obj_set_width( ui_scrDatetime_btnSave, 150);
-lv_obj_set_height( ui_scrDatetime_btnSave, 38);
+lv_obj_set_height( ui_scrDatetime_btnSave, 30);
 lv_obj_set_x( ui_scrDatetime_btnSave, 314 );
-lv_obj_set_y( ui_scrDatetime_btnSave, 268 );
+lv_obj_set_y( ui_scrDatetime_btnSave, 250 );
 lv_obj_remove_flag( ui_scrDatetime_btnSave, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_style_radius(ui_scrDatetime_btnSave, 8, LV_PART_MAIN| LV_STATE_DEFAULT);
 ui_object_set_themeable_style_property(ui_scrDatetime_btnSave, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BG_COLOR, _ui_theme_color_Foco);
@@ -485,7 +485,8 @@ lv_image_set_src(ui_scrDatetime_iconSave, &ui_img_icons_ic_check_png);
 lv_obj_set_width( ui_scrDatetime_iconSave, 15);
 lv_obj_set_height( ui_scrDatetime_iconSave, 15);
 lv_obj_set_x( ui_scrDatetime_iconSave, 38 );
-lv_obj_set_y( ui_scrDatetime_iconSave, 12 );
+lv_obj_set_y( ui_scrDatetime_iconSave, 0 );
+lv_obj_set_align( ui_scrDatetime_iconSave, LV_ALIGN_LEFT_MID );
 lv_obj_add_flag( ui_scrDatetime_iconSave, LV_OBJ_FLAG_CLICKABLE );   /// Flags
 lv_obj_remove_flag( ui_scrDatetime_iconSave, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_image_set_scale(ui_scrDatetime_iconSave,80);
@@ -502,13 +503,51 @@ ui_scrDatetime_lblSave = lv_label_create(ui_scrDatetime_btnSave);
 lv_obj_set_width( ui_scrDatetime_lblSave, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_scrDatetime_lblSave, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_scrDatetime_lblSave, 60 );
-lv_obj_set_y( ui_scrDatetime_lblSave, 11 );
+lv_obj_set_y( ui_scrDatetime_lblSave, 0 );
+lv_obj_set_align( ui_scrDatetime_lblSave, LV_ALIGN_LEFT_MID );
 lv_label_set_text(ui_scrDatetime_lblSave,"Guardar");
 ui_object_set_themeable_style_property(ui_scrDatetime_lblSave, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Base);
 ui_object_set_themeable_style_property(ui_scrDatetime_lblSave, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Base);
 lv_obj_set_style_text_font(ui_scrDatetime_lblSave, &ui_font_SansBold13, LV_PART_MAIN| LV_STATE_DEFAULT);
 ui_object_set_themeable_style_property(ui_scrDatetime_lblSave, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Foco);
 ui_object_set_themeable_style_property(ui_scrDatetime_lblSave, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Foco);
+
+ui_scrDatetime_cntBottomInfo = lv_obj_create(ui_scrDatetime);
+lv_obj_remove_style_all(ui_scrDatetime_cntBottomInfo);
+lv_obj_set_width( ui_scrDatetime_cntBottomInfo, 480);
+lv_obj_set_height( ui_scrDatetime_cntBottomInfo, 26);
+lv_obj_set_x( ui_scrDatetime_cntBottomInfo, 0 );
+lv_obj_set_y( ui_scrDatetime_cntBottomInfo, 294 );
+lv_obj_set_align( ui_scrDatetime_cntBottomInfo, LV_ALIGN_TOP_MID );
+lv_obj_remove_flag( ui_scrDatetime_cntBottomInfo, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+ui_object_set_themeable_style_property(ui_scrDatetime_cntBottomInfo, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BG_COLOR, _ui_theme_color_Panel);
+ui_object_set_themeable_style_property(ui_scrDatetime_cntBottomInfo, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BG_OPA, _ui_theme_alpha_Panel);
+ui_object_set_themeable_style_property(ui_scrDatetime_cntBottomInfo, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_COLOR, _ui_theme_color_Card_Border);
+ui_object_set_themeable_style_property(ui_scrDatetime_cntBottomInfo, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_OPA, _ui_theme_alpha_Card_Border);
+lv_obj_set_style_border_width(ui_scrDatetime_cntBottomInfo, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_scrDatetime_circle = lv_label_create(ui_scrDatetime_cntBottomInfo);
+lv_obj_set_width( ui_scrDatetime_circle, 12);
+lv_obj_set_height( ui_scrDatetime_circle, 12);
+lv_obj_set_x( ui_scrDatetime_circle, 65 );
+lv_obj_set_y( ui_scrDatetime_circle, 0 );
+lv_obj_set_align( ui_scrDatetime_circle, LV_ALIGN_LEFT_MID );
+lv_label_set_text(ui_scrDatetime_circle,"");
+lv_obj_set_style_radius(ui_scrDatetime_circle, 12, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_object_set_themeable_style_property(ui_scrDatetime_circle, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_COLOR, _ui_theme_color_Font_Atenuado);
+ui_object_set_themeable_style_property(ui_scrDatetime_circle, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BORDER_OPA, _ui_theme_alpha_Font_Atenuado);
+lv_obj_set_style_border_width(ui_scrDatetime_circle, 1, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_scrDatetime_lblBottomInfo = lv_label_create(ui_scrDatetime_cntBottomInfo);
+lv_obj_set_width( ui_scrDatetime_lblBottomInfo, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_scrDatetime_lblBottomInfo, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_scrDatetime_lblBottomInfo, 0 );
+lv_obj_set_y( ui_scrDatetime_lblBottomInfo, -1 );
+lv_obj_set_align( ui_scrDatetime_lblBottomInfo, LV_ALIGN_CENTER );
+lv_label_set_text(ui_scrDatetime_lblBottomInfo,"Gire para navegar/modificar - Pulse para bloquear/desbloquear");
+ui_object_set_themeable_style_property(ui_scrDatetime_lblBottomInfo, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Atenuado);
+ui_object_set_themeable_style_property(ui_scrDatetime_lblBottomInfo, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Atenuado);
+lv_obj_set_style_text_font(ui_scrDatetime_lblBottomInfo, &ui_font_SansReg11, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 lv_obj_add_event_cb(ui_scrDatetime_btnBack, ui_event_scrDatetime_btnBack, LV_EVENT_ALL, NULL);
 
@@ -520,7 +559,7 @@ void ui_scrDatetime_screen_destroy(void)
 
 // NULL screen variables
 ui_scrDatetime= NULL;
-ui_scrDatetime_contTopBar3= NULL;
+ui_scrDatetime_contTopBar= NULL;
 ui_scrDatetime_lblDatime= NULL;
 ui_scrDatetime_btnBack= NULL;
 ui_scrDatetime_lblDate= NULL;
@@ -554,5 +593,8 @@ ui_scrDatetime_lblMin= NULL;
 ui_scrDatetime_btnSave= NULL;
 ui_scrDatetime_iconSave= NULL;
 ui_scrDatetime_lblSave= NULL;
+ui_scrDatetime_cntBottomInfo= NULL;
+ui_scrDatetime_circle= NULL;
+ui_scrDatetime_lblBottomInfo= NULL;
 
 }

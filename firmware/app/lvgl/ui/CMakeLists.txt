@@ -13,8 +13,6 @@ SET(SOURCES components/ui_comp_conttopbar.c
     ui_helpers.c
     images/ui_img_1310808144.c
     images/ui_img_icons_ic_sd_png.c
-    images/ui_img_1310808144.c
-    images/ui_img_icons_ic_sd_png.c
     images/ui_img_icons_ic_realtime_png.c
     images/ui_img_icons_ic_fft_png.c
     images/ui_img_icons_ic_measure_png.c
