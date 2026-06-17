@@ -1,6 +1,8 @@
 #include "ui.h"
 #include "screen_manager.h"
 
+#include "lvgl/helpers/components.h"
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -12,13 +14,14 @@
  */
 typedef struct screen {
   const char *name;
-  lv_obj_t **scr;
-  void (*create)(void);    // SquareLine-generated ui_scrX_screen_init: builds the lv_obj_t tree
-  void (*destroy)(void);   // SquareLine-generated ui_scrX_screen_destroy: frees it
-  void (*prepare)(void);
-  void (*init)(void);
-  void (*deinit)(void);
-  void (*step)(void);
+  lv_obj_t **scr;         /**< Screen pointer object */
+  lv_obj_t **topbar;      /**< Common topbar component across most screen. NULL when it's not available */
+  void (*create)(void);   /**< SquareLine Studio init function */
+  void (*destroy)(void);  /**< SquareLine Studio destroy function */
+  void (*prepare)(void);  /**< Called one time after screen creation */
+  void (*init)(void);     /**< Called when entering the screen to set up */
+  void (*deinit)(void);   /**< Called after leaving screen to clear up local variables/states */
+  void (*step)(void);     /**< Called every screen_manager step cycle */
 } screen_t;
 
 // Longest spd/anim-time passed to _ui_screen_change() anywhere in the
@@ -31,12 +34,12 @@ typedef struct screen {
 
 // Used to register all screens in the applications with their callback functions
 static const screen_t screens[SCREEN_COUNT] = {
-  [SCREEN_BOOT]     = SCR_REGISTER("Boot",          ui_scrBoot,         boot    ),
-  [SCREEN_DATETIME] = SCR_REGISTER("Datetime",      ui_scrDatetime,     datetime),
-  [SCREEN_FFT]      = SCR_REGISTER("FFT",           ui_scrFFT,          fft     ),
-  [SCREEN_MENU]     = SCR_REGISTER("Menu",          ui_scrMenu,         menu    ),
-  [SCREEN_OSC]      = SCR_REGISTER("Oscilloscope",  ui_scrOscilloscope, oscilloscope ),
-  [SCREEN_SETTINGS] = SCR_REGISTER("Setting",       ui_scrSettings,     settings ),
+  [SCREEN_BOOT]     = SCR_REGISTER("Boot",            ui_scrBoot,         boot    ),
+  [SCREEN_DATETIME] = SCR_REGISTER_TB("Datetime",     ui_scrDatetime,     datetime),
+  [SCREEN_FFT]      = SCR_REGISTER_TB("FFT",          ui_scrFFT,          fft     ),
+  [SCREEN_MENU]     = SCR_REGISTER_TB("Menu",         ui_scrMenu,         menu    ),
+  [SCREEN_OSC]      = SCR_REGISTER_TB("Oscilloscope", ui_scrOscilloscope, oscilloscope ),
+  [SCREEN_SETTINGS] = SCR_REGISTER_TB("Setting",      ui_scrSettings,     settings ),
 };
 
 // Keep track of running screens and transitions
@@ -52,7 +55,8 @@ static screen_id_t pending = SCREEN_BOOT;
 // can't infer "just built" from timing alone.
 static bool prepared[SCREEN_COUNT] = { false };
 
-static void destroy_timer_cb(lv_timer_t *timer) {
+static void destroy_timer_cb(lv_timer_t *timer)
+{
   screen_id_t id = (screen_id_t)(intptr_t)lv_timer_get_user_data(timer);
   lv_lock();
   // Skip if the user already navigated back to it before the delay elapsed
@@ -64,7 +68,8 @@ static void destroy_timer_cb(lv_timer_t *timer) {
   lv_unlock();
 }
 
-void screen_manager_init(void) {
+void screen_manager_init(void)
+{
   // Only the first screen needs to exist up front; every other screen is
   // built lazily the first time we navigate to it (see screen_manager_step()
   // and _ui_screen_change() in ui_helpers.c), so LVGL's heap only ever has
@@ -75,11 +80,13 @@ void screen_manager_init(void) {
   if(screens[current].init) { screens[current].init(); }
 }
 
-void screen_manager_go_to(screen_id_t id) {
+void screen_manager_go_to(screen_id_t id)
+{
   pending = id;
 }
 
-void screen_manager_step(void) {
+void screen_manager_step(void)
+{
   // Check if any event called _ui_screen_change
   if(current != screen_manager_get_active_screen()) {
     pending = screen_manager_get_active_screen();
@@ -105,8 +112,13 @@ void screen_manager_step(void) {
     if(!prepared[pending] && screens[pending].prepare) { screens[pending].prepare(); }
     prepared[pending] = true;
     if(screens[pending].init) { screens[pending].init(); }
-    lv_unlock();
     current = pending;
+    // Update clock if necessary
+    hal_rtc_datetime_t dt;
+    if (hal_rtc_get(&dt)) {
+      screen_manager_update_datetime(&dt);
+    }
+    lv_unlock();
 
     // Free the screen we just left once any slide/fade animation it might
     // still be part of has had time to finish (see SCR_DESTROY_DELAY_MS).
@@ -122,11 +134,19 @@ void screen_manager_step(void) {
   lv_unlock();
 }
 
-screen_id_t screen_manager_get_active_screen(void) {
+screen_id_t screen_manager_get_active_screen(void)
+{
   for (screen_id_t id = SCREEN_BOOT; id < SCREEN_COUNT; id++) {
     if (lv_screen_active() == *(screens[id].scr)) {
       return id;
     }
   }
   return current;
+}
+
+void screen_manager_update_datetime(hal_rtc_datetime_t *dt)
+{
+  if(screens[current].topbar && *screens[current].topbar) {
+    ui_topbar_update_datetime(*screens[current].topbar, dt);
+  }
 }

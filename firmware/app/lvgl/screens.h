@@ -12,7 +12,14 @@
 // Register a screen by name — expands to the SquareLine-generated create/destroy
 // pair (so the screen can be built lazily, on first visit) plus the app-level
 // lifecycle callbacks expected by screen_manager.
-#define SCR_REGISTER(name, scr, fn_name)  { name, &scr, scr##_screen_init, scr##_screen_destroy, scr_##fn_name##_prepare, scr_##fn_name##_init, scr_##fn_name##_deinit, scr_##fn_name##_step }
+#define SCR_REGISTER(name, scr, fn_name) \
+  { name, &scr, NULL, scr##_screen_init, scr##_screen_destroy, \
+    scr_##fn_name##_prepare, scr_##fn_name##_init, scr_##fn_name##_deinit, scr_##fn_name##_step }
+
+// Register screen version with topbar component
+#define SCR_REGISTER_TB(name, scr, fn_name) \
+  { name, &scr, &scr##_contTopBar, scr##_screen_init, scr##_screen_destroy, \
+    scr_##fn_name##_prepare, scr_##fn_name##_init, scr_##fn_name##_deinit, scr_##fn_name##_step }
 
 // Add a widget to the default LVGL encoder group so it can receive input.
 // Call this inside scr_xxx_init() for every focusable widget on the screen.
