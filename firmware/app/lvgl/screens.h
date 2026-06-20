@@ -5,6 +5,7 @@
 #include "screens/scr_boot.h"
 #include "screens/scr_datetime.h"
 #include "screens/scr_fft.h"
+#include "screens/scr_information.h"
 #include "screens/scr_menu.h"
 #include "screens/scr_oscilloscope.h"
 #include "screens/scr_settings.h"
@@ -37,6 +38,7 @@ typedef enum screen_id {
     SCREEN_BOOT,
     SCREEN_DATETIME,
     SCREEN_FFT,
+    SCREEN_INFO,
     SCREEN_MENU,
     SCREEN_OSC,
     SCREEN_SETTINGS,

@@ -6,6 +6,7 @@ SET(SOURCES components/ui_comp_conttopbar.c
     screens/ui_scrFFT.c
     screens/ui_scrSettings.c
     screens/ui_scrDatetime.c
+    screens/ui_scrInformation.c
     ui_theme_manager.c
     ui_themes.c
     ui.c

@@ -7,6 +7,7 @@ add_library(app STATIC
   lvgl/screens/scr_boot.c
   lvgl/screens/scr_datetime.c
   lvgl/screens/scr_fft.c
+  lvgl/screens/scr_information.c
   lvgl/screens/scr_menu.c
   lvgl/screens/scr_oscilloscope.c
   lvgl/screens/scr_settings.c

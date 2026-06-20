@@ -36,6 +36,7 @@ ui_scrOscilloscope_screen_init();
 ui_scrFFT_screen_init();
 ui_scrSettings_screen_init();
 ui_scrDatetime_screen_init();
+ui_scrInformation_screen_init();
 ui____initial_actions0 = lv_obj_create(NULL);
 lv_disp_load_scr( ui_scrBoot);
 }
@@ -47,4 +48,5 @@ ui_scrOscilloscope_screen_destroy();
 ui_scrFFT_screen_destroy();
 ui_scrSettings_screen_destroy();
 ui_scrDatetime_screen_destroy();
+ui_scrInformation_screen_destroy();
 }
