@@ -52,10 +52,24 @@ void screen_update_cmd_push(screen_update_cmd_t cmd, void *data) {
 }
 
 void screen_update(void) {
+  screen_update_msg_t latest[SCREEN_UPDATE_CMD_COUNT];
+  bool has_msg[SCREEN_UPDATE_CMD_COUNT] = {false};
   screen_update_msg_t msg;
-  if (xQueueReceive(screen_update_queue, &msg, 0)) {
+
+  // Drain the entire queue, keeping only the latest message per command type.
+  // This discards stale frames that built up between UI task iterations.
+  while (xQueueReceive(screen_update_queue, &msg, 0)) {
+    latest[msg.cmd] = msg;
+    has_msg[msg.cmd] = true;
+  }
+
+  // Each handler gets its own lock window — same as the original code.
+  // Holding one big lock for all handlers (including FFT computation) starves
+  // the encoder indev timer that LVGL services between lv_lock windows.
+  for (int i = 0; i < SCREEN_UPDATE_CMD_COUNT; i++) {
+    if (!has_msg[i]) continue;
     lv_lock();
-    screen_update_handlers[msg.cmd](msg.data);
+    screen_update_handlers[i](latest[i].data);
     lv_unlock();
   }
 }
