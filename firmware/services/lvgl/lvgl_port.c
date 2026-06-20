@@ -179,6 +179,7 @@ int32_t lvgl_port_init(void) {
     enc_indev = lv_indev_create();
     lv_indev_set_type(enc_indev, LV_INDEV_TYPE_ENCODER);
     lv_indev_set_read_cb(enc_indev, encoder_read_cb);
+    lv_timer_set_period(lv_indev_get_read_timer(enc_indev), 10);
 
     lv_group_t *group = lv_group_create();
     lv_group_set_default(group);
