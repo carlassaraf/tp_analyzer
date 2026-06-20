@@ -64299,7 +64299,7 @@
                   {
                     "nid": 1000385,
                     "strtype": "_event/name",
-                    "strval": "go",
+                    "strval": "goInformation",
                     "InheritedType": 10
                   },
                   {
@@ -76746,7 +76746,7 @@
                 "compnid": 10,
                 "flags": 131072,
                 "strtype": "OBJECT/Name",
-                "strval": "contTopBar1",
+                "strval": "contTopBar",
                 "InheritedType": 10
               },
               {
@@ -83449,7 +83449,7 @@
   },
   "animations": [],
   "selected_theme": "Dark",
-  "selected_screen": "GUID61026074-788211S6185167",
+  "selected_screen": "GUID95715806-877468S7605171",
   "info": {
     "name": "ui.spj",
     "depth": 1,
@@ -83478,7 +83478,7 @@
     "separate_screen_save": false,
     "hierarchy_state_save": false,
     "reverse_event_order": false,
-    "backup_cnt": 122,
+    "backup_cnt": 125,
     "autosave_cnt": 0,
     "group_color_cnt": 1,
     "imagebytearrayprefix": "",

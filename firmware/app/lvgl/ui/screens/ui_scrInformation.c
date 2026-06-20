@@ -5,7 +5,7 @@
 
 #include "../ui.h"
 
-lv_obj_t *ui_scrInformation = NULL;lv_obj_t *ui_scrInformation_contTopBar1 = NULL;lv_obj_t *ui_scrInformation_lblInfo = NULL;lv_obj_t *ui_scrInformation_btnBack = NULL;lv_obj_t *ui_scrInformation_cntDevice = NULL;lv_obj_t *ui_scrInformation_logo = NULL;lv_obj_t *ui_scrInformation_lblName = NULL;lv_obj_t *ui_scrInformation_lblSubname = NULL;lv_obj_t *ui_scrInformation_cntModel = NULL;lv_obj_t *ui_scrInformation_lblModel = NULL;lv_obj_t *ui_scrInformation_lblModelV = NULL;lv_obj_t *ui_scrInformation_cntSerial = NULL;lv_obj_t *ui_scrInformation_lblSerial = NULL;lv_obj_t *ui_scrInformation_lblSerialV = NULL;lv_obj_t *ui_scrInformation_cntFirmware = NULL;lv_obj_t *ui_scrInformation_lblFirmware = NULL;lv_obj_t *ui_scrInformation_lblFirmwareV = NULL;lv_obj_t *ui_scrInformation_cntBuild = NULL;lv_obj_t *ui_scrInformation_lblBuild = NULL;lv_obj_t *ui_scrInformation_lblBuildV = NULL;lv_obj_t *ui_scrInformation_cntHardware = NULL;lv_obj_t *ui_scrInformation_lblHardware = NULL;lv_obj_t *ui_scrInformation_cntMcu = NULL;lv_obj_t *ui_scrInformation_lblMcu = NULL;lv_obj_t *ui_scrInformation_lblMcuV = NULL;lv_obj_t *ui_scrInformation_cntAdc = NULL;lv_obj_t *ui_scrInformation_lblAdc = NULL;lv_obj_t *ui_scrInformation_lblAdcV = NULL;lv_obj_t *ui_scrInformation_cntActiveTime = NULL;lv_obj_t *ui_scrInformation_lblActiveTime = NULL;lv_obj_t *ui_scrInformation_lblActiveTimeV = NULL;lv_obj_t *ui_scrInformation_cntBy = NULL;lv_obj_t *ui_scrInformation_lblBy = NULL;lv_obj_t *ui_scrInformation_lblUniversity = NULL;lv_obj_t *ui_scrInformation_lblProject = NULL;
+lv_obj_t *ui_scrInformation = NULL;lv_obj_t *ui_scrInformation_contTopBar = NULL;lv_obj_t *ui_scrInformation_lblInfo = NULL;lv_obj_t *ui_scrInformation_btnBack = NULL;lv_obj_t *ui_scrInformation_cntDevice = NULL;lv_obj_t *ui_scrInformation_logo = NULL;lv_obj_t *ui_scrInformation_lblName = NULL;lv_obj_t *ui_scrInformation_lblSubname = NULL;lv_obj_t *ui_scrInformation_cntModel = NULL;lv_obj_t *ui_scrInformation_lblModel = NULL;lv_obj_t *ui_scrInformation_lblModelV = NULL;lv_obj_t *ui_scrInformation_cntSerial = NULL;lv_obj_t *ui_scrInformation_lblSerial = NULL;lv_obj_t *ui_scrInformation_lblSerialV = NULL;lv_obj_t *ui_scrInformation_cntFirmware = NULL;lv_obj_t *ui_scrInformation_lblFirmware = NULL;lv_obj_t *ui_scrInformation_lblFirmwareV = NULL;lv_obj_t *ui_scrInformation_cntBuild = NULL;lv_obj_t *ui_scrInformation_lblBuild = NULL;lv_obj_t *ui_scrInformation_lblBuildV = NULL;lv_obj_t *ui_scrInformation_cntHardware = NULL;lv_obj_t *ui_scrInformation_lblHardware = NULL;lv_obj_t *ui_scrInformation_cntMcu = NULL;lv_obj_t *ui_scrInformation_lblMcu = NULL;lv_obj_t *ui_scrInformation_lblMcuV = NULL;lv_obj_t *ui_scrInformation_cntAdc = NULL;lv_obj_t *ui_scrInformation_lblAdc = NULL;lv_obj_t *ui_scrInformation_lblAdcV = NULL;lv_obj_t *ui_scrInformation_cntActiveTime = NULL;lv_obj_t *ui_scrInformation_lblActiveTime = NULL;lv_obj_t *ui_scrInformation_lblActiveTimeV = NULL;lv_obj_t *ui_scrInformation_cntBy = NULL;lv_obj_t *ui_scrInformation_lblBy = NULL;lv_obj_t *ui_scrInformation_lblUniversity = NULL;lv_obj_t *ui_scrInformation_lblProject = NULL;
 // event funtions
 void ui_event_scrInformation_btnBack( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
@@ -24,9 +24,9 @@ lv_obj_remove_flag( ui_scrInformation, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 ui_object_set_themeable_style_property(ui_scrInformation, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BG_COLOR, _ui_theme_color_Base);
 ui_object_set_themeable_style_property(ui_scrInformation, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_BG_OPA, _ui_theme_alpha_Base);
 
-ui_scrInformation_contTopBar1 = ui_contTopBar_create(ui_scrInformation);
-lv_obj_set_x( ui_scrInformation_contTopBar1, 0 );
-lv_obj_set_y( ui_scrInformation_contTopBar1, 0 );
+ui_scrInformation_contTopBar = ui_contTopBar_create(ui_scrInformation);
+lv_obj_set_x( ui_scrInformation_contTopBar, 0 );
+lv_obj_set_y( ui_scrInformation_contTopBar, 0 );
 
 ui_scrInformation_lblInfo = lv_label_create(ui_scrInformation);
 lv_obj_set_width( ui_scrInformation_lblInfo, LV_SIZE_CONTENT);  /// 1
@@ -423,7 +423,7 @@ void ui_scrInformation_screen_destroy(void)
 
 // NULL screen variables
 ui_scrInformation= NULL;
-ui_scrInformation_contTopBar1= NULL;
+ui_scrInformation_contTopBar= NULL;
 ui_scrInformation_lblInfo= NULL;
 ui_scrInformation_btnBack= NULL;
 ui_scrInformation_cntDevice= NULL;
