@@ -33,4 +33,5 @@ void ui_chart_push_float_data(lv_obj_t *chart, const float *points, uint16_t cou
     s_scaled_fft[i] = (int32_t)(points[i] * scale);
   }
   lv_chart_set_series_ext_y_array(chart, ser, s_scaled_fft);
+  lv_chart_refresh(chart);
 }

@@ -15,7 +15,7 @@ void scr_fft_step(void);
  * @param magnitudes Float magnitude array (normalized 0..1)
  * @param count Number of data points
  */
-void scr_fft_update_chart(const float *magnitudes, uint16_t count);
+void scr_fft_update_chart(const float *magnitudes, uint16_t count, float freq_resolution);
 /**
  * @brief Updates the peak field in the FFT data brief
  * @param raw_peak Raw peak value (not scaled)
