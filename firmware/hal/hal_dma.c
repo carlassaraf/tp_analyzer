@@ -1,5 +1,6 @@
 #include "hal_dma.h"
 #include "hardware/dma.h"
+#include "hardware/irq.h"
 
 static const enum dma_channel_transfer_size dma_size_map[] = {
     [HAL_DMA_SIZE_8]  = DMA_SIZE_8,
@@ -40,4 +41,19 @@ void hal_dma_start(hal_dma_t *ctx, const void *src, size_t count) {
 
 void hal_dma_wait(hal_dma_t *ctx) {
     dma_channel_wait_for_finish_blocking((uint)ctx->chan);
+}
+
+void hal_dma_set_completion_irq(hal_dma_t *ctx, void (*handler)(void)) {
+    if (handler) {
+        irq_set_exclusive_handler(DMA_IRQ_1, handler);
+        dma_channel_set_irq1_enabled((uint)ctx->chan, true);
+        irq_set_enabled(DMA_IRQ_1, true);
+    } else {
+        irq_set_enabled(DMA_IRQ_1, false);
+        dma_channel_set_irq1_enabled((uint)ctx->chan, false);
+    }
+}
+
+void hal_dma_irq_clear(hal_dma_t *ctx) {
+    dma_hw->ints1 = 1u << (uint)ctx->chan;
 }
