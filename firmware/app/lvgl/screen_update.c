@@ -95,7 +95,7 @@ static void screen_update_plot_data(void *data)
     initialized = true;
   }
   dsp_fft_run(&fft_inst, input, fft_out);
-  arm_max_f32(fft_out, N, &peak, &bin_max);
+  arm_max_f32(fft_out, N / 2, &peak, &bin_max);
   scr_oscilloscope_update_frequency(bin_max * FS / N);
 }
 
