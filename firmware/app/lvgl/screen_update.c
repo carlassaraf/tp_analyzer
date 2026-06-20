@@ -126,7 +126,16 @@ static void screen_update_fft_data(void *data)
   arm_mult_f32(input, hanning_window, input, N);
   for (uint32_t i = 0; i < N; i++) { input[i] /= hanning_gain; }
   dsp_fft_run(&fft_inst, input, fft_out);
-  scr_fft_update_chart(fft_out, N / 2);
+  scr_fft_update_chart(fft_out, N / 2, FS / N);
+
+  // Get peak, rms and frequency value
+  float32_t sqrt2, peak;
+  uint32_t idx;
+  arm_sqrt_f32(2, &sqrt2);
+  arm_absmax_f32(fft_out, N / 2, &peak, &idx);
+  scr_fft_update_frequency(idx * FS / N);
+  scr_fft_update_peak(peak);
+  scr_fft_update_rms(peak / sqrt2);
 }
 
 static void screen_update_datetime(void *data)
