@@ -57,23 +57,23 @@ LV_IMG_DECLARE( ui_img_icons_ic_chevdown_png);   // assets/icons/ic_chevdown.png
 LV_FONT_DECLARE( ui_font_MonoBold11);
 LV_FONT_DECLARE( ui_font_MonoBold13);
 LV_FONT_DECLARE( ui_font_MonoBold19);
+LV_FONT_DECLARE( ui_font_MonoBold24);
 LV_FONT_DECLARE( ui_font_MonoMed10);
 LV_FONT_DECLARE( ui_font_MonoMed11);
 LV_FONT_DECLARE( ui_font_MonoReg10);
 LV_FONT_DECLARE( ui_font_MonoReg11);
 LV_FONT_DECLARE( ui_font_MonoReg8);
 LV_FONT_DECLARE( ui_font_MonoReg9);
-LV_FONT_DECLARE( ui_font_MonoBold24);
 LV_FONT_DECLARE( ui_font_SansBold10);
 LV_FONT_DECLARE( ui_font_SansBold13);
 LV_FONT_DECLARE( ui_font_SansBold15);
+LV_FONT_DECLARE( ui_font_SansBold16);
 LV_FONT_DECLARE( ui_font_SansBold24);
 LV_FONT_DECLARE( ui_font_SansBold9);
 LV_FONT_DECLARE( ui_font_SansMed10);
 LV_FONT_DECLARE( ui_font_SansMed12);
 LV_FONT_DECLARE( ui_font_SansReg10);
 LV_FONT_DECLARE( ui_font_SansReg11);
-LV_FONT_DECLARE( ui_font_SansBold16);
 
 // UI INIT
 void ui_init(void);

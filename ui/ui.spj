@@ -42578,7 +42578,6 @@
               },
               {
                 "nid": 1010,
-                "flags": 1048576,
                 "strtype": "CHART/Chart",
                 "InheritedType": 1
               },
@@ -74619,7 +74618,7 @@
   },
   "animations": [],
   "selected_theme": "Dark",
-  "selected_screen": "GUID16417394-794409S1275160",
+  "selected_screen": "GUID72234545-788174S6715166",
   "info": {
     "name": "ui.spj",
     "depth": 1,
@@ -74648,7 +74647,7 @@
     "separate_screen_save": false,
     "hierarchy_state_save": false,
     "reverse_event_order": false,
-    "backup_cnt": 113,
+    "backup_cnt": 118,
     "autosave_cnt": 0,
     "group_color_cnt": 1,
     "imagebytearrayprefix": "",
