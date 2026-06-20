@@ -37,6 +37,7 @@ static const screen_t screens[SCREEN_COUNT] = {
   [SCREEN_BOOT]     = SCR_REGISTER("Boot",            ui_scrBoot,         boot    ),
   [SCREEN_DATETIME] = SCR_REGISTER_TB("Datetime",     ui_scrDatetime,     datetime),
   [SCREEN_FFT]      = SCR_REGISTER_TB("FFT",          ui_scrFFT,          fft     ),
+  [SCREEN_INFO]     = SCR_REGISTER_TB("Info",         ui_scrInformation,  information),
   [SCREEN_MENU]     = SCR_REGISTER_TB("Menu",         ui_scrMenu,         menu    ),
   [SCREEN_OSC]      = SCR_REGISTER_TB("Oscilloscope", ui_scrOscilloscope, oscilloscope ),
   [SCREEN_SETTINGS] = SCR_REGISTER_TB("Setting",      ui_scrSettings,     settings ),
