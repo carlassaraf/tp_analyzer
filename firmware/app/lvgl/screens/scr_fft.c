@@ -2,13 +2,13 @@
 #include "lvgl/screens.h"
 #include "lvgl/helpers/chart.h"
 #include "lvgl/helpers/animations.h"
+#include "lvgl_port.h"
 
 #define CHART_PIXEL_WIDTH     414
 #define SIDE_MENU_X_HIDDEN    480
 #define SIDE_MENU_X_VISIBLE   296
 #define SIDE_MENU_TIMEOUT_MS  5000
 #define SIDE_MENU_ANIM_MS     250
-#define ENCODER_ACTIVE_THRESH 50   // ms: inactive_time below this → encoder just moved
 #define INIT_GRACE_MS         200  // ignore encoder for 200ms after entering screen
 #define VSCALE_CNT            4
 #define SPAN_CNT              5
@@ -194,10 +194,11 @@ void scr_fft_step(void)
   // from immediately triggering the side menu.
   if (lv_tick_elaps(s_init_tick) < INIT_GRACE_MS) return;
 
-  // lv_task_handler() updates last_activity_time whenever enc_diff != 0,
-  // so a low inactive time here means the encoder was rotated this frame.
-  bool encoder_active = lv_display_get_inactive_time(lv_display_get_default()) < ENCODER_ACTIVE_THRESH;
-  
+  // lvgl_port_get_encoder_diff() returns the raw diff from the last indev read
+  // (set inside lv_task_handler()) and clears it — non-zero means the encoder
+  // rotated this frame, regardless of how long the display flush took.
+  bool encoder_active = lvgl_port_get_encoder_diff() != 0;
+
   if (!encoder_active) return;
 
   if (!s_menu_visible) {
