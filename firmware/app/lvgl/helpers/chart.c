@@ -1,7 +1,7 @@
 #include "chart.h"
 #include "hal/hal_adc.h"
 
-#define FFT_OUT_MAX 1024
+#define FFT_OUT_MAX 512
 
 static int32_t s_scaled[HAL_ADC_BUFFER_SIZE];
 static int32_t s_scaled_fft[FFT_OUT_MAX];
@@ -33,4 +33,5 @@ void ui_chart_push_float_data(lv_obj_t *chart, const float *points, uint16_t cou
     s_scaled_fft[i] = (int32_t)(points[i] * scale);
   }
   lv_chart_set_series_ext_y_array(chart, ser, s_scaled_fft);
+  lv_chart_refresh(chart);
 }

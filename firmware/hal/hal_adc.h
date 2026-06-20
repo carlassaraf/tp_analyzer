@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 // Samples per DMA transfer — must equal N in dsp.h so one transfer fills one FFT window
-#define HAL_ADC_BUFFER_SIZE 2048
+#define HAL_ADC_BUFFER_SIZE 1024
 
 // Type of expected callback for DMA
 typedef void (*hal_adc_ready_cb_t)(const uint16_t *buf);

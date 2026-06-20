@@ -33,22 +33,22 @@ SET(SOURCES components/ui_comp_conttopbar.c
     fonts/ui_font_MonoBold11.c
     fonts/ui_font_MonoBold13.c
     fonts/ui_font_MonoBold19.c
+    fonts/ui_font_MonoBold24.c
     fonts/ui_font_MonoMed10.c
     fonts/ui_font_MonoMed11.c
     fonts/ui_font_MonoReg10.c
     fonts/ui_font_MonoReg11.c
     fonts/ui_font_MonoReg8.c
     fonts/ui_font_MonoReg9.c
-    fonts/ui_font_MonoBold24.c
     fonts/ui_font_SansBold10.c
     fonts/ui_font_SansBold13.c
     fonts/ui_font_SansBold15.c
+    fonts/ui_font_SansBold16.c
     fonts/ui_font_SansBold24.c
     fonts/ui_font_SansBold9.c
     fonts/ui_font_SansMed10.c
     fonts/ui_font_SansMed12.c
     fonts/ui_font_SansReg10.c
-    fonts/ui_font_SansReg11.c
-    fonts/ui_font_SansBold16.c)
+    fonts/ui_font_SansReg11.c)
 
 add_library(ui ${SOURCES})

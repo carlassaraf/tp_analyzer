@@ -2,13 +2,13 @@
 #include "lvgl/screens.h"
 #include "lvgl/helpers/chart.h"
 #include "lvgl/helpers/animations.h"
+#include "lvgl_port.h"
 
 #define CHART_PIXEL_WIDTH     414
 #define SIDE_MENU_X_HIDDEN    480
 #define SIDE_MENU_X_VISIBLE   296
 #define SIDE_MENU_TIMEOUT_MS  5000
 #define SIDE_MENU_ANIM_MS     250
-#define ENCODER_ACTIVE_THRESH 50   // ms: inactive_time below this → encoder just moved
 #define INIT_GRACE_MS         200  // ignore encoder for 200ms after entering screen
 #define VSCALE_CNT            4
 #define SPAN_CNT              5
@@ -61,19 +61,25 @@ static int32_t restore_selected_scale(lv_obj_t *parent, uint32_t idx);
 
 // Public functions
 
-void scr_fft_update_chart(const float *magnitudes, uint16_t count)
+void scr_fft_update_chart(const float *magnitudes, uint16_t count, float freq_resolution)
 {
   static float decimated[CHART_PIXEL_WIDTH];
+  uint16_t bins_to_show = (uint16_t)((float)s_curr_span / freq_resolution);
+  if (bins_to_show > count) bins_to_show = count;
+
   for (uint16_t px = 0; px < CHART_PIXEL_WIDTH; px++) {
-    uint32_t start = (uint32_t)px * count / CHART_PIXEL_WIDTH;
-    uint32_t end   = (uint32_t)(px + 1) * count / CHART_PIXEL_WIDTH;
-    if (end > count) end = count;
-    uint32_t sum = 0;
-    for (uint32_t i = start; i < end; i++) sum += magnitudes[i];
-    decimated[px] = (sum / (end - start));
+    uint32_t start = (uint32_t)px * bins_to_show / CHART_PIXEL_WIDTH;
+    uint32_t end   = (uint32_t)(px + 1) * bins_to_show / CHART_PIXEL_WIDTH;
+    if (start == end) {
+      decimated[px] = magnitudes[start < bins_to_show ? start : bins_to_show - 1];
+    } else {
+      float sum = 0.0f;
+      for (uint32_t i = start; i < end; i++) sum += magnitudes[i];
+      decimated[px] = sum / (end - start);
+    }
   }
 
-  ui_chart_push_float_data(ui_scrFFT_chartView, decimated, count, (float)s_curr_vscale);
+  ui_chart_push_float_data(ui_scrFFT_chartView, decimated, CHART_PIXEL_WIDTH, (float)s_curr_vscale);
 }
 
 void scr_fft_update_peak(float raw_peak)
@@ -104,6 +110,7 @@ void scr_fft_prepare(void)
                     lv_color_hex(_ui_theme_color_Voltage[0]),
                     LV_CHART_AXIS_PRIMARY_Y);
   lv_chart_set_point_count(ui_scrFFT_chartView, CHART_PIXEL_WIDTH);
+  lv_obj_set_style_pad_column(ui_scrFFT_chartView, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
   ui_chart_bind_ext_array(ui_scrFFT_chartView, CHART_PIXEL_WIDTH);
   // Propagate focus event to inside objects
   lv_obj_add_flag(ui_scrFFT_cntScaleV, LV_OBJ_FLAG_EVENT_TRICKLE);
@@ -148,6 +155,7 @@ void scr_fft_init(void)
   s_menu_visible = false;
   s_init_tick    = lv_tick_get();
   // Update scales accordingly
+  lv_chart_set_axis_range(ui_scrFFT_chartView, LV_CHART_AXIS_PRIMARY_Y, 0, s_curr_vscale);
   lv_label_set_text_fmt(ui_scrFFT_lblTop, "%d", s_curr_vscale);
   lv_label_set_text(ui_scrFFT_lblBot, "0");
   lv_label_set_text_fmt(ui_scrFFT_lblScaleVValue, "%d %s", s_curr_vscale, (s_curr_signal == SIGNAL_SP_VOLTAGE) ? "V" : "A");
@@ -186,9 +194,10 @@ void scr_fft_step(void)
   // from immediately triggering the side menu.
   if (lv_tick_elaps(s_init_tick) < INIT_GRACE_MS) return;
 
-  // lv_task_handler() updates last_activity_time whenever enc_diff != 0,
-  // so a low inactive time here means the encoder was rotated this frame.
-  bool encoder_active = lv_display_get_inactive_time(lv_display_get_default()) < ENCODER_ACTIVE_THRESH;
+  // lvgl_port_get_encoder_diff() returns the raw diff from the last indev read
+  // (set inside lv_task_handler()) and clears it — non-zero means the encoder
+  // rotated this frame, regardless of how long the display flush took.
+  bool encoder_active = lvgl_port_get_encoder_diff() != 0;
 
   if (!encoder_active) return;
 
@@ -279,6 +288,7 @@ static void change_signal_cb(lv_event_t *event)
     s_curr_vscale = s_curr_current_scale;
   }
   // Update scales with current signal
+  lv_chart_set_axis_range(ui_scrFFT_chartView, LV_CHART_AXIS_PRIMARY_Y, 0, s_curr_vscale);
   lv_label_set_text_fmt(ui_scrFFT_lblScaleVValue, "%d %s", s_curr_vscale, (s_curr_signal == SIGNAL_SP_VOLTAGE) ? "V" : "A");
   lv_label_set_text_fmt(ui_scrFFT_lblUnit, "%s", (s_curr_signal == SIGNAL_SP_VOLTAGE) ? "V" : "A");
   update_vscales();
@@ -368,6 +378,7 @@ static void change_vertical_scale_cb(lv_event_t *event)
     s_curr_current_scale = s_vscales[s_curr_signal][selected];
     s_curr_vscale = s_curr_current_scale;
   }
+  lv_chart_set_axis_range(ui_scrFFT_chartView, LV_CHART_AXIS_PRIMARY_Y, 0, s_curr_vscale);
   lv_label_set_text_fmt(ui_scrFFT_lblTop, "%d", s_curr_vscale);
   lv_label_set_text(ui_scrFFT_lblBot, "0");
   lv_label_set_text_fmt(ui_scrFFT_lblScaleVValue, "%d %s", s_curr_vscale, (s_curr_signal == SIGNAL_SP_VOLTAGE) ? "V" : "A");

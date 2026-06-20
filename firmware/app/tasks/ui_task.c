@@ -47,7 +47,7 @@ void ui_task(void *params) {
     lv_task_handler();
     screen_update();
     screen_manager_step();
-    vTaskDelay(pdMS_TO_TICKS(10));
+    vTaskDelay(pdMS_TO_TICKS(5));
   }
 }
 

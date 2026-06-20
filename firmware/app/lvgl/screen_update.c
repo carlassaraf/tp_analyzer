@@ -52,10 +52,24 @@ void screen_update_cmd_push(screen_update_cmd_t cmd, void *data) {
 }
 
 void screen_update(void) {
+  screen_update_msg_t latest[SCREEN_UPDATE_CMD_COUNT];
+  bool has_msg[SCREEN_UPDATE_CMD_COUNT] = {false};
   screen_update_msg_t msg;
-  if (xQueueReceive(screen_update_queue, &msg, 0)) {
+
+  // Drain the entire queue, keeping only the latest message per command type.
+  // This discards stale frames that built up between UI task iterations.
+  while (xQueueReceive(screen_update_queue, &msg, 0)) {
+    latest[msg.cmd] = msg;
+    has_msg[msg.cmd] = true;
+  }
+
+  // Each handler gets its own lock window — same as the original code.
+  // Holding one big lock for all handlers (including FFT computation) starves
+  // the encoder indev timer that LVGL services between lv_lock windows.
+  for (int i = 0; i < SCREEN_UPDATE_CMD_COUNT; i++) {
+    if (!has_msg[i]) continue;
     lv_lock();
-    screen_update_handlers[msg.cmd](msg.data);
+    screen_update_handlers[i](latest[i].data);
     lv_unlock();
   }
 }
@@ -95,7 +109,7 @@ static void screen_update_plot_data(void *data)
     initialized = true;
   }
   dsp_fft_run(&fft_inst, input, fft_out);
-  arm_max_f32(fft_out, N, &peak, &bin_max);
+  arm_max_f32(fft_out, N / 2, &peak, &bin_max);
   scr_oscilloscope_update_frequency(bin_max * FS / N);
 }
 
@@ -126,7 +140,16 @@ static void screen_update_fft_data(void *data)
   arm_mult_f32(input, hanning_window, input, N);
   for (uint32_t i = 0; i < N; i++) { input[i] /= hanning_gain; }
   dsp_fft_run(&fft_inst, input, fft_out);
-  scr_fft_update_chart(fft_out, N / 2);
+  scr_fft_update_chart(fft_out, N / 2, FS / N);
+
+  // Get peak, rms and frequency value
+  float32_t sqrt2, peak;
+  uint32_t idx;
+  arm_sqrt_f32(2, &sqrt2);
+  arm_absmax_f32(fft_out, N / 2, &peak, &idx);
+  scr_fft_update_frequency(idx * FS / N);
+  scr_fft_update_peak(peak);
+  scr_fft_update_rms(peak / sqrt2);
 }
 
 static void screen_update_datetime(void *data)

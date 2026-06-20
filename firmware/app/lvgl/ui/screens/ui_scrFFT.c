@@ -197,7 +197,7 @@ lv_obj_set_width( ui_scrFFT_lblPeakValue, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_scrFFT_lblPeakValue, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_scrFFT_lblPeakValue, 14 );
 lv_obj_set_y( ui_scrFFT_lblPeakValue, 22 );
-lv_label_set_text(ui_scrFFT_lblPeakValue,"327");
+lv_label_set_text(ui_scrFFT_lblPeakValue,"327.0");
 ui_object_set_themeable_style_property(ui_scrFFT_lblPeakValue, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Primario);
 ui_object_set_themeable_style_property(ui_scrFFT_lblPeakValue, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Primario);
 lv_obj_set_style_text_font(ui_scrFFT_lblPeakValue, &ui_font_MonoBold19, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -205,7 +205,7 @@ lv_obj_set_style_text_font(ui_scrFFT_lblPeakValue, &ui_font_MonoBold19, LV_PART_
 ui_scrFFT_lblPeakUnit = lv_label_create(ui_scrFFT_cntPeak);
 lv_obj_set_width( ui_scrFFT_lblPeakUnit, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_scrFFT_lblPeakUnit, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_scrFFT_lblPeakUnit, 50 );
+lv_obj_set_x( ui_scrFFT_lblPeakUnit, 75 );
 lv_obj_set_y( ui_scrFFT_lblPeakUnit, 30 );
 lv_label_set_text(ui_scrFFT_lblPeakUnit,"V");
 ui_object_set_themeable_style_property(ui_scrFFT_lblPeakUnit, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Atenuado);

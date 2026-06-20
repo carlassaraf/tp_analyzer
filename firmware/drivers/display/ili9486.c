@@ -208,3 +208,11 @@ void ili9486_send_pixels_dma(ili9486_t *ctx, const uint8_t *data, size_t len) {
 void ili9486_dma_wait(ili9486_t *ctx) {
     hal_dma_wait(ctx->dma);
 }
+
+void ili9486_dma_set_completion_irq(ili9486_t *ctx, void (*handler)(void)) {
+    hal_dma_set_completion_irq(ctx->dma, handler);
+}
+
+void ili9486_dma_irq_clear(ili9486_t *ctx) {
+    hal_dma_irq_clear(ctx->dma);
+}

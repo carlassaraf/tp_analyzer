@@ -4,20 +4,38 @@
 #include "hal/hal_display.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "semphr.h"
 
 #define DISPLAY_BUFFER_LINES 20
 
 #if defined(DISPLAY_DRIVER_ILI9486)
 #include "drivers/display/ili9486.h"
 
-static ili9486_t *display_ctx;
+static ili9486_t        *display_ctx;
+static SemaphoreHandle_t s_flush_sem;
 
+// Called from DMA_IRQ_0 when each band's pixel transfer finishes.
+// Signals flush_wait_cb so the UI task can render the next band.
+static void dma_done_irq(void) {
+    ili9486_dma_irq_clear(display_ctx);
+    BaseType_t hp = pdFALSE;
+    xSemaphoreGiveFromISR(s_flush_sem, &hp);
+    portYIELD_FROM_ISR(hp);
+}
+
+// Start DMA and return immediately — LVGL calls flush_wait_cb before the next band.
 static void ili9486_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
                            const uint8_t *buf, size_t len, void (*done_cb)(void)) {
+    (void)done_cb;  // completion is handled via flush_wait_cb + DMA IRQ
     ili9486_set_window(display_ctx, x1, y1, x2, y2);
     ili9486_send_pixels_dma(display_ctx, buf, len);
-    ili9486_dma_wait(display_ctx);
-    done_cb();
+}
+
+// Called by LVGL before rendering each new band; yields CPU until DMA is done.
+static void flush_wait_cb(lv_display_t *display) {
+    (void)display;
+    xSemaphoreTake(s_flush_sem, portMAX_DELAY);
+    // LVGL clears disp->flushing after this returns.
 }
 
 static const hal_display_info_t ili9486_display_info = {
@@ -109,7 +127,9 @@ int32_t lvgl_port_init(void) {
         .height  = ILI9486_HEIGHT,
         .rotation = 1,
     };
+    s_flush_sem = xSemaphoreCreateBinary();
     display_ctx = ili9486_init(&disp_config);
+    ili9486_dma_set_completion_irq(display_ctx, dma_done_irq);
     hal_display_set_backend(ili9486_flush, &ili9486_display_info);
 #elif defined(DISPLAY_DRIVER_ST7789)
     static const st7789_config_t disp_config = {
@@ -142,6 +162,9 @@ int32_t lvgl_port_init(void) {
     disp = lv_display_create(info->width, info->height);
     lv_display_set_color_format(disp, LV_COLOR_FORMAT_RGB565_SWAPPED);
     lv_display_set_flush_cb(disp, flush_cb);
+#if defined(DISPLAY_DRIVER_ILI9486)
+    lv_display_set_flush_wait_cb(disp, flush_wait_cb);
+#endif
     lv_display_set_buffers(disp, buf, NULL, sizeof(buf), LV_DISPLAY_RENDER_MODE_PARTIAL);
 
     lv_tick_set_cb((lv_tick_get_cb_t)xTaskGetTickCount);
@@ -156,6 +179,7 @@ int32_t lvgl_port_init(void) {
     enc_indev = lv_indev_create();
     lv_indev_set_type(enc_indev, LV_INDEV_TYPE_ENCODER);
     lv_indev_set_read_cb(enc_indev, encoder_read_cb);
+    lv_timer_set_period(lv_indev_get_read_timer(enc_indev), 10);
 
     lv_group_t *group = lv_group_create();
     lv_group_set_default(group);

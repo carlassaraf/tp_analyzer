@@ -24,4 +24,13 @@ void hal_dma_start(hal_dma_t *ctx, const void *src, size_t count);
 // Block until the current transfer completes.
 void hal_dma_wait(hal_dma_t *ctx);
 
+// Register a completion callback on DMA_IRQ_1. Called from interrupt context
+// when the transfer finishes. Pass NULL to disable.
+// Note: DMA_IRQ_0 is reserved for the ADC HAL (hal_adc.c).
+void hal_dma_set_completion_irq(hal_dma_t *ctx, void (*handler)(void));
+
+// Clear the channel's DMA_IRQ_1 interrupt flag. Must be called at the start
+// of the completion handler.
+void hal_dma_irq_clear(hal_dma_t *ctx);
+
 #endif
