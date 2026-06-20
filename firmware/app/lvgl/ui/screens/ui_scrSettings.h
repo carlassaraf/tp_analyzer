@@ -34,6 +34,7 @@ extern lv_obj_t *ui_scrSettings_iconMeasure;
 extern lv_obj_t *ui_scrSettings_lblMeasure;
 extern lv_obj_t *ui_scrSettings_lblMeasureBrief;
 extern lv_obj_t *ui_scrSettings_iconMeasureEnter;
+extern void ui_event_scrSettings_cntInfo( lv_event_t * e);
 extern lv_obj_t *ui_scrSettings_cntInfo;
 extern lv_obj_t *ui_scrSettings_iconInfo;
 extern lv_obj_t *ui_scrSettings_lblInfo;
