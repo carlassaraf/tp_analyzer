@@ -30,4 +30,11 @@ void ili9486_send_pixels_dma(ili9486_t *ctx, const uint8_t *data, size_t len);
 // Block until the current DMA transfer is complete.
 void ili9486_dma_wait(ili9486_t *ctx);
 
+// Register a callback invoked from DMA_IRQ_1 when a pixel DMA transfer finishes.
+// The handler runs in interrupt context; call ili9486_dma_irq_clear() first.
+void ili9486_dma_set_completion_irq(ili9486_t *ctx, void (*handler)(void));
+
+// Clear the DMA completion interrupt flag. Must be called at the top of the handler.
+void ili9486_dma_irq_clear(ili9486_t *ctx);
+
 #endif
