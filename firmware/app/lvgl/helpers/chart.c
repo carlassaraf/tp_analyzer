@@ -1,7 +1,7 @@
 #include "chart.h"
 #include "hal/hal_adc.h"
 
-#define FFT_OUT_MAX 1024
+#define FFT_OUT_MAX 512
 
 static int32_t s_scaled[HAL_ADC_BUFFER_SIZE];
 static int32_t s_scaled_fft[FFT_OUT_MAX];
