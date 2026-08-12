@@ -100,7 +100,7 @@ Notes:
 - [x] Confirm flashing workflow (UF2 drag-drop or `picotool`/SWD).
 - [x] Confirm USB CDC console/logging, matching current [main.c](main.c)
       behavior.
-- [ ] Lay down the [target directory structure](#target-directory-structure)
+- [x] Lay down the [target directory structure](#target-directory-structure)
       (`west.yml`, `CMakeLists.txt`, `prj.conf`, empty `src/`, `drivers/`,
       `dts/bindings/`, `boards/` overlay skeleton).
 

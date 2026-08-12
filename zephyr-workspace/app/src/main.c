@@ -1,29 +1,29 @@
 #include <stdio.h>
-#include "pico/stdlib.h"
-#include "FreeRTOS.h"
-#include "task.h"
-#include "app/app.h"
+#include <zephyr/kernel.h>
+#include <zephyr/logging/log.h>
 
-int main(void) {
-    stdio_init_all();
+LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
 
-    // Wait up to 2s for USB; continue regardless so the display works standalone.
-    for (int i = 0; i < 20 && !stdio_usb_connected(); i++) { sleep_ms(100); }
-    printf("Starting firmware...\n");
-
-    if (!app_init()) {
-        puts("app_init failed");
-        return 1;
+int main(void)
+{
+    while(1) {
+        LOG_INF("Hello Zephyr...");
+        k_msleep(200);
     }
 
-    if (!app_run()) {
-        puts("app_run failed");
-        return 1;
-    }
+    // if (!app_init()) {
+    //     puts("app_init failed");
+    //     return 1;
+    // }
 
-    vTaskStartScheduler();
+    // if (!app_run()) {
+    //     puts("app_run failed");
+    //     return 1;
+    // }
 
-    // Should never reach here
-    for (;;) {}
+    // vTaskStartScheduler();
+
+    // // Should never reach here
+    // for (;;) {}
     return 0;
 }
