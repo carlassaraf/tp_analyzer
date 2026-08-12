@@ -155,6 +155,28 @@ checkout).
       driver needed.** The app's carried-over `drivers/display_ili9486/`
       files are dead code as a result (see directory structure above) —
       not yet deleted, but no longer part of the plan.
+- [x] Frame time measured on real hardware (bitbang backend, 20-frame
+      average, `src/main.c`'s `run_fps_test()`): **312.6 ms for a full
+      480×320 flush (~3.1 fps)**, ≈0.98 ms/row. Full-screen redraw isn't
+      the metric that matters for this app though — LVGL will only flush
+      dirty regions, and the FreeRTOS driver's own partial buffer was 40
+      lines tall. Extrapolated to that same chunk size: **~39 ms per
+      40-line partial flush**, up to ~25 flushes/sec back-to-back. Judged
+      acceptable to proceed on; revisit only if Phase 4's real chart/FFT
+      redraw rate feels sluggish once LVGL is actually driving it.
+
+**PIO attempted and reverted:** swapping the bus node to
+`raspberrypi,pico-mipi-dbi-pio` built and flashed but produced an all-white
+screen. Root-caused (by reading `mipi_dbi_rpi_pico_pio.c`, not confirmed on
+a scope) to our exact pin numbers — WR=17, DC=18, CS=19 are 3 consecutive
+GPIOs, which trips the driver's "consecutive control pins" fast path: CS/DC/WR
+get driven through hardcoded PIO side-set instructions instead of through
+`gpio_pin_set_dt()` (which is what respects our devicetree `GPIO_ACTIVE_LOW`/
+`HIGH` flags, and what the bitbang backend and the driver's *non*-consecutive
+path both use). That side-set logic couldn't be verified by static reading
+alone — would need a scope on WR/CS/DC or upstream input to pin down further.
+Since 1a's bitbang numbers above are judged acceptable, PIO stays parked as
+optional future work, not a blocker.
 
 **Note:** this is the `ilitek,ili9488` driver's power/gamma tuning, not a
 native ILI9486 driver — Zephyr still has no `ilitek,ili9486` compatible.
@@ -173,8 +195,10 @@ node needs zero changes, since it only ever talks to the abstract `mipi_dbi`
 device.
 
 **Exit criteria:** met — panel renders correctly on real hardware through
-the reused `ilitek,ili9488` binding, correct orientation, no visual
-artifacts during window-set/pixel-push sequences.
+the reused `ilitek,ili9488` binding over the bitbang `mipi_dbi` backend,
+correct orientation, no visual artifacts during window-set/pixel-push
+sequences, frame time measured and judged acceptable (~39 ms/40-line
+partial flush, extrapolated from a 312.6 ms full-screen benchmark).
 
 ### 1b. Continuous ADC + DMA acquisition
 

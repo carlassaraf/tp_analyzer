@@ -102,6 +102,52 @@ static int write_gradient_strip(uint16_t y, uint16_t height)
 	return 0;
 }
 
+/* Number of full-screen flushes to average over. */
+#define FPS_TEST_FRAMES 20
+
+/* Two alternating colors so a slow rate is visible on the panel too, not
+ * just in the log.
+ */
+static const uint16_t fps_test_colors[] = {
+	RGB565(255, 0, 0),
+	RGB565(0, 255, 0),
+};
+
+static void run_fps_test(void)
+{
+	struct display_buffer_descriptor desc = {
+		.width = DISPLAY_WIDTH,
+		.pitch = DISPLAY_WIDTH,
+	};
+	uint32_t start_ms = k_uptime_get_32();
+
+	for (int frame = 0; frame < FPS_TEST_FRAMES; frame++) {
+		uint16_t color = fps_test_colors[frame % ARRAY_SIZE(fps_test_colors)];
+
+		for (int i = 0; i < DISPLAY_WIDTH * CHUNK_LINES; i++) {
+			line_buf[i] = color;
+		}
+
+		for (uint16_t row = 0; row < DISPLAY_HEIGHT; row += CHUNK_LINES) {
+			uint16_t rows_this_write = MIN(CHUNK_LINES, DISPLAY_HEIGHT - row);
+
+			desc.height = rows_this_write;
+			desc.buf_size = DISPLAY_WIDTH * rows_this_write * sizeof(uint16_t);
+
+			display_write(display_dev, 0, row, &desc, line_buf);
+		}
+	}
+
+	uint32_t elapsed_ms = k_uptime_get_32() - start_ms;
+	uint32_t avg_frame_ms = elapsed_ms / FPS_TEST_FRAMES;
+	/* fps * 10, to get one decimal place without pulling in float printf */
+	uint32_t fps_x10 = (FPS_TEST_FRAMES * 10000U) / elapsed_ms;
+
+	LOG_INF("FPS test: %d full-screen (%ux%u) flushes in %u ms -> %u ms/frame, %u.%u fps",
+		FPS_TEST_FRAMES, DISPLAY_WIDTH, DISPLAY_HEIGHT, elapsed_ms, avg_frame_ms,
+		fps_x10 / 10, fps_x10 % 10);
+}
+
 int main(void)
 {
 	if (!device_is_ready(display_dev)) {
@@ -144,6 +190,8 @@ int main(void)
 	display_blanking_off(display_dev);
 
 	LOG_INF("Static pattern test done");
+
+	run_fps_test();
 
 	while (1) {
 		k_msleep(1000);
