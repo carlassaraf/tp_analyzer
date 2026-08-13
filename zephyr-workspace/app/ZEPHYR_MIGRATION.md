@@ -254,21 +254,40 @@ structure](#current-directory-structure) above for the full tree):
   same `reg` as the stock (disabled) `adc` node, `&dma` enabled, GPIO26/ADC
   channel 0 pinctrl group (matches `board_config.h`'s `ADC_GPIO`/`ADC_CHANNEL`).
 
-**STATUS:** the above is a scaffold, not a validated implementation — no
-`west`/toolchain available to build it in this pass, and the pinctrl
-handling for the ADC pin in particular is an unverified TODO in the overlay.
-Treat every file as a first draft to correct during hardware bring-up, not
-as done work.
+**STATUS:** built and hardware-validated. The scaffold's one real bug: the
+DMA block config never set `source_addr_adj`, so it zero-initialized to
+`DMA_ADDR_ADJ_INCREMENT` (its `0` value) instead of `DMA_ADDR_ADJ_NO_CHANGE`
+— the read pointer was walking off the ADC FIFO register into whatever
+followed it in `adc_hw` instead of re-reading the FIFO each transfer. Fixed
+in `adc_stream_rpi_pico.c`. Pinctrl conf turned out fine as tested (3V3/GND
+and a real analog signal both read correctly) — see Known follow-ups below
+for what's still unverified about it.
 
-- [ ] Build it, fix whatever the scaffold above got wrong (pinctrl conf for
-      the ADC pin is the most likely culprit), get it running on hardware.
-- [ ] Wire `adc_stream_start()` up from a standalone thread/task, feeding a
-      `k_msgq` of `struct adc_stream_block`.
-- [ ] Validate sample rate and values via UART dump of peak/RMS/frequency
-      against a known signal-generator input.
+- [x] Build it, fix whatever the scaffold above got wrong, get it running
+      on hardware.
+- [x] Wire `adc_stream_start()` up feeding a `k_msgq` of `struct
+      adc_stream_block` — currently a smoke-test consumer loop in `main.c`
+      (logs min/avg/max per block); moving it into a real standalone
+      thread/task is Phase 2 work, tracked there.
+- [x] Validate sample rate and values via UART dump of peak/RMS/frequency
+      against a known signal-generator input — confirmed correct 100 ms
+      block cadence (1024 samples / 10240 Hz) and correct readings against
+      both DC rails (3V3/GND) and a real analog signal.
 
-**Exit criteria:** correct sample rate and values on hardware, no display
-needed yet.
+**Exit criteria:** met.
+
+**Known follow-ups** (none block the exit criteria above, revisit opportunistically):
+- Pinctrl only sets `RP2_PINCTRL_GPIO_FUNC_NULL` on the ADC pin — doesn't
+  confirm pulls/input-buffer are explicitly disabled the way the Pico-SDK's
+  `adc_gpio_init()` does. Testing so far used low-impedance sources (driven
+  rails, a signal generator), which wouldn't expose a weak pull bias.
+- `adc_select_input(0)` is hardcoded rather than devicetree/Kconfig-driven
+  (fine for this project's single-channel use).
+- `adc_stream_init()` resets/enables the ADC via both Zephyr's
+  `reset_line_toggle_dt()`/`clock_control_on()` *and* the Pico-SDK's
+  `adc_init()` right after — redundant, harmless, untidy.
+- No drop counter on a full `k_msgq` (just a rate-limited log) — matters
+  once `ad_task` is the real consumer instead of a draining smoke-test loop.
 
 ---
 

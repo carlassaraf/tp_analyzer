@@ -142,7 +142,9 @@ int adc_stream_start(const struct device *dev, struct k_msgq *msgq)
 
 	data->dma_blk = (struct dma_block_config){
 		.source_address = (uint32_t)&adc_hw->fifo,
+		.source_addr_adj = DMA_ADDR_ADJ_NO_CHANGE,	/* always the FIFO register */
 		.dest_address = (uint32_t)data->active,
+		.dest_addr_adj = DMA_ADDR_ADJ_INCREMENT,	/* walk the ping-pong buffer */
 		.block_size = BLOCK_SIZE_BYTES,
 	};
 
