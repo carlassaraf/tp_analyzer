@@ -4,6 +4,8 @@
 #include <zephyr/drivers/display.h>
 #include <zephyr/logging/log.h>
 
+#include "adc_stream.h"
+
 LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
 
 /* RGB565: 5 bits red, 6 bits green, 5 bits blue, packed into a native uint16_t. */
@@ -148,12 +150,69 @@ static void run_fps_test(void)
 		fps_x10 / 10, fps_x10 % 10);
 }
 
+static const struct device *adc = DEVICE_DT_GET(DT_NODELABEL(adc_stream));
+
+/* Depth 4: enough slack for a couple of blocks to queue up if this thread
+ * gets briefly preempted, without masking a real backpressure problem — see
+ * adc_stream_rpi_pico.c's k_msgq_put(K_NO_WAIT) comment on drops.
+ */
+K_MSGQ_DEFINE(adc_msgq, sizeof(struct adc_stream_block), 4, sizeof(void *));
+
+/* Phase 1b hardware bring-up smoke test (see adc_stream_rpi_pico.c's STATUS
+ * comment): pull blocks straight off the driver and log min/avg/max per
+ * block. No display/LVGL involved yet, so a failure here points at the ADC
+ * DMA path specifically, not anything downstream.
+ */
+static void run_adc_stream_test(void)
+{
+	int err;
+
+	if (!device_is_ready(adc)) {
+		LOG_ERR("ADC stream device not ready");
+		return;
+	}
+
+	err = adc_stream_start(adc, &adc_msgq);
+	if (err) {
+		LOG_ERR("adc_stream_start failed: %d", err);
+		return;
+	}
+	LOG_INF("ADC stream started, waiting for blocks...");
+
+	while (1) {
+		struct adc_stream_block block;
+
+		err = k_msgq_get(&adc_msgq, &block, K_SECONDS(2));
+		if (err) {
+			LOG_WRN("No ADC block in 2s - check DMA wiring/pinctrl");
+			continue;
+		}
+
+		uint32_t sum = 0;
+		uint16_t min = UINT16_MAX;
+		uint16_t max = 0;
+
+		for (size_t i = 0; i < block.count; i++) {
+			uint16_t sample = block.samples[i];
+
+			sum += sample;
+			min = MIN(min, sample);
+			max = MAX(max, sample);
+		}
+
+		LOG_INF("block: %u samples, min=%u avg=%u max=%u",
+			block.count, min, sum / block.count, max);
+	}
+}
+
 int main(void)
 {
 	if (!device_is_ready(display_dev)) {
 		LOG_ERR("Display device not ready");
 		return 0;
 	}
+
+	run_adc_stream_test();
 
 	struct display_capabilities caps;
 

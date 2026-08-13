@@ -6,6 +6,7 @@ menuconfig ADC_STREAM_RPI_PICO
 	default y
 	depends on DT_HAS_RASPBERRYPI_PICO_ADC_STREAM_ENABLED
 	select DMA
+	select PICOSDK_USE_ADC
 	help
 	  App-local driver (app/drivers/adc_stream/, not an upstream Zephyr
 	  driver) that free-runs the RP2350 ADC into ping-pong DMA buffers
