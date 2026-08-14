@@ -32,6 +32,7 @@ struct adc_stream_block {
 	 */
 	const uint16_t *samples;
 	size_t count;
+	uint8_t channel;
 };
 
 /**

@@ -68,6 +68,11 @@
 			pinmux = <ADC_CH0_P26>;
 		};
 	};
+	adc_ch1_default: adc_ch1_default {
+		group1 {
+			pinmux = <ADC_CH1_P27>;
+		};
+	};
 };
 
 &dma {
@@ -92,10 +97,20 @@
 		reg = <0x400a0000 DT_SIZE_K(4)>;
 		resets = <&reset RPI_PICO_RESETS_RESET_ADC>;
 		clocks = <&clocks RPI_PICO_CLKID_CLK_ADC>;
-		pinctrl-0 = <&adc_ch0_default>;
+		pinctrl-0 = <&adc_ch0_default &adc_ch1_default>;
 		pinctrl-names = "default";
 		dmas = <&dma 0 RPI_PICO_DMA_SLOT_ADC 0>;
 		dma-names = "rx";
 		status = "okay";
+
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		voltage_a: channel@0 {
+			reg = <0>;
+		};
+		current_a: channel@1 {
+			reg = <1>;
+		};
 	};
 };

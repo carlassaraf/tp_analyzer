@@ -152,11 +152,8 @@ static void run_fps_test(void)
 
 static const struct device *adc = DEVICE_DT_GET(DT_NODELABEL(adc_stream));
 
-/* Depth 4: enough slack for a couple of blocks to queue up if this thread
- * gets briefly preempted, without masking a real backpressure problem — see
- * adc_stream_rpi_pico.c's k_msgq_put(K_NO_WAIT) comment on drops.
- */
-K_MSGQ_DEFINE(adc_msgq, sizeof(struct adc_stream_block), 4, sizeof(void *));
+K_MSGQ_DEFINE(adc_msgq, sizeof(struct adc_stream_block),
+	      2 * DT_CHILD_NUM_STATUS_OKAY(DT_NODELABEL(adc_stream)), sizeof(void *));
 
 /* Phase 1b hardware bring-up smoke test (see adc_stream_rpi_pico.c's STATUS
  * comment): pull blocks straight off the driver and log min/avg/max per
@@ -200,8 +197,8 @@ static void run_adc_stream_test(void)
 			max = MAX(max, sample);
 		}
 
-		LOG_INF("block: %u samples, min=%u avg=%u max=%u",
-			block.count, min, sum / block.count, max);
+		LOG_INF("channel %u: %u samples, min=%u avg=%u max=%u",
+			block.channel, block.count, min, sum / block.count, max);
 	}
 }
 

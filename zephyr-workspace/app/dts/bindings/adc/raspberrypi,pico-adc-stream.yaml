@@ -18,6 +18,12 @@ compatible: "raspberrypi,pico-adc-stream"
 include: [base.yaml, pinctrl-device.yaml, reset-device.yaml]
 
 properties:
+  "#address-cells":
+    const: 1
+
+  "#size-cells":
+    const: 0
+
   reg:
     required: true
 
@@ -40,3 +46,11 @@ properties:
   dma-names:
     required: true
     description: Must be "rx".
+
+child-binding:
+  description: One ADC input channel.
+  properties:
+    reg:
+      type: array
+      required: true
+      description: ADC channel index (0-3 = GPIO26-29, 4 = internal temp; RP2350B adds more).

@@ -38,10 +38,11 @@
 LOG_MODULE_REGISTER(adc_stream_rpi_pico, CONFIG_ADC_STREAM_RPI_PICO_LOG_LEVEL);
 
 #define SAMPLE_SIZE_BYTES sizeof(uint16_t)
-#define BLOCK_SIZE_BYTES  (CONFIG_ADC_STREAM_BUFFER_SIZE * SAMPLE_SIZE_BYTES)
 
 struct adc_stream_config {
 	const struct pinctrl_dev_config *pcfg;
+	const uint8_t *channels;
+	uint8_t num_channels;
 	const struct device *clk_dev;
 	clock_control_subsys_t clk_id;
 	const struct reset_dt_spec reset;
@@ -53,10 +54,18 @@ struct adc_stream_config {
 struct adc_stream_data {
 	struct dma_config dma_cfg;
 	struct dma_block_config dma_blk;
-	uint16_t buf_a[CONFIG_ADC_STREAM_BUFFER_SIZE];
-	uint16_t buf_b[CONFIG_ADC_STREAM_BUFFER_SIZE];
-	uint16_t *active;	/* half the DMA channel is currently filling */
-	struct k_msgq *msgq;	/* NULL when stopped */
+	/* Sized per-instance (num_channels * CONFIG_ADC_STREAM_PER_CHANNEL_BUFFER_SIZE
+	 * samples each) by the arrays the INIT macro below declares and points
+	 * these at — can't size these inline here, num_channels varies per
+	 * devicetree instance and this struct type is shared across instances.
+	 */
+	uint16_t *buf_a;
+	uint16_t *buf_b;
+	uint16_t *active;		/* half the DMA channel is currently filling */
+	size_t block_size_bytes;	/* num_channels * PER_CHANNEL_BUFFER_SIZE * sizeof(uint16_t) */
+	struct k_msgq *msgq;		/* NULL when stopped */
+	uint16_t *channel_out;	/* De-interleaved channel output */
+	uint32_t block_count;
 };
 
 static inline uint16_t *other_buf(struct adc_stream_data *data, uint16_t *buf)
@@ -97,7 +106,7 @@ static void adc_stream_dma_cb(const struct device *dma_dev, void *user_data,
 	 */
 	err = dma_reload(config->dma_dev, config->dma_channel,
 			 (uint32_t)&adc_hw->fifo, (uint32_t)data->active,
-			 BLOCK_SIZE_BYTES);
+			 data->block_size_bytes);
 	if (err) {
 		LOG_ERR("dma_reload failed: %d", err);
 		return;
@@ -112,18 +121,30 @@ static void adc_stream_dma_cb(const struct device *dma_dev, void *user_data,
 		return;
 	}
 
-	block.samples = completed;
-	block.count = CONFIG_ADC_STREAM_BUFFER_SIZE;
+	/* Measure how much time it costs to de-interleave every channel */
+	uint32_t t0 = k_cycle_get_32();
+	for (uint8_t ch = 0; ch < config->num_channels; ch++) {
+		uint16_t *dst = &data->channel_out[ch * CONFIG_ADC_STREAM_PER_CHANNEL_BUFFER_SIZE];
 
-	/*
-	 * K_NO_WAIT: a full msgq means the consumer fell behind. Drop and
-	 * log rather than block the DMA-completion path.
-	 * TODO(Phase 2/4): surface a drop counter to ad_task once it exists,
-	 * instead of just a rate-limited log line.
-	 */
-	err = k_msgq_put(data->msgq, &block, K_NO_WAIT);
-	if (err) {
-		LOG_WRN("msgq full, dropped a block");
+		for (uint32_t k = 0; k < CONFIG_ADC_STREAM_PER_CHANNEL_BUFFER_SIZE; k++) {
+			dst[k] = completed[k * config->num_channels + ch];
+		}
+	}
+	uint32_t us = k_cyc_to_us_floor32(k_cycle_get_32() - t0);
+	/* log every 32nd block, not every one — logging itself has ISR-context cost */
+	if ((data->block_count++ & 31) == 0) {
+		LOG_INF("de-interleave: %u us for %u channels", us, config->num_channels);
+	}
+
+	for (uint8_t ch = 0; ch < config->num_channels; ch++) {
+		struct adc_stream_block block = {
+			.channel = config->channels[ch],
+			.samples = &data->channel_out[ch * CONFIG_ADC_STREAM_PER_CHANNEL_BUFFER_SIZE],
+			.count = CONFIG_ADC_STREAM_PER_CHANNEL_BUFFER_SIZE,
+		};
+		if (k_msgq_put(data->msgq, &block, K_NO_WAIT)) {
+			LOG_WRN("msgq full, dropped channel %u block", block.channel);
+		}
 	}
 }
 
@@ -139,13 +160,20 @@ int adc_stream_start(const struct device *dev, struct k_msgq *msgq)
 
 	data->msgq = msgq;
 	data->active = data->buf_a;
+	/* Single source of truth for the transfer size — computed once here,
+	 * reused by adc_stream_dma_cb()'s dma_reload() calls too, instead of
+	 * each recomputing it (and risking drifting out of sync with each
+	 * other, which a stale copy-pasted macro used to do here).
+	 */
+	data->block_size_bytes = (size_t)CONFIG_ADC_STREAM_PER_CHANNEL_BUFFER_SIZE *
+				 config->num_channels * SAMPLE_SIZE_BYTES;
 
 	data->dma_blk = (struct dma_block_config){
 		.source_address = (uint32_t)&adc_hw->fifo,
 		.source_addr_adj = DMA_ADDR_ADJ_NO_CHANGE,	/* always the FIFO register */
 		.dest_address = (uint32_t)data->active,
 		.dest_addr_adj = DMA_ADDR_ADJ_INCREMENT,	/* walk the ping-pong buffer */
-		.block_size = BLOCK_SIZE_BYTES,
+		.block_size = data->block_size_bytes,
 	};
 
 	data->dma_cfg = (struct dma_config){
@@ -168,18 +196,26 @@ int adc_stream_start(const struct device *dev, struct k_msgq *msgq)
 		return err;
 	}
 
+	/* Get the enabled channels for the round robin */
+	uint32_t mask = 0;
+	for (uint8_t i = 0; i < config->num_channels; i++) {
+		mask |= BIT(config->channels[i]);
+	}
+	/* Seed the starting channel and set round robin */
+	adc_select_input(config->channels[0]);
+	adc_set_round_robin(mask);
+
 	/*
 	 * adc_fifo_setup(en, dreq_en, dreq_thresh, err_in_fifo, byte_shift):
 	 * DREQ asserts once per FIFO entry (threshold 1), matching
 	 * hal_adc.c. adc_set_clkdiv() mirrors board_config.h's
 	 * ADC_SAMPLE_RATE derivation (48 MHz / (div + 1)).
 	 * TODO: confirm on a scope that the resulting rate matches
-	 * CONFIG_ADC_STREAM_SAMPLE_RATE_HZ closely enough for the FFT bin
+	 * CONFIG_ADC_STREAM_PER_CHANNEL_SAMPLE_RATE_HZ closely enough for the FFT bin
 	 * math in services/dsp to hold.
 	 */
-	adc_select_input(0);	/* TODO: drive from devicetree/Kconfig, not hardcoded — see below */
 	adc_fifo_setup(true, true, 1, false, false);
-	adc_set_clkdiv(48e6f / (float)CONFIG_ADC_STREAM_SAMPLE_RATE_HZ - 1.0f);
+	adc_set_clkdiv(48e6f / (float)(CONFIG_ADC_STREAM_PER_CHANNEL_SAMPLE_RATE_HZ * config->num_channels) - 1.0f);
 
 	err = dma_start(config->dma_dev, config->dma_channel);
 	if (err) {
@@ -244,10 +280,32 @@ static int adc_stream_init(const struct device *dev)
 	return 0;
 }
 
+/* One cell (the channel's `reg`) per enabled channel@ child, comma-separated
+ * — DT_INST_FOREACH_CHILD_STATUS_OKAY expands this once per child and
+ * concatenates the results, so this builds an array initializer's contents.
+ */
+#define ADC_STREAM_CHANNEL_REG(node_id) DT_REG_ADDR(node_id),
+
 #define ADC_STREAM_RPI_PICO_INIT(idx)                                                        \
 	PINCTRL_DT_INST_DEFINE(idx);                                                          \
+	static const uint8_t adc_stream_channels_##idx[] = {                                 \
+		DT_INST_FOREACH_CHILD_STATUS_OKAY(idx, ADC_STREAM_CHANNEL_REG)               \
+	};                                                                                     \
+	/* num_channels * PER_CHANNEL_BUFFER_SIZE samples each — exactly sized per
+	 * instance, same reasoning as adc_stream_channels_ above: this can't be a
+	 * fixed member size inside struct adc_stream_data, since that type is
+	 * shared across however many adc_stream instances exist.
+	 */                                                                                    \
+	static uint16_t adc_stream_buf_a_##idx[ARRAY_SIZE(adc_stream_channels_##idx) *        \
+						CONFIG_ADC_STREAM_PER_CHANNEL_BUFFER_SIZE];   \
+	static uint16_t adc_stream_buf_b_##idx[ARRAY_SIZE(adc_stream_channels_##idx) *        \
+						CONFIG_ADC_STREAM_PER_CHANNEL_BUFFER_SIZE];   \
+	static uint16_t adc_stream_channel_out_##idx[ARRAY_SIZE(adc_stream_channels_##idx) * \
+					      CONFIG_ADC_STREAM_PER_CHANNEL_BUFFER_SIZE];	\
 	static const struct adc_stream_config adc_stream_config_##idx = {                    \
 		.pcfg = PINCTRL_DT_INST_DEV_CONFIG_GET(idx),                                  \
+		.channels = adc_stream_channels_##idx,                                        \
+		.num_channels = ARRAY_SIZE(adc_stream_channels_##idx),                        \
 		.clk_dev = DEVICE_DT_GET(DT_INST_CLOCKS_CTLR(idx)),                           \
 		.clk_id = (clock_control_subsys_t)DT_INST_PHA_BY_IDX(idx, clocks, 0, clk_id), \
 		.reset = RESET_DT_SPEC_INST_GET(idx),                                         \
@@ -255,7 +313,11 @@ static int adc_stream_init(const struct device *dev)
 		.dma_channel = DT_INST_DMAS_CELL_BY_IDX(idx, 0, channel),                     \
 		.dma_slot = DT_INST_DMAS_CELL_BY_IDX(idx, 0, slot),                           \
 	};                                                                                     \
-	static struct adc_stream_data adc_stream_data_##idx;                                 \
+	static struct adc_stream_data adc_stream_data_##idx = {                              \
+		.buf_a = adc_stream_buf_a_##idx,                                              \
+		.buf_b = adc_stream_buf_b_##idx,                                              \
+		.channel_out = adc_stream_channel_out_##idx,																	\
+	};                                                                                     \
 	DEVICE_DT_INST_DEFINE(idx, adc_stream_init, NULL, &adc_stream_data_##idx,             \
 			      &adc_stream_config_##idx, POST_KERNEL,                          \
 			      CONFIG_ADC_STREAM_RPI_PICO_INIT_PRIORITY, NULL);

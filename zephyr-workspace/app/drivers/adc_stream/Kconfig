@@ -22,20 +22,17 @@ config ADC_STREAM_RPI_PICO_INIT_PRIORITY
 	  by default) — adc_stream_init() calls device_is_ready() on the DMA
 	  controller device.
 
-config ADC_STREAM_BUFFER_SIZE
-	int "Samples per ping-pong half-buffer"
+config ADC_STREAM_PER_CHANNEL_BUFFER_SIZE
+	int "Samples per channel ping-pong half-buffer"
 	default 1024
 	help
-	  Mirrors main:firmware/hal/hal_adc.h's HAL_ADC_BUFFER_SIZE. Must equal
-	  services/dsp's FFT window size N so one completed DMA block is
-	  exactly one FFT window — see dsp.h on main.
+		Two DMA buffers with this size times the number will be created to hold the total number of samples.
 
-config ADC_STREAM_SAMPLE_RATE_HZ
-	int "Sample rate in Hz"
+config ADC_STREAM_PER_CHANNEL_SAMPLE_RATE_HZ
+	int "Sample rate for each channel in Hz"
 	default 10240
 	help
-	  Mirrors main:firmware/bsp/rp2350/board_config.h's ADC_SAMPLE_RATE:
-	  50*N/FS lands on exact FFT bins for 50 Hz harmonics.
+	  Depending on the number of channels, the total ADC sampling will be increased.
 
 module = ADC_STREAM_RPI_PICO
 module-str = adc stream
