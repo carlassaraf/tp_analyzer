@@ -1,7 +1,7 @@
 add_library(app STATIC
   app.c
-  tasks/ui_task.c
-  tasks/ad_task.c
+  tasks/ui_thread.c
+  tasks/ad_thread.c
   lvgl/screen_manager.c
   lvgl/screen_update.c
   lvgl/screens/scr_boot.c
