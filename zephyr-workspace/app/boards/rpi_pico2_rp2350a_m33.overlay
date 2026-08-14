@@ -1,5 +1,7 @@
 #include <zephyr/dt-bindings/mipi_dbi/mipi_dbi.h>
 #include <zephyr/dt-bindings/display/panel.h>
+#include <zephyr/dt-bindings/dma/rpi-pico-dma-rp2350.h>
+#include <zephyr/dt-bindings/pinctrl/rpi-pico-rp2350a-pinctrl.h>
 
 / {
 	chosen {
@@ -43,5 +45,72 @@
 	cdc_acm_uart0: cdc_acm_uart0 {
 		compatible = "zephyr,cdc-acm-uart";
 		label = "CDC_ACM_0";
+	};
+};
+
+/* Phase 1b (see ZEPHYR_MIGRATION.md): continuous ADC + DMA acquisition.
+ * GPIO26 / ADC channel 0, matching main:firmware/bsp/rp2350/board_config.h's
+ * ADC_GPIO/ADC_CHANNEL. The stock `adc` node (raspberrypi,pico-adc, same
+ * peripheral) stays disabled — see rp2350.dtsi, default is already
+ * status = "disabled", nothing to override here.
+ */
+
+&pinctrl {
+	/* TODO: unverified — RP2_PINCTRL_GPIO_FUNC_NULL disconnects the
+	 * digital function per the pinctrl header's own comment, matching
+	 * the Pico SDK's adc_gpio_init(), but whether pulls/input-buffer
+	 * also need explicitly disabling here (input-enable omitted =
+	 * disabled, need to confirm that's actually sufficient on RP2350)
+	 * hasn't been checked against real hardware yet.
+	 */
+	adc_ch0_default: adc_ch0_default {
+		group1 {
+			pinmux = <ADC_CH0_P26>;
+		};
+	};
+	adc_ch1_default: adc_ch1_default {
+		group1 {
+			pinmux = <ADC_CH1_P27>;
+		};
+	};
+};
+
+&dma {
+	status = "okay";
+};
+
+&{/soc} {
+	/* NOT named "adc@400a0000" — that's the existing (disabled) stock
+	 * node's exact name+unit-address, and an overlay node matching both
+	 * merges into it instead of creating a sibling, silently overwriting
+	 * its `compatible` out from under anything still referencing it (see
+	 * rp2350a.dtsi's `&die_temp { io-channels = <&adc 4>; };`, which
+	 * needs the *original* raspberrypi,pico-adc binding intact even
+	 * though die_temp itself defaults to disabled — edtlib validates the
+	 * io-channels cell count regardless of status). Different node name,
+	 * same reg — dtc's unique_unit_address check is the "if_enabled"
+	 * variant here, so two same-address siblings are fine as long as at
+	 * most one is ever status = "okay" at a time, which this is.
+	 */
+	adc_stream: adc-stream@400a0000 {
+		compatible = "raspberrypi,pico-adc-stream";
+		reg = <0x400a0000 DT_SIZE_K(4)>;
+		resets = <&reset RPI_PICO_RESETS_RESET_ADC>;
+		clocks = <&clocks RPI_PICO_CLKID_CLK_ADC>;
+		pinctrl-0 = <&adc_ch0_default &adc_ch1_default>;
+		pinctrl-names = "default";
+		dmas = <&dma 0 RPI_PICO_DMA_SLOT_ADC 0>;
+		dma-names = "rx";
+		status = "okay";
+
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		voltage_a: channel@0 {
+			reg = <0>;
+		};
+		current_a: channel@1 {
+			reg = <1>;
+		};
 	};
 };

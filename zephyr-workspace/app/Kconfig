@@ -1,0 +1,11 @@
+# Copyright (c) 2026 Fabrizio Carlassara
+# SPDX-License-Identifier: Apache-2.0
+
+# Pulled forward from Phase 5 (see ZEPHYR_MIGRATION.md) just far enough to
+# host the Phase 1b driver's Kconfig fragment below. The full app-level
+# menu ported from main:firmware/Kconfig still happens in Phase 5 — this
+# file grows then, it isn't reworked from scratch.
+
+rsource "drivers/adc_stream/Kconfig"
+
+source "Kconfig.zephyr"

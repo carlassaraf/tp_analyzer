@@ -58,10 +58,21 @@ zephyr-workspace/                      (west topdir)
 ├── .west/config                       (manifest.path = app)
 ├── app/                                (west manifest repo == Zephyr app root)
 │   ├── west.yml                        (zephyr v4.4.2, name-allowlist: cmsis_6, hal_rpi_pico, lvgl)
-│   ├── CMakeLists.txt
+│   ├── CMakeLists.txt                  (adds drivers/adc_stream when CONFIG_ADC_STREAM_RPI_PICO=y)
+│   ├── Kconfig                         (pulled forward from Phase 5, see below — just enough
+│   │                                    to host drivers/adc_stream/Kconfig for now)
 │   ├── prj.conf
 │   ├── boards/
-│   │   └── rpi_pico2_rp2350a_m33.overlay   (USB CDC ACM console; pins TBD Phase 5)
+│   │   └── rpi_pico2_rp2350a_m33.overlay   (USB CDC ACM console; adc_stream node (Phase 1b);
+│   │                                        remaining pins TBD Phase 5)
+│   ├── dts/bindings/adc/
+│   │   └── raspberrypi,pico-adc-stream.yaml   (Phase 1b, see below)
+│   ├── drivers/
+│   │   └── adc_stream/                 (Phase 1b — continuous ADC + DMA driver, see below.
+│   │       ├── CMakeLists.txt           Not zephyr/drivers/adc.h-conformant and not
+│   │       ├── Kconfig                  CONFIG_ADC_STREAM/RTIO-conformant either — single
+│   │       ├── adc_stream.h             in-app consumer, bespoke start()/stop() + k_msgq API.
+│   │       └── adc_stream_rpi_pico.c    STATUS: untested skeleton, not hardware-validated yet.)
 │   ├── src/
 │   │   ├── CMakeLists.txt
 │   │   ├── main.c
@@ -77,12 +88,6 @@ zephyr-workspace/                      (west topdir)
 │   │       └── ui/                     (generated UI code, unchanged)
 │   ├── services/
 │   │   └── dsp/                        (CMSIS-DSP FFT, unchanged, RTOS-agnostic)
-│   ├── drivers/
-│   │   └── display_ili9486/            (dead — carried over from the
-│   │       ├── ili9486.c                FreeRTOS tree, never wired into any
-│   │       └── ili9486.h                CMakeLists, not part of the build.
-│   │                                    Phase 1a resolved without it — see
-│   │                                    below. Not yet deleted.)
 │   └── ZEPHYR_MIGRATION.md
 ├── zephyr/                             (cloned by `west update`)
 ├── modules/                            (cloned by `west update`)
@@ -90,14 +95,17 @@ zephyr-workspace/                      (west topdir)
 ```
 
 Not created yet, added when the phase that needs them arrives:
-- `app/Kconfig` — app-level Kconfig menu ported from `main:firmware/Kconfig`
-  (Phase 5).
-- `app/drivers/adc_stream/` — continuous ADC + DMA driver (Phase 1b).
+- The rest of `app/Kconfig`'s app-level menu, ported from `main:firmware/Kconfig`
+  (Phase 5) — the file already exists (see above) but only carries the
+  Phase 1b driver's options so far.
 
 Deferred, not currently planned:
 - `app/dts/bindings/display/ilitek,ili9486.yaml` + a dedicated driver — only
   if the reused `ilitek,ili9488` binding's picture quality becomes an actual
   problem later (see Phase 1a, resolved).
+- The dead `app/drivers/display_ili9486/` carried over from the FreeRTOS
+  tree — already deleted (5e53911), this note is just to stop anyone
+  re-adding it: Phase 1a resolved without it.
 
 ---
 
@@ -202,16 +210,84 @@ partial flush, extrapolated from a 312.6 ms full-screen benchmark).
 
 ### 1b. Continuous ADC + DMA acquisition
 
-- [ ] Standalone thread that free-runs the ADC into ping-pong DMA buffers at
-      10 kHz, bypassing the stock `adc_rpi_pico` driver (it is
-      one-shot/round-robin only, no continuous DMA streaming), mirroring
-      `main:firmware/hal/hal_adc.c`'s ISR logic.
-- [ ] Hand completed buffers to a `k_msgq`.
-- [ ] Validate sample rate and values via UART dump of peak/RMS/frequency
-      against a known signal-generator input.
+**Key finding, mirrors Phase 1a's shape:** the stock `raspberrypi,pico-adc`
+driver (`drivers/adc/adc_rpi_pico.c` upstream) is IRQ-per-sample,
+one-shot/round-robin only — no DMA path at all, confirmed by reading it, not
+just the docs. But RP2350's DMA controller *is* already properly supported
+in-tree (`drivers/dma/dma_rpi_pico.c`, conforms to `zephyr/drivers/dma.h`),
+and there's even a pre-defined `RPI_PICO_DMA_SLOT_ADC` DREQ slot constant for
+it in `dt-bindings/dma/rpi-pico-dma-rp2350.h`. So the plan isn't a bare
+register-banging port of `hal_adc.c` — it's a small custom driver that owns
+the ADC side (free-run + FIFO, via the vendored Pico-SDK `hardware/adc.h`,
+since Zephyr's ADC subsystem has no free-run concept to reuse) but drives
+DMA through the standard `dma.h` API against the existing `dma_rpi_pico`
+device, the same way `drivers/adc/adc_stm32.c` does for STM32
+(`adc_stm32_dma_start()`: `dma_config()` + `dma_start()` against a real DMA
+controller device, not hand-rolled DMA registers). Ping-pong reload on each
+completed block uses `dma_reload()`, which `dma_rpi_pico.c` implements.
 
-**Exit criteria:** correct sample rate and values on hardware, no display
-needed yet.
+Not a `zephyr/drivers/adc.h`-conformant driver, and not built on the newer
+`CONFIG_ADC_STREAM`/RTIO streaming API either (Zephyr v4.4.2 has it —
+`adc_stm32.c` implements `.submit` for it — but it's real added complexity
+for a driver with exactly one consumer; revisit only if this ever needs to
+be reusable/upstreamable). Own devicetree binding/compatible instead
+(`raspberrypi,pico-adc-stream`), claiming the same physical ADC peripheral
+node the stock driver would otherwise use (which stays `status = "disabled"`
+— see the board overlay). Bespoke API: `adc_stream_start(dev, msgq)` /
+`adc_stream_stop(dev)`.
+
+Directory structure laid down (see [Current directory
+structure](#current-directory-structure) above for the full tree):
+- `app/dts/bindings/adc/raspberrypi,pico-adc-stream.yaml` — new binding,
+  `dmas`/`dma-names` phandle to the DMA controller on top of the same
+  `pinctrl-device.yaml`/`reset-device.yaml` shape the stock binding uses.
+- `app/drivers/adc_stream/adc_stream.h` — public API + rationale for why
+  this isn't a generic `adc`/`ADC_STREAM` driver.
+- `app/drivers/adc_stream/adc_stream_rpi_pico.c` — driver implementation.
+- `app/drivers/adc_stream/{Kconfig,CMakeLists.txt}` — `CONFIG_ADC_STREAM_RPI_PICO`,
+  `CONFIG_ADC_STREAM_BUFFER_SIZE` (default 1024, must equal `dsp.h`'s FFT
+  window `N`), `CONFIG_ADC_STREAM_SAMPLE_RATE_HZ` (default 10240, matching
+  `board_config.h`'s `ADC_SAMPLE_RATE`).
+- `app/Kconfig` — pulled forward from Phase 5 just far enough to source the
+  driver's Kconfig fragment.
+- `app/boards/rpi_pico2_rp2350a_m33.overlay` — new `adc_stream` node at the
+  same `reg` as the stock (disabled) `adc` node, `&dma` enabled, GPIO26/ADC
+  channel 0 pinctrl group (matches `board_config.h`'s `ADC_GPIO`/`ADC_CHANNEL`).
+
+**STATUS:** built and hardware-validated. The scaffold's one real bug: the
+DMA block config never set `source_addr_adj`, so it zero-initialized to
+`DMA_ADDR_ADJ_INCREMENT` (its `0` value) instead of `DMA_ADDR_ADJ_NO_CHANGE`
+— the read pointer was walking off the ADC FIFO register into whatever
+followed it in `adc_hw` instead of re-reading the FIFO each transfer. Fixed
+in `adc_stream_rpi_pico.c`. Pinctrl conf turned out fine as tested (3V3/GND
+and a real analog signal both read correctly) — see Known follow-ups below
+for what's still unverified about it.
+
+- [x] Build it, fix whatever the scaffold above got wrong, get it running
+      on hardware.
+- [x] Wire `adc_stream_start()` up feeding a `k_msgq` of `struct
+      adc_stream_block` — currently a smoke-test consumer loop in `main.c`
+      (logs min/avg/max per block); moving it into a real standalone
+      thread/task is Phase 2 work, tracked there.
+- [x] Validate sample rate and values via UART dump of peak/RMS/frequency
+      against a known signal-generator input — confirmed correct 100 ms
+      block cadence (1024 samples / 10240 Hz) and correct readings against
+      both DC rails (3V3/GND) and a real analog signal.
+
+**Exit criteria:** met.
+
+**Known follow-ups** (none block the exit criteria above, revisit opportunistically):
+- Pinctrl only sets `RP2_PINCTRL_GPIO_FUNC_NULL` on the ADC pin — doesn't
+  confirm pulls/input-buffer are explicitly disabled the way the Pico-SDK's
+  `adc_gpio_init()` does. Testing so far used low-impedance sources (driven
+  rails, a signal generator), which wouldn't expose a weak pull bias.
+- `adc_select_input(0)` is hardcoded rather than devicetree/Kconfig-driven
+  (fine for this project's single-channel use).
+- `adc_stream_init()` resets/enables the ADC via both Zephyr's
+  `reset_line_toggle_dt()`/`clock_control_on()` *and* the Pico-SDK's
+  `adc_init()` right after — redundant, harmless, untidy.
+- No drop counter on a full `k_msgq` (just a rate-limited log) — matters
+  once `ad_task` is the real consumer instead of a draining smoke-test loop.
 
 ---
 
