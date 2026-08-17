@@ -1,6 +1,7 @@
 #include <zephyr/kernel.h>
 #include <zephyr/device.h>
 #include <zephyr/drivers/display.h>
+#include <zephyr/drivers/rtc.h>
 #include <zephyr/logging/log.h>
 
 #include "lvgl.h"
@@ -12,6 +13,7 @@ LOG_MODULE_REGISTER(ui_thread, LOG_LEVEL_INF);
 
 // LVGL Display device
 static const struct device *display_dev = DEVICE_DT_GET(DT_CHOSEN(zephyr_display));
+static const struct device *rtc = DEVICE_DT_GET(DT_NODELABEL(powman_rtc));
 
 // Private prototypes and callbacks
 static void ui_init_minimal(void);
@@ -38,8 +40,13 @@ void ui_thread(void *param1, void *param2, void *param3)
 
   // RTC and SoftTimer initialization to set UI
   /** @todo Proper RTC initialization */
-  // hal_rtc_datetime_t dt = { .day = 16, .month = 6, .year = 2026, .hour = 20, .min = 52 };
-  // hal_rtc_set(&dt);
+  struct rtc_time default_dt = { .tm_mday = 16, .tm_mon = 6, .tm_year = 2026, .tm_hour = 20, .tm_min = 52 };
+  if (rtc_set_time(rtc, &default_dt)) {
+    LOG_ERR("Failed to initialize RTC");
+  }
+  LOG_INF("Successfully initialized RTC to %02d/%02d/%02d %02d:%02d:00", 
+    default_dt.tm_mday, default_dt.tm_mon + 1, default_dt.tm_year, default_dt.tm_hour, default_dt.tm_min);
+  k_timer_start(&rtc_timer, K_SECONDS(60), K_SECONDS(60));
   // screen_update_cmd_push(SCREEN_UPDATE_DATETIME, (void*)&dt);
 
   // Render the first frame before turning blanking off, so we don't flash
@@ -73,10 +80,14 @@ static void ui_init_minimal(void) {
  */
 static void rtc_timer_cb(struct k_timer *timer_id)
 {
-  // // Local datetime struct
-  // static hal_rtc_datetime_t dt = {0};
-  // if(hal_rtc_get(&dt)) {
-  //   // Update UI command
-  //   screen_update_cmd_push(SCREEN_UPDATE_DATETIME, (void*)&dt);
-  // }
+  // Local datetime struct
+  static struct rtc_time dt = {0};
+  if(rtc_get_time(rtc, &dt)) {
+    LOG_ERR("Unable to get RTC datetime");
+    return;
+  }
+  // Update UI command
+  // screen_update_cmd_push(SCREEN_UPDATE_DATETIME, (void*)&dt);
+  LOG_INF("RTC datetime %02d/%02d/%02d %02d:%02d:00", 
+    dt.tm_mday, dt.tm_mon + 1, dt.tm_year, dt.tm_hour, dt.tm_min);
 }

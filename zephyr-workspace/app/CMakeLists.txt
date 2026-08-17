@@ -17,3 +17,7 @@ target_include_directories(app PRIVATE drivers/adc_stream)
 add_subdirectory_ifdef(CONFIG_ADC_STREAM_RPI_PICO drivers/adc_stream)
 target_include_directories_ifdef(CONFIG_ADC_STREAM_RPI_PICO app_lib PRIVATE drivers/adc_stream)
 target_link_libraries_ifdef(CONFIG_ADC_STREAM_RPI_PICO app_lib PRIVATE adc_stream)
+# Link POWMAN RTC driver to application
+add_subdirectory_ifdef(CONFIG_POWMAN_RTC_RPI_PICO drivers/powman_rtc)
+target_include_directories_ifdef(CONFIG_POWMAN_RTC_RPI_PICO app_lib PRIVATE drivers/powman_rtc)
+target_link_libraries_ifdef(CONFIG_POWMAN_RTC_RPI_PICO app_lib PRIVATE powman_rtc)

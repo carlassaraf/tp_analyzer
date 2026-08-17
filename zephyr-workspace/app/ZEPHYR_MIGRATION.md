@@ -329,9 +329,8 @@ Can run in parallel with Phase 1. Each item independently testable.
   - `"lvgl_port.h"` include removed outright (was the old FreeRTOS
     port-init header) — superseded by `CONFIG_LV_Z_AUTO_INIT`, see Phase 3.
 - [x] Once-a-minute RTC software timer → `k_timer`.
-- [ ] `main:firmware/hal/hal_rtc.c` → native `raspberrypi,pico-rtc` driver
+- [x] `main:firmware/hal/hal_rtc.c` → native `raspberrypi,pico-rtc` driver
       via `zephyr/drivers/rtc.h`.
-- [ ] PWM backlight in `main.c` → `raspberrypi,pico-pwm` + Zephyr PWM API.
 - [ ] Stack-overflow hook (`main:firmware/rtos/hooks.c`) →
       `CONFIG_STACK_SENTINEL` / thread fault handling equivalent.
 
