@@ -295,7 +295,7 @@ for what's still unverified about it.
 
 Can run in parallel with Phase 1. Each item independently testable.
 
-- [ ] Task creation (`app.c`) → `K_THREAD_DEFINE` / priorities.
+- [x] Task creation (`app.c`) → `K_THREAD_DEFINE` / priorities.
 - [ ] `xTaskNotifyFromISR`/`xTaskNotifyWait` in `tasks/ad_task.c` →
       `k_sem`/`k_msgq` handoff from the Phase 1b ADC driver.
 - [ ] Cross-task `QueueHandle_t` in `lvgl/screen_update.c` → `k_msgq`, or

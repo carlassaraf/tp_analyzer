@@ -34,9 +34,10 @@
 			reg = <0>;
 			pixel-format = <PANEL_PIXEL_FORMAT_RGB_565>;
 			rotation = <90>;
-			width = <480>;
-			height = <320>;
+			width = <320>;
+			height = <480>;
 			mipi-mode = "MIPI_DBI_MODE_8080_BUS_8_BIT";
+			h-mirror;
 		};
 	};
 };
