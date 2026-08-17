@@ -79,6 +79,11 @@
 	status = "okay";
 };
 
+/** Disable the built-in ADC peripheral and driver */
+&adc {
+	status = "disabled";
+};
+
 &{/soc} {
 	/* NOT named "adc@400a0000" — that's the existing (disabled) stock
 	 * node's exact name+unit-address, and an overlay node matching both
