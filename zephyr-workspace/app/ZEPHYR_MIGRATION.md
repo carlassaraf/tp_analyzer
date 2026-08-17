@@ -296,12 +296,38 @@ for what's still unverified about it.
 Can run in parallel with Phase 1. Each item independently testable.
 
 - [x] Task creation (`app.c`) → `K_THREAD_DEFINE` / priorities.
-- [ ] `xTaskNotifyFromISR`/`xTaskNotifyWait` in `tasks/ad_task.c` →
+- [x] `xTaskNotifyFromISR`/`xTaskNotifyWait` in `tasks/ad_task.c` →
       `k_sem`/`k_msgq` handoff from the Phase 1b ADC driver.
-- [ ] Cross-task `QueueHandle_t` in `lvgl/screen_update.c` → `k_msgq`, or
-      drop it in favor of the Zephyr LVGL module's workqueue-driven
-      `lv_timer_handler`/`lv_async_call` (re-evaluate whether a custom queue
-      is still needed).
+- [x] Cross-task `QueueHandle_t` in `lvgl/screen_update.c` → `k_msgq`.
+      Evaluated dropping it for the Zephyr LVGL module's
+      `CONFIG_LV_Z_RUN_LVGL_ON_WORKQUEUE` + `lv_async_call`, but kept the
+      custom queue: `screen_update()`'s drain-and-keep-only-latest-per-type
+      behavior (discards stale oscilloscope/FFT frames) has no equivalent in
+      `lv_async_call`, which queues every call as an independent one-shot
+      LVGL timer — would need to hand-roll the same coalescing via
+      `lv_async_call_cancel()` to get it back, no net simplification for
+      this app's update pattern.
+
+  **Known follow-up:** porting the queue mechanics didn't port the three
+  handler bodies (`screen_update_plot_data`, `screen_update_fft_data`,
+  `screen_update_datetime`) — they're currently commented out, not
+  functional, because they depend on pieces that either don't exist yet or
+  aren't wired up:
+  - `screen_update_plot_data`/`screen_update_fft_data` are still shaped
+    around `main:firmware/hal/hal_adc.h`'s raw buffer + `HAL_ADC_BUFFER_SIZE`
+    (doesn't exist in this tree). They need to consume `struct
+    adc_stream_block` (`channel`/`samples`/`count`) from the Phase 1b
+    `adc_stream` driver instead — this is exactly Phase 4's `scr_oscilloscope`/
+    `scr_fft` item below, not new work, just noting the starting state is
+    "stubbed," not "FreeRTOS-working."
+  - `services/dsp/dsp.h` (the ported CMSIS-DSP FFT, unchanged per the
+    Guiding principle above) exists at `app/services/dsp/` but `app_lib`
+    doesn't link the `dsp` library yet — mechanical CMake wiring, not a
+    porting gap.
+  - `screen_update_datetime` depends on `hal_rtc_datetime_t`, blocked on the
+    `hal_rtc.c` → native `raspberrypi,pico-rtc` item right below.
+  - `"lvgl_port.h"` include removed outright (was the old FreeRTOS
+    port-init header) — superseded by `CONFIG_LV_Z_AUTO_INIT`, see Phase 3.
 - [ ] Once-a-minute RTC software timer → `k_timer`.
 - [ ] `main:firmware/hal/hal_rtc.c` → native `raspberrypi,pico-rtc` driver
       via `zephyr/drivers/rtc.h`.

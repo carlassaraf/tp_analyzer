@@ -2,18 +2,18 @@ add_library(app_lib STATIC
   app.c
   threads/ui_thread.c
   threads/ad_thread.c
-  # lvgl/screen_manager.c
-  # lvgl/screen_update.c
-  # lvgl/screens/scr_boot.c
-  # lvgl/screens/scr_datetime.c
-  # lvgl/screens/scr_fft.c
-  # lvgl/screens/scr_information.c
-  # lvgl/screens/scr_menu.c
-  # lvgl/screens/scr_oscilloscope.c
-  # lvgl/screens/scr_settings.c
-  # lvgl/helpers/animations.c
-  # lvgl/helpers/chart.c
-  # lvgl/helpers/components.c
+  lvgl/screen_manager.c
+  lvgl/screen_update.c
+  lvgl/screens/scr_boot.c
+  lvgl/screens/scr_datetime.c
+  lvgl/screens/scr_fft.c
+  lvgl/screens/scr_information.c
+  lvgl/screens/scr_menu.c
+  lvgl/screens/scr_oscilloscope.c
+  lvgl/screens/scr_settings.c
+  lvgl/helpers/animations.c
+  lvgl/helpers/chart.c
+  lvgl/helpers/components.c
 )
 
 target_include_directories(app_lib PUBLIC
