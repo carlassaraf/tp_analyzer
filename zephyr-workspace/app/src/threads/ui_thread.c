@@ -10,17 +10,15 @@
 
 LOG_MODULE_REGISTER(ui_thread, LOG_LEVEL_INF);
 
-// LVGL itself is already initialized by this point: CONFIG_LV_Z_AUTO_INIT
-// (default y) runs the module's lvgl_init() via SYS_INIT before app_run(),
-// wiring up display + input devices straight from the "zephyr,display"
-// chosen node in the board overlay. No hand-rolled lvgl_port_init() needed —
-// we just grab the same device to flip blanking off once the first frame
-// is drawn, same as zephyr/samples/subsys/display/lvgl.
+// LVGL Display device
 static const struct device *display_dev = DEVICE_DT_GET(DT_CHOSEN(zephyr_display));
 
 // Private prototypes and callbacks
 static void ui_init_minimal(void);
-// static void rtc_timer_cb(TimerHandle_t timer);
+static void rtc_timer_cb(struct k_timer *timer_id);
+
+// Zephyr Timer to handle the RTC callback
+K_TIMER_DEFINE(rtc_timer, rtc_timer_cb, NULL);
 
 void ui_thread(void *param1, void *param2, void *param3)
 {
@@ -35,23 +33,14 @@ void ui_thread(void *param1, void *param2, void *param3)
 
   // UI related initialization
   ui_init_minimal();
-  // screen_manager_init();
-  // screen_update_init();
+  screen_manager_init();
+  screen_update_init();
 
   // RTC and SoftTimer initialization to set UI
   /** @todo Proper RTC initialization */
   // hal_rtc_datetime_t dt = { .day = 16, .month = 6, .year = 2026, .hour = 20, .min = 52 };
   // hal_rtc_set(&dt);
   // screen_update_cmd_push(SCREEN_UPDATE_DATETIME, (void*)&dt);
-
-  // Software Timer every minute
-  // xTimerStart(xTimerCreate(
-  //   "RTC SoftTimer",
-  //   pdMS_TO_TICKS(60000),
-  //   pdTRUE,
-  //   NULL,
-  //   rtc_timer_cb
-  // ), 0);
 
   // Render the first frame before turning blanking off, so we don't flash
   // whatever garbage was left in the panel's RAM at boot.
@@ -82,12 +71,12 @@ static void ui_init_minimal(void) {
 /**
  * @brief Called every 1 min to update datetime in UI
  */
-// static void rtc_timer_cb(TimerHandle_t timer)
-// {
-  // Local datetime struct
+static void rtc_timer_cb(struct k_timer *timer_id)
+{
+  // // Local datetime struct
   // static hal_rtc_datetime_t dt = {0};
   // if(hal_rtc_get(&dt)) {
   //   // Update UI command
   //   screen_update_cmd_push(SCREEN_UPDATE_DATETIME, (void*)&dt);
   // }
-// }
+}
