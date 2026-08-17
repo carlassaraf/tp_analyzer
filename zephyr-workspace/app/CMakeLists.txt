@@ -7,6 +7,9 @@ target_sources(app PRIVATE
   src/main.c
 )
 
+add_subdirectory(src)
+target_link_libraries(app PRIVATE app_lib)
+
 # So main.c can `#include "adc_stream.h"` for the app-local driver's public
 # API (adc_stream_start()/adc_stream_stop()) without reaching into
 # drivers/adc_stream/ with a relative path.
