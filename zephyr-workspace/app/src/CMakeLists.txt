@@ -1,6 +1,6 @@
 add_library(app_lib STATIC
   app.c
-  # tasks/ui_thread.c
+  threads/ui_thread.c
   threads/ad_thread.c
   # lvgl/screen_manager.c
   # lvgl/screen_update.c
@@ -22,9 +22,9 @@ target_include_directories(app_lib PUBLIC
 
 target_link_libraries(app_lib PUBLIC
   zephyr_interface
+  ui
 )
 
-# add_subdirectory(lvgl/ui)
-# target_include_directories(ui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/ui)
-# target_link_libraries(ui lvgl)
-# target_link_libraries(app_lib ui)
+add_subdirectory(lvgl/ui)
+target_include_directories(ui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/ui)
+target_link_libraries(ui PUBLIC zephyr_interface)
