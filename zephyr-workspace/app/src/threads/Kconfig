@@ -1,0 +1,11 @@
+config AD_THREAD_PRIORITY
+  int "Priority of ADC thread"
+  default 2
+  help
+    This sets the priority of the thread that handles ADC DMA conversions and any messages to other threads.
+
+config AD_THREAD_STACK_SIZE
+  int "Size in bytes for the ADC thread"
+  default 2048
+  help
+    This sets the bytes reserved for the ADC thread stack.

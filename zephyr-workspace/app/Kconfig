@@ -6,6 +6,12 @@
 # menu ported from main:firmware/Kconfig still happens in Phase 5 — this
 # file grows then, it isn't reworked from scratch.
 
-rsource "drivers/adc_stream/Kconfig"
+menu "Application Threads"
+  rsource "src/threads/Kconfig"
+endmenu
+
+menu "ADC Driver"
+  rsource "drivers/adc_stream/Kconfig"
+endmenu
 
 source "Kconfig.zephyr"
