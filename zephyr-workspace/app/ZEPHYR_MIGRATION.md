@@ -335,7 +335,7 @@ Can run in parallel with Phase 1. Each item independently testable.
       `CONFIG_STACK_SENTINEL` / thread fault handling equivalent.
 
 **Exit criteria:** each primitive swap has a small standalone test (RTC
-round-trips a date, PWM backlight dims, a dummy thread survives a
+round-trips a date a dummy thread survives a
 stack-overflow probe) — no full app yet.
 
 ---
