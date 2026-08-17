@@ -14,4 +14,8 @@ menu "ADC Driver"
   rsource "drivers/adc_stream/Kconfig"
 endmenu
 
+menu "RTC Driver"
+  rsource "drivers/powman_rtc/Kconfig"
+endmenu
+
 source "Kconfig.zephyr"
