@@ -1,7 +1,7 @@
-add_library(app STATIC
+add_library(app_lib STATIC
   app.c
-  tasks/ui_task.c
-  tasks/ad_task.c
+  threads/ui_thread.c
+  threads/ad_thread.c
   lvgl/screen_manager.c
   lvgl/screen_update.c
   lvgl/screens/scr_boot.c
@@ -16,16 +16,15 @@ add_library(app STATIC
   lvgl/helpers/components.c
 )
 
-target_include_directories(app PUBLIC
+target_include_directories(app_lib PUBLIC
   ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-target_link_libraries(app
-  services
-  freertos
+target_link_libraries(app_lib PUBLIC
+  zephyr_interface
+  ui
 )
 
 add_subdirectory(lvgl/ui)
 target_include_directories(ui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/ui)
-target_link_libraries(ui lvgl)
-target_link_libraries(app ui)
+target_link_libraries(ui PUBLIC zephyr_interface)

@@ -34,9 +34,10 @@
 			reg = <0>;
 			pixel-format = <PANEL_PIXEL_FORMAT_RGB_565>;
 			rotation = <90>;
-			width = <480>;
-			height = <320>;
+			width = <320>;
+			height = <480>;
 			mipi-mode = "MIPI_DBI_MODE_8080_BUS_8_BIT";
+			h-mirror;
 		};
 	};
 };
@@ -79,6 +80,11 @@
 	status = "okay";
 };
 
+/** Disable the built-in ADC peripheral and driver */
+&adc {
+	status = "disabled";
+};
+
 &{/soc} {
 	/* NOT named "adc@400a0000" — that's the existing (disabled) stock
 	 * node's exact name+unit-address, and an overlay node matching both
@@ -112,5 +118,10 @@
 		current_a: channel@1 {
 			reg = <1>;
 		};
+	};
+
+	powman_rtc: powman-rtc@40100000 {
+		compatible = "raspberrypi,pico-powman-rtc";
+		reg = <0x40100000 DT_SIZE_K(32)>;
 	};
 };

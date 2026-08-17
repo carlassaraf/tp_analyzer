@@ -84,7 +84,6 @@ static void adc_stream_dma_cb(const struct device *dma_dev, void *user_data,
 	const struct adc_stream_config *config = dev->config;
 	struct adc_stream_data *data = dev->data;
 	uint16_t *completed;
-	struct adc_stream_block block;
 	int err;
 
 	ARG_UNUSED(dma_dev);
