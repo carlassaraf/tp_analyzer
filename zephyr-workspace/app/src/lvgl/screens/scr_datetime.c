@@ -134,7 +134,7 @@ void scr_datetime_step(void)
 /** @brief Update field values with RTC data */
 void scr_datetime_update_datetime(struct rtc_time *dt) {
   s_fields[FIELD_DAY].value = dt->tm_mday;
-  s_fields[FIELD_MONTH].value = dt->tm_mon;
+  s_fields[FIELD_MONTH].value = dt->tm_mon + 1;
   s_fields[FIELD_YEAR].value = dt->tm_year % 100;
   s_fields[FIELD_HOUR].value = dt->tm_hour;
   s_fields[FIELD_MIN].value = dt->tm_min;
