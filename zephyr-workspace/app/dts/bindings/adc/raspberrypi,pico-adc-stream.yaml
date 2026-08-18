@@ -1,0 +1,56 @@
+# Copyright (c) 2026 Fabrizio Carlassara
+# SPDX-License-Identifier: Apache-2.0
+
+description: |
+  Raspberry Pi Pico/Pico 2 ADC, free-running into a DMA channel.
+
+  Deliberately a separate compatible from the in-tree "raspberrypi,pico-adc"
+  binding: that driver (drivers/adc/adc_rpi_pico.c upstream) only supports
+  one-shot/round-robin reads — one IRQ per sample, no DMA — which can't
+  sustain continuous 10 kHz acquisition. This binding claims the same ADC
+  peripheral instance instead, so whichever board overlay enables this node
+  must leave the stock "adc" node at status = "disabled" (it already
+  defaults to disabled in rp2350.dtsi). See ZEPHYR_MIGRATION.md Phase 1b
+  and app/drivers/adc_stream/.
+
+compatible: "raspberrypi,pico-adc-stream"
+
+include: [base.yaml, pinctrl-device.yaml, reset-device.yaml]
+
+properties:
+  "#address-cells":
+    const: 1
+
+  "#size-cells":
+    const: 0
+
+  reg:
+    required: true
+
+  clocks:
+    required: true
+
+  vref-mv:
+    type: int
+    default: 3300
+    description: ADC reference voltage in mV (tied to VDD on the Pico 2).
+
+  dmas:
+    required: true
+    description: |
+      Single DMA channel used for ADC FIFO -> memory transfers, e.g.:
+        dmas = <&dma 0 RPI_PICO_DMA_SLOT_ADC 0>;
+      RPI_PICO_DMA_SLOT_ADC comes from
+      <zephyr/dt-bindings/dma/rpi-pico-dma-rp2350.h>.
+
+  dma-names:
+    required: true
+    description: Must be "rx".
+
+child-binding:
+  description: One ADC input channel.
+  properties:
+    reg:
+      type: array
+      required: true
+      description: ADC channel index (0-3 = GPIO26-29, 4 = internal temp; RP2350B adds more).

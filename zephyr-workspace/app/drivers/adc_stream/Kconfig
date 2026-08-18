@@ -1,0 +1,41 @@
+# Copyright (c) 2026 Fabrizio Carlassara
+# SPDX-License-Identifier: Apache-2.0
+
+menuconfig ADC_STREAM_RPI_PICO
+	bool "RP2350 continuous ADC + DMA streaming driver"
+	default y
+	depends on DT_HAS_RASPBERRYPI_PICO_ADC_STREAM_ENABLED
+	select DMA
+	select PICOSDK_USE_ADC
+	help
+	  App-local driver (app/drivers/adc_stream/, not an upstream Zephyr
+	  driver) that free-runs the RP2350 ADC into ping-pong DMA buffers
+	  for continuous acquisition. See ZEPHYR_MIGRATION.md, Phase 1b.
+
+if ADC_STREAM_RPI_PICO
+
+config ADC_STREAM_RPI_PICO_INIT_PRIORITY
+	int "Init priority"
+	default KERNEL_INIT_PRIORITY_DEVICE
+	help
+	  Must sort after CONFIG_DMA_INIT_PRIORITY (KERNEL_INIT_PRIORITY_DEFAULT
+	  by default) — adc_stream_init() calls device_is_ready() on the DMA
+	  controller device.
+
+config ADC_STREAM_PER_CHANNEL_BUFFER_SIZE
+	int "Samples per channel ping-pong half-buffer"
+	default 1024
+	help
+		Two DMA buffers with this size times the number will be created to hold the total number of samples.
+
+config ADC_STREAM_PER_CHANNEL_SAMPLE_RATE_HZ
+	int "Sample rate for each channel in Hz"
+	default 10240
+	help
+	  Depending on the number of channels, the total ADC sampling will be increased.
+
+module = ADC_STREAM_RPI_PICO
+module-str = adc stream
+source "subsys/logging/Kconfig.template.log_config"
+
+endif # ADC_STREAM_RPI_PICO

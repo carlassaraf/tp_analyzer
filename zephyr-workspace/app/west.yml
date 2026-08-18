@@ -1,0 +1,12 @@
+manifest:
+  version: 1.0
+
+  projects:
+    - name: zephyr
+      url: https://github.com/zephyrproject-rtos/zephyr
+      revision: v4.4.2
+      import:
+        name-allowlist:
+          - cmsis_6
+          - hal_rpi_pico
+          - lvgl

@@ -1,0 +1,7 @@
+menuconfig POWMAN_RTC_RPI_PICO
+	bool "RP2350 POWMAN-backed RTC driver"
+	default y
+	depends on DT_HAS_RASPBERRYPI_PICO_POWMAN_RTC_ENABLED
+	help
+	  App-local driver (app/drivers/powman_rtc/) exposing RP2350's POWMAN
+	  always-on timer through zephyr/drivers/rtc.h. See ZEPHYR_MIGRATION.md.
