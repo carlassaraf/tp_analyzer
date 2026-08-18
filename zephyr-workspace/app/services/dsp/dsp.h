@@ -5,11 +5,6 @@
 #include "arm_math.h"
 #include <stdlib.h>
 
-// Number of samples — must match HAL_ADC_BUFFER_SIZE
-#define N   1024
-// Sampling frequency in Hz — must match ADC_SAMPLE_RATE in board_config.h
-#define FS  10240.0f
-
 /**
  * @brief FFT directions
  */
@@ -24,15 +19,15 @@ typedef enum {
  * @return initialization status ARM_MATH_SUCCESS if was possible
  */
 static inline arm_status dsp_fft_init(arm_rfft_fast_instance_f32 *instance) {
-#if(N == 256)
+#if(CONFIG_ADC_SAMPLES == 256)
   return arm_rfft_fast_init_256_f32(instance);
-#elif(N == 512)
+#elif(CONFIG_ADC_SAMPLES == 512)
   return arm_rfft_fast_init_512_f32(instance);
-#elif(N == 1024)
+#elif(CONFIG_ADC_SAMPLES == 1024)
   return arm_rfft_fast_init_1024_f32(instance);
-#elif(N == 2048)
+#elif(CONFIG_ADC_SAMPLES == 2048)
   return arm_rfft_fast_init_2048_f32(instance);
-#elif(N == 4096)
+#elif(CONFIG_ADC_SAMPLES == 4096)
   return arm_rfft_fast_init_4096_f32(instance);
 #endif
 }
