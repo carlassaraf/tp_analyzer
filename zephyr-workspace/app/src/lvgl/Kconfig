@@ -1,0 +1,5 @@
+config BOOT_TIME_WAIT_MS
+  int "Time in ms to wait in the boot screen"
+  default 2000
+  help
+    Mostly used to speed up boot time

@@ -384,7 +384,7 @@ than a ported custom one.
 
 ## Phase 4 — Real screens, one at a time
 
-- [ ] `scr_boot` — confirms boot flow and `lvgl/screen_manager.c` state
+- [x] `scr_boot` — confirms boot flow and `lvgl/screen_manager.c` state
       machine under Zephyr threading.
 - [ ] `scr_menu` — confirms encoder + group focus end-to-end.
 - [ ] `scr_datetime`, `scr_settings`, `scr_information` — static/RTC-fed,
