@@ -9,6 +9,7 @@
 #include "screens/scr_menu.h"
 #include "screens/scr_oscilloscope.h"
 #include "screens/scr_settings.h"
+#include "screens/scr_timeout.h"
 
 // Register a screen by name — expands to the SquareLine-generated create/destroy
 // pair (so the screen can be built lazily, on first visit) plus the app-level
@@ -42,6 +43,7 @@ typedef enum screen_id {
     SCREEN_MENU,
     SCREEN_OSC,
     SCREEN_SETTINGS,
+    SCREEN_TIMEOUT,
     SCREEN_COUNT
 } screen_id_t;
 

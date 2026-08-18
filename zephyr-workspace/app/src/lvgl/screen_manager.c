@@ -36,6 +36,7 @@ static const screen_t screens[SCREEN_COUNT] = {
   [SCREEN_MENU]     = SCR_REGISTER_TB("Menu",         ui_scrMenu,         menu    ),
   [SCREEN_OSC]      = SCR_REGISTER_TB("Oscilloscope", ui_scrOscilloscope, oscilloscope ),
   [SCREEN_SETTINGS] = SCR_REGISTER_TB("Setting",      ui_scrSettings,     settings ),
+  [SCREEN_TIMEOUT]  = SCR_REGISTER_TB("Timeout",      ui_scrTimeout,      timeout),
 };
 
 // Keep track of running screens and transitions

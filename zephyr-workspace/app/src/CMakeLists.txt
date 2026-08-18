@@ -11,6 +11,7 @@ add_library(app_lib STATIC
   lvgl/screens/scr_menu.c
   lvgl/screens/scr_oscilloscope.c
   lvgl/screens/scr_settings.c
+  lvgl/screens/scr_timeout.c
   lvgl/helpers/animations.c
   lvgl/helpers/chart.c
   lvgl/helpers/components.c
