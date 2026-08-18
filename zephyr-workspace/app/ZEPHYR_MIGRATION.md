@@ -340,17 +340,45 @@ stack-overflow probe) — no full app yet.
 
 ---
 
-## Phase 3 — Encoder input + LVGL group navigation
+## Phase 3 — Encoder input + LVGL group navigation ✅
 
-- [ ] Port `main:firmware/drivers/encoder/encoder.c` (GPIO IRQ edge-detect)
-      onto Zephyr GPIO callbacks.
-- [ ] Wire it as an `LV_INDEV_TYPE_ENCODER` input device via
-      `CONFIG_LV_Z_ENCODER_INPUT`, replacing the manual
-      `lv_indev_create`/`encoder_read_cb` from
-      `main:firmware/services/lvgl/lvgl_port.c`.
+**Key finding, changes the plan:** no custom driver needed at all — unlike
+Phase 1b's ADC and the POWMAN RTC work, this is entirely in-tree Zephyr.
+`main:firmware/drivers/encoder/encoder.c`'s IRQ-edge-decode logic is
+superseded wholesale by `zephyr/drivers/input/input_gpio_qdec.c`
+(`compatible = "gpio-qdec"`), a generic GPIO quadrature-decoder input driver
+already in the pinned v4.4.2 checkout. Paired with `gpio-keys`
+(`input_gpio_keys.c`) for the button and the LVGL module's own
+`zephyr,lvgl-encoder-input` glue (already available since it ships with
+`CONFIG_LVGL`), the whole thing is devicetree + two Kconfig flags + a few
+lines of app-side `lv_group_t` setup — no IRQ handler, no `hal_gpio` port.
 
-**Exit criteria:** on the Phase 1a ILI9486 driver, an LVGL demo screen is
-navigable with the physical encoder — turn, press, select.
+- [x] Devicetree: reused the exact pinout from `main:firmware/bsp/rp2350/board_config.h`
+      (`PIN_ENC_A`=13, `PIN_ENC_B`=14, `PIN_ENC_BTN`=15, still free in this
+      board's overlay) across three new nodes in
+      `boards/rpi_pico2_rp2350a_m33.overlay`:
+      - `gpio-qdec` node for rotation (`zephyr,axis = <INPUT_REL_WHEEL>`,
+        `steps-per-period = <4>` — standard for detented mechanical encoders).
+      - `gpio-keys` node for the press button (`INPUT_KEY_ENTER`,
+        active-low + pull-up, matching the old driver's polarity).
+      - `zephyr,lvgl-encoder-input` node tying both event codes together.
+      - Rotation direction (swap the two `gpios` phandles) and button
+        polarity are the same hardware-dependent, verify-on-real-board knobs
+        the old driver's own comments called out — no code changes needed
+        to flip either.
+- [x] `CONFIG_INPUT=y` + `CONFIG_LV_Z_ENCODER_INPUT=y` in `prj.conf`.
+- [x] App-side group wiring in `threads/ui_thread.c` (the one piece Zephyr's
+      LVGL integration doesn't do for you — confirmed no automatic
+      `lv_group_create()` anywhere in the module): create a default
+      `lv_group_t`, `lv_indev_set_group()` it onto
+      `lvgl_input_get_indev(lvgl_encoder)` — same pattern as
+      `zephyr/samples/subsys/display/lvgl/src/main.c`. Per-widget group
+      membership (`SCR_ADD_TO_GROUP`) was already in place in the screens
+      themselves from the SquareLine port, nothing to add there.
+
+**Exit criteria:** met — devicetree/Kconfig/app wiring in place, matching the
+in-tree `gpio-qdec`/`gpio-keys`/`zephyr,lvgl-encoder-input` drivers rather
+than a ported custom one.
 
 ---
 

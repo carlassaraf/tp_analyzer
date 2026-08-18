@@ -3,6 +3,7 @@
 #include <zephyr/drivers/display.h>
 #include <zephyr/drivers/rtc.h>
 #include <zephyr/logging/log.h>
+#include <lvgl_input_device.h>
 
 #include "lvgl.h"
 #include "lvgl/screen_manager.h"
@@ -14,6 +15,7 @@ LOG_MODULE_REGISTER(ui_thread, LOG_LEVEL_INF);
 // LVGL Display device
 static const struct device *display_dev = DEVICE_DT_GET(DT_CHOSEN(zephyr_display));
 static const struct device *rtc = DEVICE_DT_GET(DT_NODELABEL(powman_rtc));
+static const struct device *lvgl_encoder = DEVICE_DT_GET(DT_NODELABEL(lvgl_encoder));
 
 // Private prototypes and callbacks
 static void ui_init_minimal(void);
@@ -35,6 +37,11 @@ void ui_thread(void *param1, void *param2, void *param3)
 
   // UI related initialization
   ui_init_minimal();
+  // Create input group for the encoder
+  lv_group_t *group = lv_group_create();
+  lv_group_set_default(group);
+  lv_indev_set_group(lvgl_input_get_indev(lvgl_encoder), group);
+
   screen_manager_init();
   screen_update_init();
 
@@ -59,8 +66,8 @@ void ui_thread(void *param1, void *param2, void *param3)
   LOG_INF("Successfully initialized display");
 
   while (true) {
-    // screen_update();
-    // screen_manager_step();
+    screen_update();
+    screen_manager_step();
     lv_timer_handler();
     k_msleep(5);
   }
