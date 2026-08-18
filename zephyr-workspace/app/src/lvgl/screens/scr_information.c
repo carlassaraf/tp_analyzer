@@ -1,5 +1,6 @@
 #include "ui.h"
 #include "lvgl/screens.h"
+#include <app_version.h>
 
 void scr_information_prepare(void)
 {
@@ -9,6 +10,8 @@ void scr_information_prepare(void)
 void scr_information_init(void)
 {
   SCR_ADD_TO_GROUP(ui_scrInformation_btnBack);
+  lv_label_set_text_fmt(ui_scrInformation_lblFirmwareV, "v%s", APP_VERSION_STRING);
+  lv_label_set_text(ui_scrInformation_lblBuildV, __DATE__);
 }
 
 void scr_information_deinit(void)
