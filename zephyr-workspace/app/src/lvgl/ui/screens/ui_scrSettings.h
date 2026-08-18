@@ -24,6 +24,7 @@ extern lv_obj_t *ui_scrSettings_iconDatetime;
 extern lv_obj_t *ui_scrSettings_lblDatetime;
 extern lv_obj_t *ui_scrSettings_lblDatetimeBrief;
 extern lv_obj_t *ui_scrSettings_iconDatetimeEnter;
+extern void ui_event_scrSettings_cntScreen( lv_event_t * e);
 extern lv_obj_t *ui_scrSettings_cntScreen;
 extern lv_obj_t *ui_scrSettings_iconScreen;
 extern lv_obj_t *ui_scrSettings_lblScreen;
