@@ -2,6 +2,7 @@
 #include <zephyr/dt-bindings/display/panel.h>
 #include <zephyr/dt-bindings/dma/rpi-pico-dma-rp2350.h>
 #include <zephyr/dt-bindings/pinctrl/rpi-pico-rp2350a-pinctrl.h>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
 
 / {
 	chosen {
@@ -39,6 +40,30 @@
 			mipi-mode = "MIPI_DBI_MODE_8080_BUS_8_BIT";
 			h-mirror;
 		};
+	};
+
+	encoder_qdec: encoder-qdec {
+		compatible = "gpio-qdec";
+		gpios = <&gpio0 13 (GPIO_PULL_UP | GPIO_ACTIVE_HIGH)>,
+			<&gpio0 14 (GPIO_PULL_UP | GPIO_ACTIVE_HIGH)>;
+		steps-per-period = <4>;
+		zephyr,axis = <INPUT_REL_WHEEL>;
+		sample-time-us = <2000>;
+		idle-timeout-ms = <200>;
+	};
+
+	encoder_btn: encoder-btn {
+		compatible = "gpio-keys";
+		btn_0 {
+			gpios = <&gpio0 15 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+			zephyr,code = <INPUT_KEY_ENTER>;
+		};
+	};
+
+	lvgl_encoder: lvgl-encoder-input {
+		compatible = "zephyr,lvgl-encoder-input";
+		rotation-input-code = <INPUT_REL_WHEEL>;
+		button-input-code = <INPUT_KEY_ENTER>;
 	};
 };
 

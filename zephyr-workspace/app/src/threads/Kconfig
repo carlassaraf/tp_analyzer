@@ -12,12 +12,12 @@ config AD_THREAD_STACK_SIZE
 
 config UI_THREAD_PRIORITY
   int "Priority of UI thread"
-  default 2
+  default 1
   help
     This sets the priority of the thread that handles UI and LVGL.
 
 config UI_THREAD_STACK_SIZE
   int "Size in bytes for the UI thread"
-  default 4096
+  default 8192
   help
     This sets the bytes reserved for the UI thread stack.
