@@ -2,7 +2,7 @@
 #include "lvgl/screens.h"
 #include "lvgl/helpers/chart.h"
 #include "lvgl/helpers/animations.h"
-#include "lvgl_port.h"
+#include "lvgl.h"
 
 #define CHART_PIXEL_WIDTH     414
 #define SIDE_MENU_X_HIDDEN    480
@@ -84,22 +84,31 @@ void scr_fft_update_chart(const float *magnitudes, uint16_t count, float freq_re
 
 void scr_fft_update_peak(float raw_peak)
 {
-  lv_label_set_text_fmt(ui_scrFFT_lblPeakValue, "%.1f", raw_peak * s_curr_vscale);
+  float val = raw_peak * s_curr_vscale;
+  lv_label_set_text_fmt(ui_scrFFT_lblPeakValue, "%2d.%01d", ((int32_t)val) % 100, (10 * (int32_t)val) % 10);
 }
 
 void scr_fft_update_rms(float raw_rms)
 {
-  lv_label_set_text_fmt(ui_scrFFT_lblRmsValue, "%.1f", raw_rms * s_curr_vscale);
+  float val = raw_rms * s_curr_vscale;
+  lv_label_set_text_fmt(ui_scrFFT_lblRmsValue, "%2d.%01d", ((int32_t)val) % 100, (10 * (int32_t)val) % 10);
 }
 
 void scr_fft_update_frequency(float frequency)
 {
-  lv_label_set_text_fmt(ui_scrFFT_lblFrequencyValue, "%.1f", frequency);
+  lv_label_set_text_fmt(ui_scrFFT_lblFrequencyValue, "%2d.%01d", ((int32_t)frequency) % 100, (10 * (int32_t)frequency) % 10);
 }
 
 void scr_fft_update_thd(float thd)
 {
-  lv_label_set_text_fmt(ui_scrFFT_lblThdValue, "%.1f", thd);
+  lv_label_set_text_fmt(ui_scrFFT_lblThdValue, "%2d.%01d", ((int32_t)thd) % 100, (10 * (int32_t)thd) % 10);
+}
+
+uint8_t scr_fft_get_active_channel(void)
+{
+  // See scr_oscilloscope_get_active_channel()'s comment — same mapping,
+  // same caveat if the two orderings are ever changed independently.
+  return (uint8_t)s_curr_signal;
 }
 
 // Life cycle functions
@@ -190,16 +199,16 @@ void scr_fft_deinit(void)
 
 void scr_fft_step(void)
 {
-  // Skip the first 200ms to avoid the encoder button press used to navigate here
-  // from immediately triggering the side menu.
-  if (lv_tick_elaps(s_init_tick) < INIT_GRACE_MS) return;
+  // // Skip the first 200ms to avoid the encoder button press used to navigate here
+  // // from immediately triggering the side menu.
+  // if (lv_tick_elaps(s_init_tick) < INIT_GRACE_MS) return;
 
-  // lvgl_port_get_encoder_diff() returns the raw diff from the last indev read
-  // (set inside lv_task_handler()) and clears it — non-zero means the encoder
-  // rotated this frame, regardless of how long the display flush took.
-  bool encoder_active = lvgl_port_get_encoder_diff() != 0;
+  // // lvgl_port_get_encoder_diff() returns the raw diff from the last indev read
+  // // (set inside lv_task_handler()) and clears it — non-zero means the encoder
+  // // rotated this frame, regardless of how long the display flush took.
+  // bool encoder_active = lvgl_port_get_encoder_diff() != 0;
 
-  if (!encoder_active) return;
+  // if (!encoder_active) return;
 
   if (!s_menu_visible) {
     side_menu_show();

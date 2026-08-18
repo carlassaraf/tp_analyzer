@@ -1,0 +1,11 @@
+config BOOT_TIME_WAIT_MS
+  int "Time in ms to wait in the boot screen"
+  default 2000
+  help
+    Mostly used to speed up boot time
+
+config SCREEN_DESTROY_DELAY_MS
+  int "Time to wait after screen transition to destroy previous screen"
+  default 300
+  help
+    Has to be greater that all transision animation duration

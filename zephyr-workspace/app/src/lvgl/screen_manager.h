@@ -1,6 +1,7 @@
 #ifndef SCREEN_MANAGER_H
 #define SCREEN_MANAGER_H
 
+#include <zephyr/drivers/rtc.h>
 #include "screens.h"
 
 /** @brief Initializes initial application screen */
@@ -25,6 +26,6 @@ screen_id_t screen_manager_get_active_screen(void);
  * @brief Updates datetime on current screen if available
  * @param dt Pointer to datetime
  */
-void screen_manager_update_datetime(hal_rtc_datetime_t *dt);
+void screen_manager_update_datetime(struct rtc_time *dt);
 
 #endif

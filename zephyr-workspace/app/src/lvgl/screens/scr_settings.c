@@ -1,5 +1,8 @@
 #include "ui.h"
 #include "lvgl/screens.h"
+#include <zephyr/drivers/rtc.h>
+
+
 
 void scr_settings_prepare(void)
 {
@@ -17,9 +20,10 @@ void scr_settings_init(void)
   SCR_ADD_TO_GROUP(ui_scrSettings_cntMeasure);
   SCR_ADD_TO_GROUP(ui_scrSettings_cntInfo);
   // Update clock label in menu
-  hal_rtc_datetime_t dt;
-  hal_rtc_get(&dt);
-  lv_label_set_text_fmt(ui_scrSettings_lblDatetimeBrief, "%02d/%02d/%02d - %02d:%02d", dt.day, dt.month, dt.year, dt.hour, dt.min);
+  const struct device *rtc = DEVICE_DT_GET(DT_NODELABEL(powman_rtc));
+  struct rtc_time dt;
+  rtc_get_time(rtc, &dt);
+  lv_label_set_text_fmt(ui_scrSettings_lblDatetimeBrief, "%02d/%02d/%02d - %02d:%02d", dt.tm_mday, dt.tm_mon + 1, dt.tm_year, dt.tm_hour, dt.tm_min);
 }
 
 void scr_settings_deinit(void)

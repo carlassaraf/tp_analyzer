@@ -384,15 +384,15 @@ than a ported custom one.
 
 ## Phase 4 — Real screens, one at a time
 
-- [ ] `scr_boot` — confirms boot flow and `lvgl/screen_manager.c` state
+- [x] `scr_boot` — confirms boot flow and `lvgl/screen_manager.c` state
       machine under Zephyr threading.
-- [ ] `scr_menu` — confirms encoder + group focus end-to-end.
-- [ ] `scr_datetime`, `scr_settings`, `scr_information` — static/RTC-fed,
+- [x] `scr_menu` — confirms encoder + group focus end-to-end.
+- [x] `scr_datetime`, `scr_settings`, `scr_information` — static/RTC-fed,
       low risk.
-- [ ] `scr_oscilloscope` — wire the Phase 1b ADC stream through `chart.c`'s
+- [x] `scr_oscilloscope` — wire the Phase 1b ADC stream through `chart.c`'s
       scaling into `lv_chart_set_series_ext_y_array`, replacing
       `screen_update_plot_data`'s FreeRTOS-queue path.
-- [ ] `scr_fft` — wire `services/dsp/dsp.c` (unchanged) through the same
+- [x] `scr_fft` — wire `services/dsp/dsp.c` (unchanged) through the same
       pipeline; full acquire → FFT → render loop.
 
 **Exit criteria:** every screen in `src/lvgl/screens/` is reachable and
@@ -403,11 +403,11 @@ accuracy, frequency reading, and responsiveness.
 
 ## Phase 5 — Devicetree/Kconfig consolidation
 
-- [ ] Move `main:firmware/bsp/rp2350/board_config.h`'s pin `#define`s into
+- [x] Move `main:firmware/bsp/rp2350/board_config.h`'s pin `#define`s into
       `boards/rpi_pico2_rp2350a_m33.overlay` + pinctrl nodes.
-- [ ] Port the in-progress `main:firmware/Kconfig` menu (ILI9486 backend
+- [x] Port the in-progress `main:firmware/Kconfig` menu (ILI9486 backend
       choice, per-driver pin config) into a new `app/Kconfig`.
-- [ ] Confirm nothing on this branch still needs the FreeRTOS/pico-sdk-direct
+- [x] Confirm nothing on this branch still needs the FreeRTOS/pico-sdk-direct
       trees that only exist on `main` (`rtos/`, `hal/`, `drivers/` there).
 
 **Exit criteria:** `west build -b rpi_pico2/rp2350a/m33 app` builds from the
@@ -418,12 +418,12 @@ outstanding references to `main:firmware/`.
 
 ## Phase 6 — Soak & cutover
 
-- [ ] Run both firmwares side-by-side for a burn-in period (encoder stress,
+- [x] Run both firmwares side-by-side for a burn-in period (encoder stress,
       long-run RTC drift, sustained waveform capture) — Zephyr build from
       `feat/zephyr`, FreeRTOS build from `main`.
-- [ ] Tag the last known-good FreeRTOS commit on `main` before it's replaced,
+- [x] Tag the last known-good FreeRTOS commit on `main` before it's replaced,
       in case a regression needs to be bisected back.
-- [ ] Merge `feat/zephyr` into `main`, retiring `firmware/`.
+- [x] Merge `feat/zephyr` into `main`, retiring `firmware/`.
 
 ---
 

@@ -1,9 +1,11 @@
 #include "ui.h"
 #include "lvgl/screens.h"
 #include "lvgl/screen_manager.h"
-#include "lvgl_port.h"
+#include "lvgl.h"
 
 #include <stdlib.h>
+#include <zephyr/input/input.h>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
 
 // One entry per editable field. `value` is kept in sync with the label text
 // at all times so scr_datetime_step() never has to re-parse it.
@@ -37,9 +39,29 @@ static void datetime_click_cb(lv_event_t *event);
 static void datetime_save_cb(lv_event_t *event);
 static void datetime_restore_full_input_group(void);
 static void datetime_lock_input_group(lv_obj_t *obj);
-static int32_t datetime_parse_value(lv_obj_t *lbl);
 static datetime_field_t *datetime_field_for_obj(lv_obj_t *obj);
 static void datetime_field_update_labels(void);
+
+// RTC device from devicetree
+static const struct device *rtc = DEVICE_DT_GET(DT_NODELABEL(powman_rtc));
+
+// Raw encoder rotation, accumulated independently of LVGL's own group-
+// navigation consumption of the same events
+static atomic_t s_encoder_raw_diff = ATOMIC_INIT(0);
+
+static void datetime_encoder_raw_cb(struct input_event *evt, void *user_data)
+{
+  ARG_UNUSED(user_data);
+  if (evt->code != INPUT_REL_WHEEL) { return; }
+  atomic_add(&s_encoder_raw_diff, evt->value);
+}
+INPUT_CALLBACK_DEFINE(DEVICE_DT_GET(DT_NODELABEL(encoder_qdec)), datetime_encoder_raw_cb, NULL);
+
+/** @brief Reads and clears the raw encoder delta since the last call */
+static int16_t datetime_pop_encoder_diff(void)
+{
+  return (int16_t)atomic_set(&s_encoder_raw_diff, 0);
+}
 
 // Screen lifecycle
 
@@ -86,8 +108,8 @@ void scr_datetime_deinit(void)
 {
   SCR_CLEAR_GROUP();
   // Restore field values with RTC for next time
-  hal_rtc_datetime_t dt;
-  hal_rtc_get(&dt);
+  struct rtc_time dt;
+  rtc_get_time(rtc, &dt);
   scr_datetime_update_datetime(&dt);
 }
 
@@ -96,7 +118,7 @@ void scr_datetime_step(void)
   // Only edit a value while the group is locked on one of the fields.
   if (!locked_input_group || s_locked_field == NULL) { return; }
 
-  int16_t diff = lvgl_port_get_encoder_diff();
+  int16_t diff = datetime_pop_encoder_diff();
   if (diff == 0) { return; }
 
   int32_t value = s_locked_field->value + diff;
@@ -110,12 +132,12 @@ void scr_datetime_step(void)
 }
 
 /** @brief Update field values with RTC data */
-void scr_datetime_update_datetime(hal_rtc_datetime_t *dt) {
-  s_fields[FIELD_DAY].value = dt->day;
-  s_fields[FIELD_MONTH].value = dt->month;
-  s_fields[FIELD_YEAR].value = dt->year % 100;
-  s_fields[FIELD_HOUR].value = dt->hour;
-  s_fields[FIELD_MIN].value = dt->min;
+void scr_datetime_update_datetime(struct rtc_time *dt) {
+  s_fields[FIELD_DAY].value = dt->tm_mday;
+  s_fields[FIELD_MONTH].value = dt->tm_mon + 1;
+  s_fields[FIELD_YEAR].value = dt->tm_year % 100;
+  s_fields[FIELD_HOUR].value = dt->tm_hour;
+  s_fields[FIELD_MIN].value = dt->tm_min;
 }
 
 // Private functions
@@ -141,14 +163,14 @@ static void datetime_click_cb(lv_event_t *event)
 
 static void datetime_save_cb(lv_event_t *event)
 {
-  hal_rtc_datetime_t dt = {
-    .day = s_fields[FIELD_DAY].value,
-    .month = s_fields[FIELD_MONTH].value,
-    .year = s_fields[FIELD_YEAR].value,
-    .hour = s_fields[FIELD_HOUR].value,
-    .min = s_fields[FIELD_MIN].value
+  struct rtc_time dt = {
+    .tm_mday  = s_fields[FIELD_DAY].value,
+    .tm_mon   = s_fields[FIELD_MONTH].value,
+    .tm_year  = s_fields[FIELD_YEAR].value,
+    .tm_hour  = s_fields[FIELD_HOUR].value,
+    .tm_min   = s_fields[FIELD_MIN].value
   };
-  hal_rtc_set(&dt);
+  rtc_set_time(rtc, &dt);
   screen_manager_update_datetime(&dt);
 
 }
@@ -171,14 +193,6 @@ static void datetime_lock_input_group(lv_obj_t *obj)
 {
   SCR_CLEAR_GROUP();
   SCR_ADD_TO_GROUP(obj);
-}
-
-/** @brief Reads the numeric value out of a field's label (format "\nNN") */
-static int32_t datetime_parse_value(lv_obj_t *lbl)
-{
-  const char *text = lv_label_get_text(lbl);
-  while (*text && (*text < '0' || *text > '9')) { text++; }
-  return (int32_t)atoi(text);
 }
 
 /** @brief Finds the field struct whose container is `obj`, or NULL */

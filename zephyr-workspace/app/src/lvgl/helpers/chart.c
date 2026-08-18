@@ -1,10 +1,7 @@
 #include "chart.h"
-#include "hal/hal_adc.h"
 
-#define FFT_OUT_MAX 512
-
-static int32_t s_scaled[HAL_ADC_BUFFER_SIZE];
-static int32_t s_scaled_fft[FFT_OUT_MAX];
+static int32_t s_scaled[CONFIG_ADC_SAMPLES];
+static int32_t s_scaled_fft[CONFIG_FFT_BINS];
 
 void ui_chart_bind_ext_array(lv_obj_t *chart, uint16_t count) {
   if (chart == NULL) return;
@@ -28,7 +25,7 @@ void ui_chart_push_float_data(lv_obj_t *chart, const float *points, uint16_t cou
   if (chart == NULL) return;
   lv_chart_series_t *ser = lv_chart_get_series_next(chart, NULL);
   if (ser == NULL) return;
-  if (count > FFT_OUT_MAX) count = FFT_OUT_MAX;
+  if (count > CONFIG_FFT_BINS) count = CONFIG_FFT_BINS;
   for (uint16_t i = 0; i < count; i++) {
     s_scaled_fft[i] = (int32_t)(points[i] * scale);
   }

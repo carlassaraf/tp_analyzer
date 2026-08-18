@@ -6,8 +6,34 @@
 # menu ported from main:firmware/Kconfig still happens in Phase 5 — this
 # file grows then, it isn't reworked from scratch.
 
-menu "Application Threads"
-  rsource "src/threads/Kconfig"
+menu "Application"
+  menu "Threads Customization"
+    rsource "src/threads/Kconfig"
+  endmenu
+  menu "UI Screens"
+    rsource "src/lvgl/Kconfig"
+  endmenu
+  menu "DSP"
+    config ADC_SAMPLES
+      int "Number of ADC samples taken"
+      default ADC_STREAM_PER_CHANNEL_BUFFER_SIZE
+      depends on ADC_STREAM_RPI_PICO
+      help
+        This sets the number of samples taken on each ADC channel
+
+    config ADC_SAMPLING_FREQUENCY_HZ
+      int "Sampling frequency per channel in Hz"
+      default ADC_STREAM_PER_CHANNEL_SAMPLE_RATE_HZ
+      depends on ADC_STREAM_RPI_PICO
+      help
+        This sets the sampling frequency per ADC channel
+
+    config FFT_BINS
+      int "Number of FFT bins"
+      default 512
+      help
+        Has to be half of ADC_SAMPLES
+  endmenu
 endmenu
 
 menu "ADC Driver"

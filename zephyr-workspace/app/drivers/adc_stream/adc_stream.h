@@ -25,6 +25,15 @@
  * ever needs to be reusable/upstreamable.
  */
 
+/**
+ * Number of ADC channels this stream produces, read from the number of
+ * enabled channel child nodes on the adc_stream devicetree node (voltage_a,
+ * current_a, ...) — shared here so consumers (ad_thread.c, screen_update.c)
+ * size their own per-channel bookkeeping off the same source of truth
+ * instead of duplicating the DT lookup or hardcoding a channel count.
+ */
+#define ADC_STREAM_MAX_CHANNELS DT_CHILD_NUM_STATUS_OKAY(DT_NODELABEL(adc_stream))
+
 /** One completed ping-pong half-buffer, handed off via k_msgq. */
 struct adc_stream_block {
 	/** Points into the driver's internal ping-pong buffer — valid until
