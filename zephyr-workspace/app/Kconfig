@@ -6,7 +6,7 @@
 # menu ported from main:firmware/Kconfig still happens in Phase 5 — this
 # file grows then, it isn't reworked from scratch.
 
-menu "Application Threads"
+menu "Application"
   menu "Threads Customization"
     rsource "src/threads/Kconfig"
   endmenu
