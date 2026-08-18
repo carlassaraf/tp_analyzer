@@ -27,6 +27,7 @@ extern "C" {
 #include "screens/ui_scrSettings.h"
 #include "screens/ui_scrDatetime.h"
 #include "screens/ui_scrInformation.h"
+#include "screens/ui_scrTimeout.h"
 
 ///////////////////// VARIABLES ////////////////////
 
