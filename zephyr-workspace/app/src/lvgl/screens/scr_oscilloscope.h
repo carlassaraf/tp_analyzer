@@ -32,5 +32,13 @@ void scr_oscilloscope_update_rms(float raw_rms);
  */
 void scr_oscilloscope_update_frequency(float frequency);
 
+/**
+ * @brief Returns the ADC channel number (0=voltage_a, 1=current_a, per the
+ * board overlay) matching the signal currently selected on this screen.
+ * screen_update.c uses this to drop adc_stream_block updates for the
+ * channel the user isn't looking at.
+ */
+uint8_t scr_oscilloscope_get_active_channel(void);
+
 #endif
 

@@ -37,4 +37,12 @@ void scr_fft_update_frequency(float frequency);
  */
 void scr_fft_update_thd(float thd);
 
+/**
+ * @brief Returns the ADC channel number (0=voltage_a, 1=current_a, per the
+ * board overlay) matching the signal currently selected on this screen.
+ * screen_update.c uses this to drop adc_stream_block updates for the
+ * channel the user isn't looking at.
+ */
+uint8_t scr_fft_get_active_channel(void);
+
 #endif
