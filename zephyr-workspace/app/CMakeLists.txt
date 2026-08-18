@@ -21,3 +21,9 @@ target_link_libraries_ifdef(CONFIG_ADC_STREAM_RPI_PICO app_lib PRIVATE adc_strea
 add_subdirectory_ifdef(CONFIG_POWMAN_RTC_RPI_PICO drivers/powman_rtc)
 target_include_directories_ifdef(CONFIG_POWMAN_RTC_RPI_PICO app_lib PRIVATE drivers/powman_rtc)
 target_link_libraries_ifdef(CONFIG_POWMAN_RTC_RPI_PICO app_lib PRIVATE powman_rtc)
+
+# CMSIS-DSP FFT wrapper (RTOS-agnostic, ported unchanged from the FreeRTOS
+# tree — see ZEPHYR_MIGRATION.md's Guiding principle)
+add_subdirectory_ifdef(CONFIG_CMSIS_DSP services/dsp)
+target_include_directories_ifdef(CONFIG_CMSIS_DSP app_lib PRIVATE services/dsp)
+target_link_libraries_ifdef(CONFIG_CMSIS_DSP app_lib PRIVATE dsp)
