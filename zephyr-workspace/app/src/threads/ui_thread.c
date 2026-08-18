@@ -54,7 +54,7 @@ void ui_thread(void *param1, void *param2, void *param3)
   LOG_INF("Successfully initialized RTC to %02d/%02d/%02d %02d:%02d:00", 
     default_dt.tm_mday, default_dt.tm_mon + 1, default_dt.tm_year, default_dt.tm_hour, default_dt.tm_min);
   k_timer_start(&rtc_timer, K_SECONDS(60), K_SECONDS(60));
-  // screen_update_cmd_push(SCREEN_UPDATE_DATETIME, (void*)&dt);
+  screen_update_cmd_push(SCREEN_UPDATE_DATETIME, (void*)&default_dt);
 
   // Render the first frame before turning blanking off, so we don't flash
   // whatever garbage was left in the panel's RAM at boot.
@@ -94,7 +94,7 @@ static void rtc_timer_cb(struct k_timer *timer_id)
     return;
   }
   // Update UI command
-  // screen_update_cmd_push(SCREEN_UPDATE_DATETIME, (void*)&dt);
+  screen_update_cmd_push(SCREEN_UPDATE_DATETIME, (void*)&dt);
   LOG_INF("RTC datetime %02d/%02d/%02d %02d:%02d:00", 
     dt.tm_mday, dt.tm_mon + 1, dt.tm_year, dt.tm_hour, dt.tm_min);
 }

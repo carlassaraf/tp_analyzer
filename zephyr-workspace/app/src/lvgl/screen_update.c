@@ -4,6 +4,7 @@
 
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
+#include <zephyr/drivers/rtc.h>
 
 // #include "dsp.h"
 #include <stdbool.h>
@@ -151,13 +152,13 @@ static void screen_update_fft_data(void *data)
 
 static void screen_update_datetime(void *data)
 {
-  // hal_rtc_datetime_t *dt = (hal_rtc_datetime_t*)data;
-  // // Update topbar datetime
-  // screen_manager_update_datetime(dt);
-  // // Only update if it's not active to load them on next prepare call
-  // if(screen_manager_get_active_screen() != SCREEN_DATETIME) {
-  //   scr_datetime_update_datetime(dt);
-  // }
+  struct rtc_time *dt = (struct rtc_time*)data;
+  // Update topbar datetime
+  screen_manager_update_datetime(dt);
+  // Only update if it's not active to load them on next prepare call
+  if(screen_manager_get_active_screen() != SCREEN_DATETIME) {
+    scr_datetime_update_datetime(dt);
+  }
 }
 
 // Helpers

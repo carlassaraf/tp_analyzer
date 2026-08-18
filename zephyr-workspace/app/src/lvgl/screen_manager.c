@@ -3,9 +3,12 @@
 
 #include "lvgl/helpers/components.h"
 
+#include <zephyr/logging/log.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdint.h>
+
+LOG_MODULE_REGISTER(screen_manager, LOG_LEVEL_INF);
 
 /**
  * @struct screen
@@ -23,14 +26,6 @@ typedef struct screen {
   void (*deinit)(void);   /**< Called after leaving screen to clear up local variables/states */
   void (*step)(void);     /**< Called every screen_manager step cycle */
 } screen_t;
-
-// Longest spd/anim-time passed to _ui_screen_change() anywhere in the
-// generated ui_scrX.c event handlers (currently 200ms, for the Settings
-// <-> Menu/Datetime slides). LVGL keeps the screen we're leaving alive for
-// the whole animation, so we must not free it before this elapses, or the
-// in-flight slide would render/animate a deleted object. Bump this if a
-// slower transition is ever added in SquareLine.
-#define SCR_DESTROY_DELAY_MS 300
 
 // Used to register all screens in the applications with their callback functions
 static const screen_t screens[SCREEN_COUNT] = {
@@ -55,6 +50,9 @@ static screen_id_t pending = SCREEN_BOOT;
 // have been built by us *or* by _ui_screen_change() in ui_helpers.c, so we
 // can't infer "just built" from timing alone.
 static bool prepared[SCREEN_COUNT] = { false };
+
+// RTC device to update datetime in active screen
+static const struct device *rtc = DEVICE_DT_GET(DT_NODELABEL(powman_rtc));
 
 static void destroy_timer_cb(lv_timer_t *timer)
 {
@@ -115,18 +113,18 @@ void screen_manager_step(void)
     if(screens[pending].init) { screens[pending].init(); }
     current = pending;
     // Update clock if necessary
-    hal_rtc_datetime_t dt;
-    if (hal_rtc_get(&dt)) {
-      screen_manager_update_datetime(&dt);
-    }
+    struct rtc_time dt;
+    if (rtc_get_time(rtc, &dt)) {
+      LOG_ERR("Failed to get RTC time");
+    } else { screen_manager_update_datetime(&dt); }
     lv_unlock();
 
     // Free the screen we just left once any slide/fade animation it might
-    // still be part of has had time to finish (see SCR_DESTROY_DELAY_MS).
+    // still be part of has had time to finish (see CONFIG_SCREEN_DESTROY_DELAY_MS).
     // The timer re-checks it's still not the active/target screen before
     // actually deleting it, in case the user navigated straight back.
     if (screens[leaving].destroy) {
-      lv_timer_t *t = lv_timer_create(destroy_timer_cb, SCR_DESTROY_DELAY_MS, (void*)(intptr_t)leaving);
+      lv_timer_t *t = lv_timer_create(destroy_timer_cb, CONFIG_SCREEN_DESTROY_DELAY_MS, (void*)(intptr_t)leaving);
       lv_timer_set_repeat_count(t, 1);
     }
   }
@@ -145,7 +143,7 @@ screen_id_t screen_manager_get_active_screen(void)
   return current;
 }
 
-void screen_manager_update_datetime(hal_rtc_datetime_t *dt)
+void screen_manager_update_datetime(struct rtc_time *dt)
 {
   if(screens[current].topbar && *screens[current].topbar) {
     ui_topbar_update_datetime(*screens[current].topbar, dt);
