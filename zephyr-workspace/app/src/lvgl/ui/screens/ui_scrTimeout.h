@@ -23,6 +23,32 @@ extern lv_obj_t *ui_scrTimeout_lblScreenOff;
 extern lv_obj_t *ui_scrTimeout_lblScreenOffInfo;
 extern lv_obj_t *ui_scrTimeout_btnScreenOff30s;
 extern lv_obj_t *ui_scrTimeout_lblOff30s;
+extern lv_obj_t *ui_scrTimeout_btnScreenOff1m;
+extern lv_obj_t *ui_scrTimeout_lblOff1m;
+extern lv_obj_t *ui_scrTimeout_btnScreenOff2m;
+extern lv_obj_t *ui_scrTimeout_lblOff2m;
+extern lv_obj_t *ui_scrTimeout_btnScreenOff5m;
+extern lv_obj_t *ui_scrTimeout_lblOff5m;
+extern lv_obj_t *ui_scrTimeout_btnScreenOff10m;
+extern lv_obj_t *ui_scrTimeout_lblOff10m;
+extern lv_obj_t *ui_scrTimeout_btnScreenOffNever;
+extern lv_obj_t *ui_scrTimeout_lblOffNever;
+extern lv_obj_t *ui_scrTimeout_vline;
+extern lv_obj_t *ui_scrTimeout_iconBack;
+extern lv_obj_t *ui_scrTimeout_lblScreenBack;
+extern lv_obj_t *ui_scrTimeout_lblScreenBackInfo;
+extern lv_obj_t *ui_scrTimeout_btnScreenBack30s;
+extern lv_obj_t *ui_scrTimeout_lblOff30s1;
+extern lv_obj_t *ui_scrTimeout_btnScreenBack1m;
+extern lv_obj_t *ui_scrTimeout_lblOff1m1;
+extern lv_obj_t *ui_scrTimeout_btnScreenBack2m;
+extern lv_obj_t *ui_scrTimeout_lblOff2m1;
+extern lv_obj_t *ui_scrTimeout_btnScreenBack5m;
+extern lv_obj_t *ui_scrTimeout_lblOff5m1;
+extern lv_obj_t *ui_scrTimeout_btnScreenBack10m;
+extern lv_obj_t *ui_scrTimeout_lblOff10m1;
+extern lv_obj_t *ui_scrTimeout_btnScreenBackNever;
+extern lv_obj_t *ui_scrTimeout_lblOffNever1;
 // CUSTOM VARIABLES
 
 #ifdef __cplusplus
