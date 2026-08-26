@@ -1,5 +1,6 @@
 add_library(app_lib STATIC
   app.c
+  dev_state/dev_state.c
   threads/ui_thread.c
   threads/ad_thread.c
   lvgl/screen_manager.c
