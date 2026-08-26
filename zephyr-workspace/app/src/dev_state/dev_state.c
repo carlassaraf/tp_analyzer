@@ -1,5 +1,7 @@
 #include "dev_state.h"
 
+#include <zephyr/input/input.h>
+
 // Timeout timers
 static void screen_timeout_expiry(struct k_timer *timer_id);
 static void off_timeout_expiry(struct k_timer *timer_id);
@@ -100,3 +102,15 @@ static void off_timeout_expiry(struct k_timer *timer_id)
 {
   if (s_timeout_cb) { s_timeout_cb(DEV_STATE_TIMEOUT_PWR_OFF); }
 }
+
+/**
+ * @brief Fires for every raw input event reported by any input device
+ * (encoder rotation and its button, currently the only ones registered).
+ * Runs in the input subsystem's own thread (CONFIG_INPUT_MODE_THREAD is
+ * the project default), so blocking on the mutex here is safe.
+ */
+static void encoder_activity_cb(struct input_event *evt, void *user_data)
+{
+  dev_state_kick_activity();
+}
+INPUT_CALLBACK_DEFINE(NULL, encoder_activity_cb, NULL);
