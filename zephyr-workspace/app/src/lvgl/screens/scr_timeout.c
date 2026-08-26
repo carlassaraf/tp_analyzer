@@ -13,38 +13,47 @@ static uint32_t obj_to_timeout(lv_obj_t *obj);
 static bool obj_is_off_timeout(lv_obj_t *obj);
 static void timeout_set_cb(lv_event_t *e);
 
+static lv_obj_t **btns[] = { 
+  &ui_scrTimeout_btnScreenOff30s, &ui_scrTimeout_btnScreenOff1m, &ui_scrTimeout_btnScreenOff2m,
+  &ui_scrTimeout_btnScreenOff5m, &ui_scrTimeout_btnScreenOff10m, &ui_scrTimeout_btnScreenOffNever,
+  &ui_scrTimeout_btnScreenBack30s, &ui_scrTimeout_btnScreenBack1m, &ui_scrTimeout_btnScreenBack2m,
+  &ui_scrTimeout_btnScreenBack5m, &ui_scrTimeout_btnScreenBack10m, &ui_scrTimeout_btnScreenBackNever
+};
+
 // Life cycle functions
 
 void scr_timeout_prepare(void)
 {
-  lv_obj_t *btns[] = { 
-    ui_scrTimeout_btnScreenOff30s, ui_scrTimeout_btnScreenOff1m, ui_scrTimeout_btnScreenOff2m,
-    ui_scrTimeout_btnScreenOff5m, ui_scrTimeout_btnScreenOff10m, ui_scrTimeout_btnScreenOffNever,
-    ui_scrTimeout_btnScreenBack30s, ui_scrTimeout_btnScreenBack1m, ui_scrTimeout_btnScreenBack2m,
-    ui_scrTimeout_btnScreenBack5m, ui_scrTimeout_btnScreenBack10m, ui_scrTimeout_btnScreenBackNever
-  };
-
   for (uint8_t i = 0; i < sizeof(btns)/sizeof(btns[0]); i++) {
-    lv_obj_add_flag(btns[i], LV_OBJ_FLAG_EVENT_TRICKLE);
-    lv_obj_add_flag(btns[i], LV_OBJ_FLAG_STATE_TRICKLE);
-    lv_obj_set_style_transform_width(btns[i], 0, LV_PART_MAIN | LV_STATE_PRESSED);
-    lv_obj_set_style_transform_height(btns[i], 0, LV_PART_MAIN | LV_STATE_PRESSED);
-    lv_obj_add_event_cb(btns[i], timeout_set_cb, LV_EVENT_CLICKED, NULL);
+    lv_obj_t *btn = *(btns[i]);
+    lv_obj_add_flag(btn, LV_OBJ_FLAG_EVENT_TRICKLE);
+    lv_obj_add_flag(btn, LV_OBJ_FLAG_STATE_TRICKLE);
+    lv_obj_set_style_transform_width(btn, 0, LV_PART_MAIN | LV_STATE_PRESSED);
+    lv_obj_set_style_transform_height(btn, 0, LV_PART_MAIN | LV_STATE_PRESSED);
+    lv_obj_add_event_cb(btn, timeout_set_cb, LV_EVENT_CLICKED, NULL);
+  }
+  // Check the button of the active timeout
+  dev_state_t dev = {0};
+  dev_state_get(&dev);
+  uint32_t screen_timeout = dev.screen_timeout_ms;
+  uint32_t off_timeout = dev.off_screen_timeout_ms;
+  
+  uint32_t timeouts[] = { 30000, 60000, 120000, 300000, 600000, 0 };
+  for (uint8_t i = 0; i < sizeof(timeouts)/sizeof(timeouts[0]); i++) {
+    if (screen_timeout == timeouts[i]) {
+      lv_obj_add_state(*(btns[6 + i]), LV_STATE_CHECKED);
+    }
+    if (off_timeout == timeouts[i]) {
+      lv_obj_add_state(*(btns[i]), LV_STATE_CHECKED);
+    }
   }
 }
 
 void scr_timeout_init(void)
 {
-  lv_obj_t *btns[] = { 
-    ui_scrTimeout_btnScreenOff30s, ui_scrTimeout_btnScreenOff1m, ui_scrTimeout_btnScreenOff2m,
-    ui_scrTimeout_btnScreenOff5m, ui_scrTimeout_btnScreenOff10m, ui_scrTimeout_btnScreenOffNever,
-    ui_scrTimeout_btnScreenBack30s, ui_scrTimeout_btnScreenBack1m, ui_scrTimeout_btnScreenBack2m,
-    ui_scrTimeout_btnScreenBack5m, ui_scrTimeout_btnScreenBack10m, ui_scrTimeout_btnScreenBackNever
-  };
-
   SCR_ADD_TO_GROUP(ui_scrTimeout_btnBack);
   for (uint8_t i = 0; i < sizeof(btns)/sizeof(btns[0]); i++) {
-    SCR_ADD_TO_GROUP(btns[i]);
+    SCR_ADD_TO_GROUP(*(btns[i]));
   }
 }
 
@@ -72,15 +81,15 @@ static uint32_t obj_to_timeout(lv_obj_t *obj)
     return 120000;
   }
   if (obj == ui_scrTimeout_btnScreenOff5m || obj == ui_scrTimeout_btnScreenBack5m) {
-    return 240000;
+    return 300000;
   }
   if (obj == ui_scrTimeout_btnScreenOff10m || obj == ui_scrTimeout_btnScreenBack10m) {
     return 600000;
   }
   if (obj == ui_scrTimeout_btnScreenOffNever || obj == ui_scrTimeout_btnScreenBackNever) {
-    return 0xffffffff;
+    return 0;
   }
-  return 0xffffffff;
+  return 0;
 }
 
 static bool obj_is_off_timeout(lv_obj_t *obj)
@@ -98,21 +107,15 @@ static bool obj_is_off_timeout(lv_obj_t *obj)
 static void timeout_set_cb(lv_event_t *e)
 {
   lv_obj_t *target = lv_event_get_target_obj(e);
-  lv_obj_t *btns[] = { 
-    ui_scrTimeout_btnScreenOff30s, ui_scrTimeout_btnScreenOff1m, ui_scrTimeout_btnScreenOff2m,
-    ui_scrTimeout_btnScreenOff5m, ui_scrTimeout_btnScreenOff10m, ui_scrTimeout_btnScreenOffNever,
-    ui_scrTimeout_btnScreenBack30s, ui_scrTimeout_btnScreenBack1m, ui_scrTimeout_btnScreenBack2m,
-    ui_scrTimeout_btnScreenBack5m, ui_scrTimeout_btnScreenBack10m, ui_scrTimeout_btnScreenBackNever
-  };
 
   if (obj_is_off_timeout(target)) {
     // Clear only the type of the target
     for (uint8_t i = 0; i < (int)(sizeof(btns)/sizeof(btns[0]) / 2); i++) {
-      lv_obj_remove_state(btns[i], LV_STATE_CHECKED);
+      lv_obj_remove_state(*(btns[i]), LV_STATE_CHECKED);
     }
   } else {
     for (uint8_t i = (int)(sizeof(btns)/sizeof(btns[0]) / 2); i < sizeof(btns)/sizeof(btns[0]); i++) {
-      lv_obj_remove_state(btns[i], LV_STATE_CHECKED);
+      lv_obj_remove_state(*(btns[i]), LV_STATE_CHECKED);
     }
   }
 
@@ -122,13 +125,11 @@ static void timeout_set_cb(lv_event_t *e)
   dev_state_get(&dev);
   
   if (obj_is_off_timeout(target)) {
-    LOG_INF("Button is an off timeout");
     if (dev.off_screen_timeout_ms != timeout) {
       // Only update when there's a change
       dev_state_set_off_timeout(timeout);
     }
   } else {
-    LOG_INF("Button is a back timeout");
     if (dev.screen_timeout_ms != timeout) {
       dev_state_set_screen_timeout(timeout);
     }
