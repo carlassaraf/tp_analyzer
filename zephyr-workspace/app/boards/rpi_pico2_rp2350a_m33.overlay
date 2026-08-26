@@ -46,9 +46,9 @@
 		compatible = "gpio-qdec";
 		gpios = <&gpio0 13 (GPIO_PULL_UP | GPIO_ACTIVE_HIGH)>,
 			<&gpio0 14 (GPIO_PULL_UP | GPIO_ACTIVE_HIGH)>;
-		steps-per-period = <4>;
+		steps-per-period = <2>;
 		zephyr,axis = <INPUT_REL_WHEEL>;
-		sample-time-us = <2000>;
+		sample-time-us = <1000>;
 		idle-timeout-ms = <200>;
 	};
 

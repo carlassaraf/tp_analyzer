@@ -1,8 +1,7 @@
 #include "ui.h"
 #include "lvgl/screens.h"
 #include <zephyr/drivers/rtc.h>
-
-
+#include <app_version.h>
 
 void scr_settings_prepare(void)
 {
@@ -24,6 +23,7 @@ void scr_settings_init(void)
   struct rtc_time dt;
   rtc_get_time(rtc, &dt);
   lv_label_set_text_fmt(ui_scrSettings_lblDatetimeBrief, "%02d/%02d/%02d - %02d:%02d", dt.tm_mday, dt.tm_mon + 1, dt.tm_year, dt.tm_hour, dt.tm_min);
+  lv_label_set_text_fmt(ui_scrSettings_lblInfoBrief, "Firmware v%s - S/N ATRI-001", APP_VERSION_STRING);
 }
 
 void scr_settings_deinit(void)

@@ -23,6 +23,14 @@ if ( event_code == LV_EVENT_CLICKED) {
 }
 }
 
+void ui_event_scrSettings_cntScreen( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+if ( event_code == LV_EVENT_CLICKED) {
+      _ui_screen_change( &ui_scrTimeout, LV_SCR_LOAD_ANIM_MOVE_LEFT, 200, 0, &ui_scrTimeout_screen_init);
+}
+}
+
 void ui_event_scrSettings_cntInfo( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
 
@@ -137,7 +145,7 @@ ui_object_set_themeable_style_property(ui_scrSettings_lblDatetime, LV_PART_MAIN|
 
 ui_scrSettings_lblDatetimeBrief = lv_label_create(ui_scrSettings_cntDatetime);
 lv_obj_set_width( ui_scrSettings_lblDatetimeBrief, 120);
-lv_obj_set_height( ui_scrSettings_lblDatetimeBrief, 10);
+lv_obj_set_height( ui_scrSettings_lblDatetimeBrief, 12);
 lv_obj_set_x( ui_scrSettings_lblDatetimeBrief, 54 );
 lv_obj_set_y( ui_scrSettings_lblDatetimeBrief, 28 );
 lv_label_set_long_mode(ui_scrSettings_lblDatetimeBrief,LV_LABEL_LONG_MODE_DOTS);
@@ -219,7 +227,7 @@ ui_object_set_themeable_style_property(ui_scrSettings_lblScreen, LV_PART_MAIN| L
 
 ui_scrSettings_lblScreenBrief = lv_label_create(ui_scrSettings_cntScreen);
 lv_obj_set_width( ui_scrSettings_lblScreenBrief, 120);
-lv_obj_set_height( ui_scrSettings_lblScreenBrief, 10);
+lv_obj_set_height( ui_scrSettings_lblScreenBrief, 12);
 lv_obj_set_x( ui_scrSettings_lblScreenBrief, 54 );
 lv_obj_set_y( ui_scrSettings_lblScreenBrief, 28 );
 lv_label_set_long_mode(ui_scrSettings_lblScreenBrief,LV_LABEL_LONG_MODE_DOTS);
@@ -301,7 +309,7 @@ ui_object_set_themeable_style_property(ui_scrSettings_lblMeasure, LV_PART_MAIN| 
 
 ui_scrSettings_lblMeasureBrief = lv_label_create(ui_scrSettings_cntMeasure);
 lv_obj_set_width( ui_scrSettings_lblMeasureBrief, 120);
-lv_obj_set_height( ui_scrSettings_lblMeasureBrief, 10);
+lv_obj_set_height( ui_scrSettings_lblMeasureBrief, 12);
 lv_obj_set_x( ui_scrSettings_lblMeasureBrief, 54 );
 lv_obj_set_y( ui_scrSettings_lblMeasureBrief, 28 );
 lv_label_set_long_mode(ui_scrSettings_lblMeasureBrief,LV_LABEL_LONG_MODE_DOTS);
@@ -383,7 +391,7 @@ ui_object_set_themeable_style_property(ui_scrSettings_lblInfo, LV_PART_MAIN| LV_
 
 ui_scrSettings_lblInfoBrief = lv_label_create(ui_scrSettings_cntInfo);
 lv_obj_set_width( ui_scrSettings_lblInfoBrief, 120);
-lv_obj_set_height( ui_scrSettings_lblInfoBrief, 10);
+lv_obj_set_height( ui_scrSettings_lblInfoBrief, 12);
 lv_obj_set_x( ui_scrSettings_lblInfoBrief, 54 );
 lv_obj_set_y( ui_scrSettings_lblInfoBrief, 28 );
 lv_label_set_long_mode(ui_scrSettings_lblInfoBrief,LV_LABEL_LONG_MODE_DOTS);
@@ -410,6 +418,7 @@ ui_object_set_themeable_style_property(ui_scrSettings_iconInfoEnter, LV_PART_MAI
 
 lv_obj_add_event_cb(ui_scrSettings_btnBack, ui_event_scrSettings_btnBack, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_scrSettings_cntDatetime, ui_event_scrSettings_cntDatetime, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_scrSettings_cntScreen, ui_event_scrSettings_cntScreen, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_scrSettings_cntInfo, ui_event_scrSettings_cntInfo, LV_EVENT_ALL, NULL);
 
 }
