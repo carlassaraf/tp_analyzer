@@ -5,7 +5,7 @@
 
 #include "../ui.h"
 
-lv_obj_t *ui_scrTimeout = NULL;lv_obj_t *ui_scrTimeout_contTopBar = NULL;lv_obj_t *ui_scrTimeout_lblScreen = NULL;lv_obj_t *ui_scrTimeout_btnBack = NULL;lv_obj_t *ui_scrTimeout_iconScreen = NULL;lv_obj_t *ui_scrTimeout_lblScreenOff = NULL;lv_obj_t *ui_scrTimeout_lblScreenOffInfo = NULL;lv_obj_t *ui_scrTimeout_btnScreenOff30s = NULL;lv_obj_t *ui_scrTimeout_lblOff30s = NULL;lv_obj_t *ui_scrTimeout_btnScreenOff1m = NULL;lv_obj_t *ui_scrTimeout_lblOff1m = NULL;lv_obj_t *ui_scrTimeout_btnScreenOff2m = NULL;lv_obj_t *ui_scrTimeout_lblOff2m = NULL;lv_obj_t *ui_scrTimeout_btnScreenOff5m = NULL;lv_obj_t *ui_scrTimeout_lblOff5m = NULL;lv_obj_t *ui_scrTimeout_btnScreenOff10m = NULL;lv_obj_t *ui_scrTimeout_lblOff10m = NULL;lv_obj_t *ui_scrTimeout_btnScreenOffNever = NULL;lv_obj_t *ui_scrTimeout_lblOffNever = NULL;lv_obj_t *ui_scrTimeout_vline = NULL;lv_obj_t *ui_scrTimeout_iconBack = NULL;lv_obj_t *ui_scrTimeout_lblScreenBack = NULL;lv_obj_t *ui_scrTimeout_lblScreenBackInfo = NULL;lv_obj_t *ui_scrTimeout_btnScreenBack30s = NULL;lv_obj_t *ui_scrTimeout_lblOff30s1 = NULL;lv_obj_t *ui_scrTimeout_btnScreenBack1m = NULL;lv_obj_t *ui_scrTimeout_lblOff1m1 = NULL;lv_obj_t *ui_scrTimeout_btnScreenBack2m = NULL;lv_obj_t *ui_scrTimeout_lblOff2m1 = NULL;lv_obj_t *ui_scrTimeout_btnScreenBack5m = NULL;lv_obj_t *ui_scrTimeout_lblOff5m1 = NULL;lv_obj_t *ui_scrTimeout_btnScreenBack10m = NULL;lv_obj_t *ui_scrTimeout_lblOff10m1 = NULL;lv_obj_t *ui_scrTimeout_btnScreenBackNever = NULL;lv_obj_t *ui_scrTimeout_lblOffNever1 = NULL;
+lv_obj_t *ui_scrTimeout = NULL;lv_obj_t *ui_scrTimeout_contTopBar = NULL;lv_obj_t *ui_scrTimeout_lblScreen = NULL;lv_obj_t *ui_scrTimeout_btnBack = NULL;lv_obj_t *ui_scrTimeout_iconScreen = NULL;lv_obj_t *ui_scrTimeout_lblScreenOff = NULL;lv_obj_t *ui_scrTimeout_lblScreenOffInfo = NULL;lv_obj_t *ui_scrTimeout_btnScreenOff30s = NULL;lv_obj_t *ui_scrTimeout_lblOff30s = NULL;lv_obj_t *ui_scrTimeout_btnScreenOff1m = NULL;lv_obj_t *ui_scrTimeout_lblOff1m = NULL;lv_obj_t *ui_scrTimeout_btnScreenOff2m = NULL;lv_obj_t *ui_scrTimeout_lblOff2m = NULL;lv_obj_t *ui_scrTimeout_btnScreenOff5m = NULL;lv_obj_t *ui_scrTimeout_lblOff5m = NULL;lv_obj_t *ui_scrTimeout_btnScreenOff10m = NULL;lv_obj_t *ui_scrTimeout_lblOff10m = NULL;lv_obj_t *ui_scrTimeout_btnScreenOffNever = NULL;lv_obj_t *ui_scrTimeout_lblOffNever = NULL;lv_obj_t *ui_scrTimeout_vline = NULL;lv_obj_t *ui_scrTimeout_iconBack = NULL;lv_obj_t *ui_scrTimeout_lblScreenBack = NULL;lv_obj_t *ui_scrTimeout_lblScreenBackInfo = NULL;lv_obj_t *ui_scrTimeout_btnScreenBack30s = NULL;lv_obj_t *ui_scrTimeout_lblBack30s = NULL;lv_obj_t *ui_scrTimeout_btnScreenBack1m = NULL;lv_obj_t *ui_scrTimeout_lblBack1m = NULL;lv_obj_t *ui_scrTimeout_btnScreenBack2m = NULL;lv_obj_t *ui_scrTimeout_lblBack2m = NULL;lv_obj_t *ui_scrTimeout_btnScreenBack5m = NULL;lv_obj_t *ui_scrTimeout_lblBack5m = NULL;lv_obj_t *ui_scrTimeout_btnScreenBack10m = NULL;lv_obj_t *ui_scrTimeout_lblBack10m = NULL;lv_obj_t *ui_scrTimeout_btnScreenBackNever = NULL;lv_obj_t *ui_scrTimeout_lblBackNever = NULL;
 // event funtions
 void ui_event_scrTimeout_btnBack( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
@@ -368,7 +368,7 @@ ui_object_set_themeable_style_property(ui_scrTimeout_lblOffNever, LV_PART_MAIN| 
 
 ui_scrTimeout_vline = lv_label_create(ui_scrTimeout);
 lv_obj_set_width( ui_scrTimeout_vline, 1);
-lv_obj_set_height( ui_scrTimeout_vline, 115);
+lv_obj_set_height( ui_scrTimeout_vline, 120);
 lv_obj_set_x( ui_scrTimeout_vline, 240 );
 lv_obj_set_y( ui_scrTimeout_vline, 82 );
 lv_label_set_text(ui_scrTimeout_vline,"");
@@ -440,18 +440,18 @@ lv_obj_set_style_outline_opa(ui_scrTimeout_btnScreenBack30s, 0, LV_PART_MAIN| LV
 lv_obj_set_style_outline_color(ui_scrTimeout_btnScreenBack30s, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_FOCUS_KEY );
 lv_obj_set_style_outline_opa(ui_scrTimeout_btnScreenBack30s, 0, LV_PART_MAIN| LV_STATE_FOCUS_KEY);
 
-ui_scrTimeout_lblOff30s1 = lv_label_create(ui_scrTimeout_btnScreenBack30s);
-lv_obj_set_width( ui_scrTimeout_lblOff30s1, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_scrTimeout_lblOff30s1, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_align( ui_scrTimeout_lblOff30s1, LV_ALIGN_CENTER );
-lv_label_set_text(ui_scrTimeout_lblOff30s1,"30s");
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff30s1, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff30s1, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
-lv_obj_set_style_text_font(ui_scrTimeout_lblOff30s1, &ui_font_MonoBold11, LV_PART_MAIN| LV_STATE_DEFAULT);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff30s1, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Base);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff30s1, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Base);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff30s1, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Border_Focused);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff30s1, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Border_Focused);
+ui_scrTimeout_lblBack30s = lv_label_create(ui_scrTimeout_btnScreenBack30s);
+lv_obj_set_width( ui_scrTimeout_lblBack30s, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_scrTimeout_lblBack30s, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_scrTimeout_lblBack30s, LV_ALIGN_CENTER );
+lv_label_set_text(ui_scrTimeout_lblBack30s,"30s");
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack30s, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack30s, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
+lv_obj_set_style_text_font(ui_scrTimeout_lblBack30s, &ui_font_MonoBold11, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack30s, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Base);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack30s, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Base);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack30s, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Border_Focused);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack30s, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Border_Focused);
 
 ui_scrTimeout_btnScreenBack1m = lv_button_create(ui_scrTimeout);
 lv_obj_set_width( ui_scrTimeout_btnScreenBack1m, 65);
@@ -485,18 +485,18 @@ lv_obj_set_style_outline_opa(ui_scrTimeout_btnScreenBack1m, 0, LV_PART_MAIN| LV_
 lv_obj_set_style_outline_color(ui_scrTimeout_btnScreenBack1m, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_FOCUS_KEY );
 lv_obj_set_style_outline_opa(ui_scrTimeout_btnScreenBack1m, 0, LV_PART_MAIN| LV_STATE_FOCUS_KEY);
 
-ui_scrTimeout_lblOff1m1 = lv_label_create(ui_scrTimeout_btnScreenBack1m);
-lv_obj_set_width( ui_scrTimeout_lblOff1m1, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_scrTimeout_lblOff1m1, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_align( ui_scrTimeout_lblOff1m1, LV_ALIGN_CENTER );
-lv_label_set_text(ui_scrTimeout_lblOff1m1,"1m");
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff1m1, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff1m1, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
-lv_obj_set_style_text_font(ui_scrTimeout_lblOff1m1, &ui_font_MonoBold11, LV_PART_MAIN| LV_STATE_DEFAULT);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff1m1, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Base);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff1m1, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Base);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff1m1, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Border_Focused);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff1m1, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Border_Focused);
+ui_scrTimeout_lblBack1m = lv_label_create(ui_scrTimeout_btnScreenBack1m);
+lv_obj_set_width( ui_scrTimeout_lblBack1m, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_scrTimeout_lblBack1m, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_scrTimeout_lblBack1m, LV_ALIGN_CENTER );
+lv_label_set_text(ui_scrTimeout_lblBack1m,"1m");
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack1m, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack1m, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
+lv_obj_set_style_text_font(ui_scrTimeout_lblBack1m, &ui_font_MonoBold11, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack1m, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Base);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack1m, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Base);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack1m, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Border_Focused);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack1m, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Border_Focused);
 
 ui_scrTimeout_btnScreenBack2m = lv_button_create(ui_scrTimeout);
 lv_obj_set_width( ui_scrTimeout_btnScreenBack2m, 65);
@@ -530,18 +530,18 @@ lv_obj_set_style_outline_opa(ui_scrTimeout_btnScreenBack2m, 0, LV_PART_MAIN| LV_
 lv_obj_set_style_outline_color(ui_scrTimeout_btnScreenBack2m, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_FOCUS_KEY );
 lv_obj_set_style_outline_opa(ui_scrTimeout_btnScreenBack2m, 0, LV_PART_MAIN| LV_STATE_FOCUS_KEY);
 
-ui_scrTimeout_lblOff2m1 = lv_label_create(ui_scrTimeout_btnScreenBack2m);
-lv_obj_set_width( ui_scrTimeout_lblOff2m1, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_scrTimeout_lblOff2m1, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_align( ui_scrTimeout_lblOff2m1, LV_ALIGN_CENTER );
-lv_label_set_text(ui_scrTimeout_lblOff2m1,"2m");
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff2m1, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff2m1, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
-lv_obj_set_style_text_font(ui_scrTimeout_lblOff2m1, &ui_font_MonoBold11, LV_PART_MAIN| LV_STATE_DEFAULT);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff2m1, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Base);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff2m1, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Base);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff2m1, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Border_Focused);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff2m1, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Border_Focused);
+ui_scrTimeout_lblBack2m = lv_label_create(ui_scrTimeout_btnScreenBack2m);
+lv_obj_set_width( ui_scrTimeout_lblBack2m, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_scrTimeout_lblBack2m, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_scrTimeout_lblBack2m, LV_ALIGN_CENTER );
+lv_label_set_text(ui_scrTimeout_lblBack2m,"2m");
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack2m, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack2m, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
+lv_obj_set_style_text_font(ui_scrTimeout_lblBack2m, &ui_font_MonoBold11, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack2m, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Base);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack2m, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Base);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack2m, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Border_Focused);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack2m, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Border_Focused);
 
 ui_scrTimeout_btnScreenBack5m = lv_button_create(ui_scrTimeout);
 lv_obj_set_width( ui_scrTimeout_btnScreenBack5m, 65);
@@ -575,18 +575,18 @@ lv_obj_set_style_outline_opa(ui_scrTimeout_btnScreenBack5m, 0, LV_PART_MAIN| LV_
 lv_obj_set_style_outline_color(ui_scrTimeout_btnScreenBack5m, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_FOCUS_KEY );
 lv_obj_set_style_outline_opa(ui_scrTimeout_btnScreenBack5m, 0, LV_PART_MAIN| LV_STATE_FOCUS_KEY);
 
-ui_scrTimeout_lblOff5m1 = lv_label_create(ui_scrTimeout_btnScreenBack5m);
-lv_obj_set_width( ui_scrTimeout_lblOff5m1, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_scrTimeout_lblOff5m1, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_align( ui_scrTimeout_lblOff5m1, LV_ALIGN_CENTER );
-lv_label_set_text(ui_scrTimeout_lblOff5m1,"5m");
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff5m1, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff5m1, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
-lv_obj_set_style_text_font(ui_scrTimeout_lblOff5m1, &ui_font_MonoBold11, LV_PART_MAIN| LV_STATE_DEFAULT);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff5m1, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Base);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff5m1, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Base);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff5m1, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Border_Focused);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff5m1, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Border_Focused);
+ui_scrTimeout_lblBack5m = lv_label_create(ui_scrTimeout_btnScreenBack5m);
+lv_obj_set_width( ui_scrTimeout_lblBack5m, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_scrTimeout_lblBack5m, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_scrTimeout_lblBack5m, LV_ALIGN_CENTER );
+lv_label_set_text(ui_scrTimeout_lblBack5m,"5m");
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack5m, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack5m, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
+lv_obj_set_style_text_font(ui_scrTimeout_lblBack5m, &ui_font_MonoBold11, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack5m, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Base);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack5m, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Base);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack5m, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Border_Focused);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack5m, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Border_Focused);
 
 ui_scrTimeout_btnScreenBack10m = lv_button_create(ui_scrTimeout);
 lv_obj_set_width( ui_scrTimeout_btnScreenBack10m, 65);
@@ -620,18 +620,18 @@ lv_obj_set_style_outline_opa(ui_scrTimeout_btnScreenBack10m, 0, LV_PART_MAIN| LV
 lv_obj_set_style_outline_color(ui_scrTimeout_btnScreenBack10m, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_FOCUS_KEY );
 lv_obj_set_style_outline_opa(ui_scrTimeout_btnScreenBack10m, 0, LV_PART_MAIN| LV_STATE_FOCUS_KEY);
 
-ui_scrTimeout_lblOff10m1 = lv_label_create(ui_scrTimeout_btnScreenBack10m);
-lv_obj_set_width( ui_scrTimeout_lblOff10m1, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_scrTimeout_lblOff10m1, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_align( ui_scrTimeout_lblOff10m1, LV_ALIGN_CENTER );
-lv_label_set_text(ui_scrTimeout_lblOff10m1,"10m");
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff10m1, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff10m1, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
-lv_obj_set_style_text_font(ui_scrTimeout_lblOff10m1, &ui_font_MonoBold11, LV_PART_MAIN| LV_STATE_DEFAULT);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff10m1, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Base);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff10m1, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Base);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff10m1, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Border_Focused);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOff10m1, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Border_Focused);
+ui_scrTimeout_lblBack10m = lv_label_create(ui_scrTimeout_btnScreenBack10m);
+lv_obj_set_width( ui_scrTimeout_lblBack10m, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_scrTimeout_lblBack10m, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_scrTimeout_lblBack10m, LV_ALIGN_CENTER );
+lv_label_set_text(ui_scrTimeout_lblBack10m,"10m");
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack10m, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack10m, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
+lv_obj_set_style_text_font(ui_scrTimeout_lblBack10m, &ui_font_MonoBold11, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack10m, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Base);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack10m, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Base);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack10m, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Border_Focused);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBack10m, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Border_Focused);
 
 ui_scrTimeout_btnScreenBackNever = lv_button_create(ui_scrTimeout);
 lv_obj_set_width( ui_scrTimeout_btnScreenBackNever, 65);
@@ -665,18 +665,18 @@ lv_obj_set_style_outline_opa(ui_scrTimeout_btnScreenBackNever, 0, LV_PART_MAIN| 
 lv_obj_set_style_outline_color(ui_scrTimeout_btnScreenBackNever, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_FOCUS_KEY );
 lv_obj_set_style_outline_opa(ui_scrTimeout_btnScreenBackNever, 0, LV_PART_MAIN| LV_STATE_FOCUS_KEY);
 
-ui_scrTimeout_lblOffNever1 = lv_label_create(ui_scrTimeout_btnScreenBackNever);
-lv_obj_set_width( ui_scrTimeout_lblOffNever1, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_scrTimeout_lblOffNever1, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_align( ui_scrTimeout_lblOffNever1, LV_ALIGN_CENTER );
-lv_label_set_text(ui_scrTimeout_lblOffNever1,"Nunca");
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOffNever1, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOffNever1, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
-lv_obj_set_style_text_font(ui_scrTimeout_lblOffNever1, &ui_font_MonoBold11, LV_PART_MAIN| LV_STATE_DEFAULT);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOffNever1, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Base);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOffNever1, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Base);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOffNever1, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Border_Focused);
-ui_object_set_themeable_style_property(ui_scrTimeout_lblOffNever1, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Border_Focused);
+ui_scrTimeout_lblBackNever = lv_label_create(ui_scrTimeout_btnScreenBackNever);
+lv_obj_set_width( ui_scrTimeout_lblBackNever, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_scrTimeout_lblBackNever, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_scrTimeout_lblBackNever, LV_ALIGN_CENTER );
+lv_label_set_text(ui_scrTimeout_lblBackNever,"Nunca");
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBackNever, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_COLOR, _ui_theme_color_Font_Secundario);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBackNever, LV_PART_MAIN| LV_STATE_DEFAULT, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Font_Secundario);
+lv_obj_set_style_text_font(ui_scrTimeout_lblBackNever, &ui_font_MonoBold11, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBackNever, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Base);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBackNever, LV_PART_MAIN| LV_STATE_CHECKED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Base);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBackNever, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_COLOR, _ui_theme_color_Border_Focused);
+ui_object_set_themeable_style_property(ui_scrTimeout_lblBackNever, LV_PART_MAIN| LV_STATE_FOCUSED, LV_STYLE_TEXT_OPA, _ui_theme_alpha_Border_Focused);
 
 lv_obj_add_event_cb(ui_scrTimeout_btnBack, ui_event_scrTimeout_btnBack, LV_EVENT_ALL, NULL);
 
@@ -711,16 +711,16 @@ ui_scrTimeout_iconBack= NULL;
 ui_scrTimeout_lblScreenBack= NULL;
 ui_scrTimeout_lblScreenBackInfo= NULL;
 ui_scrTimeout_btnScreenBack30s= NULL;
-ui_scrTimeout_lblOff30s1= NULL;
+ui_scrTimeout_lblBack30s= NULL;
 ui_scrTimeout_btnScreenBack1m= NULL;
-ui_scrTimeout_lblOff1m1= NULL;
+ui_scrTimeout_lblBack1m= NULL;
 ui_scrTimeout_btnScreenBack2m= NULL;
-ui_scrTimeout_lblOff2m1= NULL;
+ui_scrTimeout_lblBack2m= NULL;
 ui_scrTimeout_btnScreenBack5m= NULL;
-ui_scrTimeout_lblOff5m1= NULL;
+ui_scrTimeout_lblBack5m= NULL;
 ui_scrTimeout_btnScreenBack10m= NULL;
-ui_scrTimeout_lblOff10m1= NULL;
+ui_scrTimeout_lblBack10m= NULL;
 ui_scrTimeout_btnScreenBackNever= NULL;
-ui_scrTimeout_lblOffNever1= NULL;
+ui_scrTimeout_lblBackNever= NULL;
 
 }
