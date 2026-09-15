@@ -10,6 +10,8 @@
 #include "lvgl/screen_update.h"
 #include "ui.h"
 
+#include "dev_state/dev_state.h"
+
 LOG_MODULE_REGISTER(ui_thread, LOG_LEVEL_INF);
 
 // LVGL Display device
@@ -20,6 +22,7 @@ static const struct device *lvgl_encoder = DEVICE_DT_GET(DT_NODELABEL(lvgl_encod
 // Private prototypes and callbacks
 static void ui_init_minimal(void);
 static void rtc_timer_cb(struct k_timer *timer_id);
+static void on_dev_state_timeout(dev_state_timeout_evt_t evt);
 
 // Zephyr Timer to handle the RTC callback
 K_TIMER_DEFINE(rtc_timer, rtc_timer_cb, NULL);
@@ -44,6 +47,9 @@ void ui_thread(void *param1, void *param2, void *param3)
 
   screen_manager_init();
   screen_update_init();
+
+  // Register timeout callback
+  dev_state_set_timeout_cb(on_dev_state_timeout);
 
   // RTC and SoftTimer initialization to set UI
   /** @todo Proper RTC initialization */
@@ -95,6 +101,25 @@ static void rtc_timer_cb(struct k_timer *timer_id)
   }
   // Update UI command
   screen_update_cmd_push(SCREEN_UPDATE_DATETIME, (void*)&dt);
-  LOG_INF("RTC datetime %02d/%02d/%02d %02d:%02d:00", 
+  LOG_INF("RTC datetime %02d/%02d/%02d %02d:%02d:00",
     dt.tm_mday, dt.tm_mon + 1, dt.tm_year, dt.tm_hour, dt.tm_min);
+}
+
+/**
+ * @brief Reacts to a dev_state timeout expiring. Runs in k_timer expiry
+ * (interrupt-level) context — must stay non-blocking.
+ */
+static void on_dev_state_timeout(dev_state_timeout_evt_t evt)
+{
+  switch (evt) {
+    case DEV_STATE_TIMEOUT_SCREEN:
+      // screen_manager_step() resolves it on its next pass through the ui_thread loop.
+      LOG_WRN("Screen timeout expired");
+      screen_manager_go_to(SCREEN_MENU);
+      break;
+    case DEV_STATE_TIMEOUT_PWR_OFF:
+      /** @todo Actually power off the device */
+      LOG_WRN("Power-off timeout expired");
+      break;
+  }
 }

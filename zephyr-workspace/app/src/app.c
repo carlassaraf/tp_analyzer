@@ -3,6 +3,8 @@
 #include <zephyr/logging/log.h>
 #include <stdio.h>
 
+#include "dev_state/dev_state.h"
+
 extern void ui_thread(void *, void *, void *);
 extern void ad_thread(void *, void *, void *);
 
@@ -25,6 +27,8 @@ bool app_init(void)
 
 bool app_run(void)
 {
+    dev_state_init();
+
     ad_tid = k_thread_create(
         &ad_thread_data, ad_thread_stack,
         K_THREAD_STACK_SIZEOF(ad_thread_stack),
