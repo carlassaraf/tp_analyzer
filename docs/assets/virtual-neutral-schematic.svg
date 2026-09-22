@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1150 660" width="1150" height="660" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#33475b"/></marker><marker id="arrowGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7a8699"/></marker></defs>
+<rect x="0" y="0" width="1150" height="660" fill="#ffffff"/>
+
+<text x="575.0" y="30" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="700" text-anchor="middle" fill="#1a1a1a">Fig. 2 — Frontend de tensión y neutro virtual (esquemático tentativo)</text>
+<text x="575.0" y="50" font-family="Helvetica, Arial, sans-serif" font-size="12.5" font-style="italic" text-anchor="middle" fill="#b0392b">diseño objetivo, no construido/validado en hardware — a confirmar en el layout de PCB (§7-8)</text>
+<rect x="155.0" y="85.0" width="90.0" height="50.0" rx="8" fill="#fde9d9" stroke="#33475b" stroke-width="1.6"/>
+<text x="200.0" y="111.5" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#1a1a1a" text-anchor="middle">L1</text>
+<path d="M 200.0,135.0 L 200.0,195.0 " fill="none" stroke="#33475b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="405.0" y="85.0" width="90.0" height="50.0" rx="8" fill="#fde9d9" stroke="#33475b" stroke-width="1.6"/>
+<text x="450.0" y="111.5" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#1a1a1a" text-anchor="middle">L2</text>
+<path d="M 450.0,135.0 L 450.0,195.0 " fill="none" stroke="#33475b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="655.0" y="85.0" width="90.0" height="50.0" rx="8" fill="#fde9d9" stroke="#33475b" stroke-width="1.6"/>
+<text x="700.0" y="111.5" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#1a1a1a" text-anchor="middle">L3</text>
+<path d="M 700.0,135.0 L 700.0,195.0 " fill="none" stroke="#33475b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="905.0" y="85.0" width="90.0" height="50.0" rx="8" fill="#fde9d9" stroke="#33475b" stroke-width="1.6"/>
+<text x="950.0" y="111.5" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#1a1a1a" text-anchor="middle">N</text>
+<path d="M 950.0,135.0 L 950.0,195.0 " fill="none" stroke="#33475b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="125.0" y="195.0" width="150.0" height="80.0" rx="8" fill="#dbe9fb" stroke="#33475b" stroke-width="1.6"/>
+<text x="200.0" y="226.9" font-family="Helvetica, Arial, sans-serif" font-size="13.5" font-weight="700" fill="#1a1a1a" text-anchor="middle">ZMPT101B</text>
+<text x="200.0" y="245.4" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">canal V1</text>
+<path d="M 275.0,235.0 L 300.0,235.0 " fill="none" stroke="#33475b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<text x="306.0" y="239.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#33475b">AGC V1</text>
+<path d="M 200.0,275.0 L 200.0,289.0 L 211.0,298.8 L 189.0,318.2 L 211.0,337.8 L 189.0,357.2 L 211.0,376.8 L 189.0,396.2 L 200.0,406.0 L 200.0,420.0" fill="none" stroke="#33475b" stroke-width="1.8"/>
+<text x="219.0" y="351.5" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#33475b">1 MΩ</text>
+<rect x="375.0" y="195.0" width="150.0" height="80.0" rx="8" fill="#dbe9fb" stroke="#33475b" stroke-width="1.6"/>
+<text x="450.0" y="226.9" font-family="Helvetica, Arial, sans-serif" font-size="13.5" font-weight="700" fill="#1a1a1a" text-anchor="middle">ZMPT101B</text>
+<text x="450.0" y="245.4" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">canal V2</text>
+<path d="M 525.0,235.0 L 550.0,235.0 " fill="none" stroke="#33475b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<text x="556.0" y="239.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#33475b">AGC V2</text>
+<path d="M 450.0,275.0 L 450.0,289.0 L 461.0,298.8 L 439.0,318.2 L 461.0,337.8 L 439.0,357.2 L 461.0,376.8 L 439.0,396.2 L 450.0,406.0 L 450.0,420.0" fill="none" stroke="#33475b" stroke-width="1.8"/>
+<text x="469.0" y="351.5" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#33475b">1 MΩ</text>
+<rect x="625.0" y="195.0" width="150.0" height="80.0" rx="8" fill="#dbe9fb" stroke="#33475b" stroke-width="1.6"/>
+<text x="700.0" y="226.9" font-family="Helvetica, Arial, sans-serif" font-size="13.5" font-weight="700" fill="#1a1a1a" text-anchor="middle">ZMPT101B</text>
+<text x="700.0" y="245.4" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">canal V3</text>
+<path d="M 775.0,235.0 L 800.0,235.0 " fill="none" stroke="#33475b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<text x="806.0" y="239.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#33475b">AGC V3</text>
+<path d="M 700.0,275.0 L 700.0,289.0 L 711.0,298.8 L 689.0,318.2 L 711.0,337.8 L 689.0,357.2 L 711.0,376.8 L 689.0,396.2 L 700.0,406.0 L 700.0,420.0" fill="none" stroke="#33475b" stroke-width="1.8"/>
+<text x="719.0" y="351.5" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#33475b">1 MΩ</text>
+<rect x="875.0" y="195.0" width="150.0" height="80.0" rx="8" fill="#dbe9fb" stroke="#33475b" stroke-width="1.6"/>
+<text x="950.0" y="226.9" font-family="Helvetica, Arial, sans-serif" font-size="13.5" font-weight="700" fill="#1a1a1a" text-anchor="middle">ZMPT101B</text>
+<text x="950.0" y="245.4" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">canal VN</text>
+<path d="M 1025.0,235.0 L 1050.0,235.0 " fill="none" stroke="#33475b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<text x="1056.0" y="239.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#33475b">AGC VN</text>
+<path d="M 950.0,275.0 L 950.0,289.0 L 961.0,298.8 L 939.0,318.2 L 961.0,337.8 L 939.0,357.2 L 961.0,376.8 L 939.0,396.2 L 950.0,406.0 L 950.0,420.0" fill="none" stroke="#33475b" stroke-width="1.8"/>
+<text x="969.0" y="351.5" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#33475b">1 MΩ</text>
+<line x1="200" y1="420" x2="950" y2="420" stroke="#33475b" stroke-width="2.2"/>
+<circle cx="200.0" cy="420.0" r="4.2" fill="#33475b"/>
+<circle cx="450.0" cy="420.0" r="4.2" fill="#33475b"/>
+<circle cx="700.0" cy="420.0" r="4.2" fill="#33475b"/>
+<circle cx="950.0" cy="420.0" r="4.2" fill="#33475b"/>
+<text x="575.0" y="454" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#1a1a1a">Neutro virtual — punto estrella artificial</text>
+<text x="575.0" y="474" font-family="Helvetica, Arial, sans-serif" font-size="12.5" font-style="italic" text-anchor="middle" fill="#5b6b82">flotante — sin conexión a tierra / PE, sin switches físicos</text>
+<rect x="75.0" y="491.0" width="1000" height="108" rx="8" fill="#f7f7f7" stroke="#c7ccd4" stroke-width="1.2"/>
+<text x="575.0" y="515" font-family="Helvetica, Arial, sans-serif" font-size="12.8" text-anchor="middle" fill="#33475b">Con las 3 fases balanceadas, el punto estrella resistivo (3x 1 MΩ) se estabiliza cerca del</text>
+<text x="575.0" y="535" font-family="Helvetica, Arial, sans-serif" font-size="12.8" text-anchor="middle" fill="#33475b">potencial del neutro real incluso sin neutro físico presente. El canal VN (columna N) mide la</text>
+<text x="575.0" y="555" font-family="Helvetica, Arial, sans-serif" font-size="12.8" text-anchor="middle" fill="#33475b">tensión del borne de neutro físico contra este mismo punto — si no hay neutro conectado, VN</text>
+<text x="575.0" y="575" font-family="Helvetica, Arial, sans-serif" font-size="12.8" text-anchor="middle" fill="#33475b">flota y el firmware lo interpreta como red en triángulo (ver Fig. 4, §4.4).</text>
+</svg>
