@@ -1,0 +1,38 @@
+# Copyright (c) 2026 Fabrizio Carlassara
+# SPDX-License-Identifier: Apache-2.0
+
+menuconfig MCP4XXX
+	bool "Microchip MCP41XX/MCP42XX SPI digital potentiometer driver"
+	default y
+	depends on DT_HAS_MICROCHIP_MCP41XX_ENABLED || DT_HAS_MICROCHIP_MCP42XX_ENABLED
+	select SPI
+	select GPIO
+	help
+	  App-local driver (app/drivers/mcp4xxx/) for Microchip's MCP41XX
+	  (MCP4131/4151, single-channel) and MCP42XX (MCP4231/4251,
+	  dual-channel) SPI digital potentiometer/rheostat family
+	  (volatile/RAM wiper variants only -- see docs/ROADMAP.md for the
+	  non-volatile MCP4141/4161/4241/4261). Not to be confused with the
+	  older, differently-protocol'd MCP41XXX/MCP42XXX family (note the
+	  extra X), which this driver does NOT support despite the
+	  near-identical naming. Unlike app/drivers/adc_stream and
+	  app/drivers/powman_rtc, this one doesn't deviate from an existing
+	  Zephyr subsystem API -- there is no generic digital-potentiometer
+	  class in Zephyr to conform to in the first place.
+
+if MCP4XXX
+
+config MCP4XXX_INIT_PRIORITY
+	int "Init priority"
+	default KERNEL_INIT_PRIORITY_DEVICE
+	help
+	  Must sort after CONFIG_SPI_INIT_PRIORITY and
+	  CONFIG_GPIO_INIT_PRIORITY -- mcp4xxx_init() calls
+	  spi_is_ready_dt() and, when shutdown-gpios is present,
+	  gpio_pin_configure_dt().
+
+module = MCP4XXX
+module-str = mcp4xxx
+source "subsys/logging/Kconfig.template.log_config"
+
+endif # MCP4XXX
