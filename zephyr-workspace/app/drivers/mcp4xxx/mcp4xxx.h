@@ -32,6 +32,17 @@
  * (`resolution = <8>`) -- one more than fits in a uint8_t, which is why
  * these take/return uint16_t rather than the byte-sized codes
  * DS11195-family chips use.
+ *
+ * IMPORTANT for any board's SPI bus node this is attached to: use
+ * `cs-gpios`, not the SPI controller's own dedicated hardware CS pin.
+ * On hardware that pulses its dedicated CS line between every data
+ * frame instead of holding it low across a multi-byte transfer (RP2350
+ * confirmed to do this; likely others), every 2-byte Read Data command
+ * -- mcp4xxx_get(), mcp4xxx_read_tcon(), mcp4xxx_read_status() -- comes
+ * back wrong: the chip sees two isolated 8-bit commands instead of one
+ * 16-bit Read, each echoing its own out-of-context response. Single-
+ * frame Writes happen to survive this, so it can look like the driver
+ * mostly works while every read is silently corrupted.
  */
 
 /**
