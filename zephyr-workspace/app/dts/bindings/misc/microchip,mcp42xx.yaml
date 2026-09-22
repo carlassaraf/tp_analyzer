@@ -1,0 +1,57 @@
+# Copyright (c) 2026 Fabrizio Carlassara
+# SPDX-License-Identifier: Apache-2.0
+
+description: |
+  Microchip MCP42XX dual-channel digital potentiometer/rheostat family
+  (volatile/RAM wiper): MCP4231 (7-bit) and MCP4251 (8-bit), selected
+  via the `resolution` property below.
+
+  SPI-controlled, 7-bit (129-tap) or 8-bit (257-tap) wiper per channel,
+  5k/10k/50k/100k ohm variants. See microchip,mcp41xx's description for
+  how this family differs from microchip,mcp41xxx (Microchip DS11195, a
+  different, older, simpler chip despite the near-identical naming).
+
+  Only the volatile (RAM) wiper variant is currently supported by the
+  driver -- the non-volatile (EEPROM) MCP4241/MCP4261 need write-timing/
+  endurance handling not yet implemented. See docs/ROADMAP.md.
+
+  Unlike microchip,mcp41xx, the 14/16-pin dual-channel package this
+  family comes in exposes an optional SHDN pin (active-low): it forces
+  each channel's terminals into the pattern set by that channel's TCON
+  register R0HW/R1HW override bit (default at power-up: forced, i.e.
+  the channel is not exempted from hardware shutdown).
+
+  Datasheet: Microchip DS22060B ("MCP413X/415X/423X/425X 7/8-Bit
+  Single/Dual SPI Digital POT with Volatile Memory").
+
+compatible: "microchip,mcp42xx"
+
+include: [spi-device.yaml]
+
+properties:
+  ohms:
+    type: int
+    required: true
+    enum:
+      - 5000
+      - 10000
+      - 50000
+      - 100000
+    description: Nominal end-to-end (terminal A to terminal B) resistance
+      of each channel.
+
+  resolution:
+    type: int
+    required: true
+    enum:
+      - 7
+      - 8
+    description: |
+      Wiper resolution in bits: 7 for MCP4231 (129 steps, full scale
+      code = 0x80), 8 for MCP4251 (257 steps, full scale code = 0x100).
+
+  shutdown-gpios:
+    type: phandle-array
+    description: |
+      Optional SHDN pin. Encode GPIO_ACTIVE_LOW -- the pin is
+      active-low on the device.

@@ -1,0 +1,50 @@
+# Copyright (c) 2026 Fabrizio Carlassara
+# SPDX-License-Identifier: Apache-2.0
+
+description: |
+  Microchip MCP41XX single-channel digital potentiometer/rheostat
+  family (volatile/RAM wiper): MCP4131 (7-bit) and MCP4151 (8-bit),
+  selected via the `resolution` property below.
+
+  SPI-controlled, 7-bit (129-tap) or 8-bit (257-tap) wiper, 5k/10k/50k/
+  100k ohm variants. Unlike microchip,mcp41xxx (Microchip DS11195 -- a
+  different, older, simpler chip despite the near-identical naming),
+  this family supports Increment/Decrement wiper commands, a Read Data
+  command (the wiper position can be read back), and a Terminal Control
+  (TCON) register for independently connecting/disconnecting each of
+  the A/W/B terminals.
+
+  Only the volatile (RAM) wiper variant is currently supported by the
+  driver -- the non-volatile (EEPROM) MCP4141/MCP4161 need write-timing/
+  endurance handling not yet implemented. See docs/ROADMAP.md.
+
+  No SHDN or WP pin on this family's 8-pin package (see
+  microchip,mcp42xx for the dual-channel family that has SHDN).
+
+  Datasheet: Microchip DS22060B ("MCP413X/415X/423X/425X 7/8-Bit
+  Single/Dual SPI Digital POT with Volatile Memory").
+
+compatible: "microchip,mcp41xx"
+
+include: [spi-device.yaml]
+
+properties:
+  ohms:
+    type: int
+    required: true
+    enum:
+      - 5000
+      - 10000
+      - 50000
+      - 100000
+    description: Nominal end-to-end (terminal A to terminal B) resistance.
+
+  resolution:
+    type: int
+    required: true
+    enum:
+      - 7
+      - 8
+    description: |
+      Wiper resolution in bits: 7 for MCP4131 (129 steps, full scale
+      code = 0x80), 8 for MCP4151 (257 steps, full scale code = 0x100).
