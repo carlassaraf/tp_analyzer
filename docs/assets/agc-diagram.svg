@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 465" width="1000" height="465" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#33475b"/></marker><marker id="arrowGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7a8699"/></marker></defs>
+<rect x="0" y="0" width="1000" height="465" fill="#ffffff"/>
+
+<text x="500.0" y="28" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="700" text-anchor="middle" fill="#1a1a1a">Fig. 3 — Lazo de control automático de ganancia (AGC)</text>
+<rect x="40.0" y="75.0" width="180.0" height="70.0" rx="8" fill="#dbe9fb" stroke="#33475b" stroke-width="1.6"/>
+<text x="130.0" y="102.0" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#1a1a1a" text-anchor="middle">Señal de TV / pinza</text>
+<text x="130.0" y="121.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">(tensión o corriente)</text>
+<rect x="295.0" y="75.0" width="210.0" height="70.0" rx="8" fill="#e6dbfb" stroke="#33475b" stroke-width="1.6"/>
+<text x="400.0" y="102.0" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#1a1a1a" text-anchor="middle">MCP42xx + op-amp</text>
+<text x="400.0" y="121.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">ganancia variable, SPI</text>
+<rect x="585.0" y="75.0" width="230.0" height="70.0" rx="8" fill="#fff3b0" stroke="#33475b" stroke-width="1.6"/>
+<text x="700.0" y="102.0" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#1a1a1a" text-anchor="middle">ADC interno RP2350B</text>
+<text x="700.0" y="121.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">forma de onda completa, 8 canales</text>
+<rect x="295.0" y="245.0" width="210.0" height="70.0" rx="8" fill="#e6dbfb" stroke="#33475b" stroke-width="1.6"/>
+<text x="400.0" y="272.0" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#1a1a1a" text-anchor="middle">Detector de picos</text>
+<text x="400.0" y="291.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">analógico, por canal</text>
+<rect x="585.0" y="245.0" width="230.0" height="70.0" rx="8" fill="#fbe0c4" stroke="#33475b" stroke-width="1.6"/>
+<text x="700.0" y="272.0" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#1a1a1a" text-anchor="middle">ADS1115 externo</text>
+<text x="700.0" y="291.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">monitoreo DC de picos, I2C</text>
+<path d="M 220.0,110.0 L 295.0,110.0 " fill="none" stroke="#33475b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M 505.0,110.0 L 585.0,110.0 " fill="none" stroke="#33475b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M 400.0,145.0 L 400.0,245.0 " fill="none" stroke="#33475b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M 505.0,280.0 L 585.0,280.0 " fill="none" stroke="#33475b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<path d="M 815.0,280.0 L 880.0,280.0 L 880.0,55.0 L 400.0,55.0 L 400.0,75.0 " fill="none" stroke="#b0392b" stroke-width="1.8" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<rect x="520.8" y="34.8" width="238.5" height="18" fill="#ffffff" opacity="0.92"/>
+<text x="640.0" y="49.2" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#b0392b" text-anchor="middle">ajusta ganancia (histéresis, §4.3)</text>
+<text x="500.0" y="400" font-family="Helvetica, Arial, sans-serif" font-size="12.5" font-style="italic" text-anchor="middle" fill="#5b6b82">La ganancia solo cambia en el tiempo muerto entre bloques del buffer ping-pong — nunca a mitad de una ventana de FFT (§6.3)</text>
+<text x="500.0" y="422" font-family="Helvetica, Arial, sans-serif" font-size="12.5" font-style="italic" text-anchor="middle" fill="#b0392b">MCP42xx en lugar de PGA MCP6S21 (difícil de conseguir en Argentina) — validar wiper + C parásita vs. 30° armónico (§4.3)</text>
+</svg>

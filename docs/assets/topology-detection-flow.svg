@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1050 830" width="1050" height="830" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#33475b"/></marker><marker id="arrowGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7a8699"/></marker></defs>
+<rect x="0" y="0" width="1050" height="830" fill="#ffffff"/>
+
+<text x="525.0" y="30" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="700" text-anchor="middle" fill="#1a1a1a">Fig. 4 — Detección automática de topología de red (firmware)</text>
+<rect x="135.0" y="50.0" width="780.0" height="70.0" rx="8" fill="#eef1f5" stroke="#33475b" stroke-width="1.6"/>
+<text x="525.0" y="77.1" font-family="Helvetica, Arial, sans-serif" font-size="14.5" font-weight="700" fill="#1a1a1a" text-anchor="middle">Bloque adquirido</text>
+<text x="525.0" y="96.6" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">V1N, V2N, V3N, VNN'  (tensión, 4 canales)  ·  I1, I2, I3, IN  (corriente, 4 canales)</text>
+<rect x="175.0" y="165.0" width="700.0" height="110.0" rx="8" fill="#fde0d6" stroke="#33475b" stroke-width="1.6"/>
+<text x="525.0" y="203.0" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#1a1a1a" text-anchor="middle">Decisión 1</text>
+<text x="525.0" y="222.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">¿Hay actividad de corriente en IN,</text>
+<text x="525.0" y="240.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">o tensión de retorno en VNN'?</text>
+<path d="M 525.0,120.0 L 525.0,150.0 " fill="none" stroke="#33475b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="90.0" y="330.0" width="380.0" height="100.0" rx="8" fill="#dbe9fb" stroke="#33475b" stroke-width="1.6"/>
+<text x="280.0" y="371.9" font-family="Helvetica, Arial, sans-serif" font-size="13.5" font-weight="700" fill="#1a1a1a" text-anchor="middle">Red en ESTRELLA con neutro (4 hilos)</text>
+<text x="280.0" y="390.4" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">Tensiones de fase = V1N, V2N, V3N directas</text>
+<rect x="580.0" y="330.0" width="380.0" height="100.0" rx="8" fill="#dbe9fb" stroke="#33475b" stroke-width="1.6"/>
+<text x="770.0" y="371.9" font-family="Helvetica, Arial, sans-serif" font-size="13.5" font-weight="700" fill="#1a1a1a" text-anchor="middle">Red en TRIÁNGULO (3 hilos, sin neutro)</text>
+<text x="770.0" y="390.4" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">Tensiones de línea: V(L1-L2) = V1N-V2N, etc.</text>
+<path d="M 525.0,275.0 L 525.0,290.0 L 280.0,290.0 L 280.0,315.0 " fill="none" stroke="#33475b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="287.7" y="269.8" width="164.6" height="18" fill="#ffffff" opacity="0.92"/>
+<text x="370.0" y="284.2" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#33475b" text-anchor="middle">Sí, actividad coherente</text>
+<path d="M 525.0,275.0 L 525.0,290.0 L 770.0,290.0 L 770.0,315.0 " fill="none" stroke="#33475b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="611.2" y="269.8" width="117.5" height="18" fill="#ffffff" opacity="0.92"/>
+<text x="670.0" y="284.2" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#33475b" text-anchor="middle">No, neutro flota</text>
+<path d="M 280.0,430.0 L 280.0,470.0 " fill="none" stroke="#33475b" stroke-width="1.8"/>
+<path d="M 770.0,430.0 L 770.0,470.0 " fill="none" stroke="#33475b" stroke-width="1.8"/>
+<path d="M 280.0,470.0 L 770.0,470.0 " fill="none" stroke="#33475b" stroke-width="1.8"/>
+<path d="M 525.0,470.0 L 525.0,500.0 " fill="none" stroke="#33475b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="175.0" y="515.0" width="700.0" height="110.0" rx="8" fill="#fde0d6" stroke="#33475b" stroke-width="1.6"/>
+<text x="525.0" y="553.0" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#1a1a1a" text-anchor="middle">Decisión 2 — verificación cruzada</text>
+<text x="525.0" y="572.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">Secuencia de fases 120°/240°</text>
+<text x="525.0" y="590.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">¿consistente con la clasificación anterior?</text>
+<rect x="90.0" y="680.0" width="380.0" height="100.0" rx="8" fill="#fbd9d9" stroke="#33475b" stroke-width="1.6"/>
+<text x="280.0" y="722.0" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#1a1a1a" text-anchor="middle">Alerta de conexión</text>
+<text x="280.0" y="741.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">Conexión errónea o fase faltante</text>
+<rect x="580.0" y="680.0" width="380.0" height="100.0" rx="8" fill="#d9f2e6" stroke="#33475b" stroke-width="1.6"/>
+<text x="770.0" y="713.0" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#1a1a1a" text-anchor="middle">Topología confirmada</text>
+<text x="770.0" y="732.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">DSP usa el set de fórmulas de</text>
+<text x="770.0" y="750.0" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">la topología detectada</text>
+<path d="M 525.0,625.0 L 525.0,640.0 L 280.0,640.0 L 280.0,665.0 " fill="none" stroke="#33475b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="341.3" y="619.8" width="97.4" height="18" fill="#ffffff" opacity="0.92"/>
+<text x="390.0" y="634.2" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#33475b" text-anchor="middle">Inconsistente</text>
+<path d="M 525.0,625.0 L 525.0,640.0 L 770.0,640.0 L 770.0,665.0 " fill="none" stroke="#33475b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="618.0" y="619.8" width="83.9" height="18" fill="#ffffff" opacity="0.92"/>
+<text x="660.0" y="634.2" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#33475b" text-anchor="middle">Consistente</text>
+</svg>
