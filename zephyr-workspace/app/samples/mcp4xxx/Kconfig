@@ -1,0 +1,8 @@
+# Copyright (c) 2026 Fabrizio Carlassara
+# SPDX-License-Identifier: Apache-2.0
+
+mainmenu "MCP4XXX driver bring-up sample"
+
+rsource "../../drivers/mcp4xxx/Kconfig"
+
+source "Kconfig.zephyr"
