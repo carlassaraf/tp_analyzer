@@ -21,6 +21,13 @@ target_link_libraries_ifdef(CONFIG_ADC_STREAM_RPI_PICO app_lib PRIVATE adc_strea
 add_subdirectory_ifdef(CONFIG_POWMAN_RTC_RPI_PICO drivers/powman_rtc)
 target_include_directories_ifdef(CONFIG_POWMAN_RTC_RPI_PICO app_lib PRIVATE drivers/powman_rtc)
 target_link_libraries_ifdef(CONFIG_POWMAN_RTC_RPI_PICO app_lib PRIVATE powman_rtc)
+# Link MCP4XXX digital potentiometer driver to application. Also exposed to
+# the `app` target (not just app_lib) so main.c can `#include "mcp4xxx.h"`
+# directly, the same way drivers/adc_stream is above.
+add_subdirectory_ifdef(CONFIG_MCP4XXX drivers/mcp4xxx)
+target_include_directories_ifdef(CONFIG_MCP4XXX app PRIVATE drivers/mcp4xxx)
+target_include_directories_ifdef(CONFIG_MCP4XXX app_lib PRIVATE drivers/mcp4xxx)
+target_link_libraries_ifdef(CONFIG_MCP4XXX app_lib PRIVATE mcp4xxx)
 
 # CMSIS-DSP FFT wrapper (RTOS-agnostic, ported unchanged from the FreeRTOS
 # tree — see ZEPHYR_MIGRATION.md's Guiding principle)

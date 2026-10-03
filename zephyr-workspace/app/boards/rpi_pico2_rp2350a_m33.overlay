@@ -74,13 +74,6 @@
 	};
 };
 
-/* Phase 1b (see ZEPHYR_MIGRATION.md): continuous ADC + DMA acquisition.
- * GPIO26 / ADC channel 0, matching main:firmware/bsp/rp2350/board_config.h's
- * ADC_GPIO/ADC_CHANNEL. The stock `adc` node (raspberrypi,pico-adc, same
- * peripheral) stays disabled — see rp2350.dtsi, default is already
- * status = "disabled", nothing to override here.
- */
-
 &pinctrl {
 	/* TODO: unverified — RP2_PINCTRL_GPIO_FUNC_NULL disconnects the
 	 * digital function per the pinctrl header's own comment, matching
@@ -99,6 +92,17 @@
 			pinmux = <ADC_CH1_P27>;
 		};
 	};
+
+	spi0_default: spi0_default {
+		group1 {
+			pinmux = <SPI0_CSN_P17>, <SPI0_SCK_P18>, <SPI0_TX_P19>;
+		};
+
+		group2 {
+			pinmux = <SPI0_RX_P16>;
+			input-enable;
+		};
+	};
 };
 
 &dma {
@@ -108,6 +112,21 @@
 /** Disable the built-in ADC peripheral and driver */
 &adc {
 	status = "disabled";
+};
+
+&spi0 {
+	clock-frequency = <DT_FREQ_M(10)>;
+	pinctrl-0 = <&spi0_default>;
+	pinctrl-names = "default";
+	status = "okay";
+
+	mcp4251: mcp4251@0 {
+		compatible = "microchip,mcp42xx";
+		reg = <0>;
+		spi-max-frequency = <DT_FREQ_M(10)>;
+		ohms = <10000>;
+		resolution = <8>;
+	};
 };
 
 &{/soc} {

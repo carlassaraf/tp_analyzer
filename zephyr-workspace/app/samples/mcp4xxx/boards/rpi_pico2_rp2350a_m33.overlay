@@ -1,0 +1,72 @@
+/*
+ * Copyright (c) 2026 Fabrizio Carlassara
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/*
+ * Bench wiring for app/drivers/mcp4xxx/ bring-up against a real MCP4251.
+ *
+ * GPIO16-19 (CS/SCK/MOSI/MISO): the devboard at hardware/devboard/ wires
+ * these to the TFT display's parallel control bus (see its README.md's
+ * "Core2350B0 pin usage" table) -- fine here only because the display
+ * isn't part of this particular bench setup. If that ever changes, this
+ * needs to move (SPI1 on GPIO10/11/24/25 + GPIO26 for SHDN is free
+ * regardless -- see git history of this file for that version).
+ *
+ * CS is a software-driven GPIO (cs-gpios), not the SPI0 peripheral's own
+ * dedicated CSN pin function -- diagnosed against real hardware
+ * (docs/ROADMAP.md has the full trace): with no cs-gpios,
+ * spi_context_cs_control() is a no-op and CS timing is left entirely to
+ * the RP2350's PL022-style hardware, which pulses CS between every data
+ * frame (byte) instead of holding it low for a whole multi-byte
+ * transfer. That's invisible for single-frame writes but breaks every
+ * 2-byte Read Data command: the MCP4251 sees each byte as the start of
+ * its own fresh, isolated command instead of one continuous 16-bit Read.
+ * A GPIO-driven CS is asserted once and released once by Zephyr itself,
+ * bypassing that hardware behavior. Same physical GPIO17 wire as before
+ * -- only how firmware treats it changes.
+ */
+
+#include <zephyr/dt-bindings/pinctrl/rpi-pico-rp2350a-pinctrl.h>
+
+/ {
+	chosen {
+		zephyr,console = &cdc_acm_uart0;
+		zephyr,shell-uart = &cdc_acm_uart0;
+	};
+};
+
+&zephyr_udc0 {
+	cdc_acm_uart0: cdc_acm_uart0 {
+		compatible = "zephyr,cdc-acm-uart";
+		label = "CDC_ACM_0";
+	};
+};
+
+&pinctrl {
+	spi0_mcp4xxx: spi0_mcp4xxx {
+		group1 {
+			pinmux = <SPI0_SCK_P18>, <SPI0_TX_P19>;
+		};
+		group2 {
+			pinmux = <SPI0_RX_P16>;
+			input-enable;
+		};
+	};
+};
+
+&spi0 {
+	status = "okay";
+	pinctrl-0 = <&spi0_mcp4xxx>;
+	pinctrl-names = "default";
+	cs-gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;
+
+	mcp42xx0: mcp4251@0 {
+		compatible = "microchip,mcp42xx";
+		reg = <0>;
+		spi-max-frequency = <DT_FREQ_M(1)>;
+		ohms = <10000>;
+		resolution = <8>;
+		shutdown-gpios = <&gpio0 20 GPIO_ACTIVE_LOW>;
+	};
+};
