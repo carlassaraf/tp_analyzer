@@ -44,4 +44,8 @@ menu "RTC Driver"
   rsource "drivers/powman_rtc/Kconfig"
 endmenu
 
+menu "MCP4XXX Driver"
+  rsource "drivers/mcp4xxx/Kconfig"
+endmenu
+
 source "Kconfig.zephyr"
