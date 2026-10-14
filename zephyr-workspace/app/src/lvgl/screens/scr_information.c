@@ -1,6 +1,6 @@
 #include "ui.h"
 #include "lvgl/screens.h"
-#include <app_version.h>
+#include <zephyr/app_version.h>
 
 void scr_information_prepare(void)
 {

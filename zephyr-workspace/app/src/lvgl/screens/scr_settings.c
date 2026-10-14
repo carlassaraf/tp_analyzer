@@ -1,7 +1,7 @@
 #include "ui.h"
 #include "lvgl/screens.h"
 #include <zephyr/drivers/rtc.h>
-#include <app_version.h>
+#include <zephyr/app_version.h>
 
 void scr_settings_prepare(void)
 {
