@@ -1,0 +1,10 @@
+* BAT54 / BAT54S - 30 V, 200 mA Schottky diode (BAT54S: two in series, SOT-23)
+*
+* Approximate fit to the typical datasheet curve, NOT a vendor model:
+*   VF = 240 mV at 0.1 mA, 320 mV at 1 mA, 400 mV at 10 mA (25 C)
+*   IR ~ 0.1 uA at 1.65 V reverse (datasheet: <= 2 uA at 25 V)
+*   CT = 10 pF at 1 V
+* In the ADC clamp both diodes sit at ~1.65 V reverse bias inside the signal
+* range (0.25 to 3.05 V), so they do not conduct; they only clamp overloads.
+
+.model BAT54 D(Is=1e-7 N=1.34 Rs=1 Cjo=10p Vj=0.35 M=0.5 BV=30 IBV=2u Eg=0.69 Xti=2 Type=schottky)

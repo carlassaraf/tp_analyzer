@@ -1,0 +1,24 @@
+* Zeming ZMPT101B voltage transformer (current-mode), 2 mA : 2 mA, 1000:1000 turns
+*
+* Pins: P1 P2 S1 S2
+*   P1 -> P2  primary (fed from the mains through a series resistor)
+*   S1/S2     secondary, S1 positive for primary current P1 -> P2
+*
+* Linear model referred to the secondary (ratio 1:1):
+*   RP = primary winding resistance (in series with the input)
+*   LM = magnetising inductance, RW = secondary winding resistance
+*
+* Datasheet: phase error <= 20' at 2 mA with a 100 ohm sampling resistor,
+* linearity <= 0.2 % from 20 % to 120 % of rated current.
+* RW = 100 ohm is a distributor figure (not confirmed for the B version).
+* LM = 110 H gives tan(phi) = (100 + 100)/(2*pi*50*110) -> 0.33 deg = 20'.
+* Not modelled: saturation above ~10 mA, ratio error, temperature.
+
+.subckt ZMPT101B P1 P2 S1 S2 RP=100 LM=110 RW=100 CW=20p
+Rp P1 p1i {RP}
+Vsense p1i P2 0
+F1 S2 e Vsense 1
+Lm e S2 {LM}
+Cw e S2 {CW}
+Rw e S1 {RW}
+.ends ZMPT101B

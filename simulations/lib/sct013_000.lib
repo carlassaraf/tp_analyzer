@@ -1,0 +1,33 @@
+* YHDC SCT-013-000 split-core current transformer, 100 A : 50 mA
+*
+* Pins: P1 P2 TIP SLEEVE
+*   P1 -> P2  primary conductor through the core (zero-impedance current sense)
+*   TIP/SLEEVE secondary (3.5 mm plug). TIP goes positive for current P1 -> P2.
+*
+* Linear equivalent circuit referred to the secondary:
+*
+*   Ip/N --+--- LL --- RW --- TIP
+*          |  |
+*         LM  CW
+*          |  |
+*   -------+--+--------------- SLEEVE
+*
+* N  = 2000 turns (datasheet ratio 100 A : 50 mA)
+* LM = magnetising inductance. 5.5 H with RW = 100 ohm reproduces the
+*      OpenEnergyMonitor measurements: ~4 deg phase lead with a 22 ohm
+*      burden and ~7-8 deg with 120 ohm.
+* RW, LL, CW are NOT published. The defaults are estimates. Measure RW with
+*      an ohmmeter and fit LL/CW from a frequency sweep before trusting
+*      results above a few kHz.
+*
+* Not modelled: core saturation (starts ~140 A), the ±3 % ratio error,
+* the internal TVS that clamps an open secondary.
+
+.subckt SCT013_000 P1 P2 TIP SLEEVE N=2000 LM=5.5 RW=100 LL=0.5m CW=50p
+Vsense P1 P2 0
+F1 SLEEVE e Vsense {1/N}
+Lm e SLEEVE {LM}
+Cw e SLEEVE {CW}
+Ll e e2 {LL}
+Rw e2 TIP {RW}
+.ends SCT013_000
