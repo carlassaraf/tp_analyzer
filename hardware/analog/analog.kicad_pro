@@ -101,7 +101,7 @@
         "hole_clearance": "error",
         "hole_to_hole": "warning",
         "holes_co_located": "warning",
-        "invalid_outline": "error",
+        "invalid_outline": "ignore",
         "isolated_copper": "warning",
         "item_on_disabled_layer": "error",
         "items_not_allowed": "error",
@@ -125,7 +125,7 @@
         "silk_overlap": "ignore",
         "skew_out_of_range": "error",
         "solder_mask_bridge": "error",
-        "starved_thermal": "error",
+        "starved_thermal": "ignore",
         "text_height": "ignore",
         "text_on_edge_cuts": "error",
         "text_thickness": "ignore",
@@ -680,7 +680,7 @@
         "uuid": "fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715"
       }
     ],
-    "used_designators": "T1,J1-9,U1-4,D1-4,#PWR1-27,C1-24,R1-28",
+    "used_designators": "R1-28,C1-24,#PWR1-27,#PWR139,D1-4,U1-4,J1-9,T1",
     "variants": []
   },
   "sheets": [

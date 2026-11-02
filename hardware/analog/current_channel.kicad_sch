@@ -771,7 +771,7 @@
 			)
 			(embedded_fonts no)
 		)
-	(symbol "Diode:BAT54S"
+		(symbol "Diode:BAT54S"
 			(pin_numbers
 				(hide yes)
 			)
@@ -1113,7 +1113,7 @@
 			)
 			(embedded_fonts no)
 		)
-	(symbol "Diode:BAT54W"
+		(symbol "Diode:BAT54W"
 			(pin_names
 				(offset 1.016)
 				(hide yes)
@@ -1963,6 +1963,19 @@
 		(uuid "426e0f53-23ef-4f67-aa9f-bdd5f5b9890e")
 	)
 	(rectangle
+		(start 73.66 125.73)
+		(end 175.26 173.99)
+		(stroke
+			(width 0)
+			(type default)
+			(color 255 0 0 1)
+		)
+		(fill
+			(type none)
+		)
+		(uuid "56c19050-b544-42c8-aefe-6ab7d04f3452")
+	)
+	(rectangle
 		(start 123.19 50.8)
 		(end 165.1 123.19)
 		(stroke
@@ -2012,6 +2025,18 @@
 			(justify left bottom)
 		)
 		(uuid "2ea363a2-cb51-4bd8-b3b2-7d9ee20290e0")
+	)
+	(text "Detector de pico (media onda, pasivo)"
+		(exclude_from_sim no)
+		(at 76.2 129.54 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+				(color 255 0 0 1)
+			)
+			(justify left bottom)
+		)
+		(uuid "3b0233c7-3cae-4b76-b179-662bb4a10b45")
 	)
 	(text "R25: pull-down contra la\ndistorsión de cruce"
 		(exclude_from_sim no)
@@ -2070,6 +2095,17 @@
 		)
 		(uuid "e34cb17e-0591-4d31-b93e-f0bb2d5eb671")
 	)
+	(text "Toma la muestra del secundario (ct): queda referido a VBIAS. ADC: IPK = VBIAS + pico - caída de D9.\nCarga 2,2k / 470nF (1 ms), descarga 1M (0,47 s). Ver simulations/current_channel/current_peak.asc"
+		(exclude_from_sim no)
+		(at 76.2 172.72 0)
+		(effects
+			(font
+				(size 1 1)
+			)
+			(justify left bottom)
+		)
+		(uuid "e4662113-4396-4c9c-9fc2-319b7fe245cf")
+	)
 	(text "Etapa de ganancia (G = 256/D)"
 		(exclude_from_sim no)
 		(at 68.58 54.61 0)
@@ -2106,10 +2142,22 @@
 		(uuid "fdbbb6e7-cb5e-4d18-970e-13e483e3b14e")
 	)
 	(junction
+		(at 130.81 138.43)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4ccbfeb2-dfa7-49a7-b00e-4af3325ddcaa")
+	)
+	(junction
 		(at 44.45 72.39)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4f01113b-1714-4e6c-8f9d-5ed76f90ecb7")
+	)
+	(junction
+		(at 106.68 138.43)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7b10c2b3-f854-42ea-82b8-052fb1ea7b76")
 	)
 	(junction
 		(at 161.29 72.39)
@@ -2124,10 +2172,28 @@
 		(uuid "7d2e634b-477b-4f91-a301-e0ef4bf0c90d")
 	)
 	(junction
+		(at 114.3 146.05)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "80c852d5-bbb5-4756-b341-8647f637742b")
+	)
+	(junction
+		(at 148.59 138.43)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "829c9dd8-8551-497c-a2a8-5c2832399871")
+	)
+	(junction
 		(at 59.69 72.39)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "85318c09-0753-4c77-bc5a-03d6b46e8cf8")
+	)
+	(junction
+		(at 106.68 146.05)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "882fca28-f0ed-4795-a9d6-452d8444978f")
 	)
 	(junction
 		(at 88.9 74.93)
@@ -2152,6 +2218,18 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e373edd1-f60c-4e93-8855-33eb393bf057")
+	)
+	(junction
+		(at 114.3 138.43)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e6079569-05cc-4d51-84e7-cc1c2d5acd1e")
+	)
+	(junction
+		(at 195.58 72.39)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "fe050f38-7093-4a2f-a373-e4a556436dd0")
 	)
 	(no_connect
 		(at 34.29 69.85)
@@ -2299,6 +2377,36 @@
 	)
 	(wire
 		(pts
+			(xy 100.33 138.43) (xy 106.68 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "40786d66-905b-4248-8f17-358fee524377")
+	)
+	(wire
+		(pts
+			(xy 125.73 138.43) (xy 130.81 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4182e577-cc7b-488d-94c5-c526f4a4cb5d")
+	)
+	(wire
+		(pts
+			(xy 106.68 146.05) (xy 114.3 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "419b71ce-02c6-4f36-918a-f4215b11fb9d")
+	)
+	(wire
+		(pts
 			(xy 161.29 72.39) (xy 170.18 72.39)
 		)
 		(stroke
@@ -2326,6 +2434,46 @@
 			(type default)
 		)
 		(uuid "53eaff8d-cc9e-4718-bef6-36390e5eac46")
+	)
+	(wire
+		(pts
+			(xy 78.74 138.43) (xy 82.55 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5458577f-722e-4989-b3c2-de4d2ac21b81")
+	)
+	(wire
+		(pts
+			(xy 96.52 146.05) (xy 106.68 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "567fc23f-0e9b-4693-bf2b-d5f75e5262f9")
+	)
+	(wire
+		(pts
+			(xy 114.3 138.43) (xy 118.11 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5a980e2f-c836-4077-b426-057c09296e02")
+	)
+	(wire
+		(pts
+			(xy 140.97 138.43) (xy 148.59 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6100226a-fdba-46cc-8c99-cada6b87222d")
 	)
 	(wire
 		(pts
@@ -2399,6 +2547,16 @@
 	)
 	(wire
 		(pts
+			(xy 106.68 138.43) (xy 114.3 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "786eae2f-ceff-428a-812d-5f3e35545901")
+	)
+	(wire
+		(pts
 			(xy 170.18 72.39) (xy 173.99 72.39)
 		)
 		(stroke
@@ -2406,16 +2564,6 @@
 			(type default)
 		)
 		(uuid "78baf708-7ea1-403b-9633-3d9a1c1fa797")
-	)
-	(wire
-		(pts
-			(xy 185.42 72.39) (xy 200.66 72.39)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "79c580b7-2e62-4ed3-b082-300caa4936ea")
 	)
 	(wire
 		(pts
@@ -2429,6 +2577,16 @@
 	)
 	(wire
 		(pts
+			(xy 114.3 146.05) (xy 130.81 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "835556c4-4c01-452c-984a-dbb953b48fa8")
+	)
+	(wire
+		(pts
 			(xy 144.78 62.23) (xy 161.29 62.23)
 		)
 		(stroke
@@ -2436,6 +2594,16 @@
 			(type default)
 		)
 		(uuid "869e12e6-c21e-4c18-9b37-9230f10dfdf8")
+	)
+	(wire
+		(pts
+			(xy 148.59 138.43) (xy 148.59 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8e5e71a7-1687-4554-8777-e739157bc7ff")
 	)
 	(wire
 		(pts
@@ -2539,6 +2707,16 @@
 	)
 	(wire
 		(pts
+			(xy 148.59 138.43) (xy 161.29 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bf73221b-7f5f-4f94-8fb0-742ed095537f")
+	)
+	(wire
+		(pts
 			(xy 158.75 72.39) (xy 161.29 72.39)
 		)
 		(stroke
@@ -2569,7 +2747,7 @@
 	)
 	(wire
 		(pts
-			(xy 181.61 72.39) (xy 185.42 72.39)
+			(xy 181.61 72.39) (xy 200.66 72.39)
 		)
 		(stroke
 			(width 0)
@@ -2609,6 +2787,16 @@
 	)
 	(wire
 		(pts
+			(xy 130.81 138.43) (xy 133.35 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e23f7919-908c-4757-97d1-49367854c1c3")
+	)
+	(wire
+		(pts
 			(xy 91.44 107.95) (xy 91.44 111.76)
 		)
 		(stroke
@@ -2639,6 +2827,26 @@
 	)
 	(wire
 		(pts
+			(xy 90.17 138.43) (xy 92.71 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f880cf5d-1e02-4122-b19c-496356546d18")
+	)
+	(wire
+		(pts
+			(xy 195.58 72.39) (xy 195.58 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fb80ad6e-ba85-45b0-aeb2-77cbac57f105")
+	)
+	(wire
+		(pts
 			(xy 59.69 80.01) (xy 59.69 82.55)
 		)
 		(stroke
@@ -2656,6 +2864,16 @@
 			(type default)
 		)
 		(uuid "ff86fa97-11b7-4fdd-a0f7-9c61663de17b")
+	)
+	(label "ct"
+		(at 78.74 138.43 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3eacfa18-d95d-45d6-bf3c-9a96491e6e81")
 	)
 	(label "fout"
 		(at 162.56 72.39 0)
@@ -2717,6 +2935,16 @@
 		)
 		(uuid "896873e1-d594-4735-a089-4b3b3914308e")
 	)
+	(label "VBIAS"
+		(at 96.52 146.05 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a2a40134-fca5-4f4b-a60b-715ffa295a24")
+	)
 	(label "gout"
 		(at 99.06 74.93 0)
 		(effects
@@ -2768,6 +2996,17 @@
 			(justify left)
 		)
 		(uuid "3a6033c3-26b4-4cb9-91b7-d19ca4bfdd0b")
+	)
+	(hierarchical_label "IPK"
+		(shape output)
+		(at 161.29 138.43 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "5cdd5006-1c20-4306-a6be-c49adcda00be")
 	)
 	(hierarchical_label "SCK"
 		(shape input)
@@ -3116,6 +3355,87 @@
 	)
 	(symbol
 		(lib_id "Device:R")
+		(at 114.3 142.24 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "1fe41c28-0cc5-4db5-a47b-ac4b58ce2e6a")
+		(property "Reference" "R32"
+			(at 116.84 140.97 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "1M"
+			(at 116.84 143.51 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 114.3 142.24 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 114.3 142.24 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 114.3 142.24 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "b78b30ab-86c7-4fd5-b974-6f303ba7baf9")
+		)
+		(pin "2"
+			(uuid "3ae838f4-22e1-4cad-98df-27295950d7c2")
+		)
+		(instances
+			(project "analog"
+				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
+					(reference "R32")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
 		(at 95.25 78.74 0)
 		(unit 1)
 		(body_style 1)
@@ -3190,6 +3510,83 @@
 			(project "analog"
 				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
 					(reference "R25")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 143.51 147.32 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "2eb59434-338b-41d0-ba0d-4a55de59cb57")
+		(property "Reference" "#PWR125"
+			(at 143.51 153.67 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 143.51 143.51 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 143.51 147.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 143.51 147.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol"
+			(at 143.51 147.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "d5806c83-552f-439f-b57d-d523bba3fa80")
+		)
+		(instances
+			(project "analog"
+				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
+					(reference "#PWR125")
 					(unit 1)
 				)
 			)
@@ -3767,6 +4164,90 @@
 		)
 	)
 	(symbol
+		(lib_id "Diode:BAT54S")
+		(at 143.51 154.94 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "4cf747c7-0da9-4873-a54e-f99d31f6e771")
+		(property "Reference" "D10"
+			(at 138.43 153.67 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "BAT54S"
+			(at 138.43 156.21 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 143.51 154.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/ds11005.pdf"
+			(at 143.51 154.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Vr 30V, If 200mA, Dual schottky barrier diode, in series, SOT-23"
+			(at 143.51 154.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "0f3f6709-11e1-42a0-98eb-8257cd3182ea")
+		)
+		(pin "2"
+			(uuid "45f828d1-e2ed-460b-9c28-5477b6dec4aa")
+		)
+		(pin "3"
+			(uuid "b48adca2-2a49-4338-9ff8-24d2522f37bd")
+		)
+		(instances
+			(project "analog"
+				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
+					(reference "D10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 95.25 85.09 0)
 		(unit 1)
@@ -4073,6 +4554,160 @@
 			(project "analog"
 				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
 					(reference "#PWR111")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 190.5 80.01 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "6ee0fb77-d048-41d1-9efa-e12228f3d110")
+		(property "Reference" "#PWR121"
+			(at 190.5 86.36 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 190.5 76.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 190.5 80.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 190.5 80.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol"
+			(at 190.5 80.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "70cc9a02-0d56-4c22-a67f-8692fb7f98a6")
+		)
+		(instances
+			(project "analog"
+				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
+					(reference "#PWR121")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 143.51 162.56 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "73bfbb4a-9605-459a-ab49-7beb980f3f3f")
+		(property "Reference" "#PWR126"
+			(at 143.51 168.91 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 143.51 166.37 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 143.51 162.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 143.51 162.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol"
+			(at 143.51 162.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "640a2857-5ff1-4beb-b828-8c7ab16b2299")
+		)
+		(instances
+			(project "analog"
+				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
+					(reference "#PWR126")
 					(unit 1)
 				)
 			)
@@ -4387,6 +5022,248 @@
 			(project "analog"
 				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
 					(reference "C22")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Diode:BAT54S")
+		(at 190.5 87.63 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "9156195d-a652-462f-8218-66bb0d714d86")
+		(property "Reference" "D5"
+			(at 185.42 86.36 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "BAT54S"
+			(at 185.42 88.9 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 190.5 87.63 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/ds11005.pdf"
+			(at 190.5 87.63 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Vr 30V, If 200mA, Dual schottky barrier diode, in series, SOT-23"
+			(at 190.5 87.63 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "e0ed765d-82d2-4ab1-baef-17c7dff54699")
+		)
+		(pin "2"
+			(uuid "eb86d976-6f42-4189-bceb-f07a33e539f4")
+		)
+		(pin "3"
+			(uuid "018cae3d-c5a5-4402-a3f4-b87bf7b430c8")
+		)
+		(instances
+			(project "analog"
+				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
+					(reference "D5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 96.52 138.43 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "9d6268be-98ff-4412-8bee-4a2e3dd199d6")
+		(property "Reference" "R31"
+			(at 96.52 133.35 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2.2k"
+			(at 96.52 135.89 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 96.52 138.43 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 96.52 138.43 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 96.52 138.43 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "d73fae6a-efa0-4c7e-a0b4-4a139d14c2e1")
+		)
+		(pin "2"
+			(uuid "85d6d343-5845-4f36-b857-898f223ad5bf")
+		)
+		(instances
+			(project "analog"
+				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
+					(reference "R31")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 121.92 138.43 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "a21e2c48-f4d4-4f56-be3e-22bb5ee9d993")
+		(property "Reference" "R33"
+			(at 121.92 133.35 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1k"
+			(at 121.92 135.89 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 121.92 138.43 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 121.92 138.43 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 121.92 138.43 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "64e0c716-4915-4a86-b288-0d8164e2a6bb")
+		)
+		(pin "2"
+			(uuid "aa4d8c4b-a3f8-47e7-a923-0779510086b4")
+		)
+		(instances
+			(project "analog"
+				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
+					(reference "R33")
 					(unit 1)
 				)
 			)
@@ -4749,6 +5626,87 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 106.68 142.24 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "d1dc8ada-0aff-4544-b1fa-5cb0709b5bac")
+		(property "Reference" "C36"
+			(at 104.14 140.97 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "470nF"
+			(at 104.14 143.51 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 106.68 142.24 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 106.68 142.24 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 106.68 142.24 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1a65d1b1-7e28-4df2-baf6-a8250bde390c")
+		)
+		(pin "2"
+			(uuid "9fd2c441-18ef-4b58-b01b-235e617ca4bb")
+		)
+		(instances
+			(project "analog"
+				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
+					(reference "C36")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 170.18 76.2 0)
 		(unit 1)
@@ -4986,6 +5944,88 @@
 		)
 	)
 	(symbol
+		(lib_id "Diode:BAT54W")
+		(at 86.36 138.43 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "dec96366-c52b-418c-a3a6-389b5c76ea13")
+		(property "Reference" "D9"
+			(at 86.36 134.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "BAT54"
+			(at 86.36 142.24 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 86.36 138.43 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/BAT54_SER.pdf"
+			(at 86.36 138.43 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Schottky barrier diode, 30 V, 200 mA, SOT-23 (pin 1 = A, pin 3 = K)"
+			(at 86.36 138.43 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "b8ddc43b-5396-4c99-a1b7-fe141760aa5a")
+		)
+		(pin "2"
+			(uuid "a0ffb4b7-32b5-4870-acf8-1c9ba3a7c4ae")
+		)
+		(pin "3"
+			(uuid "618d2d1b-93fc-4eb8-99c8-d44792ba7f34")
+		)
+		(instances
+			(project "analog"
+				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
+					(reference "D9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 127 85.09 0)
 		(unit 1)
@@ -5057,6 +6097,166 @@
 			(project "analog"
 				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
 					(reference "#PWR104")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 130.81 142.24 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "e8d6a025-a1b6-4320-93aa-1a8f43d1608f")
+		(property "Reference" "C37"
+			(at 133.35 140.97 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 133.35 143.51 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 130.81 142.24 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 130.81 142.24 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 130.81 142.24 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "507c7a23-56c5-4943-ade4-0fbada9d8004")
+		)
+		(pin "2"
+			(uuid "a8e7ccd4-980d-4908-ac9c-7ef1c7c95dbb")
+		)
+		(instances
+			(project "analog"
+				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
+					(reference "C37")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 137.16 138.43 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "ef4fdb8a-4227-4145-976d-5c7380a0f266")
+		(property "Reference" "R34"
+			(at 137.16 133.35 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 137.16 135.89 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 137.16 138.43 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 137.16 138.43 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 137.16 138.43 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "fc79750e-16c2-408a-83ff-a3f92afa385d")
+		)
+		(pin "2"
+			(uuid "2d61db41-c084-4b72-9b08-1d208c6c7168")
+		)
+		(instances
+			(project "analog"
+				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
+					(reference "R34")
 					(unit 1)
 				)
 			)
@@ -5242,1213 +6442,4 @@
 			)
 		)
 	)
-	(wire
-		(pts
-			(xy 195.58 72.39) (xy 195.58 87.63)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fb80ad6e-ba85-45b0-aeb2-77cbac57f105")
-	)
-	(junction
-		(at 195.58 72.39)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "fe050f38-7093-4a2f-a373-e4a556436dd0")
-	)
-	(symbol
-		(lib_id "Diode:BAT54S")
-		(at 190.5 87.63 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "9156195d-a652-462f-8218-66bb0d714d86")
-		(property "Reference" "D5"
-			(at 185.42 86.36 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "BAT54S"
-			(at 185.42 88.9 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
-			(at 190.5 87.63 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/ds11005.pdf"
-			(at 190.5 87.63 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Vr 30V, If 200mA, Dual schottky barrier diode, in series, SOT-23"
-			(at 190.5 87.63 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "e0ed765d-82d2-4ab1-baef-17c7dff54699")
-		)
-		(pin "2"
-			(uuid "eb86d976-6f42-4189-bceb-f07a33e539f4")
-		)
-		(pin "3"
-			(uuid "018cae3d-c5a5-4402-a3f4-b87bf7b430c8")
-		)
-		(instances
-			(project "analog"
-				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
-					(reference "D5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3.3V")
-		(at 190.5 80.01 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "6ee0fb77-d048-41d1-9efa-e12228f3d110")
-		(property "Reference" "#PWR121"
-			(at 190.5 86.36 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "+3.3V"
-			(at 190.5 76.2 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 190.5 80.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 190.5 80.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol"
-			(at 190.5 80.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "70cc9a02-0d56-4c22-a67f-8692fb7f98a6")
-		)
-		(instances
-			(project "analog"
-				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
-					(reference "#PWR121")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(rectangle
-		(start 73.66 125.73)
-		(end 175.26 173.99)
-		(stroke
-			(width 0)
-			(type default)
-			(color 255 0 0 1)
-		)
-		(fill
-			(type none)
-		)
-		(uuid "56c19050-b544-42c8-aefe-6ab7d04f3452")
-	)
-	(text "Detector de pico (media onda, pasivo)"
-		(exclude_from_sim no)
-		(at 76.2 129.54 0)
-		(effects
-			(font
-				(size 1.5 1.5)
-				(color 255 0 0 1)
-			)
-			(justify left bottom)
-		)
-		(uuid "3b0233c7-3cae-4b76-b179-662bb4a10b45")
-	)
-	(text "Toma la muestra del secundario (ct): queda referido a VBIAS. ADC: IPK = VBIAS + pico - caída de D9.\nCarga 2,2k / 470nF (1 ms), descarga 1M (0,47 s). Ver simulations/current_channel/current_peak.asc"
-		(exclude_from_sim no)
-		(at 76.2 172.72 0)
-		(effects
-			(font
-				(size 1.0 1.0)
-			)
-			(justify left bottom)
-		)
-		(uuid "e4662113-4396-4c9c-9fc2-319b7fe245cf")
-	)
-	(label "ct"
-		(at 78.74 138.43 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "3eacfa18-d95d-45d6-bf3c-9a96491e6e81")
-	)
-	(wire
-		(pts
-			(xy 78.74 138.43) (xy 82.55 138.43)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5458577f-722e-4989-b3c2-de4d2ac21b81")
-	)
-	(symbol
-		(lib_id "Diode:BAT54W")
-		(at 86.36 138.43 180)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "dec96366-c52b-418c-a3a6-389b5c76ea13")
-		(property "Reference" "D9"
-			(at 86.36 134.62 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "BAT54"
-			(at 86.36 142.24 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
-			(at 86.36 138.43 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/BAT54_SER.pdf"
-			(at 86.36 138.43 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Schottky barrier diode, 30 V, 200 mA, SOT-23 (pin 1 = A, pin 3 = K)"
-			(at 86.36 138.43 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "b8ddc43b-5396-4c99-a1b7-fe141760aa5a")
-		)
-		(pin "2"
-			(uuid "a0ffb4b7-32b5-4870-acf8-1c9ba3a7c4ae")
-		)
-		(pin "3"
-			(uuid "618d2d1b-93fc-4eb8-99c8-d44792ba7f34")
-		)
-		(instances
-			(project "analog"
-				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
-					(reference "D9")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 90.17 138.43) (xy 92.71 138.43)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f880cf5d-1e02-4122-b19c-496356546d18")
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 96.52 138.43 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "9d6268be-98ff-4412-8bee-4a2e3dd199d6")
-		(property "Reference" "R31"
-			(at 96.52 133.35 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "2.2k"
-			(at 96.52 135.89 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
-			(at 96.52 138.43 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 96.52 138.43 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 96.52 138.43 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "d73fae6a-efa0-4c7e-a0b4-4a139d14c2e1")
-		)
-		(pin "2"
-			(uuid "85d6d343-5845-4f36-b857-898f223ad5bf")
-		)
-		(instances
-			(project "analog"
-				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
-					(reference "R31")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 100.33 138.43) (xy 106.68 138.43)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "40786d66-905b-4248-8f17-358fee524377")
-	)
-	(junction
-		(at 106.68 138.43)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "7b10c2b3-f854-42ea-82b8-052fb1ea7b76")
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 106.68 142.24 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "d1dc8ada-0aff-4544-b1fa-5cb0709b5bac")
-		(property "Reference" "C36"
-			(at 104.14 140.97 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "470nF"
-			(at 104.14 143.51 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 106.68 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 106.68 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 106.68 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "1a65d1b1-7e28-4df2-baf6-a8250bde390c")
-		)
-		(pin "2"
-			(uuid "9fd2c441-18ef-4b58-b01b-235e617ca4bb")
-		)
-		(instances
-			(project "analog"
-				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
-					(reference "C36")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 106.68 138.43) (xy 114.3 138.43)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "786eae2f-ceff-428a-812d-5f3e35545901")
-	)
-	(junction
-		(at 114.3 138.43)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "e6079569-05cc-4d51-84e7-cc1c2d5acd1e")
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 114.3 142.24 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "1fe41c28-0cc5-4db5-a47b-ac4b58ce2e6a")
-		(property "Reference" "R32"
-			(at 116.84 140.97 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1M"
-			(at 116.84 143.51 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
-			(at 114.3 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 114.3 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 114.3 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "b78b30ab-86c7-4fd5-b974-6f303ba7baf9")
-		)
-		(pin "2"
-			(uuid "3ae838f4-22e1-4cad-98df-27295950d7c2")
-		)
-		(instances
-			(project "analog"
-				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
-					(reference "R32")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 114.3 138.43) (xy 118.11 138.43)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5a980e2f-c836-4077-b426-057c09296e02")
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 121.92 138.43 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "a21e2c48-f4d4-4f56-be3e-22bb5ee9d993")
-		(property "Reference" "R33"
-			(at 121.92 133.35 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1k"
-			(at 121.92 135.89 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
-			(at 121.92 138.43 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 121.92 138.43 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 121.92 138.43 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "64e0c716-4915-4a86-b288-0d8164e2a6bb")
-		)
-		(pin "2"
-			(uuid "aa4d8c4b-a3f8-47e7-a923-0779510086b4")
-		)
-		(instances
-			(project "analog"
-				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
-					(reference "R33")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 125.73 138.43) (xy 130.81 138.43)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4182e577-cc7b-488d-94c5-c526f4a4cb5d")
-	)
-	(junction
-		(at 130.81 138.43)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "4ccbfeb2-dfa7-49a7-b00e-4af3325ddcaa")
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 130.81 142.24 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "e8d6a025-a1b6-4320-93aa-1a8f43d1608f")
-		(property "Reference" "C37"
-			(at 133.35 140.97 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "100nF"
-			(at 133.35 143.51 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 130.81 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 130.81 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 130.81 142.24 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "507c7a23-56c5-4943-ade4-0fbada9d8004")
-		)
-		(pin "2"
-			(uuid "a8e7ccd4-980d-4908-ac9c-7ef1c7c95dbb")
-		)
-		(instances
-			(project "analog"
-				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
-					(reference "C37")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 130.81 138.43) (xy 133.35 138.43)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e23f7919-908c-4757-97d1-49367854c1c3")
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 137.16 138.43 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "ef4fdb8a-4227-4145-976d-5c7380a0f266")
-		(property "Reference" "R34"
-			(at 137.16 133.35 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10k"
-			(at 137.16 135.89 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
-			(at 137.16 138.43 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 137.16 138.43 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 137.16 138.43 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "fc79750e-16c2-408a-83ff-a3f92afa385d")
-		)
-		(pin "2"
-			(uuid "2d61db41-c084-4b72-9b08-1d208c6c7168")
-		)
-		(instances
-			(project "analog"
-				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
-					(reference "R34")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 140.97 138.43) (xy 148.59 138.43)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6100226a-fdba-46cc-8c99-cada6b87222d")
-	)
-	(junction
-		(at 148.59 138.43)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "829c9dd8-8551-497c-a2a8-5c2832399871")
-	)
-	(wire
-		(pts
-			(xy 148.59 138.43) (xy 161.29 138.43)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bf73221b-7f5f-4f94-8fb0-742ed095537f")
-	)
-	(hierarchical_label "IPK"
-		(shape output)
-		(at 161.29 138.43 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "5cdd5006-1c20-4306-a6be-c49adcda00be")
-	)
-	(label "VBIAS"
-		(at 96.52 146.05 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "a2a40134-fca5-4f4b-a60b-715ffa295a24")
-	)
-	(wire
-		(pts
-			(xy 96.52 146.05) (xy 106.68 146.05)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "567fc23f-0e9b-4693-bf2b-d5f75e5262f9")
-	)
-	(junction
-		(at 106.68 146.05)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "882fca28-f0ed-4795-a9d6-452d8444978f")
-	)
-	(wire
-		(pts
-			(xy 106.68 146.05) (xy 114.3 146.05)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "419b71ce-02c6-4f36-918a-f4215b11fb9d")
-	)
-	(junction
-		(at 114.3 146.05)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "80c852d5-bbb5-4756-b341-8647f637742b")
-	)
-	(wire
-		(pts
-			(xy 114.3 146.05) (xy 130.81 146.05)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "835556c4-4c01-452c-984a-dbb953b48fa8")
-	)
-	(wire
-		(pts
-			(xy 148.59 138.43) (xy 148.59 154.94)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8e5e71a7-1687-4554-8777-e739157bc7ff")
-	)
-	(symbol
-		(lib_id "Diode:BAT54S")
-		(at 143.51 154.94 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "4cf747c7-0da9-4873-a54e-f99d31f6e771")
-		(property "Reference" "D10"
-			(at 138.43 153.67 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "BAT54S"
-			(at 138.43 156.21 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
-			(at 143.51 154.94 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/ds11005.pdf"
-			(at 143.51 154.94 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Vr 30V, If 200mA, Dual schottky barrier diode, in series, SOT-23"
-			(at 143.51 154.94 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "0f3f6709-11e1-42a0-98eb-8257cd3182ea")
-		)
-		(pin "2"
-			(uuid "45f828d1-e2ed-460b-9c28-5477b6dec4aa")
-		)
-		(pin "3"
-			(uuid "b48adca2-2a49-4338-9ff8-24d2522f37bd")
-		)
-		(instances
-			(project "analog"
-				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
-					(reference "D10")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3.3V")
-		(at 143.51 147.32 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "2eb59434-338b-41d0-ba0d-4a55de59cb57")
-		(property "Reference" "#PWR125"
-			(at 143.51 153.67 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "+3.3V"
-			(at 143.51 143.51 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 143.51 147.32 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 143.51 147.32 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol"
-			(at 143.51 147.32 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "d5806c83-552f-439f-b57d-d523bba3fa80")
-		)
-		(instances
-			(project "analog"
-				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
-					(reference "#PWR125")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 143.51 162.56 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "73bfbb4a-9605-459a-ab49-7beb980f3f3f")
-		(property "Reference" "#PWR126"
-			(at 143.51 168.91 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 143.51 166.37 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 143.51 162.56 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 143.51 162.56 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol"
-			(at 143.51 162.56 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "640a2857-5ff1-4beb-b828-8c7ab16b2299")
-		)
-		(instances
-			(project "analog"
-				(path "/fe4d0ffd-5e8d-422c-a527-5e5a0e1a7715/37d595e2-e931-47ea-8c6c-82f4c38b004c"
-					(reference "#PWR126")
-					(unit 1)
-				)
-			)
-		)
-	))
+)
