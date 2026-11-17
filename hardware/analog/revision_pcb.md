@@ -18,7 +18,8 @@ Las coordenadas están en mm, en el sistema de coordenadas de KiCad, para ubicar
 | Tamaño | 66 × 54 mm, con origen en (100, 50) |
 | Cara inferior (B.Cu) | Canal de tensión (V) completo, divisor de red R5–R10 y bloque común (VBIAS y desacople): 42 SMD |
 | Cara superior (F.Cu) | Canal de corriente (I) completo: 24 SMD |
-| THT | J1, T1 y J2 montados arriba y soldados abajo. J10 montado abajo y soldado arriba |
+| THT | T1 y J2 montados arriba y soldados abajo. J10 montado abajo y soldado arriba |
+| Entrada de red (J1) | Dos pads para soldar los cables, sin bornera: el cable entra por arriba y se suelda abajo |
 | SMD | 0805, salvo R23 y R5–R10 en 1206 |
 | Pistas | 0,4 mm con 0,3 mm de aislación; las de red, 0,6 mm |
 | Vías | 38 de 1,3/0,7 mm (anillo de 0,3 mm) |
@@ -39,8 +40,8 @@ Las coordenadas están en mm, en el sistema de coordenadas de KiCad, para ubicar
 
 Tensiones:
 
-- Entre bornes de J1: hasta 380 V eficaces (537 V de pico) si se mide entre fases.
-- Respecto de tierra: hasta 220 V eficaces (311 V de pico) en cualquier borne, más los transitorios de la red.
+- Entre los dos pads de J1: hasta 380 V eficaces (537 V de pico) si se mide entre fases.
+- Respecto de tierra: hasta 220 V eficaces (311 V de pico) en cualquiera de los dos pads, más los transitorios de la red.
 
 El GND de esta placa llega a la placa digital y de ahí al RP2350B y a lo que se le conecte (USB, PC). J10 y el cable del SCT-013 también son de baja tensión. Por eso entre la red y **cualquier** otro cobre hace falta aislación **reforzada**. La única barrera prevista es el ZMPT101B, y el PCB la respeta.
 
@@ -54,12 +55,12 @@ Valores orientativos, del orden de lo que piden IEC 61010-1 / IEC 60664-1 para 3
 | Red y borde de placa | 3 mm |
 | Red y agujeros de montaje | 7,5 mm (cubre la cabeza del tornillo M3) |
 | Redes de red distintas entre sí | 1 mm |
-| Bornes de J1 | 2,5 mm de cobre (pads de Ø 2,5 mm a 5 mm de paso) |
+| Pads de J1 entre sí (L y N) | 4,5 mm de cobre (pads de Ø 3,0 mm a 7,5 mm de paso) |
 | Primario y secundario de T1 | 7,8 mm de pad a pad (lo da el ZMPT101B) |
 
 ### Cómo está hecha
 
-- **Ubicación:** esquina superior izquierda. J1 está en el borde izquierdo. El divisor R5–R10 está en dos filas, en la cara inferior, debajo del lado del primario de T1. El secundario de T1 mira hacia el resto del circuito.
+- **Ubicación:** esquina superior izquierda. J1 son dos pads para soldar los cables de red, sobre el borde izquierdo (J1.1 en (105,6; 67,2) y J1.2 en (105,6; 59,7)). J1.1 queda a 6,1 mm de la baja tensión más cercana y a 4 mm del borde. El divisor R5–R10 está en dos filas, en la cara inferior, debajo del lado del primario de T1. El secundario de T1 mira hacia el resto del circuito.
 - **Ruteo:** las pistas de red están en la cara inferior, son de 0,6 mm y están **bloqueadas** en KiCad para no moverlas sin querer.
 - **Planos:** los planos de GND no entran en la zona.
 - **Guía visual:** el contorno de la zona está dibujado en la capa `User.Drawings`.
@@ -77,7 +78,7 @@ Ubicación de referencia:
 
 | Bloque | Cara | Dónde |
 |---|---|---|
-| Zona de red: J1, R5–R10, primario de T1 | J1/T1 arriba, R5–R10 abajo | Esquina superior izquierda, hasta x ≈ 134 e y ≈ 75 |
+| Zona de red: J1, R5–R10, primario de T1 | T1 arriba; J1 y R5–R10 soldados abajo | Esquina superior izquierda, hasta x ≈ 134 e y ≈ 75 |
 | Canal V: U5 (148,4; 63,5), U7 (149,7; 80,3), burden R11 junto a T1.3 | B.Cu | Arriba a la derecha, entre T1 y J2 |
 | Canal I: U4 (128,7; 91,9), U6 (140,7; 92,0), burden R23 junto a J10 | F.Cu | Abajo, a la derecha de J10 |
 | Común: U1 (148,9; 98,3), C14 (155,7; 91,5) | B.Cu | Abajo a la derecha |
@@ -91,7 +92,7 @@ Ubicación de referencia:
 
 Sin metalizado, cada pin THT solo conecta del lado donde se suelda:
 
-- **J1, T1 y J2:** se sueldan abajo, así que sus pistas llegan solo por B.Cu.
+- **J1 (cables de red), T1 y J2:** se sueldan abajo, así que sus pistas llegan solo por B.Cu.
 - **J10:** se suelda arriba, así que sus pistas llegan solo por F.Cu.
 
 KiCad 10 no permite sacar el anillo del lado del componente, así que queda como cobre aislado. Para que ese anillo no parezca conectado, los pads THT tienen la conexión a planos en "ninguna". Por eso cada pad de GND de J2 (2, 4, 6 y 8) tiene un tramo de pista que entra en el plano.
@@ -100,7 +101,7 @@ Los footprints adaptados están en la biblioteca del proyecto [tp_analog.pretty]
 
 | Componente | Pad / agujero | Cambio respecto del footprint estándar |
 |---|---|---|
-| J1 (bornera Altech AK100) | 2,5 / 1,3 mm | Pads más chicos, para tener 2,5 mm entre bornes |
+| J1 (entrada de red) | 3,0 / 1,3 mm | Footprint propio en lugar de la bornera: dos pads para cable de hasta 0,75 mm², a 7,5 mm de paso |
 | J2 (header IDC 2×7) | 2,0 / 1,0 mm | Pads más grandes, para agujerear a mano |
 | J10 (jack CUI SJ1-3523N) | 2,4 / 1,4 mm | Agujeros redondos en lugar de ranuras de 0,4 mm, que no se pueden hacer a mano |
 | T1 (ZMPT101B) | 2,2 / 1,2 mm | Sin cambios de tamaño, pads solo en la cara de soldadura |
@@ -183,7 +184,7 @@ Eléctricamente está bien; hay que tenerlo en cuenta al armar (sección 8).
   - HV al borde: 3 mm.
   - HV a agujeros de otras redes: 6 mm.
   - HV a agujeros de montaje: 7,5 mm.
-  - Entre bornes de J1: 1 mm.
+  - Entre redes de red distintas: 1 mm.
 
 Si se modifica el ruteo:
 
@@ -195,14 +196,19 @@ Si se modifica el ruteo:
 1. **Verificar footprints con las piezas reales:**
    - Que la pata del jack J10 entre en el agujero de 1,4 mm.
    - La separación de pines del ZMPT101B.
-   - Que la bornera J1 esté especificada para 400 V o más. Muchas borneras de 5 mm son de 250–300 V; si no alcanza, usar una de 7,5 mm de paso.
-2. **Mecánica de J10:** el cuerpo del jack queda debajo de la placa. Los separadores del gabinete tienen que ser más altos que el jack (ver la altura del SJ1-3523N en la hoja de datos), y la abertura del panel tiene que quedar del lado de abajo.
-3. **Tornillos:** usar tornillos y separadores de nylon, o al menos verificar que los metálicos no se acerquen a la zona de red.
-4. **Imprimir para el tóner:** la cara superior espejada y la inferior sin espejar. Usar los 4 agujeros de montaje como guía de alineación entre caras.
-5. **Orden de armado:**
+   - Que el cable de red entre en el agujero de 1,3 mm (hasta 0,75 mm²).
+2. **Cables de red:**
+   - Usar cable con aislación para red (300/500 V, por ejemplo H05V-K) y terminales pala aislados del otro lado.
+   - Pelar lo justo para que no quede cobre expuesto del lado de arriba.
+   - Sujetar los dos cables a la placa o al gabinete con un precinto o abrazadera, para que el tirón no lo tome la soldadura.
+3. **Mecánica de J10:** el cuerpo del jack queda debajo de la placa. Los separadores del gabinete tienen que ser más altos que el jack (ver la altura del SJ1-3523N en la hoja de datos), y la abertura del panel tiene que quedar del lado de abajo.
+4. **Tornillos:** usar tornillos y separadores de nylon, o al menos verificar que los metálicos no se acerquen a la zona de red.
+5. **Imprimir para el tóner:** la cara superior espejada y la inferior sin espejar. Usar los 4 agujeros de montaje como guía de alineación entre caras.
+6. **Orden de armado:**
    1. Vías, cortadas al ras. Primero las que tocan pads (sección 6), porque el estaño del pad se une con el de la vía.
    2. SMD de la cara inferior (canal V, divisor y bloque común).
    3. SMD de la cara superior (canal I).
-   4. THT al final: T1, J1 y J2 desde arriba, soldados abajo; J10 desde abajo, soldado arriba.
-6. **Después de soldar:** limpiar el flux y barnizar la zona de red (laca acrílica o barniz para placas), porque la placa no tiene máscara.
-7. **Primeras pruebas con red:** alimentar la placa digital desde una notebook a batería o con un aislador USB, hasta haber verificado la aislación.
+   4. THT al final: T1 y J2 desde arriba, soldados abajo; J10 desde abajo, soldado arriba.
+   5. Cables de red: desde arriba, soldados abajo, y sujetos con el precinto.
+7. **Después de soldar:** limpiar el flux y barnizar la zona de red (laca acrílica o barniz para placas), porque la placa no tiene máscara.
+8. **Primeras pruebas con red:** alimentar la placa digital desde una notebook a batería o con un aislador USB, hasta haber verificado la aislación.

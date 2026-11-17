@@ -5633,7 +5633,7 @@
 				)
 			)
 		)
-		(property "Footprint" "tp_analog:TerminalBlock_Altech_AK100_1x02_P5.00mm_HandEtched"
+		(property "Footprint" "tp_analog:SolderWire_HV_1x02_P7.50mm_D1.3mm_OD3.0mm"
 			(at 25.4 60.96 0)
 			(hide yes)
 			(show_name no)
@@ -5655,7 +5655,7 @@
 				)
 			)
 		)
-		(property "Description" "Generic screw terminal, single row, 01x02"
+		(property "Description" "Entrada de red: cables soldados (L, N)"
 			(at 25.4 60.96 0)
 			(hide yes)
 			(show_name no)
