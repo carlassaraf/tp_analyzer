@@ -4203,7 +4203,7 @@
 	)
 	(wire
 		(pts
-			(xy 185.42 76.2) (xy 187.96 76.2)
+			(xy 185.42 76.2) (xy 193.04 76.2)
 		)
 		(stroke
 			(width 0)
@@ -6142,7 +6142,7 @@
 		(uuid "0c330f89-b5d1-5bea-8cf7-fd9f9e30cf93")
 	)
 	(label "SCL"
-		(at 193.04 78.74 0)
+		(at 193.04 81.28 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6172,12 +6172,12 @@
 		(uuid "0dce8e60-0f68-5762-919a-ebb764f7f96a")
 	)
 	(label "MISO"
-		(at 165.1 76.2 180)
+		(at 193.04 76.2 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "0e2cb797-e380-5546-8ac6-90259a31e794")
 	)
@@ -6242,7 +6242,7 @@
 		(uuid "1887fa81-f4fd-5d7d-bdca-b8d18e1327c8")
 	)
 	(label "VPK_L2"
-		(at 160.02 215.9 90)
+		(at 294.64 215.9 90)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6262,7 +6262,7 @@
 		(uuid "1b4344d1-c2f2-5e02-85c3-869caeb387f3")
 	)
 	(label "VPK_L2"
-		(at 167.64 193.04 180)
+		(at 167.64 195.58 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6332,7 +6332,7 @@
 		(uuid "2b1b9c4a-ce40-5fef-96f1-da4f29ca165b")
 	)
 	(label "IPK_L2"
-		(at 294.64 215.9 90)
+		(at 160.02 215.9 90)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6552,12 +6552,12 @@
 		(uuid "50737921-95a9-5459-b440-4fd72b2b9230")
 	)
 	(label "SDA"
-		(at 165.1 78.74 180)
+		(at 193.04 83.82 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "587c0d89-2273-5b49-9cf7-c2189d5f6495")
 	)
@@ -6612,7 +6612,7 @@
 		(uuid "5fcc780e-adf1-5ebb-bd53-a613d9ad5905")
 	)
 	(label "MOSI"
-		(at 193.04 73.66 0)
+		(at 193.04 78.74 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6682,12 +6682,12 @@
 		(uuid "6d33b51d-9e3e-5a40-afad-5636ba20d943")
 	)
 	(label "SCK"
-		(at 165.1 73.66 180)
+		(at 193.04 73.66 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "6d736cdc-1031-5540-83f9-f657105c24eb")
 	)
@@ -7282,7 +7282,7 @@
 		(uuid "f3b7ff51-28bc-54f1-8d74-402bff49c57d")
 	)
 	(label "IPK_L2"
-		(at 167.64 195.58 180)
+		(at 167.64 193.04 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7595,7 +7595,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 96.52 58.42 0)
 			(hide yes)
 			(show_name no)
@@ -7676,7 +7676,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 114.3 58.42 0)
 			(hide yes)
 			(show_name no)
@@ -8221,7 +8221,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 361.95 43.18 0)
 			(hide yes)
 			(show_name no)
@@ -8379,7 +8379,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 384.81 43.18 0)
 			(hide yes)
 			(show_name no)
@@ -8614,7 +8614,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 114.3 162.56 0)
 			(hide yes)
 			(show_name no)
@@ -9188,7 +9188,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 114.3 110.49 0)
 			(hide yes)
 			(show_name no)
@@ -10049,7 +10049,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 96.52 214.63 0)
 			(hide yes)
 			(show_name no)
@@ -10554,7 +10554,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 271.78 111.76 0)
 			(hide yes)
 			(show_name no)
@@ -10604,7 +10604,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 193.04 81.28 270)
+		(at 165.1 76.2 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -10614,7 +10614,7 @@
 		(dnp no)
 		(uuid "514224dc-ab88-5eef-b4e2-803a899357ad")
 		(property "Reference" "#PWR35"
-			(at 193.04 81.28 0)
+			(at 165.1 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10625,7 +10625,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 199.39 81.28 90)
+			(at 158.75 76.2 270)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10635,7 +10635,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 193.04 81.28 0)
+			(at 165.1 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10646,7 +10646,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 193.04 81.28 0)
+			(at 165.1 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10657,7 +10657,7 @@
 			)
 		)
 		(property "Description" "Power symbol"
-			(at 193.04 81.28 0)
+			(at 165.1 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11179,7 +11179,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 384.81 76.2 0)
 			(hide yes)
 			(show_name no)
@@ -11418,7 +11418,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 361.95 76.2 0)
 			(hide yes)
 			(show_name no)
@@ -11499,7 +11499,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 373.38 76.2 0)
 			(hide yes)
 			(show_name no)
@@ -11580,7 +11580,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 114.3 214.63 0)
 			(hide yes)
 			(show_name no)
@@ -11819,7 +11819,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 96.52 162.56 0)
 			(hide yes)
 			(show_name no)
@@ -11869,7 +11869,7 @@
 	)
 	(symbol
 		(lib_id "power:+5V")
-		(at 193.04 83.82 270)
+		(at 165.1 81.28 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -11879,7 +11879,7 @@
 		(dnp no)
 		(uuid "663b6702-692c-51ff-ab3e-60eb12e66f9e")
 		(property "Reference" "#PWR37"
-			(at 193.04 83.82 0)
+			(at 165.1 81.28 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11890,7 +11890,7 @@
 			)
 		)
 		(property "Value" "+5V"
-			(at 199.39 83.82 90)
+			(at 158.75 81.28 270)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -11900,7 +11900,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 193.04 83.82 0)
+			(at 165.1 81.28 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11911,7 +11911,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 193.04 83.82 0)
+			(at 165.1 81.28 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11922,7 +11922,7 @@
 			)
 		)
 		(property "Description" "Power symbol"
-			(at 193.04 83.82 0)
+			(at 165.1 81.28 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12023,7 +12023,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 187.96 76.2 90)
+		(at 165.1 83.82 270)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -12033,7 +12033,7 @@
 		(dnp no)
 		(uuid "67de31c7-cc31-5d73-a02b-f57491a56b95")
 		(property "Reference" "#PWR33"
-			(at 187.96 76.2 0)
+			(at 165.1 83.82 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12044,7 +12044,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 194.31 76.2 270)
+			(at 158.75 83.82 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12055,7 +12055,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 187.96 76.2 0)
+			(at 165.1 83.82 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12066,7 +12066,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 187.96 76.2 0)
+			(at 165.1 83.82 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12077,7 +12077,7 @@
 			)
 		)
 		(property "Description" "Power symbol"
-			(at 187.96 76.2 0)
+			(at 165.1 83.82 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12446,7 +12446,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 284.48 111.76 0)
 			(hide yes)
 			(show_name no)
@@ -12875,7 +12875,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 396.24 76.2 0)
 			(hide yes)
 			(show_name no)
@@ -13110,7 +13110,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 96.52 110.49 0)
 			(hide yes)
 			(show_name no)
@@ -13704,7 +13704,7 @@
 	)
 	(symbol
 		(lib_id "power:+5V")
-		(at 165.1 83.82 90)
+		(at 165.1 78.74 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -13714,7 +13714,7 @@
 		(dnp no)
 		(uuid "90930f1b-52e3-5112-8e60-cd482b6190ff")
 		(property "Reference" "#PWR36"
-			(at 165.1 83.82 0)
+			(at 165.1 78.74 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13725,7 +13725,7 @@
 			)
 		)
 		(property "Value" "+5V"
-			(at 158.75 83.82 270)
+			(at 158.75 78.74 270)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -13735,7 +13735,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 165.1 83.82 0)
+			(at 165.1 78.74 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13746,7 +13746,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 165.1 83.82 0)
+			(at 165.1 78.74 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13757,7 +13757,7 @@
 			)
 		)
 		(property "Description" "Power symbol"
-			(at 165.1 83.82 0)
+			(at 165.1 78.74 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16078,7 +16078,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 373.38 43.18 0)
 			(hide yes)
 			(show_name no)
@@ -16236,7 +16236,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 350.52 43.18 0)
 			(hide yes)
 			(show_name no)
@@ -16517,7 +16517,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 165.1 81.28 90)
+		(at 165.1 73.66 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -16527,7 +16527,7 @@
 		(dnp no)
 		(uuid "c8ad4d4d-53be-5f7c-ad11-29cefd586301")
 		(property "Reference" "#PWR34"
-			(at 165.1 81.28 0)
+			(at 165.1 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16538,7 +16538,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 158.75 81.28 270)
+			(at 158.75 73.66 270)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -16548,7 +16548,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 165.1 81.28 0)
+			(at 165.1 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16559,7 +16559,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 165.1 81.28 0)
+			(at 165.1 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16570,7 +16570,7 @@
 			)
 		)
 		(property "Description" "Power symbol"
-			(at 165.1 81.28 0)
+			(at 165.1 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16935,7 +16935,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 396.24 43.18 0)
 			(hide yes)
 			(show_name no)
@@ -17016,7 +17016,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 271.78 71.12 0)
 			(hide yes)
 			(show_name no)
@@ -17758,7 +17758,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 350.52 76.2 0)
 			(hide yes)
 			(show_name no)
