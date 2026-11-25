@@ -6141,7 +6141,7 @@
 		)
 		(uuid "0c330f89-b5d1-5bea-8cf7-fd9f9e30cf93")
 	)
-	(label "SCL"
+	(label "SDA"
 		(at 193.04 81.28 0)
 		(effects
 			(font
@@ -6261,7 +6261,7 @@
 		)
 		(uuid "1b4344d1-c2f2-5e02-85c3-869caeb387f3")
 	)
-	(label "VPK_L2"
+	(label "IPK_L2"
 		(at 167.64 195.58 180)
 		(effects
 			(font
@@ -6551,7 +6551,7 @@
 		)
 		(uuid "50737921-95a9-5459-b440-4fd72b2b9230")
 	)
-	(label "SDA"
+	(label "SCL"
 		(at 193.04 83.82 0)
 		(effects
 			(font
@@ -7281,7 +7281,7 @@
 		)
 		(uuid "f3b7ff51-28bc-54f1-8d74-402bff49c57d")
 	)
-	(label "IPK_L2"
+	(label "VPK_L2"
 		(at 167.64 193.04 180)
 		(effects
 			(font
@@ -10604,7 +10604,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 165.1 76.2 90)
+		(at 165.1 78.74 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -10614,7 +10614,7 @@
 		(dnp no)
 		(uuid "514224dc-ab88-5eef-b4e2-803a899357ad")
 		(property "Reference" "#PWR35"
-			(at 165.1 76.2 0)
+			(at 165.1 78.74 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10625,7 +10625,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 158.75 76.2 270)
+			(at 158.75 78.74 270)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10635,7 +10635,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 165.1 76.2 0)
+			(at 165.1 78.74 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10646,7 +10646,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 165.1 76.2 0)
+			(at 165.1 78.74 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10657,7 +10657,7 @@
 			)
 		)
 		(property "Description" "Power symbol"
-			(at 165.1 76.2 0)
+			(at 165.1 78.74 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11869,7 +11869,7 @@
 	)
 	(symbol
 		(lib_id "power:+5V")
-		(at 165.1 81.28 90)
+		(at 165.1 73.66 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -11879,7 +11879,7 @@
 		(dnp no)
 		(uuid "663b6702-692c-51ff-ab3e-60eb12e66f9e")
 		(property "Reference" "#PWR37"
-			(at 165.1 81.28 0)
+			(at 165.1 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11890,7 +11890,7 @@
 			)
 		)
 		(property "Value" "+5V"
-			(at 158.75 81.28 270)
+			(at 158.75 73.66 270)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -11900,7 +11900,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 165.1 81.28 0)
+			(at 165.1 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11911,7 +11911,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 165.1 81.28 0)
+			(at 165.1 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11922,7 +11922,7 @@
 			)
 		)
 		(property "Description" "Power symbol"
-			(at 165.1 81.28 0)
+			(at 165.1 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13704,7 +13704,7 @@
 	)
 	(symbol
 		(lib_id "power:+5V")
-		(at 165.1 78.74 90)
+		(at 165.1 76.2 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -13714,7 +13714,7 @@
 		(dnp no)
 		(uuid "90930f1b-52e3-5112-8e60-cd482b6190ff")
 		(property "Reference" "#PWR36"
-			(at 165.1 78.74 0)
+			(at 165.1 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13725,7 +13725,7 @@
 			)
 		)
 		(property "Value" "+5V"
-			(at 158.75 78.74 270)
+			(at 158.75 76.2 270)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -13735,7 +13735,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 165.1 78.74 0)
+			(at 165.1 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13746,7 +13746,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 165.1 78.74 0)
+			(at 165.1 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13757,7 +13757,7 @@
 			)
 		)
 		(property "Description" "Power symbol"
-			(at 165.1 78.74 0)
+			(at 165.1 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16517,7 +16517,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 165.1 73.66 90)
+		(at 165.1 81.28 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -16527,7 +16527,7 @@
 		(dnp no)
 		(uuid "c8ad4d4d-53be-5f7c-ad11-29cefd586301")
 		(property "Reference" "#PWR34"
-			(at 165.1 73.66 0)
+			(at 165.1 81.28 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16538,7 +16538,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 158.75 73.66 270)
+			(at 158.75 81.28 270)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -16548,7 +16548,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 165.1 73.66 0)
+			(at 165.1 81.28 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16559,7 +16559,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 165.1 73.66 0)
+			(at 165.1 81.28 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16570,7 +16570,7 @@
 			)
 		)
 		(property "Description" "Power symbol"
-			(at 165.1 73.66 0)
+			(at 165.1 81.28 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)

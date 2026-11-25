@@ -9,7 +9,7 @@ Esta placa es el punto de unión entre las 4 placas analógicas (una por línea:
 
 | Función | Cómo |
 |---|---|
-| Leer los detectores de pico (VPK, IPK) de las 4 líneas | Dos MCP3204 (12 bits, 4 canales, SPI): U2 para tensión, U3 para corriente |
+| Leer los detectores de pico (VPK, IPK) de las 4 líneas | Dos MCP3204 (12 bits, 4 canales, SPI): U2 para L1 y L2, U3 para L3 y N |
 | Generar los 10 chip selects (8 MCP41010 + 2 MCP3204) sin usar pines del RP2350B | Expansor MCP23017 por I2C (U1) |
 | Llevar las 8 señales del canal principal (VADC, IADC) al ADC del RP2350B | Pasan directo de J1–J4 a J5 |
 | Repartir alimentación y SPI a las placas analógicas | J5 → J1–J4 |
@@ -17,8 +17,8 @@ Esta placa es el punto de unión entre las 4 placas analógicas (una por línea:
 ```
  Placa analógica L1 ──┐ 2x07                                       2x13
  Placa analógica L2 ──┤   VADC, IADC ─────────────────────────────►┐
- Placa analógica L3 ──┤   VPK  ──► U2 MCP3204 ──┐                  │
- Placa analógica N  ──┘   IPK  ──► U3 MCP3204 ──┤ MISO             ├── J5 ──► RP2350B
+ Placa analógica L3 ──┤   VPK, IPK L1/L2 ──► U2 ──┐               │
+ Placa analógica N  ──┘   VPK, IPK L3/N  ──► U3 ──┤ MISO          ├── J5 ──► RP2350B
               ▲  SCK/MOSI (33 Ω por línea) ◄────┤ SCK, MOSI        │         (ADC GPIO40-47,
               └─ CS_V, CS_I ◄── U1 MCP23017 ◄───┘ SDA, SCL ────────┘          SPI, I2C, 5 V, 3,3 V)
 ```
@@ -45,21 +45,23 @@ J1 = L1, J2 = L2, J3 = L3, J4 = N. En el esquemático las redes llevan el sufijo
 
 | Pin | Señal | Pin | Señal |
 |---|---|---|---|
-| 1 | VADC_L1 | 2 | GND |
-| 3 | IADC_L1 | 4 | GND |
-| 5 | VADC_L2 | 6 | GND |
-| 7 | IADC_L2 | 8 | GND |
-| 9 | VADC_L3 | 10 | GND |
-| 11 | IADC_L3 | 12 | GND |
-| 13 | VADC_N | 14 | GND |
-| 15 | IADC_N | 16 | GND |
-| 17 | SCK | 18 | MOSI |
-| 19 | MISO | 20 | GND |
-| 21 | SDA | 22 | SCL |
-| 23 | +3,3 V | 24 | +3,3 V |
-| 25 | +5 V | 26 | +5 V |
+| 1 | IADC_L1 | 2 | GND |
+| 3 | VADC_L1 | 4 | GND |
+| 5 | IADC_L2 | 6 | GND |
+| 7 | VADC_L2 | 8 | GND |
+| 9 | IADC_L3 | 10 | GND |
+| 11 | VADC_L3 | 12 | GND |
+| 13 | IADC_N | 14 | GND |
+| 15 | VADC_N | 16 | GND |
+| 17 | +5 V | 18 | SCK |
+| 19 | +5 V | 20 | MISO |
+| 21 | +3,3 V | 22 | MOSI |
+| 23 | +3,3 V | 24 | SDA |
+| 25 | GND | 26 | SCL |
 
-Los pines 1–15 van a las entradas de ADC del RP2350B (GPIO40–47). La alimentación de todo el sistema analógico entra por J5.
+Los pines 1–15 van a las entradas de ADC del RP2350B (GPIO40–47). Dentro de cada par, IADC va en el pin impar más bajo y VADC en el siguiente: es el orden en que llegan las pistas por el borde de la placa (ver [placa_pcb.md](placa_pcb.md)). El cable o adaptador hacia el devboard tiene que respetar esta tabla. La alimentación de todo el sistema analógico entra por J5.
+
+Pines 17–26: la fila impar mira al borde de la placa y lleva solo alimentación y GND, que pasan por vía al lado del conector. La fila par mira al interior y lleva las cinco señales digitales, en el orden en que llegan a U2 y U1 sin cruzarse. En el cable plano cada señal digital queda entre dos hilos de alimentación o GND.
 
 ### J6: expansión (1x08)
 
@@ -72,15 +74,15 @@ A2, A1 y A0 van a GND: dirección I2C **0x20**. RESET con pull-up de 10 kΩ (R9)
 | Pin del MCP23017 | Señal | Dispositivo |
 |---|---|---|
 | GPA0 | CS_V_L1 | MCP41010, canal de tensión L1 |
-| GPA1 | CS_V_L2 | MCP41010, canal de tensión L2 |
-| GPA2 | CS_V_L3 | MCP41010, canal de tensión L3 |
-| GPA3 | CS_V_N | MCP41010, canal de tensión N |
-| GPA4 | CS_I_L1 | MCP41010, canal de corriente L1 |
-| GPA5 | CS_I_L2 | MCP41010, canal de corriente L2 |
-| GPA6 | CS_I_L3 | MCP41010, canal de corriente L3 |
+| GPA1 | CS_I_L1 | MCP41010, canal de corriente L1 |
+| GPA2 | CS_V_L2 | MCP41010, canal de tensión L2 |
+| GPA3 | CS_I_L2 | MCP41010, canal de corriente L2 |
+| GPA4 | CS_V_L3 | MCP41010, canal de tensión L3 |
+| GPA5 | CS_I_L3 | MCP41010, canal de corriente L3 |
+| GPA6 | CS_V_N | MCP41010, canal de tensión N |
 | GPA7 | CS_I_N | MCP41010, canal de corriente N |
-| GPB0 | CS_ADC_V | U2, MCP3204 de picos de tensión |
-| GPB1 | CS_ADC_I | U3, MCP3204 de picos de corriente |
+| GPB0 | CS_ADC_L12 | U2, MCP3204 de picos de L1 y L2 |
+| GPB1 | CS_ADC_L3N | U3, MCP3204 de picos de L3 y N |
 | GPB2–GPB7 | — | Libres, en J6 |
 
 - **Pull-ups de 10 kΩ en los 10 CS (R12–R21).** Después del encendido o de un reset, los pines del MCP23017 son entradas (alta impedancia). Sin pull-up, un CS podría quedar flotando en bajo y un MCP41010 tomaría basura del bus SPI como un cambio de ganancia. Con los pull-ups todo queda deseleccionado hasta que el firmware configura el expansor.
@@ -88,10 +90,12 @@ A2, A1 y A0 van a GND: dirección I2C **0x20**. RESET con pull-up de 10 kΩ (R9)
 
 ## 4. ADC de picos (MCP3204)
 
+Cada MCP3204 lee las dos líneas que tiene al lado en la placa (U2: L1 y L2, U3: L3 y N), en lugar de separar tensión y corriente. Así los picos de cada par de conectores llegan juntos al ADC y se ahorran cruces en el ruteo (ver [placa_pcb.md](placa_pcb.md)). Para el firmware solo cambia el mapa de canales.
+
 | ADC | CH0 | CH1 | CH2 | CH3 |
 |---|---|---|---|---|
-| U2 (tensión) | VPK_L1 | VPK_L2 | VPK_L3 | VPK_N |
-| U3 (corriente) | IPK_L1 | IPK_L2 | IPK_L3 | IPK_N |
+| U2 (L1, L2) | VPK_L1 | IPK_L1 | VPK_L2 | IPK_L2 |
+| U3 (L3, N) | VPK_L3 | IPK_L3 | VPK_N | IPK_N |
 
 - **VREF = 3,3 V, ratiométrico.** Las placas analógicas toman su 3,3 V de esta placa, y su VBIAS es 3,3 V / 2. Si el 3,3 V se mueve, VBIAS y la referencia se mueven juntos, y VBIAS sigue cayendo en ~2048 cuentas. El offset de cada canal (tolerancia del divisor de VBIAS y fuga del detector) se calibra midiendo sin señal.
 - Rango: el detector entrega VBIAS + 0 a 1,3 V, o sea 1,65 a 2,95 V, dentro de 0–3,3 V. 1 LSB = 0,81 mV.
@@ -132,17 +136,21 @@ C1 y C2 (10 µF) son la reserva de 3,3 V y 5 V en la entrada.
 
 ## 9. Lista de componentes
 
+J1–J6 usan footprints de [tp_digital.pretty](tp_digital.pretty): los estándar con pads de 2,0 mm y agujero de 1,0 mm, para agujerear a mano.
+
+R1, R3, R5, R6, R7, R10 y R20, y los capacitores C4, C7, C12 y C13, tienen pistas que pasan entre sus pads. Por eso las resistencias son 1206: no reemplazarlas ni a ellas ni a los capacitores por un tamaño menor (ver [placa_pcb.md](placa_pcb.md), sección 4).
+
 | Ref. | Valor | Tipo | Función |
 |---|---|---|---|
 | U1 | MCP23017-E/SO | SOIC-28W | Expansor de E/S I2C (chip selects) |
-| U2, U3 | MCP3204-CI/SL | SOIC-14 | ADC de picos de tensión y de corriente |
+| U2, U3 | MCP3204-CI/SL | SOIC-14 | ADC de picos (U2: L1 y L2, U3: L3 y N) |
 | J1–J4 | 2x07 | IDC vertical, 2,54 mm | Placas analógicas L1, L2, L3, N |
 | J5 | 2x13 | IDC vertical, 2,54 mm | RP2350B |
 | J6 | 1x08 | Tira 2,54 mm | GPB2–GPB7 libres |
-| R1–R8 | 33 Ω | 0805, 1 % | Serie en SCK y MOSI de cada línea |
-| R9 | 10 kΩ | 0805, 1 % | Pull-up de RESET del MCP23017 |
-| R10, R11 | 4,7 kΩ | 0805, 1 % | Pull-ups I2C (opcionales) |
-| R12–R21 | 10 kΩ | 0805, 1 % | Pull-ups de los 10 chip selects |
+| R1–R8 | 33 Ω | 1206, 1 % | Serie en SCK y MOSI de cada línea |
+| R9 | 10 kΩ | 1206, 1 % | Pull-up de RESET del MCP23017 |
+| R10, R11 | 4,7 kΩ | 1206, 1 % | Pull-ups I2C (opcionales) |
+| R12–R21 | 10 kΩ | 1206, 1 % | Pull-ups de los 10 chip selects |
 | C1, C2 | 10 µF | 0805, X7R | Reserva de 3,3 V y 5 V |
 | C3 | 100 nF | 0805, X7R | Desacople de U1 |
 | C4–C7, C11–C14 | 100 nF | 0805, X7R | Entradas de los MCP3204 |
