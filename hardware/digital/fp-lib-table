@@ -1,0 +1,4 @@
+(fp_lib_table
+	(version 7)
+	(lib (name "tp_digital") (type "KiCad") (uri "${KIPRJMOD}/tp_digital.pretty") (options "") (descr "Footprints adaptados a placa casera sin metalizado"))
+)

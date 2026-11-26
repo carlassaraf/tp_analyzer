@@ -1,0 +1,59 @@
+* LM358 behavioural macromodel - one op-amp section
+*
+* Pins: IN+ IN- VCC VEE OUT   (same order as TI/ON Semi PSpice models,
+*                              so an official model can be dropped in)
+*
+* Written for this project (not a vendor model). It reproduces the
+* datasheet limits that matter for the analog front end:
+*   - open-loop gain AOL, gain-bandwidth GBW, slew rate SR
+*   - input offset VOS and input bias current IB (PNP input: flows out of pins)
+*   - output swing: ~VEE (light load) up to VCC - VHR
+*   - class-B output stage with a VXO dead band and a 50 uA internal sink,
+*     so crossover distortion appears when the load needs more than ISINK
+* Not modelled: input common-mode limit (VCC - 1.5 V), noise, PSRR/CMRR,
+* temperature drift, second poles.
+*
+* Typical LM358 values (5 V supply, 25 C): AOL 100 V/mV, GBW 0.7 MHz,
+* SR 0.3 V/us, VOS 2 mV typ (7 mV max), IB 45 nA (250 nA max).
+
+.subckt LM358B inp inn vcc vee out VOS=2m IB=45n AOL=100k GBW=0.7Meg SR=0.3Meg ISINK=50u VXO=0.6 VHR=1.5
+.param CC=1n
+.param GM={2*pi*GBW*CC}
+.param IMAX={SR*CC}
+.param RO={AOL/GM}
+
+* supply current (both sections of the package draw ~0.7 mA)
+Iq vcc vee 350u
+
+* input offset and bias currents
+Vos inp inpo {VOS}
+Ibp vcc inp {IB}
+Ibn vcc inn {IB}
+
+* mid-supply reference for the integrator
+Bmid mid 0 V=(V(vcc)+V(vee))/2
+
+* transconductance with slew limit, integrating into CC (dominant pole)
+Bgm 0 x I={IMAX}*tanh({GM}*(V(inpo)-V(inn))/{IMAX})
+Cc x mid {CC}
+Ro x mid {RO}
+
+* clamp the integrator node so the output stops at VEE / VCC-VHR
+* and recovers from saturation without wind-up
+Vhi xhi vcc {-VHR+0.6}
+Dhi x xhi DCLMP
+Dlo vee x DCLMP
+
+* class-B output stage
+*   source path: NPN follower, conducts when out < x - 0.6
+*   sink path:   PNP, conducts when out > x - 1.2 + VXO
+*   between the two (width VXO) only the 50 uA sink is active
+Ey y 0 x 0 1
+Dsrc y out DOUT
+Byn yn 0 V=V(x)+{VXO}-1.2
+Dsnk out yn DOUT
+Isnk out vee {ISINK}
+
+.model DCLMP D(IS=1e-14 N=0.05)
+.model DOUT D(IS=1e-14 N=1 RS=20)
+.ends LM358B

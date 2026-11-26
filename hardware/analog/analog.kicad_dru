@@ -1,0 +1,31 @@
+(version 1)
+
+# Mains (HV) nets: J1, the R5-R10 divider and the T1 primary.
+# Reinforced insulation to every low-voltage net (GND, supplies, signals,
+# T1 secondary). Values follow revision_pcb.md, section 1.
+
+(rule "HV to low voltage: clearance"
+  (condition "A.hasNetclass('HV') && !B.hasNetclass('HV')")
+  (constraint clearance (min 6mm)))
+
+(rule "HV to low voltage: creepage"
+  (condition "A.hasNetclass('HV') && !B.hasNetclass('HV')")
+  (constraint creepage (min 6mm)))
+
+(rule "HV to board edge"
+  (condition "A.hasNetclass('HV')")
+  (constraint edge_clearance (min 3mm)))
+
+(rule "HV to holes of other nets"
+  (condition "A.hasNetclass('HV') && !B.hasNetclass('HV')")
+  (constraint hole_clearance (min 6mm)))
+
+# J1 terminals: full line voltage between them (functional insulation).
+(rule "J1 terminals"
+  (condition "A.hasNetclass('HV') && B.hasNetclass('HV')")
+  (constraint clearance (min 1mm)))
+
+# Metal screws: M3 head is 5.5 mm, so keep HV 6 mm away from the head.
+(rule "HV to mounting holes"
+  (condition "A.hasNetclass('HV') && B.Pad_Type == 'NPTH, mechanical'")
+  (constraint hole_clearance (min 7.5mm)))

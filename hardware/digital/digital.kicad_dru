@@ -1,0 +1,12 @@
+(version 1)
+
+# Hand-made vias are a wire soldered on both faces: the top bump would lift any
+# body above it (IDC shrouds included). No via inside a component courtyard.
+(rule "No vias under components"
+  (constraint disallow via)
+  (condition "A.intersectsCourtyard('*')"))
+
+# M3 screw head is 5.5 mm: keep copper about 1.2 mm clear of the 3.2 mm hole.
+(rule "Mounting holes"
+  (condition "A.Pad_Type == 'NPTH, mechanical'")
+  (constraint hole_clearance (min 1.2mm)))

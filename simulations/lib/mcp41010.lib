@@ -1,0 +1,21 @@
+* Microchip MCP41010 - 10 kohm, 8-bit (256 position) digital potentiometer
+*
+* Pins: A W B   (PA0 / PW0 / PB0)
+* D   = wiper code 0..255 (power-on value 128)
+* RAB = end-to-end resistance (10 k nominal, ±20 % part to part)
+* RW  = wiper switch resistance (52 ohm typ, 100 ohm max)
+*
+*   R_WB = RAB * D / 256         R_AW = RAB * (256 - D) / 256
+*
+* Static model only: the SPI interface is replaced by the D parameter.
+* The terminal capacitances are approximate. Check the datasheet
+* (CA/CB/CW) if you care about behaviour above ~100 kHz.
+
+.subckt MCP41010 A W B D=128 RAB=10k RW=52
+Raw A wi {max(RAB*(256-D)/256, 1m)}
+Rwb wi B {max(RAB*D/256, 1m)}
+Rwip wi W {RW}
+Ca A 0 10p
+Cb B 0 10p
+Cw W 0 5.6p
+.ends MCP41010

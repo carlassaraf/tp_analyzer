@@ -22,7 +22,7 @@
 <path d="M 795.0,120.0 L 795.0,175.0 " fill="none" stroke="#33475b" stroke-width="1.8" marker-end="url(#arrow)"/>
 <rect x="290.0" y="325.0" width="620.0" height="70.0" rx="8" fill="#e6dbfb" stroke="#33475b" stroke-width="1.6"/>
 <text x="600.0" y="351.9" font-family="Helvetica, Arial, sans-serif" font-size="13.5" font-weight="700" fill="#1a1a1a" text-anchor="middle">AGC — control automático de ganancia (Fig. 3 · §4.3)</text>
-<text x="600.0" y="370.4" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">MCP42xx + op-amp (SPI) + detector de picos + ADS1115 (I2C)</text>
+<text x="600.0" y="370.4" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">8x MCP41010 + LM358 · detectores de pico + 2x MCP3204 (SPI) · CS por MCP23017 (I2C)</text>
 <path d="M 600.0,275.0 L 600.0,325.0 " fill="none" stroke="#33475b" stroke-width="1.8" marker-end="url(#arrow)"/>
 <rect x="260.0" y="435.0" width="680.0" height="150.0" rx="8" fill="#fff3b0" stroke="#33475b" stroke-width="1.6"/>
 <text x="600.0" y="475.2" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#1a1a1a" text-anchor="middle">RP2350B — adquisición y procesamiento</text>
