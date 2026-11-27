@@ -21,4 +21,5 @@ target_include_directories(powman_rtc PRIVATE
   ${ZEPHYR_HAL_RPI_PICO_MODULE_DIR}/src/rp2_common/hardware_powman/include
   ${ZEPHYR_HAL_RPI_PICO_MODULE_DIR}/src/rp2_common/pico_aon_timer/include
   ${ZEPHYR_HAL_RPI_PICO_MODULE_DIR}/src/common/pico_util/include
+  ${ZEPHYR_HAL_RPI_PICO_MODULE_DIR}/src/common/pico_time/include
 )
